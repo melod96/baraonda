@@ -17,7 +17,6 @@
 	<div class="div-join1">
 		<div class="div-join2">
 			<h1 align="center">회원가입</h1>
-			
 			<form action="insert.me" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 				   <label for="id">*아이디</label>
