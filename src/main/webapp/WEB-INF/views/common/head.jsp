@@ -7,7 +7,13 @@
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/superfish.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/touchTouch.css" rel="stylesheet">
-
+<!--181025 부트스트랩 css추가-->
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css.map" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css.map" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
 
 <!-- #### FONTS FILES #### -->
@@ -17,23 +23,27 @@
 <link href="${pageContext.request.contextPath}/resources/fonts/FontAwesome.otf" rel="stylesheet">
 
 <!-- #### JAVASCRIPT FILES #### -->
-<script src="${pageContext.request.contextPath}/resources/js/html5shiv.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-migrate-1.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.equalheights.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.mobilemenu.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.ui.totop.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/superfish.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/TMForm.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/tmStickUp.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/touchTouch.jquery.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/PIE.htc"></script>
-<script src="${pageContext.request.contextPath}/resources/js/PIE.php"></script>
+<script src="${pageContext.request.contextPath}/resources/js/npm.js"></script>
+<!--181025 부트스트랩 js추가-->
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/npm.js"></script>
 
-<link rel="stylesheet" type="text/css" href="">
+<!--181025 모달 css, js추가-->
+<link href="${pageContext.request.contextPath}/resources/loginModal/css/main.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/loginModal/css/util.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/loginModal/js/main.js"></script>
+
 
 
 

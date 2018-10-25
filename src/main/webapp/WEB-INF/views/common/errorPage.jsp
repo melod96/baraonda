@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<jsp:include page="../common/header.jsp"/>
-		
+	<h1 align="center">${msg }</h1>
+	<div  align="center">
+		<button onclick="location.href='goMain.me'">메인으로 이동</button>
+	</div>
 </body>
 </html>
