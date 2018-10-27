@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--Dao에서 Member.query로 작성을 했을 때 앞의 Member가 여기서 mapper의 namespace이고 query부분은 query의 이름부분이다.-->
+<mapper namespace="Member">
+	<resultMap type="com.kh.baraonda.member.model.vo.Member" id="memberResultSet">
+		<!--property부분은 Member클래스에 있는 필드와 같아야 하고, column은 DB의 컬럼명과 같다.-->
+		<!--setter를 통해 자동으로 값을 넣기 때문에 해당 class에 setter가 생성되어 있어야 한다.-->
+		<!--mid가 result가 아닌 id인 이유는 식별자로 사용되기 때문이다.-->
+		<id property="member_no" column="MEMBER_NO"/>
+		<result property="id" column="ID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="name" column="NAME"/>
+		<result property="status" column="STATUS"/>
+		<result property="admin_right" column="ADMIN_RIGHT"/>
+		<result property="token" column="TOKEN"/>
+		<result property="phone" column="PHONE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="nick_name" column="NICK_NAME"/>
+		<result property="enroll_date" column="ENROLL_DATE"/>
+		<result property="modify_date" column="MODIFY_DATE"/>
+		<result property="introduction" column="INTRODUCTION"/>
+		<result property="enterprise_right" column="ENTERPRISE_RIGHT"/>
+		<result property="enterprise_number" column="ENTERPRISE_NUMBER"/>
+		<result property="bank" column="BANK"/>
+		<result property="account" column="ACCOUNT"/>
+		<result property="representative" column="REPRESENTATIVE"/>
+		<result property="business_type" column="BUSINESS_TYPE"/>
+		
+	</resultMap>
+	
+	<!-- 로그인 정보 조회용 쿼리문 -->
+	<!--사용시 유의 사항 2가지-->
+	<!--1. 마이 바티스에서 앨리어스 설정-->
+	<!--2. parameterType -->
+	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID = #{id}
+		AND USER_PWD = #{password}
+		AND STATUS = 'Y'
+	</select>
+	
+	<!-- 회원가입용 메소드 -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(
+				SEQ_MEMBER_NO.NEXTVAL, #{id}, #{password}, null, DEFAULT,DEFAULT,
+				null, null, null, #{nick_name}, SYSDATE, null, null,
+				 DEFAULT, null, null, null, null, null
+		)
+		
+	</insert>
+	
+	<!--암호화된 비밀번호 조회용 쿼리-->
+	<!--resultType은 문자열을 -->
+	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT PASSWORD
+		FROM MEMBER
+		WHERE ID = #{id}
+		AND STATUS = 0
+	</select>
+	
+	<!--암호화 후 로그인용 쿼리-->
+	<select id="selectLoginUser" resultMap="memberResultSet" parameterType="Member">
+		SELECT * 
+		FROM MEMBER
+		WHERE ID = #{id}
+		AND STATUS = 0
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

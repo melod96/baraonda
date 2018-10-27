@@ -7,12 +7,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/superfish.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/touchTouch.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/custom.css" rel="stylesheet">
 <!--181025 부트스트랩 css추가-->
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css.map" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css.map" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
 
@@ -36,8 +32,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/touchTouch.jquery.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/npm.js"></script>
 <!--181025 부트스트랩 js추가-->
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/npm.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 <!--181025 모달 css, js추가-->
 <link href="${pageContext.request.contextPath}/resources/loginModal/css/main.css" rel="stylesheet">

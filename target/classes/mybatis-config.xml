@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+  <!--타입앨리어스, mapper등록만 여기서 하고 db설정 관련은 하지 않는다.-->
+  		<typeAliases>
+  			<typeAlias type="com.kh.baraonda.member.model.vo.Member" alias="Member"/>
+  		</typeAliases>
+  		
+  		<mappers>
+			<mapper resource="mappers/member-mapper.xml"/>
+		</mappers>
+  		
+  </configuration>
+  
