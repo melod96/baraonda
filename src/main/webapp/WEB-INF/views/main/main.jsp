@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<%-- <jsp:include page="../common/header.jsp"/> --%>
-		<jsp:include page="../notice/notice.jsp"/>
+		<jsp:include page="../common/header.jsp"/>
+		<%-- <jsp:include page="../myPage/growingChicks.jsp"/> --%>
 </body>
 </html>
