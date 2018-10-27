@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/froala_editor.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/froala_style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/code_view.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/colors.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/emoticons.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/image_manager.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/image.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/line_breaker.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/table.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/char_counter.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/video.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/fullscreen.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/file.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/floala/css/quick_insert.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+  <style>
+      body {
+          text-align: center;
+      }
+
+      div#editor {
+          width: 81%;
+          margin: auto;
+          text-align: left;
+      }
+
+      .class1 {
+        border-radius: 10%;
+        border: 2px solid #efefef;
+      }
+
+      .class2 {
+        opacity: 0.5;
+      }
+  </style>
+</head>
+
+<body>
+  <div id="editor">
+    <div id='edit' style="margin-top: 30px;">
+      <h1>Insert as Base64</h1>
+
+      <p>Using the <code>image.beforeUpload</code> event, the images can be inserted as base64 instead of being uploaded to the server.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/froala_editor.min.js" ></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/align.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/char_counter.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/code_beautifier.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/code_view.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/colors.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/draggable.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/emoticons.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/entities.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/file.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/font_size.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/font_family.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/fullscreen.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/image.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/image_manager.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/line_breaker.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/inline_style.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/link.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/lists.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/paragraph_format.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/paragraph_style.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/quick_insert.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/quote.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/table.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/save.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/url.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/board/floala/js/video.min.js"></script>
+
+  <script>
+    $(function(){
+      $('#edit').froalaEditor()
+        .on('froalaEditor.image.beforeUpload', function (e, editor, files) {
+          if (files.length) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var result = e.target.result;
+
+              editor.image.insert(result, null, null, editor.image.get());
+            };
+
+            reader.readAsDataURL(files[0]);
+          }
+
+          return false;
+        })
+    });
+  </script>
+</body>
+</html>

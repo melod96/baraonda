@@ -62,27 +62,27 @@
 	margin-right: auto;
 }
 
-#writeBtn {float: right; margin-top: -90px; height: 34px; width: 50px; }
+#writeBtn { float: right; margin-top: -90px; height: 34px; width: 80px; }
 .searchTd1{padding-right: 2px;}
 .searchSelect{height: 34px;}
 #searchInput{margin-left: 60px;}
 #searchBtn1{height: 34px; width: 50px; margin-top: 0px; margin-left: 7px;}
 .boardHr{border:1px solid #313131;}
 .my-4{margin-bottom: 2.5rem!important;}
-.row{padding-top: 10px;}
+
 
 </style>
 </head>
 <body>
 
-	<!-------------------------------------------------------- 이미지 형태 게시판 -------------------------------------------------------->
+	<!-- 컨테이너 -->
 	<div class="imageContainer">
 
-		<!-- 게시판 이름 -->
+		<!---------------------------------- 게시판 이름 ---------------------------------->
 		<h1 class="my-4">다이어트 식단 </h1>
-		<hr class="boardHr">
+		<hr class="boardHr"><br>
 		
-		<!------------------------------ 게시글(이미지) 6개 ------------------------------>
+		<!-------------------------------- 게시글(이미지) 6개 -------------------------------->
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 portfolio-item">
 				<div class="card h-100">
@@ -91,16 +91,15 @@
 					</a>
 					<div class="card-body">
 						<h4 class="card-title">
-						<!------------------------------ 게시글 제목  ------------------------------>
 							<a href="#">글제목</a>
 							<p>(2)</p>
 						</h4>
 						<p class="card-text">
-						<!------------------------------ 게시글 날짜, 조회수, 좋아요 ------------------------------>
 							<em>2018-10-26</em> <em>조회수<sapn class="hit">30</sapn></em> <em>좋아요<sapn
 									class="hit">3</sapn></em>
 						</p>
 						<span>운동맨</span>
+						
 					</div>
 				</div>
 			</div>
@@ -190,9 +189,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- /.row -->
 
-		<!-- Pagination -->
+		<!---------------------------------- 페이징 처리 ---------------------------------->
 		<div class="text-center">
 			<ul class="pagination">
 				<li><a href="#"><</a></li>
@@ -204,9 +202,10 @@
 				<li><a href="#">></a></li>
 			</ul>
 		</div>
-		<button class="btn btn-primary" id="writeBtn">글쓰기</button></td>
-		<!-- <button class="writeBtn">글쓰기</button> -->
+		<!---------------------------------- 관리자용 삭제 버튼 ---------------------------------->
+		<button id="writeBtn"><img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete1.PNG"></button></td>
 		
+		<!---------------------------------- 검색 폼 ---------------------------------->
 		<form name="search" method="post" class="searchForm">
 			<table>
 				<tr>
@@ -225,7 +224,7 @@
 		</form>
 	</div>
 	<br><br><br><br><br><br><br><br><br><br>
-	<!-- /.container -->
+	
 
 
 

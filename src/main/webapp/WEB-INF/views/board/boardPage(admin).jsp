@@ -269,33 +269,22 @@
 	padding-left: 10px;
 	padding-right: 10px;
 }
-.listpic1{
-	float: right;
-    margin-top: 24px;
-    padding-left: 10px;
-	padding-right: 10px;
-	
-}
 .bSubject{font-size: 17px; font-weight: bold;}
 .pageWriteBtn{margin-right: 12px;}
 .commentPro{width: 50px; height: 50px;}
 .aflistp{display: inline-block;}
 .re{padding-top: 10px;}
-.modifyB, .deleteB{font-weight: 400; font-size:13px; float:right;	color:#9c9c9cbf; padding-top:13px;}
-.modifyB:hover, .deleteB:hover{cursor: pointer;}
-.remd{display: inline-block; padding-left: 800px;}
-.listpic2{padding-left: 10px; padding-bottom: 4px;}
-.modifyB2, .deleteB2{font-weight: 400; font-size:13px;color:#9c9c9cbf;}
-.modifyB2:hover, .deleteB2:hover{cursor: pointer;}
-
+.reDeleteBtn{width:85px; float:right;}
 
 </style>
 <body class="page1" id="top">
-	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
-	
-	<!--==============================  header =================================-->
+	<!--==============================
+              header
+=================================-->
 	<header>
-		<!--============================== Stuck menu =================================-->
+		<!--==============================
+            Stuck menu
+=================================-->
 		<section id="stuck_container">
 			<div class="container">
 				<div class="row">
@@ -324,40 +313,35 @@
 		</section>
 	</header>
 
-	<!--===================== Content======================-->
+	<!--=====================
+          Content
+======================-->
 	<section class="content">
 		<div class="ic">More Website Templates @ TemplateMonster.com -
 			July 30, 2014!</div>
 		<div class="container">
 			<div class="row">
-				<!---------------------------------------------------------------------------------------------------------------------------------------------->
+				<!-------------------------------------------------------------------------->
 				<div class="container">
 					<!-- 게시판 명 -->
-					<h2 class="boardName">자유게시판
-					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
-					<span class="modifyB">수정</span>
-					<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic1">
-					<span class="deleteB">삭제</span>
-					</h2>
-					
+					<h2 class="boardName">자유게시판</h2>
+
 					<!-- 게시글 제목 -->
 					<div>
 						<span class="bSubject">오늘부터 운동시작합니다!</span>
 					</div>
 					<hr class="hrline">
 					<div class="boardInfo">
-						<span class="inner">
-						<span class="ico_wrap">
-						<a href="#">
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic">
-						</a>
-						</span>
-							<!------------------------------------ 게시글 작성자명 ------------------------------------>
-								<em class="nick_em">
+						<span class="inner"> <span class="ico_wrap"> <a
+								href="#"> <img
+									src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif"
+									class="proic">
+							</a>
+						</span> <!-- 작성자명 --> <em class="nick_em">
 								<div class="inner_nick_box">
 									<p class="inner_nick">다이어트맨</p>
 								</div>
-						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
+						</em> <!-- 게시 날짜, 조회수, 댓글수 -->
 							<div class="group_inner">
 								<ul class="date_menu">
 									<li class="da01"><span>2018-10-25 14:20</span></li>
@@ -369,23 +353,24 @@
 					</div>
 					<hr class="hrline">
 
-					<!------------------------------------ 게시글 내용 ------------------------------------>
+					<!-- 게시글 내용 -->
 					<div class="viewContent">
 						<p class="view_text">천지는 얼마나 기쁘며 얼마나 아름다우냐? 이것을 얼음 속에서 불러 내는
 							것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의
 							동산에는 사랑의 풀이 돋고 이상의 꽃이</p>
 					</div>
 
-					<!------------------------------------ 북마크, 좋아요------------------------------------>
+					<!-- 북마크, 좋아요 -->
 					<div class="allmark">
 						<a href="#" onclick="#" class="bmark"> <span>북마크</span>
 						</a> <a href="#" onclick="#" class="heart"> <span>1</span>
 						</a>
 					</div>
-					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
+					
+					<!-- 삭제, 목록(btn) -->
 					<div class="btn_ar">
 						<a href="#"> <img class="pageWriteBtn"
-							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
+							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete2.png">
 						</a> <a href="#"> <img
 							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 						</a>
@@ -396,7 +381,7 @@
 								src="<%=request.getContextPath()%>/resources/images/boardImg/tit_cmt_write.png">
 						</p>
 
-						<!------------------------------------ 댓글 작성 폼 ------------------------------------>
+						<!-- 댓글 작성 폼 -->
 						<div id="comment-write" class="comment-write"">
 							<form>
 								<textarea id="comment" class="txtarea r5 placeholder"
@@ -408,7 +393,7 @@
 						</div>
 					</div>
 
-					<!------------------------------------ 게시글에 작성된 댓글 수 ------------------------------------>
+					<!-- 게시글에 작성된 댓글 수 -->
 					<div class="comment-count">
 						<p class="comment-count-1">댓글</p>
 						<p class="comment-count-2">1</p>
@@ -421,21 +406,17 @@
 										src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
 								</div>
 								<div class="comment-txt">
-									<!--------------------------------- 댓글 작성자명 ---------------------------------->
+									<!-- 댓글 작성자명 -->
 									<strong id="ntxt">운동맨</strong>
-									<!---------------------------------- 댓글 작성 시간---------------------------------->
+									<!-- 댓글 작성 시간 -->
 									<span>2018-10-17 15:30</span>
-									<div class="remd">
-									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-									<span class="modifyB2">수정</span>
-										<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
-										<span class="deleteB2">삭제</span>
-									</div>
 									<!-- 댓글 내용 -->
 									<p id="ptxt">화이팅! 꾸준함이 제일 중요합니다!</p>
 								</div>
 								<div class="re">
 									<a href="#" class="btn-re">답글 ▼</a>
+									<button class="reDeleteBtn"><img class="pageWriteBtn"
+							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete2.png"></button>
 								</div>
 							</li>
 							<hr class="hrline">
@@ -448,7 +429,7 @@
 						<hr class="hrline">
 					</div>
 
-					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
+					<!-- 다음글 제목, 날짜, 조회수 -->
 					<div class="balist1">
 						<a href="#" class="aflist1">다음글 ▲
 							<p class="aflist2">저녁추천좀요</p>
@@ -459,7 +440,7 @@
 							<p class="aflistp">조회수 10</p>
 						</div>
 					</div>
-					<!------------------------------------ 이전글 제목, 날짜, 조회수 ------------------------------------>
+					<!-- 이전글 제목, 날짜, 조회수 -->
 					<div>
 						<a href="#" class="belist1">이전글 ▼
 							<p class="belist2">오늘 먹은 점심임니다</p>

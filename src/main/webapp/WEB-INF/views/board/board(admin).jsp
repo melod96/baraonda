@@ -63,15 +63,16 @@
 .boardTr:hover{cursor:pointer;}
 .boardHr{border:1px solid #313131;}
 .page1 h2{margin-bottom: 25px;}
-
+.boardWriteBtn{ width: 85px; float: right;}
 
 </style>
+
+
+
 
 </head>
 
 <body class="page1" id="top">
-	<!---------------------------------- 커뮤니티 게시판 ---------------------------------->
-
 	<!--============================== header=================================-->
 	<header>
 	<!--============================== Stuck menu=================================-->
@@ -110,7 +111,7 @@
 			<br>
 		<div class="container">
 			<div class="row">
-				<!------------------------------ 작업 공간 ------------------------------>
+				<!-- 작업 공간-->
 
 				<div class="container">
 					<h2>자유게시판</h2>
@@ -119,7 +120,6 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-							<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
 								<th class="boardNo">번호</th>
 								<th class="boardSubject1">제목</th>
 								<th class="boardWriter">작성자</th>
@@ -159,10 +159,10 @@
 						</tbody>
 					</table>
 					<hr>
-					<!------------------------------ 글쓰기 버튼 ------------------------------>
-					<a class="btn btn-default pull-right">글쓰기</a>
-					
-					<!------------------------------ 페이징 처리------------------------------>
+					<button class="boardWriteBtn">
+						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete1.PNG">
+					</button>
+
 					<div class="text-center">
 						<ul class="pagination">
 							<li><a href="#"><</a></li>
@@ -174,8 +174,6 @@
 							<li><a href="#">></a></li>
 						</ul>
 					</div>
-					
-					<!------------------------------ 검색 폼 ------------------------------>
 					<form name="search" method="post" class="searchForm">
 						<table>
 							<tr>
