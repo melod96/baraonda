@@ -21,9 +21,11 @@
 <link href="${pageContext.request.contextPath}/resources/fonts/FontAwesome.otf" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf" rel="stylesheet">
 
+
 <style>
 @font-face {
-	 font-family: 'Chungchunsidae'; src: url("${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf"); 
+  	 font-family: 'Chungchunsidae'; src: url("${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf");   
+	  font-family: 'Easop'; src: url("${pageContext.request.contextPath}/resources/fonts/Easop.ttf"); 
 }
 </style>
 

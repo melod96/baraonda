@@ -42,17 +42,17 @@
         <div class="grid_12">
         <h1>
           <a href="goMain.me">
-            <img src="#" alt="Logo alt">
+            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="Logo alt">
           </a>
         </h1>  
           <div class="navigation">
             <nav>
               <ul class="sf-menu">
-               <li class="current"><a href="index.html"><img src="#" alt="Logo alt"></a></li>
-               <li><a href="index-1.html"><img src="#" alt="Logo alt"></a></li>
-               <li><a href="index-2.html"><img src="#" alt="Logo alt"></a></li>
-               <li><a href="index-3.html"><img src="#" alt="Logo alt"></a></li>
-               <li><a href="index-4.html"><img src="#" alt="Logo alt"></a></li>
+               <li class="current"><a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/main/다이어트꿀팁.png" alt="Logo alt"></a></li>
+               <li><a href="index-1.html"><img src="${pageContext.request.contextPath}/resources/images/main/칼로리사전.png" alt="Logo alt"></a></li>
+               <li><a href="index-2.html"><img src="${pageContext.request.contextPath}/resources/images/main/홈트레이닝.png" alt="Logo alt"></a></li>
+               <li><a href="index-3.html"><img src="${pageContext.request.contextPath}/resources/images/main/커뮤니티.png" alt="Logo alt"></a></li>
+               <li><a href="index-4.html"><img src="${pageContext.request.contextPath}/resources/images/main/바다체험단.png" alt="Logo alt"></a></li>
              </ul>
             </nav>        
             <div class="clear"></div>
