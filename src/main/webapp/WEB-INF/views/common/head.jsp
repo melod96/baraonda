@@ -7,7 +7,9 @@
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/superfish.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/touchTouch.css" rel="stylesheet">
+
 <link href="${pageContext.request.contextPath}/resources/css/custom.css" rel="stylesheet">
+
 <!--181025 부트스트랩 css추가-->
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,6 +19,13 @@
 <link href="${pageContext.request.contextPath}/resources/fonts/fontawesome-webfont.svg" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/fonts/fontawesome-webfont.woff" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/fonts/FontAwesome.otf" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf" rel="stylesheet">
+
+<style>
+@font-face {
+	 font-family: 'Chungchunsidae'; src: url("${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf"); 
+}
+</style>
 
 <!-- #### JAVASCRIPT FILES #### -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
@@ -31,6 +40,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/tmStickUp.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/touchTouch.jquery.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/npm.js"></script>
+
 <!--181025 부트스트랩 js추가-->
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
