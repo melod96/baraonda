@@ -8,6 +8,10 @@
 </style>
 
 <jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="loginModal.jsp"/>
+<jsp:include page="joinModal.jsp"/>
+
+
     <header>
 <!--==============================
             Stuck menu
@@ -24,9 +28,9 @@
 	    
 	    <!--로그인 후-->
 	    <c:if test="${!empty sessionScope.loginUser}">
-			<h4 align="right"><c:out value="${sessionScope.loginUser.nick_name }님 환영합니다."/></h3>
+			<h4 align="right"><c:out value="${sessionScope.loginUser.nick_name }님 환영합니다."/></h4>
 			<div style="float:right;">
-		     	<button class="btn btn-success">정보수정</button>
+		     	<button onclick="location.href='changeInfo.my'" class="btn btn-success">정보수정</button>
 		     	<button onclick="location.href='logout.me'" class="btn btn-default">로그아웃</button>
 		    </div>
 		</c:if>
@@ -60,6 +64,4 @@
     </div>
   </section> 
   
-  <jsp:include page="loginModal.jsp"/>
-   <jsp:include page="joinModal.jsp"/>
 </header>  
