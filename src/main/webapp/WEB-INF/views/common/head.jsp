@@ -8,6 +8,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/superfish.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/touchTouch.css" rel="stylesheet">
 
+<link href="${pageContext.request.contextPath}/resources/css/custom.css" rel="stylesheet">
+
 <!--181025 부트스트랩 css추가-->
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
