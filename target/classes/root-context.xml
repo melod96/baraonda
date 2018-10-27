@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 데이터베이스 접속에 관련된 클래스들을 bean으로 등록-->
+	<!--의존성 주입을 위한 구문-->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg ref="sqlSession"/>
+	</bean>
 		
+	<!--기본생성자가 존재함. -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--setter를 통한 의존성 주입-->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/> <!--sqlSession을 만들라고 하는 구문이다.-->
+		<property name="dataSource" ref="dataSource"/> <!--ref : 레퍼런스 변수로 객체의 주소를 저장한다.-->
+	</bean>
 		
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		 <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+		 <property name="username" value="baraonda"/>
+		 <property name="password" value="baraonda"/>
+		 <property name="defaultAutoCommit" value="false"/>
+	</bean>
 		
-		
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!--트랜젝션 advice를 설정-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="select*" read-only= "true" rollback-for="Exception"/>
+			<tx:method name="insert*" rollback-for="Exception" propagation="REQUIRED" isolation="SERIALIZABLE"/>			
+			<tx:method name="update*" rollback-for="Exception" propagation="REQUIRED" isolation="SERIALIZABLE"/>
+			<tx:method name="delete*" rollback-for="Exception" propagation="REQUIRED" isolation="SERIALIZABLE"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	
+	<!--AOP를 이용하여 ㅇ위의 txAdvice를 적용시키기 위한 내용-->
+	<!--advice 객체가 weaving 될 시점(pointcut을 등록하는 것임)-->
+	<!--AOP스키마를 추가해야 한다.-->
+	<aop:config proxy-target-class="true">				
+		<aop:pointcut id="serviceMethod" expression="execution(* com.kh.baraonda..*ServiceImpl.*(..))"/>
+		<aop:advisor id="transactionAdvisor" pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
+	</aop:config>
+	
 </beans>
