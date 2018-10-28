@@ -74,97 +74,103 @@
     <div class="row">
 	<div class="left">
 		<img src="/baraonda/src/main/webapp/resources/images/berrywater.PNG" style="width:732px; height:180px;">
-		<h2 class="title">공지사항</h2>
+		<h2 class="title">운동 칼로리</h2>
 		<div class="search">
-			<select class="form-control input-xshort" style="float:left; margin-right:10px;">
-				<option>제목</option>
-				<option>내용</option>
-				<option>작성자</option>
-			</select>
-			<div class="ui action input">
+			<div class="ui action input" style="width:100%;">
 				<input type="text" placeholder="Search...">
 				<button class="ui icon button">
 					<i class="search icon"></i>
 				</button>
 			</div>
-			<button type="button" class="btn btn-primary" style="float:right; margin:0;">작성하기</button>
 		</div>
 		<div class="list">
 					<table class="tbl-type02">
 						<colgroup>
-							<col style="width: 40%;">
-							<col style="width: 20%;">
-							<col style="width: 20%;">
-							<col style="width: 20%;">
+							<col style="width: 10%;">
+							<col style="width: 45%;">
+							<col style="width: 15%;">
+							<col style="width: 15%;">
+							<col style="width: 15%;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="col">제목</th>
-								<th scope="col">작성자</th>
-								<th scope="col">조회수</th>
-								<th scope="col">작성일</th>
+								<th scope="col">No</th>
+								<th scope="col">운동 칼로리</th>
+								<th scope="col">강도 / 세트</th>
+								<th scope="col">분 / 초 / 횟수</th>
+								<th scope="col">칼로리</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
+								<td>1</td>
+								<td>보통 걷기</td>
+								<td>가볍게</td>
+								<td>10(분)</td>
+								<td>21kcal</td>
 							</tr>
 						</tbody>
 					</table>
