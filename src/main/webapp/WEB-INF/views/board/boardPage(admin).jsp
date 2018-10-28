@@ -275,6 +275,9 @@
 .aflistp{display: inline-block;}
 .re{padding-top: 10px;}
 .reDeleteBtn{width:85px; float:right;}
+.paging-numbers a.on{background:#c0392b;}
+#deleteBtn{width:112px; height:44px;}
+
 
 </style>
 <body class="page1" id="top">
@@ -369,10 +372,10 @@
 					
 					<!-- 삭제, 목록(btn) -->
 					<div class="btn_ar">
-						<a href="#"> <img class="pageWriteBtn"
-							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete2.png">
-						</a> <a href="#"> <img
-							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
+						<a href="#">
+							<img id="deleteBtn" class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete1.PNG">
+						</a> <a href="#">
+							<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 						</a>
 					</div>
 					<div id="commList">
@@ -415,19 +418,20 @@
 								</div>
 								<div class="re">
 									<a href="#" class="btn-re">답글 ▼</a>
-									<button class="reDeleteBtn"><img class="pageWriteBtn"
-							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete2.png"></button>
+									<button class="reDeleteBtn"><img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete1.PNG"></button>
 								</div>
 							</li>
 							<hr class="hrline">
 						</ul>
 					</table>
-					<div class="text-center">
-						<ul class="pagination">
-							<li><a href="#">1</a></li>
-						</ul>
-						<hr class="hrline">
+					<div class="paginate">
+						<span class="paging-numbers">
+							<a href="#" class="on">1
+								<span class="blind">페이지로 이동</span>
+							</a>
+						</span>
 					</div>
+					<hr>
 
 					<!-- 다음글 제목, 날짜, 조회수 -->
 					<div class="balist1">
