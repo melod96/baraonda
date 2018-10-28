@@ -55,7 +55,7 @@
 
 .searchForm {
 	margin: 0 auto;
-	width: 400px;
+	width: 530px;
 }
 .container{width: 732px;}
 #boardInput{margin-left: 7px;}
@@ -63,16 +63,19 @@
 .boardTr:hover{cursor:pointer;}
 .boardHr{border:1px solid #313131;}
 .page1 h2{margin-bottom: 25px;}
+#boardB{width:53px; padding-top: 8px;}
+.paginate{margin-bottom: 40px;}
+#searchBtn{float:right;margin: auto;}
+.boardHr2{margin-top: -15px;}
 .boardWriteBtn{ width: 85px; float: right;}
 
 </style>
 
-
-
-
 </head>
 
 <body class="page1" id="top">
+	<!---------------------------------- 커뮤니티 게시판 ---------------------------------->
+
 	<!--============================== header=================================-->
 	<header>
 	<!--============================== Stuck menu=================================-->
@@ -82,9 +85,7 @@
 				<div class="row">
 					<div class="grid_12">
 						<h1>
-							<a href="index.html"> <img src="images/logo.png"
-								alt="Logo alt">
-							</a>
+							<a href="index.html"> <img src="images/logo.png" alt="Logo alt"></a>
 						</h1>
 						<div class="navigation">
 							<nav>
@@ -111,7 +112,7 @@
 			<br>
 		<div class="container">
 			<div class="row">
-				<!-- 작업 공간-->
+				<!------------------------------ 작업 공간 ------------------------------>
 
 				<div class="container">
 					<h2>자유게시판</h2>
@@ -120,6 +121,7 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
+							<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
 								<th class="boardNo">번호</th>
 								<th class="boardSubject1">제목</th>
 								<th class="boardWriter">작성자</th>
@@ -158,22 +160,42 @@
 							</tr>
 						</tbody>
 					</table>
-					<hr>
+					<hr class="boardHr2">
+					<!------------------------------ 관리자용 게시글 삭제 버튼 ------------------------------>
 					<button class="boardWriteBtn">
 						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_delete1.PNG">
 					</button>
-
-					<div class="text-center">
-						<ul class="pagination">
-							<li><a href="#"><</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">></a></li>
-						</ul>
+					
+					<!------------------------------ 페이징 처리------------------------------>
+					<div class="paginate">
+					<a href="#" class="btn-prev" title="이전" id="boardB">이전
+						<em class="blind">목록에서 이전 페이지 이동</em>
+					</a>
+					<span class="paging-numbers">
+						<a href="#">1
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#" class="on">2
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#">3
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#">4
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#">5
+							<span class="blind">페이지로 이동</span>
+						</a>
+					</span>
+					<a href="#" class="btn-next" title="다음" id="boardB">다음
+						<span class="spr">
+							<em class="blind">목록에서 다음 페이지 이동</em>
+						</span>
+					</a>
 					</div>
+					
+					<!------------------------------ 검색 폼 ------------------------------>
 					<form name="search" method="post" class="searchForm">
 						<table>
 							<tr>

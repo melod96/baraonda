@@ -55,7 +55,7 @@
 
 .searchForm {
 	margin: 0 auto;
-	width: 400px;
+	width: 530px;
 }
 .container{width: 732px;}
 #boardInput{margin-left: 7px;}
@@ -63,7 +63,10 @@
 .boardTr:hover{cursor:pointer;}
 .boardHr{border:1px solid #313131;}
 .page1 h2{margin-bottom: 25px;}
-
+#boardB{width:53px; padding-top: 8px;}
+.paginate{margin-bottom: 40px;}
+#searchBtn{float:right;margin: auto;}
+.boardHr2{margin-top: -15px;}
 
 </style>
 
@@ -81,9 +84,7 @@
 				<div class="row">
 					<div class="grid_12">
 						<h1>
-							<a href="index.html"> <img src="images/logo.png"
-								alt="Logo alt">
-							</a>
+							<a href="index.html"> <img src="images/logo.png" alt="Logo alt"></a>
 						</h1>
 						<div class="navigation">
 							<nav>
@@ -158,21 +159,37 @@
 							</tr>
 						</tbody>
 					</table>
-					<hr>
+					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
-					<a class="btn btn-default pull-right">글쓰기</a>
+					<button id="searchBtn" type="submit" class="btn btn-primary">글쓰기</button>
 					
 					<!------------------------------ 페이징 처리------------------------------>
-					<div class="text-center">
-						<ul class="pagination">
-							<li><a href="#"><</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">></a></li>
-						</ul>
+					<div class="paginate">
+					<a href="#" class="btn-prev" title="이전" id="boardB">이전
+						<em class="blind">목록에서 이전 페이지 이동</em>
+					</a>
+					<span class="paging-numbers">
+						<a href="#">1
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#" class="on">2
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#">3
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#">4
+							<span class="blind">페이지로 이동</span>
+						</a>
+						<a href="#">5
+							<span class="blind">페이지로 이동</span>
+						</a>
+					</span>
+					<a href="#" class="btn-next" title="다음" id="boardB">다음
+						<span class="spr">
+							<em class="blind">목록에서 다음 페이지 이동</em>
+						</span>
+					</a>
 					</div>
 					
 					<!------------------------------ 검색 폼 ------------------------------>

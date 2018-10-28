@@ -220,6 +220,7 @@
 .comment-txt {
 	display: inline-block;
 	padding-left: 15px;
+	width: 93%;
 }
 
 .comment-pic {
@@ -283,11 +284,11 @@
 .re{padding-top: 10px;}
 .modifyB, .deleteB{font-weight: 400; font-size:13px; float:right;	color:#9c9c9cbf; padding-top:13px;}
 .modifyB:hover, .deleteB:hover{cursor: pointer;}
-.remd{display: inline-block; padding-left: 800px;}
-.listpic2{padding-left: 10px; padding-bottom: 4px;}
+.remd{display: inline-block; float: right;}
+.listpic2{padding-left: 10px; padding-bottom: 8px;}
 .modifyB2, .deleteB2{font-weight: 400; font-size:13px;color:#9c9c9cbf;}
 .modifyB2:hover, .deleteB2:hover{cursor: pointer;}
-
+.paging-numbers a.on{background:#f13d3d;}
 
 </style>
 <body class="page1" id="top">
@@ -425,11 +426,11 @@
 									<strong id="ntxt">운동맨</strong>
 									<!---------------------------------- 댓글 작성 시간---------------------------------->
 									<span>2018-10-17 15:30</span>
-									<div class="remd">
 									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-									<span class="modifyB2">수정</span>
-										<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
-										<span class="deleteB2">삭제</span>
+									<div class="remd">
+										<span class="modifyB2">수정</span>
+											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
+											<span class="deleteB2">삭제</span>
 									</div>
 									<!-- 댓글 내용 -->
 									<p id="ptxt">화이팅! 꾸준함이 제일 중요합니다!</p>
@@ -441,13 +442,15 @@
 							<hr class="hrline">
 						</ul>
 					</table>
-					<div class="text-center">
-						<ul class="pagination">
-							<li><a href="#">1</a></li>
-						</ul>
-						<hr class="hrline">
+					<div class="paginate">
+						<span class="paging-numbers">
+							<a href="#" class="on">1
+								<span class="blind">페이지로 이동</span>
+							</a>
+						</span>
 					</div>
 
+					<hr class="hrline">
 					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
 					<div class="balist1">
 						<a href="#" class="aflist1">다음글 ▲
