@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+	<resultMap type="com" id=""></resultMap>
+</mapper>  
+
+  
+  
+<!-- <select id="listAll" resultType="com.kh.baraonda.board.model.vo">
+	SELECT BOARD_NO, BOARD_TYPE, WRITING_TYPE, BOARD_TITLE, BOARD_CONTENT,
+		   WRITER, MEMBER_NO, BOARD_DATE, MODIFY_DATE, BOARD_STATUS, BOARD_COUNT
+	FROM BOARD
+	ORDER BY BOARD_NO DESC
+</select> -->

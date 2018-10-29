@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<jsp:include page="../common/head.jsp"></jsp:include>
+
+<jsp:include page="../common/header.jsp" />
 
 <script>
 	$(document).ready(function() {
@@ -57,7 +58,7 @@
 	margin: 0 auto;
 	width: 530px;
 }
-.container{width: 732px;}
+.container1{margin: auto; width: 65%;}
 #boardInput{margin-left: 7px;}
 #boardBtn{margin-top: 0px; margin-left: 7px;}
 .boardTr:hover{cursor:pointer;}
@@ -72,37 +73,7 @@
 
 </head>
 
-<body class="page1" id="top">
-	<!---------------------------------- 커뮤니티 게시판 ---------------------------------->
-
-	<!--============================== header=================================-->
-	<header>
-	<!--============================== Stuck menu=================================-->
-		<section id="stuck_container">
-
-			<div class="container">
-				<div class="row">
-					<div class="grid_12">
-						<h1>
-							<a href="index.html"> <img src="images/logo.png" alt="Logo alt"></a>
-						</h1>
-						<div class="navigation">
-							<nav>
-								<ul class="sf-menu">
-									<li class="current"><a href="index.html">home</a></li>
-									<li><a href="index-1.html">menu</a></li>
-									<li><a href="index-2.html">reservation</a></li>
-									<li><a href="index-3.html">blog</a></li>
-									<li><a href="index-4.html">contacts</a></li>
-								</ul>
-							</nav>
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</header>
+<body class="page1" id="top">	
 
 	<!-------------------------------------Content------------------------------------------->
 	<section class="content">
@@ -113,7 +84,7 @@
 			<div class="row">
 				<!------------------------------ 작업 공간 ------------------------------>
 
-				<div class="container">
+				<div class="container1">
 					<h2>자유게시판</h2>
 					<hr class="boardHr">
 					
@@ -129,14 +100,16 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="row" items="${list }">
 							<tr class="boardTr">
-								<th class="boardNo">165</th>
-								<th class="boardSubject2">부트스트랩 연습중</th>
-								<th class="boardWriter">김재엽</th>
-								<th class="boardDay">2018-10-25</th>
-								<th class="boardCount">25</th>
+								<th class="boardNo">${row.BOARD_NO}</th>
+								<th class="boardSubject2">${row.BOARD_TITLE }</th>
+								<th class="boardWriter">${row.WRITER }</th>
+								<th class="boardDay">${row.BOARD_DATE }</th>
+								<th class="boardCount">${row.BOARD_COUNT }</th>
 							</tr>
-							<tr class="boardTr">
+						</c:forEach>
+							<!-- <tr class="boardTr">
 								<th class="boardNo">164</th>
 								<th class="boardSubject2">게시판 만드는중입니다....</th>
 								<th class="boardWriter">다신</th>
@@ -156,7 +129,7 @@
 								<th class="boardWriter">목요일</th>
 								<th class="boardDay">2018-10-25</th>
 								<th class="boardCount">0</th>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 					<hr class="boardHr2">

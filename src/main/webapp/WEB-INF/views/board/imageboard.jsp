@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="../common/head.jsp"></jsp:include>
+
+<jsp:include page="../common/header.jsp" />
 <jsp:include page="bResources.jsp"></jsp:include>
 
 <style>
@@ -81,7 +82,6 @@ a{text-decoration: none!important;}
 </style>
 </head>
 <body>
-
 	<!-------------------------------------------------------- 이미지 형태 게시판 -------------------------------------------------------->
 	<div class="imageContainer">
 

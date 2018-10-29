@@ -15,6 +15,7 @@
 		<result property="name" column="NAME"/>
 		<result property="nick_name" column="NICK_NAME"/>
 		<result property="phone" column="PHONE"/>
+		
 		<result property="token" column="TOKEN"/>
 		<result property="enroll_date" column="ENROLL_DATE"/>
 		<result property="modify_date" column="MODIFY_DATE"/>
