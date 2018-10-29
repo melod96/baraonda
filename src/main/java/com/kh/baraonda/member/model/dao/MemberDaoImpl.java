@@ -10,11 +10,21 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
-		
 		return sqlSession.insert("Member.insertMember", m);
 		
 	}
+	
+	@Override
+	public Member selectMemberOne(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.selectOne",m);
+	}
 
+	@Override
+	public int insertPoint(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("Member.insertPoint", m);
+	}
+	
+	
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("Member.selectPwd", m.getId());
@@ -24,5 +34,8 @@ public class MemberDaoImpl implements MemberDao{
 	public Member selectMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("Member.selectLoginUser", m);
 	}
+
+	
+	
 
 }

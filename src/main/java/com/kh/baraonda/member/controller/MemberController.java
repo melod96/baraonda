@@ -20,6 +20,7 @@ public class MemberController {
 	@Autowired
 	private MemberService ms ;
 	
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -80,6 +81,7 @@ public class MemberController {
 		
 		return "main/main";
 	}
+	
 	//회원가입
 	@RequestMapping("insert.me")
 	public String insertMember(Model model, Member m) {
@@ -93,13 +95,20 @@ public class MemberController {
 		System.out.println("암호화 후 : " + m);
 		
 		int result = ms.insertMember(m);
+		Member member = ms.selectOne(m);
 		
 		if(result > 0) {
-			return "redirect:goMain.me";
+			int result2 =ms.insertPoint(member);
+			
+			if(result2 > 0) {
+				return "redirect:goMain.me";
+			}else {
+				model.addAttribute("msg", "포인트 생성 실패");
+				return "common/errorPage";
+			}
 		}else {
 			model.addAttribute("msg", "회원가입실패");
 			return "common/errorPage";
 		}
 	}
-
 }
