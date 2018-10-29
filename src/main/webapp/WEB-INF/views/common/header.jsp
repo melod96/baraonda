@@ -49,12 +49,8 @@
             <nav>
               <ul class="sf-menu">
                <li class="current">
-               <a href="WEB-INF/views/tips/tips.jsp">
-               <img src="${pageContext.request.contextPath}/resources/images/main/다이어트꿀팁.png" alt="Logo alt">
-</a>
-               
-               
-             </li>
+              
+               <li><a href="tips.tp"><img src="${pageContext.request.contextPath}/resources/images/main/다이어트꿀팁.png" alt="Logo alt"></a></li>
                <li><a href="index-1.html"><img src="${pageContext.request.contextPath}/resources/images/main/칼로리사전.png" alt="Logo alt"></a></li>
                <li><a href="index-2.html"><img src="${pageContext.request.contextPath}/resources/images/main/홈트레이닝.png" alt="Logo alt"></a></li>
                <li><a href="index-3.html"><img src="${pageContext.request.contextPath}/resources/images/main/커뮤니티.png" alt="Logo alt"></a></li>
