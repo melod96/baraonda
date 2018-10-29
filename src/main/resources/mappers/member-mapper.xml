@@ -13,21 +13,22 @@
 		<result property="id" column="ID"/>
 		<result property="password" column="PASSWORD"/>
 		<result property="name" column="NAME"/>
-		<result property="status" column="STATUS"/>
-		<result property="admin_right" column="ADMIN_RIGHT"/>
-		<result property="token" column="TOKEN"/>
-		<result property="phone" column="PHONE"/>
-		<result property="email" column="EMAIL"/>
 		<result property="nick_name" column="NICK_NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="token" column="TOKEN"/>
 		<result property="enroll_date" column="ENROLL_DATE"/>
 		<result property="modify_date" column="MODIFY_DATE"/>
-		<result property="introduction" column="INTRODUCTION"/>
-		<result property="enterprise_right" column="ENTERPRISE_RIGHT"/>
-		<result property="enterprise_number" column="ENTERPRISE_NUMBER"/>
+		<result property="member_status" column="MEMBER_STATUS"/>
+		<result property="admin_right" column="ADMIN_RIGHT"/>
+		<result property="company_right" column="COMPANY_RIGHT"/>
+		<result property="company_name" column="COMPANY_NAME"/>
+		<result property="company_no" column="COMPANY_NO"/>
 		<result property="bank" column="BANK"/>
 		<result property="account" column="ACCOUNT"/>
-		<result property="representative" column="REPRESENTATIVE"/>
-		<result property="business_type" column="BUSINESS_TYPE"/>
+		<result property="ceo_name" column="CEO_NAME"/>
+		<result property="ceo_type" column="CEO_TYPE"/>
+		<result property="self_introduction" column="SELF_INTRODUCTION"/>
+		<result property="email" column="EMAIL"/>
 		
 	</resultMap>
 	
@@ -40,16 +41,17 @@
 		FROM MEMBER
 		WHERE USER_ID = #{id}
 		AND USER_PWD = #{password}
-		AND STATUS = 'Y'
+		AND MEMBER_STATUS = 'Y'
 	</select>
 	
 	<!-- 회원가입용 메소드 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
 		VALUES(
-				SEQ_MEMBER_NO.NEXTVAL, #{id}, #{password}, null, DEFAULT,DEFAULT,
-				null, null, null, #{nick_name}, SYSDATE, null, null,
-				 DEFAULT, null, null, null, null, null
+				 SEQ_MEMBER_NO.NEXTVAL, #{id}, #{password}, null, #{nick_name},
+				 null, null, SYSDATE, null, default, default, default, 
+				 null, null, null, null, null, null, null, null
+				 
 		)
 		
 	</insert>
@@ -60,7 +62,7 @@
 		SELECT PASSWORD
 		FROM MEMBER
 		WHERE ID = #{id}
-		AND STATUS = 0
+		AND MEMBER_STATUS = 0
 	</select>
 	
 	<!--암호화 후 로그인용 쿼리-->
@@ -68,7 +70,7 @@
 		SELECT * 
 		FROM MEMBER
 		WHERE ID = #{id}
-		AND STATUS = 0
+		AND MEMBER_STATUS = 0
 	</select>
 	
 </mapper>
