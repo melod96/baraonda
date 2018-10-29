@@ -10,10 +10,10 @@
     <div class="myHeader">
 		<h3>마이페이지</h3>
 			<div class="listBtn">
-				<button type="button" id="changeInfo" class="btn btn-default" onclick="location.href='changeInfo.my'">내 정보 변경</button>
-				<button type="button" class="btn btn-default" onclick="location.href='footprints.my'">내 활동 정보</button>
+				<button type="button" id="changeInfo" class="btn btn-default" onclick="location.href='changeInfoView.my'">내 정보 변경</button>
+				<button type="button" class="btn btn-default" onclick="location.href='footprintsView.my'">내 활동 정보</button>
 				<button type="button" class="btn btn-default">1:1 채팅</button>
-				<button type="button" class="btn btn-default" onclick="location.href='growingChicks.my'">병아리 키우기</button>
+				<button type="button" class="btn btn-default" onclick="location.href='growingChicksView.my'">병아리 키우기</button>
 			</div>
 	</div>
 	

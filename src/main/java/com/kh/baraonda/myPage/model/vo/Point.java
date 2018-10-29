@@ -9,6 +9,7 @@ public class Point {
 	private Date point_change_date;
 	private int accrue_point;
 	
+	public Point() {}
 	
 	public Point(int point_no, int member_no, Date point_change_date, int accrue_point) {
 		super();
