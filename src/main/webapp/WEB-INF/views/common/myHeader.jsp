@@ -6,7 +6,6 @@
     	.myHeader{width:800px;margin-right:auto;margin-left:auto;;margin-top:100px;}
     	.listBtn{margin-left:20px;}
     	.btn-default{width:125px; border:1px solid darkgray !important;; border-radius:3px !important;}
-    	*{font-family:'Chungchunsidae' !important;}
     </style>
     <div class="myHeader">
 		<h3>마이페이지</h3>
