@@ -46,7 +46,7 @@
 	</tx:advice>
 	
 	
-	<!--AOP를 이용하여 ㅇ위의 txAdvice를 적용시키기 위한 내용-->
+	<!--AOP를 이용하여 위의 txAdvice를 적용시키기 위한 내용-->
 	<!--advice 객체가 weaving 될 시점(pointcut을 등록하는 것임)-->
 	<!--AOP스키마를 추가해야 한다.-->
 	<aop:config proxy-target-class="true">				

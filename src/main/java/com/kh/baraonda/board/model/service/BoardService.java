@@ -8,4 +8,5 @@ public interface BoardService {
 	
 	//게시글 전체 목록 조회
 	public List<Board> listAll() throws Exception;
+	
 }
