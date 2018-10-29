@@ -8,8 +8,8 @@
 	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 <title>Insert title here</title>
 
-<jsp:include page="../common/head.jsp"></jsp:include>
-<jsp:include page="floalaResources.jsp"></jsp:include>
+<jsp:include page="../common/header.jsp" />
+<jsp:include page="floalaResources.jsp"/>
 
 <style>
 body {
@@ -58,10 +58,8 @@ div#editor {
 </head>
 
 <body>
+
 	<!---------------------------------- 게시글 작성 페이지(글쓰기) ---------------------------------->
-	<section class="content">
-		<div class="ic">More Website Templates @ TemplateMonster.com -
-			July 30, 2014!</div>
 		<div class="container">
 				<!------------------------------------------------------------------------------------------>
 				<div class="row">
@@ -71,7 +69,7 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="BoardReWriteProc.jsp" method="post">
+						<form action="insert.bo" method="post">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -102,20 +100,20 @@ div#editor {
 								<!------------------------------ 글작성 공간 에디터 ------------------------------>
 								<div id="editor" >
 									<div id='edit' style="margin-top: 30px;">
-									
+										
 									</div>
 								</div>
 
 							</div>
-						</form>
-						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
 						<input type="submit" value="작성하기" class="btn btn-success">
 						<input type="reset" value="취소" class="btn btn-warning">
+						</form>
+						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
 					</div>
 				</div>
 				<!------------------------------------------------------------------------------------------>
 			</div>
-	</section>
+			<br><br><br><br><br><br><br><br><br>
 
 	<script>
 		$(function() {

@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="../common/head.jsp"></jsp:include>
+
+<jsp:include page="../common/header.jsp" />
 
 <script>
  $(document).ready(function(){
@@ -289,50 +290,18 @@
 .modifyB2, .deleteB2{font-weight: 400; font-size:13px;color:#9c9c9cbf;}
 .modifyB2:hover, .deleteB2:hover{cursor: pointer;}
 .paging-numbers a.on{background:#f13d3d;}
+.container1{margin: auto; width:75%;}
+
 
 </style>
 <body class="page1" id="top">
 	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
-	
-	<!--==============================  header =================================-->
-	<header>
-		<!--============================== Stuck menu =================================-->
-		<section id="stuck_container">
-			<div class="container">
-				<div class="row">
-					<div class="grid_12">
-						<h1>
-							<a href="index.html"> <img
-								src="<%=request.getContextPath()%>/resources/images/boardImg/logo.png"
-								alt="Logo alt">
-							</a>
-						</h1>
-						<div class="navigation">
-							<nav>
-								<ul class="sf-menu">
-									<li class="current"><a href="index.html">home</a></li>
-									<li><a href="index-1.html">menu</a></li>
-									<li><a href="index-2.html">reservation</a></li>
-									<li><a href="index-3.html">blog</a></li>
-									<li><a href="index-4.html">contacts</a></li>
-								</ul>
-							</nav>
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</header>
 
 	<!--===================== Content======================-->
-	<section class="content">
-		<div class="ic">More Website Templates @ TemplateMonster.com -
-			July 30, 2014!</div>
 		<div class="container">
 			<div class="row">
 				<!---------------------------------------------------------------------------------------------------------------------------------------------->
-				<div class="container">
+				<div class="container1">
 					<!-- 게시판 명 -->
 					<h2 class="boardName">자유게시판
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
@@ -477,7 +446,6 @@
 				<!-------------------------------------------------------------------------->
 			</div>
 		</div>
-	</section>
 	<!----------------- footer----------------->
 	<footer id="footer">
 		<div class="container">
