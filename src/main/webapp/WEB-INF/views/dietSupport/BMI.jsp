@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BMI</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 <jsp:include page="../common/head.jsp" />
 <style>
 .left {
@@ -68,8 +69,8 @@
 	<div class="left">
 		<img src="/baraonda/src/main/webapp/resources/images/berrywater.PNG" style="width:732px; height:180px;">
 		<h2 class="title">나의 BMI 지수 확인</h2>
+		<form action="BMICal.ds" method="get">
 		<div class="tbl-y-wrap r5">
-			<form name="frm" method="get">
 				<table class="tbl-y">
 					<colgroup>
 						<col style="width:144px">
@@ -103,7 +104,6 @@
 						</tr>
 					</tbody>
 				</table>
-			</form>
 		</div>
 		<p class="fbold">
 			<i class="fas fa-exclamation-circle" style="font-size:20px;"></i>&nbsp;비만도 측정(BMI) 이란?
@@ -111,8 +111,9 @@
 			<span class="p-gray">나이, 신장(cm)과 체중(kg)만으로 비만을 판정하는 비만 지수</span>
 		</p>
 		<div class="btn-ac">
-			<button type="button" class="btn btn-danger btn-lg" style="width:130px;">확인</button>
+			<button type="submit" class="btn btn-danger btn-lg" style="width:130px;">확인</button>
 		</div>
+		</form>
 	</div>
 	<jsp:include page="../common/rightBoard.jsp" />
   </div>

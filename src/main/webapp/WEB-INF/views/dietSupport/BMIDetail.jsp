@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,19 +82,24 @@
 							<tbody>
 								<tr>
 									<th>성별</th>
-									<td>여자</td>
+								<c:if test="${b.gender=='F'}">
+									<td>여자</td>									
+								</c:if>
+								<c:if test="${b.gender=='M'}">
+									<td>남자</td>
+								</c:if>
 								</tr>
 								<tr>
 									<th>연령</th>
-									<td>만 22세</td>
+									<td>만 <c:out value="${b.age }"/>세</td>
 								</tr>
 								<tr>
 									<th>키</th>
-									<td>165cm</td>
+									<td><c:out value="${b.height }cm"/></td>
 								</tr>
 								<tr>
 									<th>몸무게</th>
-									<td>55kg</td>
+									<td><c:out value="${b.weight }kg"/></td>
 								</tr>
 							</tbody>
 						</table>
@@ -107,7 +113,44 @@
 					<div class="progress-bar progress-bar-warning" role="progressbar" style="width: 20%">비만</div>
 					<div class="progress-bar progress-bar-danger" role="progressbar" style="width: 20%">고도비만</div>
 				</div>
-				<p>당신의 비만도(BMI) 지수는 22.9로 "정상" 입니다.</p>
+				<p>
+					당신의 비만도(BMI) 지수는 <c:out value="${b.bmi }"/>로
+					<c:if test="${b.gender=='F'}">
+						<c:if test="${b.bmi<18.5}">
+							"저체중"
+						</c:if>
+						<c:if test="${b.bmi>=18.5&&b.bmi=<25.0}">
+							"정상"
+						</c:if>
+						<c:if test="${b.bmi>25.0&&b.bmi=<29.9}">
+							"과체중"
+						</c:if>
+						<c:if test="${b.bmi>=30&&b.bmi<=40.0}">
+							"비만"
+						</c:if>
+						<c:if test="${b.bmi>40.0}">
+							"고도비만"
+						</c:if>
+					</c:if>
+					<c:if test="${b.gender=='M'}">
+						<c:if test="${b.bmi<20.0}">
+							"저체중"
+						</c:if>
+						<c:if test="${b.bmi>=20.0&&b.bmi=<25.0}">
+							"정상"
+						</c:if>
+						<c:if test="${b.bmi>25.0&&b.bmi=<29.9}">
+							"과체중"
+						</c:if>
+						<c:if test="${b.bmi>=30&&b.bmi<=40.0}">
+							"비만"
+						</c:if>
+						<c:if test="${b.bmi>40.0}">
+							"고도비만"
+						</c:if>
+					</c:if>
+					입니다.
+				</p>
 				<div class="btn-ac">
 					<button type="button" class="btn btn-danger btn-lg"
 						style="width: 130px;">다시하기</button>

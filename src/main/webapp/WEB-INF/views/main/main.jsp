@@ -204,7 +204,7 @@ hr{
           <div class="count" id="count">1.</div>
           <img src="${pageContext.request.contextPath}/resources/images/main/bmi.png">
           <br>
-          <a href="#" class="btn">more</a>
+          <a onclick="location.href='BMI.ds'" class="btn">more</a>
         </div>
       </div>
       <div class="grid_4">
