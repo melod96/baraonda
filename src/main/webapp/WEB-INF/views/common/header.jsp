@@ -4,12 +4,12 @@
 <style>
 	.menu1{display:inline-block;}
 	.menu1:hover{color:white;cursor:pointer;}
-
+	*{font-family:'Chungchunsidae' !important;}
 </style>
 
-<jsp:include page="head.jsp"></jsp:include>
 <jsp:include page="loginModal.jsp"/>
 <jsp:include page="joinModal.jsp"/>
+<jsp:include page="head.jsp"></jsp:include>
 
 
     <header>
@@ -59,6 +59,7 @@
                <li><a href="index-2.html"><img src="${pageContext.request.contextPath}/resources/images/main/홈트레이닝.png" alt="Logo alt"></a></li>
                <li><a href="index-3.html"><img src="${pageContext.request.contextPath}/resources/images/main/커뮤니티.png" alt="Logo alt"></a></li>
                <li><a href="index-4.html"><img src="${pageContext.request.contextPath}/resources/images/main/바다체험단.png" alt="Logo alt"></a></li>
+               <li><a href="goAdmin.adm"><img src="${pageContext.request.contextPath}/resources/images/main/바다체험단.png" alt="Logo alt"></a></li>
              </ul>
             </nav>        
             <div class="clear"></div>

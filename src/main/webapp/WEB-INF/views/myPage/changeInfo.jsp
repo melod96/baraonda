@@ -46,89 +46,98 @@
 		#btnR, #btn1{background:#ddd;}
 		#btn1{float:left;}
 		
+		.emptyLogin{width:800px; margin-left: auto; margin-right: auto;text-align:center;}
+		
 	</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 	<jsp:include page="../common/header.jsp"/>
-	<jsp:include page="../common/myHeader.jsp"/>
 	
-	<div class="mainFrame">
-		<div class="profileFrame">
-			<div class="profileImg">
-				<img id="photo" src="${pageContext.request.contextPath}/resources/images/myPageImages/profile.jpg">
-				<div class="Position1"><button type="button" id="uploadBtn" class="btn btn-default">사진 등록 / 변경</button></div>
-				<div class="Position1"><button type="button" id="removeBtn" class="btn btn-default">사진 삭제</button></div>
-			</div>
-			
-			<div class="profileInfo">
-				<div class="profileArea1">
-						<h5 id="myExe">[내 경험치]</h5>
-					<div class="exeInfo">
-						<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/level.png">
-						<div class="exe1">
-							<br>
-							<h6>현재 경험치 량 : 5024</h6>
-							<br>
-							<h6>다음 단계까지 : 976</h6>
+	<c:if test="${!empty sessionScope.loginUser}">
+	<jsp:include page="../common/myHeader.jsp"/>
+		<div class="mainFrame">
+			<div class="profileFrame">
+				<div class="profileImg">
+					<img id="photo" src="${pageContext.request.contextPath}/resources/images/myPageImages/profile.jpg">
+					<div class="Position1"><button type="button" id="uploadBtn" class="btn btn-default">사진 등록 / 변경</button></div>
+					<div class="Position1"><button type="button" id="removeBtn" class="btn btn-default">사진 삭제</button></div>
+				</div>
+				
+				<div class="profileInfo">
+					<div class="profileArea1">
+							<h5 id="myExe">[내 경험치]</h5>
+						<div class="exeInfo">
+							<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/level.png">
+							<div class="exe1">
+								<br>
+								<h6>현재 경험치 량 : <c:out value="${sessionScope.loginUser}"/></h6>
+								<br>
+								<h6>다음 단계까지 : 976</h6>
+							</div>
+							<h5 id="exe3">현재 등급 : 병아리</h5>
 						</div>
-						<h5 id="exe3">현재 등급 : 병아리</h5>
 					</div>
-				</div>
-				<div class="profileArea2">
-					<div class="introInfo">
-						<h5>[한 줄 다짐]</h5>
-						<pre id="introText">다들 한 번 열심히 해봅시다.</pre>
+					<div class="profileArea2">
+						<div class="introInfo">
+							<h5>[한 줄 다짐]</h5>
+							<pre id="introText">다들 한 번 열심히 해봅시다.</pre>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<form action="" method="post">
-			<div class="changeInfo">
-				<div class="position2">
-					<div class="textLabel">계정</div>
-					<input type="text" class="form-control" name="id" value="user99" readonly>
-				</div>
-				
-				<div class="position2">
-					<div class="textLabel">닉네임</div>
-					<input type="text" class="form-control" name="nickname" value="유저구구">
-				</div>
-				
-				<br>
-				
-				<div class="position2">
-					<div class="textLabel">현재 비밀번호</div>
-					<input type="password" class="form-control" name="password" placeholder="현재 비밀번호 입력">
+			<form action="" method="post">
+				<div class="changeInfo">
+					<div class="position2">
+						<div class="textLabel">계정</div>
+						<input type="text" class="form-control" name="id" value="user99" readonly>
+					</div>
 					
-				</div>
-				
-				<div class="position2">
-					<div class="textLabel">변경 비밀번호</div>
-					<input type="password" class="form-control" name="password" placeholder="변경할 비밀번호 입력">
+					<div class="position2">
+						<div class="textLabel">닉네임</div>
+						<input type="text" class="form-control" name="nickname" value="유저구구">
+					</div>
 					
+					<br>
+					
+					<div class="position2">
+						<div class="textLabel">현재 비밀번호</div>
+						<input type="password" class="form-control" name="password" placeholder="현재 비밀번호 입력">
+						
+					</div>
+					
+					<div class="position2">
+						<div class="textLabel">변경 비밀번호</div>
+						<input type="password" class="form-control" name="password" placeholder="변경할 비밀번호 입력">
+						
+					</div>
+					
+					<div class="position2">
+						<div class="textLabel">비밀번호 확인</div>
+						<input type="password" class="form-control" name="password" placeholder="비밀번호 확인">
+					</div>
 				</div>
-				
-				<div class="position2">
-					<div class="textLabel">비밀번호 확인</div>
-					<input type="password" class="form-control" name="password" placeholder="비밀번호 확인">
-				</div>
-			</div>
-		
 			
-			<div class="osArea">
-				<div id="out1">
-					<button id="btn1" class="btn btn-yn">회원탈퇴</button>
-				</div>
 				
-				<div class="selectBtn">
-					<button type="submit" id="btnS" class="btn btn-yn">확인</button>
-					<button type="reset" id="btnR" class="btn btn-yn">취소</button>
+				<div class="osArea">
+					<div id="out1">
+						<button id="btn1" class="btn btn-yn">회원탈퇴</button>
+					</div>
+					
+					<div class="selectBtn">
+						<button type="submit" id="btnS" class="btn btn-yn">확인</button>
+						<button type="reset" id="btnR" class="btn btn-yn">취소</button>
+					</div>
 				</div>
-			</div>
-		</form>
-		
-		
-	</div>
+			</form>
+		</div>
+	</c:if>
+	
+	<c:if test="${empty sessionScope.loginUser}">
+		<div class="emptyLogin">
+			<h2>로그인 후 이용해주세요.</h2>
+			<button onclick="location.href='goMain.me'">메인으로 이동</button>
+		</div>
+	</c:if>
 </body>
 </html>

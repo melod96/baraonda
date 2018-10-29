@@ -9,8 +9,6 @@
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
-	<%--  <jsp:forward page="WEB-INF/views/main/main.jsp"></jsp:forward>   --%>
-	 <jsp:forward page="WEB-INF/views/tips/tipsWrite.jsp"></jsp:forward>
-<%-- 	<jsp:forward page="WEB-INF/views/myPage/changeInfo.jsp"></jsp:forward>  --%>
+	 <jsp:forward page="WEB-INF/views/main/main.jsp"></jsp:forward>  
 </body>
 </html>

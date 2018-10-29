@@ -26,10 +26,23 @@ public class MemberServiceImpl implements MemberService{
 	private DataSourceTransactionManager transactionManager;
 	//transactionManager를 의존성 주입으로 받는다.
 	
-	//회원가입
+	//트랜젝션 관리  - 메소드 내에 있는 구문은 전부 하나의 트랜젝션으로 관리된다.
+	
+	//멤버 검색
+	@Override
+	public Member selectOne(Member m) {
+		return md.selectMemberOne(sqlSession, m);
+	}
+	
+	//회원가입(+ 포인트 행 추가)
 	@Override
 	public int insertMember(Member m) {
 		return md.insertMember(sqlSession, m);
+	}
+	
+	@Override
+	public int insertPoint(Member m) {
+		return  md.insertPoint(sqlSession, m);
 	}
 	
 	//암호화 처리 하는 로그인용 메소드
@@ -50,4 +63,10 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return loginUser;
 	}
+
+	
+
+
+
+	
 }

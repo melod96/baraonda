@@ -11,4 +11,8 @@ public interface MemberService {
 
 	Member loginMember(Member m) throws LoginException;
 
+	int insertPoint(Member m);
+
+	Member selectOne(Member m);
+
 }
