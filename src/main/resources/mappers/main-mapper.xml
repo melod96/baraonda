@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="Main">
+ 	<!-- 공지사항 조회용 -->
+ 	<resultMap type="com.kh.baraonda.notice.model.vo.Notice" id="noticeResultSet">
+		<!--property부분은 Member클래스에 있는 필드와 같아야 하고, column은 DB의 컬럼명과 같다.-->
+		<!--setter를 통해 자동으로 값을 넣기 때문에 해당 class에 setter가 생성되어 있어야 한다.-->
+		<!--mid가 result가 아닌 id인 이유는 식별자로 사용되기 때문이다.-->
+		<id property="board_no" column="BOARD_NO"/>
+		<result property="board_type" column="BOARD_TYPE"/>
+		<result property="writing_type" column="WRITING_TYPE"/>
+		<result property="board_title" column="BOARD_TITLE"/>
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="board_date" column="BOARD_DATE"/>
+		<result property="modify_date" column="MODIFY_DATE"/>
+		<result property="board_status" column="BOARD_STATUS"/>
+		<result property="board_count" column="BOARD_COUNT"/>
+	</resultMap>
+	
+	<!-- 게시판 목록 조회용 쿼리문 -->
+	<select id="selectNotice" resultMap="noticeResultSet">
+	SELECT RANK, BOARD_TITLE
+	FROM(SELECT RANK() OVER (ORDER BY BOARD_DATE DESC) AS RANK, BOARD_TITLE FROM BOARD WHERE BOARD_TYPE = 6 AND BOARD_STATUS = 0)
+	WHERE RANK BETWEEN 1 AND 5
+	</select>
+	
+	</mapper>

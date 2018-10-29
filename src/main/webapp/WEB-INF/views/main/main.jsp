@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,9 +139,7 @@ hr{
 <!--==============================
               header
 =================================-->
-<header>
  <jsp:include page="../common/header.jsp"/> 
-</header>     
  <!--==============================
               header
 =================================-->
@@ -161,7 +160,7 @@ hr{
             <div class="maxheight">
               <img src="${pageContext.request.contextPath}/resources/images/icon2.png" alt="">
               <div class="bann_title">Diet<br>Best Tip</div>
-              <a href="#">more</a>
+              <a href="tips.tp">more</a>
             </div>
           </div>
         </div>
@@ -233,20 +232,22 @@ hr{
           <!-- 공지사항 -->
             <div class="grid_5 preffix_1" id="nq_box">
               <h2>Notice</h2>
+              <c:forEach var="n" items="${ list }">
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>리스트 항목</label>
+              <label>${ n.board_title }</label>
               <br>
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>리스트 항목</label>
+              <label>${ n.board_title }</label>
               <br>
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>리스트 항목</label>
+              <label>${ n.board_title }</label>
               <br>
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>리스트 항목</label>
+              <label>${ n.board_title }</label>
               <br>
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>리스트 항목</label>
+              <label>${ n.board_title }</label>
+              </c:forEach>
               <br>
               <!-- <p>Post about this <strong class="color1"><a href="http://blog.templatemonster.com/free-website-templates/" rel="nofollow">freebie</a></strong> will tell all you need to know about it. Need a good choice of <strong class="color1"><a href="http://www.templatemonster.com/properties/topic/food-restaurant/" rel="nofollow">themes</a></strong>? Visit TemplateMonster’s website.</p>
               Aliquam nibh e,estas id dictum a, commodo. Praesent faucibus malesuada faucibusonec laeet metus id laoreet malesuadarem ipsum dolor sit <br> -->

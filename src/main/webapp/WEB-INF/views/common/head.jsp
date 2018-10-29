@@ -24,8 +24,12 @@
 <style>
 @font-face {
 	 font-family: 'Chungchunsidae'; src: url("${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf"); 
-	  font-family: 'Easop'; src: url("${pageContext.request.contextPath}/resources/fonts/Easop.ttf"); 
 }
+
+	@font-face {
+ 	font-family: 'Easop'; src: url("${pageContext.request.contextPath}/resources/fonts/Easop.ttf"); 
+}
+
 </style>
 
 <!-- #### JAVASCRIPT FILES #### -->
