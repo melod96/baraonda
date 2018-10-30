@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BMI</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<title>healthCenterList</title>
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous"> -->
 <jsp:include page="../common/head.jsp" />
 <style>
 .left {
@@ -51,6 +51,10 @@
 .tbl-type02 {
 	width: 100%;
 }
+.marker{
+	width:25px;
+	height:25px;
+}
 </style>
 </head>
 <body>
@@ -66,6 +70,7 @@
 					<i class="fas fa-exclamation-circle" style="font-size: 20px;"></i>&nbsp;
 					지역별 인바디 측정 가능 보건소를 찾아보세요.
 				</p>
+				<button onclick = "hcdata.ds">데이터 입력</button>
 				<div class="tab3-wrap">
 					<ul class="tab3 clfix">
 						<li><a href="#">서울특별시</a></li>
@@ -113,8 +118,7 @@
 							<td>가평군 보건소</td>
 							<td>경기도 가평군 가평읍 가화로 155-18</td>
 							<td>031-582-2822</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
+							<td><img src="${pageContext.request.contextPath}/resources/images/dietSupportImg/marker.png" class="marker" /></td>
 						</tr>
 						<tr>
 							<td>강남구 보건소</td>
