@@ -232,8 +232,13 @@ hr{
           <!-- 공지사항 -->
             <div class="grid_5 preffix_1" id="nq_box">
               <h2>Notice</h2>
-              <c:forEach var="n" items="${ list }">
-              <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
+              <c:forEach var="n" items="${list}">
+	              <label><img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
+	              ${ n.board_title }</label>
+	              <br>
+              
+              
+           <%--    <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
               <label>${ n.board_title }</label>
               <br>
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
@@ -243,10 +248,25 @@ hr{
               <label>${ n.board_title }</label>
               <br>
               <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>${ n.board_title }</label>
-              <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>${ n.board_title }</label>
+              <label>${ n.board_title }</label> --%>
+              
+              
+           <%--    <%if((ArrayList<Notice>)request.getAttribute("noticeList") != null){
+                      		for (Notice ntl : noticeList) {
+                     	 %>
+						
+						<li>
+							<input type="hidden" value=<%=ntl.getnNo() %>>
+							<span class="ntTitle">
+									<a class="ntTitleTag"><%=ntl.getnTitle() %><input type="hidden" value="<%=ntl.getnNo()%>"></a></span><span class="ntDate"><%=ntl.getnDate()%>
+							</span>
+						</li>
+						
+						<%
+							}}
+						%> --%>
+              
+              
               </c:forEach>
               <br>
               <!-- <p>Post about this <strong class="color1"><a href="http://blog.templatemonster.com/free-website-templates/" rel="nofollow">freebie</a></strong> will tell all you need to know about it. Need a good choice of <strong class="color1"><a href="http://www.templatemonster.com/properties/topic/food-restaurant/" rel="nofollow">themes</a></strong>? Visit TemplateMonster’s website.</p>

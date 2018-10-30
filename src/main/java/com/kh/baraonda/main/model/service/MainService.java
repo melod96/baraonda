@@ -12,7 +12,7 @@ import com.kh.baraonda.main.model.exception.NoticeSelectListException;
 import com.kh.baraonda.main.model.vo.PageInfo;
 import com.kh.baraonda.notice.model.vo.Notice;
 
-@Service
+
 public interface MainService {
 	
 	ArrayList<Notice> selectNotice() throws NoticeSelectListException;

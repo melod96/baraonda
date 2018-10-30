@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.board.model.dao.BoardDao;
 import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.member.model.vo.Member;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -23,5 +24,30 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> listAll() throws Exception{
 		return boardDao.listAll(sqlSession);
+	}
+	
+	//게시글 작성
+	@Override
+	public void create(Board b, Member m) throws Exception {
+		String title = b.getBoard_title();
+		String content = b.getBoard_content();
+		String writer = m.getNick_name();
+		//*태그문자 처리(<==> &it; > == > &gt;)
+		//replace(A,B)A를 B로 변경
+		title = title.replace("<", "&It");
+		title = title.replace("<", "&gt;");
+		writer = writer.replace("<", "&It;");
+		writer = writer.replace("<", "&gt;");
+		//*공백문자 처리
+		title = title.replace(" ", "&nbsp;&nbsp;");
+		writer = writer.replace(" ", "&nbsp;&nbsp;");
+		//*줄바꿈 문자 처리
+		content = content.replace("\n", "<br>");
+		b.setBoard_title(title);
+		b.setBoard_content(content);
+		m.setNick_name(writer);
+		boardDao.create(b, m);
+		
+		
 	}
 }

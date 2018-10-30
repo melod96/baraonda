@@ -1,10 +1,23 @@
 package com.kh.baraonda.dietSupport.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.kh.baraonda.dietSupport.model.vo.BMI;
 import com.kh.baraonda.dietSupport.model.vo.CaloriePresciption;
@@ -59,21 +72,40 @@ public class DietSupportController {
 		double ae = 0;				//활동 대사량
 		double ne = 0;				//필요 열량
 		
-		if(cp.getActivity().equals("No")) {
-			ae = 0.4 * 6 * cp.getWeight();
-			ne = avgweight1 * 20;
-		}else if(cp.getActivity().equals("Little")) {
-			ae = 1.2 * 6 * cp.getWeight();
-			ne = avgweight1 * 25;
-		}else if(cp.getActivity().equals("Nomal")) {
-			ae = 2.3 * 6 * cp.getWeight();
-			ne = avgweight1 * 30;
-		}else if(cp.getActivity().equals("Many")) {
-			ae = 2.7 * 6 * cp.getWeight();
-			ne = avgweight1 * 35;
+		if(cp.getGender() == "M") {
+			if(cp.getActivity().equals("No")) {
+				ae = 0.4 * 6 * cp.getWeight();
+				ne = avgweight1 * 20;
+			}else if(cp.getActivity().equals("Little")) {
+				ae = 1.3 * 6 * cp.getWeight();
+				ne = avgweight1 * 25;
+			}else if(cp.getActivity().equals("Nomal")) {
+				ae = 2.6 * 6 * cp.getWeight();
+				ne = avgweight1 * 30;
+			}else if(cp.getActivity().equals("Many")) {
+				ae = 3.1 * 6 * cp.getWeight();
+				ne = avgweight1 * 35;
+			}else {
+				ae = 3.9 * 6 * cp.getWeight();
+				ne = avgweight1 * 40;
+			}
 		}else {
-			ae = 3.5 * 6 * cp.getWeight();
-			ne = avgweight1 * 40;
+			if(cp.getActivity().equals("No")) {
+				ae = 0.4 * 6 * cp.getWeight();
+				ne = avgweight1 * 20;
+			}else if(cp.getActivity().equals("Little")) {
+				ae = 1.2 * 6 * cp.getWeight();
+				ne = avgweight1 * 25;
+			}else if(cp.getActivity().equals("Nomal")) {
+				ae = 2.3 * 6 * cp.getWeight();
+				ne = avgweight1 * 30;
+			}else if(cp.getActivity().equals("Many")) {
+				ae = 2.7 * 6 * cp.getWeight();
+				ne = avgweight1 * 35;
+			}else {
+				ae = 3.5 * 6 * cp.getWeight();
+				ne = avgweight1 * 40;
+			}
 		}
 		double f = (bm1 + ae) * 0.1;
 		
@@ -88,7 +120,16 @@ public class DietSupportController {
 	}
 	
 	@RequestMapping("healthCenterList.ds")
-	public String healthCenterListPage() {
+	public String healthCenterListPage(ModelMap map) throws SAXException, IOException, ParserConfigurationException{
+		
+        
+		return "dietSupport/healthCenterList";
+	}
+	
+	@RequestMapping("hcdata.ds")
+	public String hcinsertdata() {
+		
+		
 		return "dietSupport/healthCenterList";
 	}
 }

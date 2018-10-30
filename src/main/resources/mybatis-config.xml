@@ -13,16 +13,24 @@
 
   			<typeAlias type="com.kh.baraonda.board.model.vo.Board" alias="Board"/>
 
+
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Files" alias="Files"/>
-			
+
+
+			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="Notice"/>
+
   		</typeAliases>
   		
   		<mappers>
 			<mapper resource="mappers/member-mapper.xml"/>
 
+			<mapper resource="mappers/main-mapper.xml"/>
+	
 			<mapper resource="mappers/myPage-mapper.xml"/>
 
 			<mapper resource="mappers/board-mapper.xml"/> 
+			
+			<mapper resource="mappers/admin-mapper.xml"/>
 
 		</mappers>
   		
