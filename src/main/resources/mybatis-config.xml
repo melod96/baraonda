@@ -8,12 +8,12 @@
   <!--타입앨리어스, mapper등록만 여기서 하고 db설정 관련은 하지 않는다.-->
   		<typeAliases>
   			<typeAlias type="com.kh.baraonda.member.model.vo.Member" alias="Member"/>
-  			<!-- <typeAlias type="com.kh.baraonda.member.model.vo.Board" alias="Board"/> -->
+  			<typeAlias type="com.kh.baraonda.board.model.vo.Board" alias="Board"/>
   		</typeAliases>
   		
   		<mappers>
 			<mapper resource="mappers/member-mapper.xml"/>
-			<!-- <mapper resource="mappers/board-mapper.xml"/> -->
+			<mapper resource="mappers/board-mapper.xml"/> 
 		</mappers>
   		
   </configuration>
