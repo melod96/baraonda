@@ -106,7 +106,6 @@
 		<img src="images/berrywater.PNG" style="width:732px; height:180px;">
 		<h2 class="title">칼로리 처방 받기</h2>
 		<div class="tbl-y-wrap r5">
-			<form name="frm" method="get">
 				<table class="tbl-y">
 					<colgroup>
 						<col style="width:144px">
@@ -115,33 +114,32 @@
 					<tbody>
 						<tr>
 							<th>총 감량기간</th>
-							<td>3개월</td>
+							<td>${cp.dateweight }개월</td>
 						</tr>
 						<tr>
 							<th> 현재체중</th>
-							<td>55kg</td>
+							<td>${cp.weight }kg</td>
 						</tr>
 						<tr>
 							<th>목표체중</th>
-							<td>50kg</td>
+							<td>${cp.goalweight }kg</td>
 						</tr>
 					</tbody>
 				</table>
-			</form>
 		</div>
-		<p><span class="label label-primary">TIP</span><span>표준체중 63.0</span> / 미용 추천 체중 <span>57.0</span> 입니다.</p>
+		<p><span class="label label-primary">TIP</span><span>표준체중 ${cp.avgweight}</span> / 미용 추천 체중 <span>${cp.avgweight-6.0}</span> 입니다.</p>
 		<p class="fblod p-gray">※ 건강을 위해서는 <span class="p-red">1달에 3kg 이내의 감량</span>을 추천해 드립니다.</p>
-		<h3>하루 소비 칼로리는<span class = "p-org">1698kcal</span></h3>
+		<h3>하루 소비 칼로리는<span class = "p-org">${cp.basal+cp.acienergy+cp.energy}kcal</span></h3>
 		<div class="r5 box calorie">
 			<div class="progress">
- 				<div class="progress-bar progress-bar-success" role="progressbar" style="width:80%">
-    					1389
+ 				<div class="progress-bar bg-success" role="progressbar" style="width:80%">
+    					${cp.basal}
 				</div>
-				<div class="progress-bar progress-bar-warning" role="progressbar" style="width:10%">
-    					138
+				<div class="progress-bar bg-warning" role="progressbar" style="width:10%">
+    					${cp.acienergy }
   				</div>
-  				<div class="progress-bar progress-bar-danger" role="progressbar" style="width:10%">
-    					169
+  				<div class="progress-bar bg-danger" role="progressbar" style="width:10%">
+    					${cp.energy }
   				</div>
 			</div>
 		</div>
@@ -159,11 +157,11 @@
 				<tbody>
 					<tr>
 						<th>하루 동안 섭취해야 할 음식 칼로리 </th>
-						<td><span id="day_eat_cal">1524kcal</span></td>
+						<td><span id="day_eat_cal">${cp.needenergy }kcal</span></td>
 					</tr>
 					<tr>
 						<th>하루 동안 운동으로 소모해야 할 칼로리 </th>
-						<td><span id="day_excersice_cal">254kcal</span></td>
+						<td><span id="day_excersice_cal">${cp.exercise }kcal</span></td>
 					</tr>
 				</tbody>
 			</table>
@@ -173,7 +171,7 @@
 			<li>1000kcal 이하의 음식 섭취는 영양 불균형 및 요요 현상의 원인이 될 수 있어요.</li>
 		</ul>
 		<div class="btn-ac">
-			<button type="button" class="btn btn-danger btn-lg" style="width:150px;">다시하기</button>
+			<button type="button" class="btn btn-danger btn-lg" style="width:150px;" onclick="location.href='caloriePresciption.ds'">다시하기</button>
 		</div>
 	</div>
 			<jsp:include page="../common/rightBoard.jsp" />
