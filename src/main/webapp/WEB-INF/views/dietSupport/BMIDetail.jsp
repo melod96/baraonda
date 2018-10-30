@@ -107,53 +107,110 @@
 				</div>
 				<p class="fbold">비만도(BMI) 검사 결과</p>
 				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: 20%">저체중</div>
-					<div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%">정상</div>
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: 20%">과체중</div>
-					<div class="progress-bar progress-bar-warning" role="progressbar" style="width: 20%">비만</div>
-					<div class="progress-bar progress-bar-danger" role="progressbar" style="width: 20%">고도비만</div>
+					<c:if test="${b.gender=='F'}">
+						<c:choose>
+							<c:when test="${b.bmi<18.5}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi>=18.5 && b.bmi<=25.0}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi>25.0 && b.bmi<=29.9}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi>=30 && b.bmi<=40.0}">
+								<div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi > 40.0}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+						</c:choose>
+					</c:if>
+					<c:if test="${b.gender=='M'}">
+						<c:choose>
+							<c:when test="${b.bmi < 20.0}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi>=20.0 && b.bmi<=25.0}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi>25.0 && b.bmi<=29.9}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi>=30 && b.bmi<=40.0}">
+								<div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+							<c:when test="${b.bmi > 40.0}">
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">저체중</div>
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%">정상</div>
+								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 20%">과체중</div>
+								<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 20%">비만</div>
+								<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 20%">고도비만</div>
+							</c:when>
+						</c:choose>
+					</c:if>
 				</div>
 				<p>
 					당신의 비만도(BMI) 지수는 <c:out value="${b.bmi }"/>로
 					<c:if test="${b.gender=='F'}">
-						<c:if test="${b.bmi<18.5}">
-							"저체중"
-						</c:if>
-						<c:if test="${b.bmi>=18.5&&b.bmi=<25.0}">
-							"정상"
-						</c:if>
-						<c:if test="${b.bmi>25.0&&b.bmi=<29.9}">
-							"과체중"
-						</c:if>
-						<c:if test="${b.bmi>=30&&b.bmi<=40.0}">
-							"비만"
-						</c:if>
-						<c:if test="${b.bmi>40.0}">
-							"고도비만"
-						</c:if>
+						<c:choose>
+							<c:when test="${b.bmi<18.5}">"저체중"</c:when>
+							<c:when test="${b.bmi>=18.5 && b.bmi<=25.0}">"정상"</c:when>
+							<c:when test="${b.bmi>25.0 && b.bmi<=29.9}">"과체중"</c:when>
+							<c:when test="${b.bmi>=30 && b.bmi<=40.0}">"비만"</c:when>
+							<c:when test="${b.bmi > 40.0}">"고도비만"</c:when>
+						</c:choose>
 					</c:if>
 					<c:if test="${b.gender=='M'}">
-						<c:if test="${b.bmi<20.0}">
-							"저체중"
-						</c:if>
-						<c:if test="${b.bmi>=20.0&&b.bmi=<25.0}">
-							"정상"
-						</c:if>
-						<c:if test="${b.bmi>25.0&&b.bmi=<29.9}">
-							"과체중"
-						</c:if>
-						<c:if test="${b.bmi>=30&&b.bmi<=40.0}">
-							"비만"
-						</c:if>
-						<c:if test="${b.bmi>40.0}">
-							"고도비만"
-						</c:if>
+						<c:choose>
+							<c:when test="${b.bmi < 20.0}">"저체중"</c:when>
+							<c:when test="${b.bmi>=20.0 && b.bmi<=25.0}">"정상"</c:when>
+							<c:when test="${b.bmi>25.0 && b.bmi<=29.9}">"과체중"</c:when>
+							<c:when test="${b.bmi>=30 && b.bmi<=40.0}">"비만"</c:when>
+							<c:when test="${b.bmi > 40.0}">"고도비만"</c:when>
+						</c:choose>
 					</c:if>
 					입니다.
 				</p>
 				<div class="btn-ac">
 					<button type="button" class="btn btn-danger btn-lg"
-						style="width: 130px;">다시하기</button>
+						style="width: 130px;" onclick="location.href='BMI.ds'">다시하기</button>
 				</div>
 			</div>
 			<jsp:include page="../common/rightBoard.jsp" />

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BMI</title>
+<title>caloriePresciption</title>
 <jsp:include page="../common/head.jsp" />
 <style>
 .left {
@@ -70,8 +70,8 @@
 				<img src="images/berrywater.PNG"
 					style="width: 732px; height: 180px;">
 				<h2 class="title">칼로리 처방 받기</h2>
+				<form action="calpre.ds" method="get">
 				<div class="tbl-y-wrap r5">
-					<form name="frm" method="get">
 						<table class="tbl-y">
 							<colgroup>
 								<col style="width: 144px">
@@ -118,11 +118,8 @@
 									<th>체중 감량 기간</th>
 									<td class="form-inline"><input id="" name="dateweight"
 										class="form-control input-short" type="text"
-										placeholder="텍스트를 입력하세요" maxlength="3">&nbsp;&nbsp; <input
-										type="radio" class="date" id="month" name="date" value="Month"
-										checked><label class="pre" for="month"> 개월 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" class="date" id="day" name="date"
-										value="Day"><label class="pre" for="day"> 일</label></td>
+										placeholder="텍스트를 입력하세요" maxlength="3">&nbsp;&nbsp; 개월
+									</td>
 								</tr>
 								<tr>
 									<th>평소 활동량</th>
@@ -144,11 +141,11 @@
 								</tr>
 							</tbody>
 						</table>
-					</form>
 				</div>
 				<div class="btn-ac">
-					<button type="button" class="btn btn-danger btn-lg" style="width: 170px;">칼로리 처방 받기</button>
+					<button type="submit" class="btn btn-danger btn-lg" style="width: 170px;">칼로리 처방 받기</button>
 				</div>
+				</form>
 			</div>
 			<jsp:include page="../common/rightBoard.jsp" />
 		</div>

@@ -212,7 +212,7 @@ hr{
           <div class="count" id="count">2.</div>
           <img src="${pageContext.request.contextPath}/resources/images/main/칼로리처방.png">
           <br>
-          <a href="#" class="btn">more</a>
+          <a onclick="location.href='caloriePresciption.ds'" class="btn">more</a>
         </div>
       </div>
       <div class="grid_4">
@@ -220,7 +220,7 @@ hr{
           <div class="count" id="count">3.</div>
           <img src="${pageContext.request.contextPath}/resources/images/main/인바디보건소.png">
           <br>
-          <a href="#" class="btn">more</a>
+          <a onclick="location.href='healthCenterList.ds'" class="btn">more</a>
         </div>        
       </div>
       <!-- 처방 서비스 -->
