@@ -9,14 +9,15 @@ public class Board {
 	private String board_title;
 	private String board_content;
 	private int member_no;
-	private String writer;
 	private Date board_date;
 	private Date modify_date;
 	private int board_status;
 	private int board_count;
 	
+	public Board() {}
+
 	public Board(int board_no, int board_type, int writing_type, String board_title, String board_content,
-			int member_no, String writer, Date board_date, Date modify_date, int board_status, int board_count) {
+			int member_no, Date board_date, Date modify_date, int board_status, int board_count) {
 		super();
 		this.board_no = board_no;
 		this.board_type = board_type;
@@ -24,7 +25,6 @@ public class Board {
 		this.board_title = board_title;
 		this.board_content = board_content;
 		this.member_no = member_no;
-		this.writer = writer;
 		this.board_date = board_date;
 		this.modify_date = modify_date;
 		this.board_status = board_status;
@@ -53,10 +53,6 @@ public class Board {
 
 	public int getMember_no() {
 		return member_no;
-	}
-
-	public String getWriter() {
-		return writer;
 	}
 
 	public Date getBoard_date() {
@@ -99,10 +95,6 @@ public class Board {
 		this.member_no = member_no;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
 	public void setBoard_date(Date board_date) {
 		this.board_date = board_date;
 	}
@@ -123,8 +115,8 @@ public class Board {
 	public String toString() {
 		return "Board [board_no=" + board_no + ", board_type=" + board_type + ", writing_type=" + writing_type
 				+ ", board_title=" + board_title + ", board_content=" + board_content + ", member_no=" + member_no
-				+ ", writer=" + writer + ", board_date=" + board_date + ", modify_date=" + modify_date
-				+ ", board_status=" + board_status + ", board_count=" + board_count + "]";
+				+ ", board_date=" + board_date + ", modify_date=" + modify_date + ", board_status=" + board_status
+				+ ", board_count=" + board_count + "]";
 	}
 	
 	
