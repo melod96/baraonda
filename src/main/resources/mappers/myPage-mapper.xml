@@ -14,15 +14,48 @@
 		<result property="accrue_point" column="ACCRUE_POINT"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Files" id="filesResultSet">
+		<id property="files_no" column="FILES_NO"/>
+		<result property="f_reference_no" column="F_REFERENCE_NO"/>
+		<result property="files_title" column="FILES_TITLE"/>
+		<result property="change_files_title" column="FILES_CHANGE_TITLE"/>
+		<result property="files_type" column="FILES_TYPE"/>
+		<result property="files_root" column="FILES_ROOT"/>
+		<result property="files_secession" column="FILES_SECESSION"/>
+	</resultMap>
+	
 	
 	<select id="selectPoint" resultMap="pointResultSet" parameterType="Point">
 		SELECT * FROM POINT
-		WHERE MEMBER_NO = #{member_no}
+		WHERE POINT_NO = #{member_no}
 	</select>
 	
 	<update id="updateMemberInfo" parameterType="_int">
 		UPDATE MEMBER SET PASSWORD = '${password}', NICK_NAME = '${nick_name}' WHERE MEMBER_NO = ${member_no}
 	</update>
+	
+	<insert id="insertPhoto" parameterType="Files">
+		INSERT INTO FILES
+		VALUES(
+			SEQ_FILES_NO.NEXTVAL, #{f_reference_no},
+			 #{files_title}, #{change_files_title}, 
+			 #{files_type}, #{files_root}, 0
+		)
+	
+	</insert>
+	
+	<select id="selectPhoto"  resultMap="filesResultSet" parameterType="Files">
+		SELECT RANK, FILES_NO, F_REFERENCE_NO, FILES_TITLE, FILES_TYPE, FILES_ROOT, FILES_SECESSION
+      
+      FROM(
+            SELECT RANK() OVER (ORDER BY FILES_NO DESC) AS RANK, 
+            FILES_NO, F_REFERENCE_NO, FILES_TITLE, FILES_TYPE, FILES_ROOT, FILES_SECESSION
+            FROM FILES WHERE F_REFERENCE_NO = #{member_no} AND FILES_TYPE = 1 AND FILES_SECESSION = 0 
+         )
+         
+		 WHERE RANK BETWEEN 1 AND 1
+	
+	</select>
 	
 <!--//point 영역-->
 	

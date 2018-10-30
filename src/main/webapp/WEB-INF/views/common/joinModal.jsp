@@ -3,6 +3,7 @@
 <style>
 	.div-join1{width:350px;height:400px;border:5px solid #BFE6F2; border-radius:20px;border-style:double;}
 	.div-join2{width:270px;height:330px; margin-right:auto;margin-left:auto;margin-top:40px;}
+	.modal-content{width:330px; height:600px;}
 </style>
 
 	<div class="modal fade" id="join-modal" tabindex="-1" role="dialog"
@@ -11,8 +12,6 @@
 			<div class="modal-content">
 			
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
 					<span class="login100-form-title p-b-10">회원가입</span>
 				</div>
 							<div class="div-join2">
@@ -30,6 +29,11 @@
 									<div class="form-group">
 									   <label for="nick_name">*닉네임</label>
 									   <input type="text" class="form-control" name="nick_name" id="nick_name" placeholder="닉네임을 입력하세요">
+									</div>
+									<br>
+									<div class="form-group">
+									   <label for="nick_name">*이름</label>
+									   <input type="text" class="form-control" name="name" id="name" placeholder="닉네임을 입력하세요">
 									</div>
 									<br>
 									<div align="center">

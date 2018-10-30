@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.dao.MyPageDao;
+import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Service
@@ -27,5 +28,17 @@ public class MyPageServiceImpl implements MyPageService{
 	public int updateMemberInfo(Member m) {
 		return mpd.updateMemberInfo(sqlSession, m);
 	}
+
+	@Override
+	public void insertPhoto(Files file) {
+		mpd.insertPhoto(sqlSession, file);
+	}
+
+	@Override
+	public Files selectPhoto(Member loginUser) {
+		return mpd.selectPhoto(sqlSession, loginUser);
+	}
+
+
 
 }
