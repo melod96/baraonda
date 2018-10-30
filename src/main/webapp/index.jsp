@@ -11,7 +11,8 @@
 <body>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
   
-	 <jsp:forward page="WEB-INF/views/main/main.jsp"></jsp:forward>  
+	 <%-- <jsp:forward page="WEB-INF/views/main/main.jsp"></jsp:forward>   --%>
+	 <jsp:forward page="main.m"/>
 
 </body>
 </html>
