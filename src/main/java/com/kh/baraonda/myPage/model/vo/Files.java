@@ -5,20 +5,20 @@ public class Files {
 	private int files_no;
 	private int f_reference_no;
 	private String files_title;
-	private String change_files_title;
+	private String files_change_title;
 	private int files_type;
 	private String files_root;
 	private int files_secession;
 	
 	public Files() {}
 
-	public Files(int files_no, int f_reference_no, String files_title, String change_files_title, int files_type,
+	public Files(int files_no, int f_reference_no, String files_title, String files_change_title, int files_type,
 			String files_root, int files_secession) {
 		super();
 		this.files_no = files_no;
 		this.f_reference_no = f_reference_no;
 		this.files_title = files_title;
-		this.change_files_title = change_files_title;
+		this.files_change_title = files_change_title;
 		this.files_type = files_type;
 		this.files_root = files_root;
 		this.files_secession = files_secession;
@@ -27,7 +27,7 @@ public class Files {
 	@Override
 	public String toString() {
 		return "Files [files_no=" + files_no + ", f_reference_no=" + f_reference_no + ", files_title=" + files_title
-				+ ", change_files_title=" + change_files_title + ", files_type=" + files_type + ", files_root="
+				+ ", files_change_title=" + files_change_title + ", files_type=" + files_type + ", files_root="
 				+ files_root + ", files_secession=" + files_secession + "]";
 	}
 
@@ -55,12 +55,12 @@ public class Files {
 		this.files_title = files_title;
 	}
 
-	public String getChange_files_title() {
-		return change_files_title;
+	public String getFiles_change_title() {
+		return files_change_title;
 	}
 
-	public void setChange_files_title(String change_files_title) {
-		this.change_files_title = change_files_title;
+	public void setFiles_change_title(String files_change_title) {
+		this.files_change_title = files_change_title;
 	}
 
 	public int getFiles_type() {
@@ -86,6 +86,7 @@ public class Files {
 	public void setFiles_secession(int files_secession) {
 		this.files_secession = files_secession;
 	}
+
 	
 	
 }

@@ -27,7 +27,7 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 	public Files selectPhoto(SqlSessionTemplate sqlSession, Member loginUser) {
-		return sqlSession.selectOne("Mypage.selectPhoto",loginUser);
+		return (Files)sqlSession.selectOne("MyPage.selectPhoto",loginUser);
 	}
 
 

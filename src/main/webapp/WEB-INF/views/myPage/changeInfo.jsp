@@ -60,7 +60,7 @@
 		<div class="mainFrame">
 			<div class="profileFrame">
 				<div class="profileImg">
-					<img id="photo" src="${pageContext.request.contextPath}/resources/images/myPageImages/profile.jpg">
+					<img id="photo" src="${pageContext.request.contextPath}/resources/images/uploadFiles/${file.files_change_title}">
 					<form action="uploadPhoto.my" method="post"  enctype="multipart/form-data">
 						<div class="Position1">
 							<button type="button" id="uploadBtn" class="btn btn-default" onclick="uploadPhoto();">사진 불러오기</button>
@@ -75,12 +75,12 @@
 					<div class="profileArea1">
 							<h5 id="myExe">[내 경험치]</h5>
 						<div class="exeInfo">
-							<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/level.png">
+							<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/chicks.png">
 							<div class="exe1">
 								<br>
 								<h6>현재 경험치 량 : <c:out value="${point.accrue_point}"/></h6>
 								<br>
-								<h6>다음 단계까지 : 976</h6>
+								<h6>다음 단계까지 :900</h6>
 							</div>
 							<h5 id="exe3">현재 등급 : 병아리</h5>
 						</div>
