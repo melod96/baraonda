@@ -48,8 +48,8 @@
 	<insert id="insertMember"  parameterType="Member">
 		INSERT INTO MEMBER
 		VALUES(
-				 SEQ_MEMBER_NO.NEXTVAL, #{id}, #{password}, null, #{nick_name},
-				 null, null, SYSDATE, null, default, default, default, 
+				 SEQ_MEMBER_NO.NEXTVAL, #{id}, #{password}, #{name}, #{nick_name},
+				 null, null, SYSDATE, SYSDATE, default, default, default, 
 				 null, null, null, null, null, null, null, null
 		)
 	</insert>
@@ -65,7 +65,7 @@
 	<insert id="insertPoint" parameterType="Member">
 		INSERT INTO POINT
 		VALUES(
-			SEQ_POINT_NO.NEXTVAL, #{member_no}, SYSDATE, 0
+			#{member_no}, SYSDATE, 0
 		)
 	</insert>
 	

@@ -9,12 +9,13 @@
 		/*내 프로필 구역*/
 		.mainFrame{width:800px;height:auto;margin-right:auto;margin-left:auto;margin-top:0px;margin-bottom:150px;}
 		.profileFrame{
-				width:800px;height:280px;margin-right:auto;margin-left:auto;border:3px solid #CFCFCF;border-radius:10px;
+				width:800px;height:auto;margin-right:auto;margin-left:auto;border:3px solid #CFCFCF;border-radius:10px;
 				margin-top:20px;}
 		.profileImg{width:150px;margin-left:10px;}
-		#uploadBtn, #removeBtn{width:90px;height:30px;margin-left:25px;font-size:10px;}
-		#uploadBtn{ margin-top:20px; border:1px solid darkgray;}
-		#removeBtn{ margin-top:8px; border:1px solid darkgray;}
+		#uploadBtn, #removeBtn, #subBtn{width:90px;height:30px;margin-left:30px;font-size:10px;}
+		#uploadBtn{ margin-top:15px; border:1px solid darkgray;}
+		#subBtn{ margin-top:8px; border:1px solid darkgray;}
+		#removeBtn{ margin-top:8px; border:1px solid darkgray; margin-bottom:10px;}
 		#photo{border:2px solid #ddd; margin-top:15px; border-radius:50%;}
 		.profileImg, .profileInfo{display:inline-block;}
 		.profileInfo{margin-top:17px;margin-left:20px; }
@@ -60,7 +61,13 @@
 			<div class="profileFrame">
 				<div class="profileImg">
 					<img id="photo" src="${pageContext.request.contextPath}/resources/images/myPageImages/profile.jpg">
-					<div class="Position1"><button type="button" id="uploadBtn" class="btn btn-default">사진 등록 / 변경</button></div>
+					<form action="uploadPhoto.my" method="post"  enctype="multipart/form-data">
+						<div class="Position1">
+							<button type="button" id="uploadBtn" class="btn btn-default" onclick="uploadPhoto();">사진 불러오기</button>
+							<button type="submit" id="subBtn" class="btn btn-default">등록하기</button>
+							<input type="file" id="uploadInput" name="photo" style="display:none;">
+						</div>
+					</form>
 					<div class="Position1"><button type="button" id="removeBtn" class="btn btn-default">사진 삭제</button></div>
 				</div>
 				
@@ -140,5 +147,13 @@
 			<button onclick="location.href='goMain.me'">메인으로 이동</button>
 		</div>
 	</c:if>
+	
+	<script>
+		function uploadPhoto(){
+			$("#uploadInput").trigger("click");
+		}
+	
+	
+	</script>
 </body>
 </html>

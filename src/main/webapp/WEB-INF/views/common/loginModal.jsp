@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	.container-login100{min-height: 450px;}
+	.container-login100{min-height:80vh;}
 	.login100-form-btn{height:40px;}
 	.btn-login-with{height:40px;}
 	.idPwdSearch{margin-right:auto;margin-left:auto;width:220px;}
+	.login100-form-title{margin-top:30px;}
 </style>
 
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
@@ -13,9 +14,7 @@
 			<div class="modal-content">
 			
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<span class="login100-form-title p-b-10">LOGIN</span>
+					<span class="login100-form-title p-b-10" style="z-index:50;">LOGIN</span>
 				</div>
 
 					
