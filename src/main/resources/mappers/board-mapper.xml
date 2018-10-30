@@ -12,19 +12,35 @@
 		<result property="board_title" column="BOARD_TITLE" />
 		<result property="board_content" column="BOARD_CONTENT" />
 		<result property="member_no" column="MEMBER_NO" />
-		<result property="writer" column="WRITER" />
 		<result property="board_date" column="BOARD_DATE" />
 		<result property="modify_date" column="MODIFY_DATE" />
 		<result property="board_status" column="BOARD_STATUS" />
 		<result property="board_count" column="BOARD_COUNT" />
+		
+		<!-- <association javaType="Member" property="Member">
+			<id column="member_no" property="member_no"/>
+			<result column="nick_name" property="nick_name"/>
+		</association> -->
+
+		
 	</resultMap>
 
-	<select id="listAll" resultMap="boardResultSet" parameterType="Board">
-		SELECT BOARD_NO, BOARD_TYPE, WRITING_TYPE, BOARD_TITLE, BOARD_CONTENT,
-		WRITER, MEMBER_NO, BOARD_DATE, MODIFY_DATE, BOARD_STATUS, BOARD_COUNT
-		FROM BOARD
-		ORDER BY BOARD_NO DESC
+	<select id="listAll" resultMap="boardResultSet">
+		SELECT B.BOARD_NO, B.BOARD_TYPE, B.WRITING_TYPE, B.BOARD_TITLE, B.BOARD_CONTENT,
+			   B.MEMBER_NO, B.BOARD_DATE, B.MODIFY_DATE, B.BOARD_STATUS, B.BOARD_COUNT
+		FROM BOARD B
+        JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+        WHERE B.WRITING_TYPE = 11
+		ORDER BY B.BOARD_NO DESC
 	</select>
-
+	
+	<!-- <select id="listAll" resultMap="boardResultSet">
+	SELECT B.BOARD_NO, B.WRITING_TYPE, M.NICK_NAME, B.BOARD_DATE, B.BOARD_COUNT
+	FROM BOARD B
+	JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+	WHERE B.WRITING_TYPE = 15
+	ORDER BY B.BOARD_NO DESC
+	</select> -->
+	
 </mapper> 
   

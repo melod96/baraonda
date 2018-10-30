@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../common/header.jsp" />
 
@@ -100,16 +101,18 @@
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="row" items="${list }">
+						
+						<c:forEach items="${list}" var="row">
 							<tr class="boardTr">
-								<th class="boardNo">${row.BOARD_NO}</th>
-								<th class="boardSubject2">${row.BOARD_TITLE }</th>
-								<th class="boardWriter">${row.WRITER }</th>
-								<th class="boardDay">${row.BOARD_DATE }</th>
-								<th class="boardCount">${row.BOARD_COUNT }</th>
+								<th class="boardNo">${row.board_no}</th>
+								<th class="boardSubject2">${row.board_title}</th>
+								<th class="boardWriter">${row.member_no}</th>
+								<th class="boardDay">${row.board_date}</th>
+								<th class="boardCount">${row.board_count}</th>
 							</tr>
 						</c:forEach>
-							<!-- <tr class="boardTr">
+						
+						<!-- <tr class="boardTr">
 								<th class="boardNo">164</th>
 								<th class="boardSubject2">게시판 만드는중입니다....</th>
 								<th class="boardWriter">다신</th>
