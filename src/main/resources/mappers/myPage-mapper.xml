@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--Dao에서 Member.query로 작성을 했을 때 앞의 Member가 여기서 mapper의 namespace이고 query부분은 query의 이름부분이다.-->
+<mapper namespace="MyPage">
+
+<!--point 영역-->
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Point" id="pointResultSet">
+		<id property="point_no" column="POINT_NO"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="point_change_date" column="POINT_CHANGE_DATE"/>
+		<result property="accrue_point" column="ACCRUE_POINT"/>
+	</resultMap>
+	
+	
+	<select id="selectPoint" resultMap="pointResultSet" parameterType="Point">
+		SELECT * FROM POINT
+		WHERE MEMBER_NO = #{member_no}
+	</select>
+	
+	<update id="updateMemberInfo" parameterType="_int">
+		UPDATE MEMBER SET PASSWORD = '${password}', NICK_NAME = '${nick_name}' WHERE MEMBER_NO = ${member_no}
+	</update>
+	
+<!--//point 영역-->
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,8 +20,12 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Override
 	public Point selectPoint(Member loginUser) {
-		
-		return null;
+		return mpd.selectPoint(sqlSession, loginUser);
+	}
+
+	@Override
+	public int updateMemberInfo(Member m) {
+		return mpd.updateMemberInfo(sqlSession, m);
 	}
 
 }

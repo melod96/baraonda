@@ -32,7 +32,7 @@
 		 #introText{margin-top:10px;height:170px;}
 		 
 		 /*내 정보 수정 구역*/
-		 input[name=id], input[name=nickname],input[name=password]{width:300px; height:31px;margin-top:-26px;margin-bottom:15px;margin-right:280px;}
+		 input[name=id], input[name=nick_name],input[name=password],input[name=password2],input[name=password3]{width:300px; height:31px;margin-top:-26px;margin-bottom:15px;margin-right:280px;}
 		.textLabel{border:1px solid darkgray; border-radius:3px;width:150px;text-align:center;
 					background:#ddd ;color:white;}
 		.position2{margin-top:15px;margin-bottom:15px;margin-left:30px;}
@@ -71,7 +71,7 @@
 							<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/level.png">
 							<div class="exe1">
 								<br>
-								<h6>현재 경험치 량 : <c:out value="${sessionScope.loginUser}"/></h6>
+								<h6>현재 경험치 량 : <c:out value="${point.accrue_point}"/></h6>
 								<br>
 								<h6>다음 단계까지 : 976</h6>
 							</div>
@@ -86,23 +86,23 @@
 					</div>
 				</div>
 			</div>
-			<form action="" method="post">
+			<form action="changeInfo.my" method="post">
 				<div class="changeInfo">
 					<div class="position2">
 						<div class="textLabel">계정</div>
-						<input type="text" class="form-control" name="id" value="user99" readonly>
+						<input type="text" class="form-control" name="id" value="${loginUser.id }" readonly>
 					</div>
 					
 					<div class="position2">
 						<div class="textLabel">닉네임</div>
-						<input type="text" class="form-control" name="nickname" value="유저구구">
+						<input type="text" class="form-control" name="nick_name" value="${loginUser.nick_name}">
 					</div>
 					
 					<br>
 					
 					<div class="position2">
 						<div class="textLabel">현재 비밀번호</div>
-						<input type="password" class="form-control" name="password" placeholder="현재 비밀번호 입력">
+						<input type="password" class="form-control" name="password2" placeholder="현재 비밀번호 입력">
 						
 					</div>
 					
@@ -114,10 +114,11 @@
 					
 					<div class="position2">
 						<div class="textLabel">비밀번호 확인</div>
-						<input type="password" class="form-control" name="password" placeholder="비밀번호 확인">
+						<input type="password" class="form-control" name="password3" placeholder="비밀번호 확인">
 					</div>
 				</div>
-			
+				
+				<input type="hidden" name="member_no" value="${loginUser.member_no }">
 				
 				<div class="osArea">
 					<div id="out1">

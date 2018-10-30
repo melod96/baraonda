@@ -7,4 +7,6 @@ public interface MyPageService {
 
 	Point selectPoint(Member loginUser);
 
+	int updateMemberInfo(Member m);
+
 }
