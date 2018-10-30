@@ -123,9 +123,10 @@
 								</tr>
 								<tr>
 									<th>평소 활동량</th>
-									<td class="form-inline"><input type="radio" class="activity" id="ac1" name="activity" value="No" checked>
+									<td>
+										<input type="radio" class="activity" id="ac1" name="activity" value="No" checked>
 										<label class="pre" for="ac1"> 활동안함 <span class="p-gray">(운동을 전혀 안 해요.)</span></label>
-										<br> 
+										<br />
 										<input type="radio" class="activity" id="ac2" name="activity" value="Little">
 										<label class="pre" for="ac2"> 가벼운 활동 <span class="p-gray">(평소 가벼운 운동이나 스포츠를 즐겨요.)</span></label>
 										<br> 
