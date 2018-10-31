@@ -38,8 +38,38 @@ public class BoardDaoImpl implements BoardDao{
 	//게시글 작성
 	@Override
 	public void create(Board b, Member m) throws Exception {
-		SqlSession.insert("board.insert", b);
+		SqlSession.insert("Board.insert", b);
+	}
+	
+	//게시글 상세 보기
+	@Override
+	public Board read(int board_no) throws BoardException{
+		return SqlSession.selectOne("Board.view" ,board_no);
+	}
+	
+	//게시글 조화수 증가
+	@Override
+	public void increaseViewCnt(int board_no) throws BoardException{
+		SqlSession.update("Board.increaseViewCnt", board_no);
+		
 	}
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

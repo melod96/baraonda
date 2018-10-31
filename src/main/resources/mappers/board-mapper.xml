@@ -5,29 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-	<!--  <resultMap type="com.kh.baraonda.member.model.vo.Member" id="memberResultSet">
-		<id property="member_no" column="MEMBER_NO"/>
-		<result property="id" column="ID"/>
-		<result property="password" column="PASSWORD"/>
-		<result property="name" column="NAME"/>
-		<result property="nick_name" column="NICK_NAME"/>
-		<result property="phone" column="PHONE"/>
-		<result property="token" column="TOKEN"/>
-		<result property="enroll_date" column="ENROLL_DATE"/>
-		<result property="modify_date" column="MODIFY_DATE"/>
-		<result property="member_status" column="MEMBER_STATUS"/>
-		<result property="admin_right" column="ADMIN_RIGHT"/>
-		<result property="company_right" column="COMPANY_RIGHT"/>
-		<result property="company_name" column="COMPANY_NAME"/>
-		<result property="company_no" column="COMPANY_NO"/>
-		<result property="bank" column="BANK"/>
-		<result property="account" column="ACCOUNT"/>
-		<result property="ceo_name" column="CEO_NAME"/>
-		<result property="ceo_type" column="CEO_TYPE"/>
-		<result property="self_introduction" column="SELF_INTRODUCTION"/>
-		<result property="email" column="EMAIL"/>
-	</resultMap>
-	
+
 	<resultMap type="com.kh.baraonda.board.model.vo.Board" id="boardResultSet">
 		<id property="board_no" column="BOARD_NO" />
 		<result property="board_type" column="BOARD_TYPE" />
@@ -39,21 +17,64 @@
 		<result property="modify_date" column="MODIFY_DATE" />
 		<result property="board_status" column="BOARD_STATUS" />
 		<result property="board_count" column="BOARD_COUNT" />
-		<collection property="com.kh.baraonda.member.model.vo.Member" resultMap="memberResultSet"/>
 	</resultMap>
- -->
  
  	<!-- 게시글 목록 조회 -->
 	<select id="listAll" resultType="java.util.HashMap">
-		SELECT B.BOARD_NO, B.BOARD_TITLE, B.WRITING_TYPE, M.NICK_NAME, B.BOARD_DATE, B.BOARD_COUNT
+		SELECT *
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
 		WHERE B.WRITING_TYPE = 15
 		ORDER BY B.BOARD_NO DESC
 	</select>
 	
+	<!-- 게시글 상세 보기 -->
+	<select id="view" resultMap="boardResultSet" parameterType="int">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT
+		FROM BOARD
+		WHERE BOARD_NO = #{BOARD_NO}
+	</select>
+	
+	<!-- 게시글 조회수 증가 처리 -->
+	<update id="increaseViewCnt">
+		UPDATE BOARD SET BOARD_COUNT = BOARD_COUNT + 1
+		WHERE BOARD_NO = #{BOARD_NO}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

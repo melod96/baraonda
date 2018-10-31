@@ -105,7 +105,8 @@
 						<c:forEach items="${list}" var="row">
 							<tr class="boardTr">
 								<th class="boardNo">${row.BOARD_NO}</th>
-								<th class="boardSubject2">${row.BOARD_TITLE}</th>
+								<th class="boardSubject2"><a href = "${path}/baraonda/board/view.do?board_no=${row.BOARD_NO}">${row.BOARD_TITLE}</a></th>
+								<!-- <th class="boardSubject2">{row.BOARD_TITLE}</th> -->
 								<th class="boardWriter">${row.NICK_NAME}</th>
 								<th class="boardDay">${row.BOARD_DATE}</th>
 								<th class="boardCount">${row.BOARD_COUNT}</th>
