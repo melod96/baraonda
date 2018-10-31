@@ -36,13 +36,13 @@ public class MyPageController {
 		
 		//포인트 불러오기
 		Point point = mps.selectPoint(loginUser);
+		//request.setAttribute("point", point);
 		model.addAttribute("point", point);
 		
 		//프로필사진 불러오기
 		Files file = mps.selectPhoto(loginUser);
+		//request.setAttribute("file", file);
 		model.addAttribute("file", file);
-		
-		System.out.println(file.getChange_files_title());
 		
 		return "myPage/changeInfo";
 	}
@@ -94,7 +94,7 @@ public class MyPageController {
 					
 					file.setF_reference_no(loginUser.getMember_no());
 					file.setFiles_title(originFileName);
-					file.setChange_files_title(ext);
+					file.setFiles_change_title(changeName+ext);
 					file.setFiles_type(1);
 					file.setFiles_root(filePath + "\\" + changeName + ext);
 					
