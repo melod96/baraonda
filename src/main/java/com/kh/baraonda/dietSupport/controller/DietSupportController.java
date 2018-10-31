@@ -1,32 +1,26 @@
 package com.kh.baraonda.dietSupport.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
+import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.dietSupport.model.exception.DietSupportSelectListException;
+import com.kh.baraonda.dietSupport.model.service.DietSupportService;
 import com.kh.baraonda.dietSupport.model.vo.BMI;
 import com.kh.baraonda.dietSupport.model.vo.CaloriePresciption;
+import com.kh.baraonda.dietSupport.model.vo.HealthCenter;
 
 @Controller
 public class DietSupportController {
 	
-/*	@Autowired
-	private DietSupportService dss;*/
+	@Autowired
+	private DietSupportService dss;
 	
 	@RequestMapping("BMI.ds")
 	public String bmiPage() {
@@ -120,16 +114,31 @@ public class DietSupportController {
 	}
 	
 	@RequestMapping("healthCenterList.ds")
-	public String healthCenterListPage(ModelMap map) throws SAXException, IOException, ParserConfigurationException{
+	public String healthCenterListPage(Model model, PageInfo pi){
+		int currentPage =1;
+		
+		if(pi.getCurrentPage() > 0){
+			currentPage = pi.getCurrentPage();
+		}
+		
+		
+		try {
+			int listCount = dss.selectCenterListCount();
+			
+			PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+			ArrayList<HealthCenter> centerlist = dss.selectCenter(pgif);
+			
+			model.addAttribute("centerlist",centerlist);
+			model.addAttribute("pi",pgif);
+			
+			return "dietSupport/healthCenterList";
+			
+		} catch (DietSupportSelectListException e) {
+			model.addAttribute("msg",e.getMessage());
+			return "common/errorPage";
+		}
 		
         
-		return "dietSupport/healthCenterList";
 	}
 	
-	@RequestMapping("hcdata.ds")
-	public String hcinsertdata() {
-		
-		
-		return "dietSupport/healthCenterList";
-	}
 }
