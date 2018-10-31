@@ -1,5 +1,6 @@
 package com.kh.baraonda.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.board.model.dao.BoardDao;
+import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.member.model.vo.Member;
 
@@ -22,8 +24,10 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 전체 목록 조회
 	@Override
-	public List<Board> listAll() throws Exception{
-		return boardDao.listAll(sqlSession);
+	public List<HashMap<String, Object>> listAll() throws BoardException {
+		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession) ;
+		
+		return list;
 	}
 	
 	//게시글 작성
