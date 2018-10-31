@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--Dao에서 Member.query로 작성을 했을 때 앞의 Member가 여기서 mapper의 namespace이고 query부분은 query의 이름부분이다.-->
+<mapper namespace="HealthCenter">
+	<resultMap type="com.kh.baraonda.dietSupport.model.vo.HealthCenter" id="healthCenterResultSet">
+		<!--property부분은 Member클래스에 있는 필드와 같아야 하고, column은 DB의 컬럼명과 같다.-->
+		<!--setter를 통해 자동으로 값을 넣기 때문에 해당 class에 setter가 생성되어 있어야 한다.-->
+		<!--mid가 result가 아닌 id인 이유는 식별자로 사용되기 때문이다.-->
+		<id property="center_no" column="CENTER_NO"/>
+		<result property="center_location" column="CENTER_LOCATION"/>
+		<result property="center_state" column="CENTER_STATE"/>
+		<result property="center_name" column="CENTER_NAME"/>
+		<result property="center_address" column="CENTER_ADDRESS"/>
+		<result property="center_tel" column="CENTER_TEL"/>
+		<result property="center_page" column="CENTER_PAGE"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM HEALTH_CENTER
+	</select>
+	
+	<select id="selectCenter" resultMap="healthCenterResultSet">
+		SELECT * FROM HEALTH_CENTER
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

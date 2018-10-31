@@ -3,91 +3,94 @@ package com.kh.baraonda.dietSupport.model.vo;
 import java.io.Serializable;
 
 public class HealthCenter implements Serializable{
-	private int id;
-	private String location;
-	private String state;
-	private String name;
-	private String address;
-	private String tel;
-	private String homepage;
+	private int center_no;
+	private String center_location;
+	private String center_state;
+	private String center_name;
+	private String center_address;
+	private String center_tel;
+	private String center_page;
 	
 	public HealthCenter() {
 		
 	}
 
-	public HealthCenter(int id, String location, String state, String name, String address, String tel,
-			String homepage) {
+	public HealthCenter(int center_no, String center_location, String center_state, String center_name,
+			String center_address, String center_tel, String center_page) {
 		super();
-		this.id = id;
-		this.location = location;
-		this.state = state;
-		this.name = name;
-		this.address = address;
-		this.tel = tel;
-		this.homepage = homepage;
+		this.center_no = center_no;
+		this.center_location = center_location;
+		this.center_state = center_state;
+		this.center_name = center_name;
+		this.center_address = center_address;
+		this.center_tel = center_tel;
+		this.center_page = center_page;
 	}
 
-	public int getId() {
-		return id;
+	public int getCenter_no() {
+		return center_no;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCenter_no(int center_no) {
+		this.center_no = center_no;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getCenter_location() {
+		return center_location;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCenter_location(String center_location) {
+		this.center_location = center_location;
 	}
 
-	public String getState() {
-		return state;
+	public String getCenter_state() {
+		return center_state;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setCenter_state(String center_state) {
+		this.center_state = center_state;
 	}
 
-	public String getName() {
-		return name;
+	public String getCenter_name() {
+		return center_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCenter_name(String center_name) {
+		this.center_name = center_name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getCenter_address() {
+		return center_address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setCenter_address(String center_address) {
+		this.center_address = center_address;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getCenter_tel() {
+		return center_tel;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setCenter_tel(String center_tel) {
+		this.center_tel = center_tel;
 	}
 
-	public String getHomepage() {
-		return homepage;
+	public String getCenter_page() {
+		return center_page;
 	}
 
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
+	public void setCenter_page(String center_page) {
+		this.center_page = center_page;
 	}
 
 	@Override
 	public String toString() {
-		return "HealthCenter [id=" + id + ", location=" + location + ", state=" + state + ", name=" + name
-				+ ", address=" + address + ", tel=" + tel + ", homepage=" + homepage + "]";
+		return "HealthCenter [center_no=" + center_no + ", center_location=" + center_location + ", center_state="
+				+ center_state + ", center_name=" + center_name + ", center_address=" + center_address + ", center_tel="
+				+ center_tel + ", center_page=" + center_page + "]";
 	}
+
+	
 	
 	
 }
