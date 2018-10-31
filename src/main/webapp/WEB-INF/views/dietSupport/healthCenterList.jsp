@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,6 +55,7 @@
 .marker{
 	width:25px;
 	height:25px;
+	cursor:pointer;
 }
 </style>
 </head>
@@ -88,6 +90,25 @@
 						<li><a href="#">제주도</a></li>
 					</ul>
 				</div>
+				<script>
+					$(function() {
+						$('.tab3').find('li').mouseenter(function() {
+							$(this).children('a').css({
+								"color" : "black",
+								"cursor" : "pointer"
+							});
+						}).mouseout(function() {
+							$(this).children('a').css({
+								"color" : "#8c8b8b"
+							});
+						}).click(
+								function() {
+									var bid = $(this).parents().children('td')
+											.eq(0).text();
+									location.href = "selectOne.bo?bid=" + bid;
+								})
+					});
+				</script>
 				<br>
 				<br>
 				<br>
@@ -114,79 +135,26 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${centerlist}" var ="clist">
 						<tr>
-							<td>가평군 보건소</td>
-							<td>경기도 가평군 가평읍 가화로 155-18</td>
-							<td>031-582-2822</td>
-							<td><img src="${pageContext.request.contextPath}/resources/images/dietSupportImg/marker.png" class="marker" /></td>
+							<td>${clist.center_name }</td>
+							<td>${clist.center_address}</td>
+							<td>${clist.center_tel }</td>
+							<td><img src="${pageContext.request.contextPath}/resources/images/dietSupportImg/marker.png" class="marker" onclick="setHealthMap('${clist.center_name}')"/></td>
 						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
-						<tr>
-							<td>강남구 보건소</td>
-							<td>서울특별시 강남구 선릉로 668</td>
-							<td>02-3423-7200</td>
-							<td><i class="fas fa-map-marker-alt"
-								style="color: #626262; font-size: 20px;"></i></td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
+				<script>
+				
+					function setHealthMap(location_name){
+						window.open ("http://map.daum.net/link/map/"+location_name+",");
+						console.log(location_name);
+					}
+				
+				</script>
 				<div class="paginate">
-					<a href="#" class="btn-first" title="처음"><em class="blind">목록에서
+					<!-- <a href="#" class="btn-first" title="처음"><em class="blind">목록에서
 							처음 페이지 이동</em></a> <a href="#" class="btn-prev" title="이전"><em
 						class="blind">목록에서 이전 페이지 이동</em></a> <span class="paging-numbers">
 						<a href="#">1<span class="blind">페이지로 이동</span></a> <a href="#"
@@ -196,7 +164,41 @@
 					</span> <a href="#" class="btn-next" title="다음"><span class="spr"><em
 							class="blind">목록에서 다음 페이지 이동</em></span></a> <a href="#" class="btn-last"
 						title="끝"><span class="spr"><em class="blind">목록에서
-								끝 페이지 이동</em></span></a>
+								끝 페이지 이동</em></span></a> -->
+			<c:if test="${ pi.currentPage <= 1 }">
+				[이전] &nbsp;
+			</c:if>
+			<c:if test="${ pi.currentPage > 1 }">
+				<c:url var="blistBack" value="/healthCenterList.ds">
+					<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+				</c:url>
+				<a href="${ blistBack }">[이전]</a>
+			</c:if>
+			
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:if test="${ p eq pi.currentPage }">
+					<font color="red" size="4"><b>[${ p }]</b></font>
+				</c:if>
+				<c:if test="${ p ne pi.currentPage }">
+					<c:url var="blistCheck" value="healthCenterList.ds">
+						<c:param name="currentPage" value="${ p }"/>
+					</c:url>
+					<a href="${ blistCheck }">${ p }</a>
+				</c:if>
+			</c:forEach>
+			
+			
+			
+			<c:if test="${ pi.currentPage >= pi.maxPage }">
+				&nbsp; [다음]
+			</c:if>
+			<c:if test="${ pi.currentPage < pi.maxPage}">
+				<c:url var="blistEnd" value="healthCenterList.ds">
+					<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+				</c:url>
+				&nbsp; 
+				<a href="${ blistEnd }">[다음]</a>
+			</c:if>
 				</div>
 			</div>
 			<jsp:include page="../common/rightBoard.jsp" />
