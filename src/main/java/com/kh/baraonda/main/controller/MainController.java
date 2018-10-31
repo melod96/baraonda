@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.baraonda.main.model.exception.NoticeSelectListException;
+import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.main.model.exception.MainSelectListException;
 import com.kh.baraonda.main.model.service.MainService;
+import com.kh.baraonda.main.model.vo.Fame;
+import com.kh.baraonda.main.model.vo.Ranking;
 import com.kh.baraonda.notice.model.vo.Notice;
+import com.kh.baraonda.tips.model.vo.Tips;
 
 
 @Controller
@@ -32,17 +35,39 @@ public class MainController {
 	@RequestMapping("main.m")
 	public String selectMainView(Model model){
 		//공지사항
-		ArrayList<Notice> list;
+		ArrayList<Notice> nlist;
+		//고객문의
+		ArrayList<Board> qlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		//명예의전당
+		ArrayList<Fame> flist;
+		//다이어트꿀팁
+		ArrayList<Tips> tlist;
 		try {
-			list = mainService.selectNotice();
-			model.addAttribute("list", list);
-			System.out.println(list.size());
+			nlist = mainService.selectNotice();
+			model.addAttribute("nlist", nlist);
+			System.out.println(nlist.size());
 			
+			qlist = mainService.selectQuestion();
+			model.addAttribute("qlist", qlist);
+			System.out.println(qlist.size());
+		     
+			rlist = mainService.selectRanking();
+			model.addAttribute("rlist", rlist);
+			System.out.println(rlist.size());
 			
+			flist = mainService.selectFame();
+			model.addAttribute("flist", flist);
+			System.out.println(flist.size());
 			
+			tlist = mainService.selectTips();
+			model.addAttribute("tlist", tlist);
+			System.out.println(tlist.size());
+
 			return "main/main";
 			
-		} catch (NoticeSelectListException e) {
+		} catch (MainSelectListException e) {
 			
 			model.addAttribute("msg", e.getMessage());
 			

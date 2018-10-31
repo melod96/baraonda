@@ -20,8 +20,59 @@
 		<result property="board_status" column="BOARD_STATUS"/>
 		<result property="board_count" column="BOARD_COUNT"/>
 	</resultMap>
+	<!-- 고객문의 조회용 -->
+ 	<resultMap type="com.kh.baraonda.board.model.vo.Board" id="questionResultSet">
+		<!--property부분은 Member클래스에 있는 필드와 같아야 하고, column은 DB의 컬럼명과 같다.-->
+		<!--setter를 통해 자동으로 값을 넣기 때문에 해당 class에 setter가 생성되어 있어야 한다.-->
+		<!--mid가 result가 아닌 id인 이유는 식별자로 사용되기 때문이다.-->
+		<id property="board_no" column="BOARD_NO"/>
+		<result property="board_type" column="BOARD_TYPE"/>
+		<result property="writing_type" column="WRITING_TYPE"/>
+		<result property="board_title" column="BOARD_TITLE"/>
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="board_date" column="BOARD_DATE"/>
+		<result property="modify_date" column="MODIFY_DATE"/>
+		<result property="board_status" column="BOARD_STATUS"/>
+		<result property="board_count" column="BOARD_COUNT"/>
+	</resultMap>
 	
-	<!-- 게시판 목록 조회용 쿼리문 -->
+	<!-- 다이어터랭킹 조회용(프로필사진 추가해야함) -->
+ 	<resultMap type="com.kh.baraonda.main.model.vo.Ranking" id="rankingResultSet">
+	<result property="member_no" column="MEMBER_NO"/>
+	<result property="nick_name" column="NICK_NAME"/>
+	<result property="member_status" column="MEMBER_STATUS"/>
+	<result property="point_no" column="POINT_NO"/>
+	<result property="accrue_point" column="ACCRUE_POINT"/>
+	</resultMap>
+	
+	<!-- 명예의 전당 조회용 -->
+ 	<resultMap type="com.kh.baraonda.main.model.vo.Fame" id="fameResultSet">
+	<result property="board_no" column="BOARD_NO"/>
+	<result property="board_title" column="BOARD_TITLE"/>
+	<result property="member_no" column="MEMBER_NO"/>
+	<result property="marking_type" column="MARKING_TYPE"/>
+	</resultMap>
+	
+	<!-- 다이어트꿀팁 조회용(프로필사진 추가해야함) -->
+ 	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="tipsResultSet">
+		<result property="board_type" column="BOARD_TYPE"/>
+		<result property="writing_type" column="WRITING_TYPE"/>
+		<result property="board_title" column="BOARD_TITLE"/>
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="board_date" column="BOARD_DATE"/>
+		<result property="modify_date" column="MODIFY_DATE"/>
+		<result property="board_status" column="BOARD_STATUS"/>
+		<result property="board_count" column="BOARD_COUNT"/>
+		<result property="nick_name" column="NICK_NAME"/>
+		<result property="marking_type" column="MARKING_TYPE"/>
+	</resultMap>
+	
+	
+	
+	
+	<!-- 공지사항 목록 조회용 쿼리문 -->
 	<select id="selectNotice" resultMap="noticeResultSet" parameterType="Notice">
 		SELECT RANK, BOARD_TITLE
 		
@@ -33,5 +84,50 @@
 		WHERE RANK BETWEEN 1 AND 5
 		
 	</select>
+	
+		<!-- 고객문의 목록 조회용 쿼리문 -->
+	<select id="selectQuestion" resultMap="questionResultSet" parameterType="Board">
+		SELECT RANK, BOARD_TITLE
+		
+		FROM(
+				SELECT RANK() OVER (ORDER BY BOARD_DATE DESC) AS RANK, 
+				BOARD_TITLE FROM BOARD WHERE BOARD_TYPE = 7 AND BOARD_STATUS = 0
+			)
+			
+		WHERE RANK BETWEEN 1 AND 5
+		
+	</select>
+	
+			<!-- 다이어터랭킹 목록 조회용 쿼리문(프로필사진 미추가) -->
+	<select id="selectRanking" resultMap="rankingResultSet" parameterType="Ranking">
+		SELECT RANK, NICK_NAME
+		FROM(
+				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK, 
+				NICK_NAME FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO) 
+                WHERE MEMBER_STATUS = 0
+			)
+		WHERE RANK BETWEEN 1 AND 5
+		
+	</select>
+	
+	<!-- 명예의전당 목록 조회용 쿼리문 -->
+	<select id="selectFame" resultMap="fameResultSet" parameterType="Fame">
+		select board_title, count(m.board_no) from marking m
+		join board b on(b.board_no = m.board_no)
+		where marking_type=2
+		group by board_title,m.board_no
+		order by m.board_no
+		</select>
+		
+	<!-- 다이어트꿀팁 목록 조회용 쿼리문(프로필사진 미추가) -->
+	<select id="selectTips" resultMap="tipsResultSet" parameterType="Tips">
+		select b.board_title, b.board_date, b.board_count, count(m.board_no), me.nick_name
+		from board b
+		join member me on (b.member_no = me.member_no)
+		join marking m on (b.board_no = m.board_no)
+		where marking_type = 2 and board_status = 0
+		group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name
+		order by b.board_date DESC
+		</select>
 	
 	</mapper>

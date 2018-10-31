@@ -232,45 +232,12 @@ hr{
           <!-- 공지사항 -->
             <div class="grid_5 preffix_1" id="nq_box">
               <h2>Notice</h2>
-              <c:forEach var="n" items="${list}">
+              <br>
+              <c:forEach var="n" items="${nlist}" end="4">
 	              <label><img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
 	              ${ n.board_title }</label>
 	              <br>
-              
-              
-           <%--    <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>${ n.board_title }</label>
-              <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>${ n.board_title }</label>
-              <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>${ n.board_title }</label>
-              <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-              <label>${ n.board_title }</label> --%>
-              
-              
-           <%--    <%if((ArrayList<Notice>)request.getAttribute("noticeList") != null){
-                      		for (Notice ntl : noticeList) {
-                     	 %>
-						
-						<li>
-							<input type="hidden" value=<%=ntl.getnNo() %>>
-							<span class="ntTitle">
-									<a class="ntTitleTag"><%=ntl.getnTitle() %><input type="hidden" value="<%=ntl.getnNo()%>"></a></span><span class="ntDate"><%=ntl.getnDate()%>
-							</span>
-						</li>
-						
-						<%
-							}}
-						%> --%>
-              
-              
               </c:forEach>
-              <br>
-              <!-- <p>Post about this <strong class="color1"><a href="http://blog.templatemonster.com/free-website-templates/" rel="nofollow">freebie</a></strong> will tell all you need to know about it. Need a good choice of <strong class="color1"><a href="http://www.templatemonster.com/properties/topic/food-restaurant/" rel="nofollow">themes</a></strong>? Visit TemplateMonster’s website.</p>
-              Aliquam nibh e,estas id dictum a, commodo. Praesent faucibus malesuada faucibusonec laeet metus id laoreet malesuadarem ipsum dolor sit <br> -->
               <a href="#" class="btn" id="nq_btn">more</a>
             </div>
               <!-- 공지사항 -->
@@ -278,21 +245,12 @@ hr{
               <!-- 고객문의 -->
             <div class="grid_5">
               <h2>Question</h2>
-              <img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
-              <label>리스트 항목</label>
               <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
-              <label>리스트 항목</label>
+              <c:forEach var="q" items="${qlist}" end="4">
+              <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
+               ${ q.board_title }</label>
               <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
-              <label>리스트 항목</label>
-              <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
-              <label>리스트 항목</label>
-              <br>
-              <img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
-              <label>리스트 항목</label>
-              <br>
+              </c:forEach> 
               <a href="#" class="btn" id="nq_btn">more</a>
             </div>
             <!-- 고객문의 -->
@@ -306,23 +264,25 @@ hr{
       <div class="grid_12">
         <h2>Before&After</h2>
       </div>
-
+		
+	<c:forEach var="t" items="${tlist}" end="5">
        <div class="grid_4">
         <div class="gall_block">
           <div class="maxheight">
             <a href="${pageContext.request.contextPath}/resources/images/bbig1.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig1.jpg" alt=""></a>
             <div class="gall_bot">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
+            <div class="text1"><a href="#">${t.board_title } </a></div>
+	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">0</label>
 	         <br>
 	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
+	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
             <a href="#" class="btn">more</a></div>
           </div>
         </div>
       </div>
-      <div class="grid_4">
+      </c:forEach>
+  <%--     <div class="grid_4">
         <div class="gall_block">
           <div class="maxheight">
             <a href="${pageContext.request.contextPath}/resources/images/bbig3.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig3.jpg" alt=""></a>
@@ -398,7 +358,7 @@ hr{
           </div>
         </div>
       </div>
-   
+    --%>
     <!-- 비포에프터 -->
       
       
@@ -424,39 +384,22 @@ hr{
       <div class="grid_4" >
       <h2>Dieter Ranking</h2>
       <div id="rank_box">
+      <div>
+      <img src="${pageContext.request.contextPath}/resources/images/main/one.png" style="float:left; padding-top:22px;">
+      <img src="${pageContext.request.contextPath}/resources/images/main/two.png" style="float:left; margin-top:90px; margin-left:-30px;"> &nbsp; &nbsp;
+      <img src="${pageContext.request.contextPath}/resources/images/main/three.png" style="float:left; margin-top:160px; margin-left:-30px;"> &nbsp; &nbsp;
+      <img src="${pageContext.request.contextPath}/resources/images/main/four.png" style="float:left; margin-top:230px; margin-left:-30px;"> &nbsp; &nbsp;
+      <img src="${pageContext.request.contextPath}/resources/images/main/five.png" style="float:left; margin-top:300px; margin-left:-30px;"> &nbsp; &nbsp;
+      </div>
+      
+      <c:forEach var="r" items="${rlist}" end="4">
 	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/one.png" id="number_img">
-	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img">
-	      <a id="profile_font">태평양이참치 </a>
+	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img" style="margin-left:15px;">
+	      <a id="profile_font">${ r.nick_name } </a>
 	      </label>
 	      <br>
 	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/two.png" id="number_img">
-	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img">
-	      <a id="profile_font">재엽쓰</a>
-	      </label>
-	      <br>
-	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/three.png" id="number_img">
-	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img">
-	      <a id="profile_font">소진쓰</a>
-	      </label>
-	      <br>
-	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/four.png" id="number_img">
-	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img">
-	      <a id="profile_font">형우쓰</a>
-	      </label>
-	      <br>
-	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/five.png" id="number_img">
-	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img">
-	      <a id="profile_font">현도쓰</a>
-	      </label>
+	     </c:forEach>
 		</div>
       </div>
       <!-- 다이어터 랭킹 -->
@@ -466,13 +409,15 @@ hr{
       <h2>Hall of Fame</h2>
       <div id="fame_box">
        	<div id="fame_box2"> 
+       	<c:forEach var="f" items="${flist}" end="4">
       	<label>
 	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
-	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
+	      <a id="fame_font">${f.board_title}</a>
 	      </label>
 	      <br>
 	      <hr>
-	      <label>
+	      </c:forEach>
+	   <%--    <label>
 	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
 	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
 	      </label>
@@ -493,7 +438,7 @@ hr{
 	      <label>
 	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
 	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
-	      </label>
+	      </label> --%>
 	       </div> 
       </div>
       </div>

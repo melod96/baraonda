@@ -13,13 +13,18 @@
 
   			<typeAlias type="com.kh.baraonda.board.model.vo.Board" alias="Board"/>
 
+	  		<typeAlias type="com.kh.baraonda.myPage.model.vo.Files" alias="Files"/>
 
-			<typeAlias type="com.kh.baraonda.myPage.model.vo.Files" alias="Files"/>
+	  		<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="Notice"/>
 
-
-			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="Notice"/>
+	  		<typeAlias type="com.kh.baraonda.main.model.vo.Ranking" alias="Ranking"/>
 			
-			<typeAlias type="com.kh.baraonda.dietSupport.model.vo.HealthCenter" alias="HealthCenter"/>
+		  	<typeAlias type="com.kh.baraonda.main.model.vo.Fame" alias="Fame"/>
+			
+		  	<typeAlias type="com.kh.baraonda.tips.model.vo.Tips" alias="Tips"/>
+        
+		  	<typeAlias type="com.kh.baraonda.dietSupport.model.vo.HealthCenter" alias="HealthCenter"/>
+
 
   		</typeAliases>
   		
