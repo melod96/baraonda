@@ -41,7 +41,7 @@
       <!-- 헤더 카테고리 -->
         <div class="grid_12">
         <h1>
-          <a href="goMain.me">
+          <a href="main.m">
             <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="Logo alt">
           </a>
         </h1>  
