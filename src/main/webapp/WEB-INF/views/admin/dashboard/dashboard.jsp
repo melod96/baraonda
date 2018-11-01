@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../adminCommon/head.jsp" />
+
+	<!-- Morris Charts CSS -->
+    <link href="${ pageContext.servletContext.contextPath }/resources/admin/css/morris.css" rel="stylesheet">
+
+<jsp:include page="../commonAdmin/head.jsp" />
 </head>
 <body>
     <div id="wrapper">
@@ -12,9 +16,9 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             
-            <jsp:include page="../adminCommon/header.jsp"/>
+            <jsp:include page="../commonAdmin/header.jsp"/>
 
-			<jsp:include page="../adminCommon/nav.jsp" />
+			<jsp:include page="../commonAdmin/nav.jsp" />
             
         </nav>
 
@@ -280,5 +284,12 @@
 
     </div>
     <!-- /#wrapper -->
+    
+    <jsp:include page="../commonAdmin/foot.jsp" />
+    <!-- Morris Charts JavaScript -->
+    <script src="${ pageContext.servletContext.contextPath }/resources/admin/js/raphael.min.js"></script>
+    <script src="${ pageContext.servletContext.contextPath }/resources/admin/js/morris.min.js"></script>
+    <script src="${ pageContext.servletContext.contextPath }/resources/admin/data/morris-data.js"></script>
+    
 </body>
 </html>

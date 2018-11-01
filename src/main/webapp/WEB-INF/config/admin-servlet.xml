@@ -23,7 +23,7 @@
 	<!--프록시 설정 추가 : 스키마 등록을 해야 한다.-->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 		
-	 <annotation-driven />
+	<annotation-driven />
 		
 		
 		
