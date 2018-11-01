@@ -26,6 +26,7 @@
 		  	<typeAlias type="com.kh.baraonda.dietSupport.model.vo.HealthCenter" alias="HealthCenter"/>
 
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Footprints" alias="Footprints"/>
+			
 
   		</typeAliases>
   		
