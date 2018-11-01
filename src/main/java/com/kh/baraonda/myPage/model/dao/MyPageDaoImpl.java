@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
+import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Repository
@@ -28,6 +29,11 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public Files selectPhoto(SqlSessionTemplate sqlSession, Member loginUser) {
 		return (Files)sqlSession.selectOne("MyPage.selectPhoto",loginUser);
+	}
+
+	@Override
+	public Footprints selectFootprints(SqlSessionTemplate sqlSession, Member loginUser) {
+		return (Footprints)sqlSession.selectOne("MyPage.selectFootprints", loginUser);
 	}
 
 

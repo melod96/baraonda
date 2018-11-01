@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.dao.MyPageDao;
 import com.kh.baraonda.myPage.model.vo.Files;
+import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Service
@@ -37,6 +38,11 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public Files selectPhoto(Member loginUser) {
 		return mpd.selectPhoto(sqlSession, loginUser);
+	}
+
+	@Override
+	public Footprints selectFootprints(Member loginUser) {
+		return mpd.selectFootprints(sqlSession, loginUser);
 	}
 
 
