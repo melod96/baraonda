@@ -16,10 +16,14 @@ public interface BoardService {
 	
 	//게시글 작성
 	public void create(Board b, Member m) throws Exception;
-
-	//게시글 상세 보기
-	public Board read(int board_no) throws BoardException;
 	
 	//게시글 조화수 증가
 	public void increaseViewCnt(int board_no, HttpSession session) throws BoardException;
+	
+	//게시글 상세 보기
+	/*public List<HashMap<String, Object>> detail(int board_no) throws BoardException;*/
+	public HashMap<String, Object> detail(int board_no) throws BoardException;
+	
+	//댓글 조회
+	public List<HashMap<String, Object>> commentList(int board_no) throws BoardException;
 }

@@ -7,17 +7,33 @@
 <mapper namespace="Board">
 
 	<resultMap type="com.kh.baraonda.board.model.vo.Board" id="boardResultSet">
-		<id property="board_no" column="BOARD_NO" />
+		<id property="board_no" column="BOARD_NO"/>
 		<result property="board_type" column="BOARD_TYPE" />
 		<result property="writing_type" column="WRITING_TYPE" />
 		<result property="board_title" column="BOARD_TITLE" />
-		<result property="board_content" column="BOARD_CONTENT" />
+		<result property="board_content" column="BOARD_CONTENT"/>
 		<result property="member_no" column="MEMBER_NO" />
 		<result property="board_date" column="BOARD_DATE" />
 		<result property="modify_date" column="MODIFY_DATE" />
 		<result property="board_status" column="BOARD_STATUS" />
 		<result property="board_count" column="BOARD_COUNT" />
 	</resultMap>
+ 
+ 	<resultMap id="Comments" type="com.kh.baraonda.board.model.vo.Comments" >
+ 	   <result property="COMMENTS_CONTENT" column="COMMENTS_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+ 	   <result property="COMMENTS_DATE" column="COMMENTS_DATE" />
+ 	   <result property="NICK_NAME" column="NICK_NAME" />
+	</resultMap>
+	
+	<resultMap id="boardDetail" type="com.kh.baraonda.board.model.vo.BoardDetail" >
+ 	   <result property="BOARD_CONTENT" column="BOARD_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+ 	   <result property="BOARD_TITLE" column="BOARD_TITLE" />
+ 	   <result property="BOARD_DATE" column="BOARD_DATE" />
+ 	   <result property="BOARD_COUNT" column="BOARD_COUNT" />
+ 	   <result property="NICK_NAME" column="NICK_NAME" />
+ 	   <result property="COMMENTS_COUNT" column="COMMENTS_COUNT" />
+	</resultMap>
+	
  
  	<!-- 게시글 목록 조회 -->
 	<select id="listAll" resultType="java.util.HashMap">
@@ -28,21 +44,32 @@
 		ORDER BY B.BOARD_NO DESC
 	</select>
 	
-	<!-- 게시글 상세 보기 -->
-	<select id="view" resultMap="boardResultSet" parameterType="int">
-		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT
-		FROM BOARD
-		WHERE BOARD_NO = #{BOARD_NO}
-	</select>
-	
 	<!-- 게시글 조회수 증가 처리 -->
 	<update id="increaseViewCnt">
 		UPDATE BOARD SET BOARD_COUNT = BOARD_COUNT + 1
 		WHERE BOARD_NO = #{BOARD_NO}
 	</update>
 	
+	<!-- 게시글 상세보기(작성자 닉네임,제목,내용,날짜,조회수,댓글수) -->
+	<select id="detail" resultType="java.util.HashMap" parameterType = "int">
+		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME,
+             (SELECT COUNT(*)
+              FROM COMMENTS C
+              JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
+              WHERE B.BOARD_NO = #{BOARD_NO}) AS COMMENTS_COUNT
+		FROM BOARD B
+		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+		WHERE B.BOARD_NO = #{BOARD_NO}
+	</select>
 	
-	
+	<!-- 댓글 조회(작성자, 내용, 날짜) -->
+	<select id="commentList" resultType="java.util.HashMap" parameterType="java.util.List" resultMap="Comments">
+		SELECT C.COMMENTS_CONTENT, C.COMMENTS_DATE, M.NICK_NAME
+		FROM COMMENTS C
+		JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
+		JOIN MEMBER M ON(C.MEMBER_NO = M.MEMBER_NO)
+		WHERE C.BOARD_NO = #{BOARD_NO}
+	</select>
 	
 	
 	
