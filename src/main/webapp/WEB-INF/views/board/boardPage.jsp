@@ -312,7 +312,7 @@
 					
 					<!-- 게시글 제목 -->
 					<div>
-						<span class="bSubject">오늘부터 운동시작합니다!</span>
+						<span class="bSubject">${dto.BOARD_TITLE}</span>
 					</div>
 					<hr class="hrline">
 					<div class="boardInfo">
@@ -325,7 +325,7 @@
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
 								<em class="nick_em">
 								<div class="inner_nick_box">
-									<p class="inner_nick">다이어트맨</p>
+									<p class="inner_nick">모르게따</p>
 								</div>
 						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
 							<div class="group_inner">
@@ -348,8 +348,8 @@
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
 					<div class="allmark">
-						<a href="#" onclick="#" class="bmark"> <span>북마크</span>
-						</a> <a href="#" onclick="#" class="heart"> <span>1</span>
+						<a href="#" class="bmark"> <span>북마크</span>
+						</a> <a href="#" class="heart"> <span>1</span>
 						</a>
 					</div>
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>

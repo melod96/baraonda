@@ -1,14 +1,17 @@
 package com.kh.baraonda.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.board.model.dao.BoardDao;
+import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.member.model.vo.Member;
 
@@ -22,8 +25,10 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 전체 목록 조회
 	@Override
-	public List<Board> listAll() throws Exception{
-		return boardDao.listAll(sqlSession);
+	public List<HashMap<String, Object>> listAll() throws BoardException {
+		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession) ;
+		
+		return list;
 	}
 	
 	//게시글 작성
@@ -50,4 +55,60 @@ public class BoardServiceImpl implements BoardService{
 		
 		
 	}
+	
+	//게시글 상세 보기
+	@Override
+	public Board read(int board_no) throws BoardException{
+		return boardDao.read(board_no);
+	}
+	
+	//게시글 조화수 증가
+	@Override
+	public void increaseViewCnt(int board_no, HttpSession session) throws BoardException{
+		long update_time = 0;
+		//세션에 저장된 조회시간 검색
+		//최초로 조회할 경우 세선에 저장된 값이 없기 때문에 if문은 실행X
+		if(session.getAttribute("update_time_" + board_no) != null) {
+			update_time = (Long) session.getAttribute("update_time_" + board_no);
+		}
+		//시스템의 현재시간을 current_time에 저장
+		long current_time = System.currentTimeMillis();
+		//일정기간이 경과 후 조회수 증가 처리 24*60*60*1000(24시간)
+		//시스템 현재 시간 - 열람 시간 > 일정 시간(조회수 증가가 가능하도록 지정한 시간)
+		if(current_time - update_time > 5 * 1000) {
+			boardDao.increaseViewCnt(board_no);
+			
+			session.setAttribute("update_time_" + board_no, current_time);
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
