@@ -41,11 +41,6 @@ public class BoardDaoImpl implements BoardDao{
 		SqlSession.insert("Board.insert", b);
 	}
 	
-	//게시글 상세 보기
-	@Override
-	public Board read(int board_no) throws BoardException{
-		return SqlSession.selectOne("Board.view" ,board_no);
-	}
 	
 	//게시글 조화수 증가
 	@Override
@@ -54,7 +49,49 @@ public class BoardDaoImpl implements BoardDao{
 		
 	}
 
+	//게시글 상세 보기
+	/*public List<HashMap<String, Object>> detail(SqlSessionTemplate sqlSession, int board_no) throws BoardException {*/
+	public HashMap<String, Object> detail(SqlSessionTemplate sqlSession, int board_no) throws BoardException {
+		try {
+			//HashMap<Key, value>
+			System.out.println("dao");
+			/*List<HashMap<String, Object>> detail = sqlSession.selectOne("Board.detail", board_no);*/
+			System.out.println("board_no : "+ board_no);
+			/*List<HashMap<String, Object>> detail = sqlSession.selectList("Board.detail", board_no);*/
+			HashMap<String, Object> detail = sqlSession.selectOne("Board.detail", board_no);
+			System.out.println("detail : " + detail);
+			
+			
+			
+			if(detail == null) {
+				throw new BoardException("리스트 값 널");
+			}
 
+			return detail;
+		}catch(Exception e) {
+			throw new BoardException(e.getMessage());
+		}
+	}
+	
+	//댓글 조회
+	@Override
+	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no) throws BoardException {
+		try {
+			//HashMap<Key, value>
+			System.out.println("드루오나");
+			List<HashMap<String, Object>> commentList = sqlSession.selectList("Board.commentList", board_no);
+			System.out.println("ㅇㄴㅁ");
+			System.out.println("commentList : " + commentList);
+			
+			if(commentList == null) {
+				throw new BoardException("리스트 값 널");
+			}
+
+			return commentList;
+		}catch(Exception e) {
+			throw new BoardException(e.getMessage());
+		}
+	}
 }
 
 

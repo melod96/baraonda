@@ -56,12 +56,6 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 	
-	//게시글 상세 보기
-	@Override
-	public Board read(int board_no) throws BoardException{
-		return boardDao.read(board_no);
-	}
-	
 	//게시글 조화수 증가
 	@Override
 	public void increaseViewCnt(int board_no, HttpSession session) throws BoardException{
@@ -81,6 +75,25 @@ public class BoardServiceImpl implements BoardService{
 			session.setAttribute("update_time_" + board_no, current_time);
 		}
 		
+	}
+	
+	//게시글 상세보기
+	@Override
+	/*public List<HashMap<String, Object>> detail(int board_no) throws BoardException {*/
+	public HashMap<String, Object> detail(int board_no) throws BoardException {
+		/*List<HashMap<String, Object>> detail = boardDao.detail(sqlSession, board_no) ;*/
+		HashMap<String, Object> detail = boardDao.detail(sqlSession, board_no) ;
+	
+		
+		return detail;
+	}
+	
+	//댓글 조회
+	@Override
+	public List<HashMap<String, Object>> commentList(int board_no) throws BoardException {
+		List<HashMap<String, Object>> commentList = boardDao.commentList(sqlSession, board_no) ;
+		
+		return commentList;
 	}
 }
 

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../common/header.jsp" />
 
@@ -59,28 +59,61 @@
 	margin: 0 auto;
 	width: 530px;
 }
-.container1{margin: auto; width: 65%;}
-#boardInput{margin-left: 7px;}
-#boardBtn{margin-top: 0px; margin-left: 7px;}
-.boardTr:hover{cursor:pointer;}
-.boardHr{border:1px solid #313131;}
-.page1 h2{margin-bottom: 25px;}
-#boardB{width:53px; padding-top: 8px;}
-.paginate{margin-bottom: 40px;}
-#searchBtn{float:right;margin: auto;}
-.boardHr2{margin-top: -15px;}
 
+.container1 {
+	margin: auto;
+	width: 65%;
+}
+
+#boardInput {
+	margin-left: 7px;
+}
+
+#boardBtn {
+	margin-top: 0px;
+	margin-left: 7px;
+}
+
+.boardTr:hover {
+	cursor: pointer;
+}
+
+.boardHr {
+	border: 1px solid #313131;
+}
+
+.page1 h2 {
+	margin-bottom: 25px;
+}
+
+#boardB {
+	width: 53px;
+	padding-top: 8px;
+}
+
+.paginate {
+	margin-bottom: 40px;
+}
+
+#searchBtn {
+	float: right;
+	margin: auto;
+}
+
+.boardHr2 {
+	margin-top: -15px;
+}
 </style>
 
 </head>
 
-<body class="page1" id="top">	
+<body class="page1" id="top">
 
 	<!-------------------------------------Content------------------------------------------->
 	<section class="content">
 		<div class="ic">More Website Templates @ TemplateMonster.com -
 			July 30, 2014!</div>
-			<br>
+		<br>
 		<div class="container">
 			<div class="row">
 				<!------------------------------ 작업 공간 ------------------------------>
@@ -88,11 +121,11 @@
 				<div class="container1">
 					<h2>자유게시판</h2>
 					<hr class="boardHr">
-					
+
 					<table class="table table-hover">
 						<thead>
 							<tr>
-							<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
+								<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
 								<th class="boardNo">번호</th>
 								<th class="boardSubject1">제목</th>
 								<th class="boardWriter">작성자</th>
@@ -101,19 +134,20 @@
 							</tr>
 						</thead>
 						<tbody>
-						
-						<c:forEach items="${list}" var="row">
-							<tr class="boardTr">
-								<th class="boardNo">${row.BOARD_NO}</th>
-								<th class="boardSubject2"><a href = "${path}/baraonda/board/view.do?board_no=${row.BOARD_NO}">${row.BOARD_TITLE}</a></th>
-								<!-- <th class="boardSubject2">{row.BOARD_TITLE}</th> -->
-								<th class="boardWriter">${row.NICK_NAME}</th>
-								<th class="boardDay">${row.BOARD_DATE}</th>
-								<th class="boardCount">${row.BOARD_COUNT}</th>
-							</tr>
-						</c:forEach>
-						
-						<!-- <tr class="boardTr">
+
+							<c:forEach items="${list}" var="row">
+								<tr class="boardTr">
+									<th class="boardNo">${row.BOARD_NO}</th>
+									<th class="boardSubject2"><a
+										href="${path}/baraonda/board/view.do?board_no=${row.BOARD_NO}">${row.BOARD_TITLE}</a></th>
+									<!-- <th class="boardSubject2">{row.BOARD_TITLE}</th> -->
+									<th class="boardWriter">${row.NICK_NAME}</th>
+									<th class="boardDay">${row.BOARD_DATE}</th>
+									<th class="boardCount">${row.BOARD_COUNT}</th>
+								</tr>
+							</c:forEach>
+
+							<!-- <tr class="boardTr">
 								<th class="boardNo">164</th>
 								<th class="boardSubject2">게시판 만드는중입니다....</th>
 								<th class="boardWriter">다신</th>
@@ -139,36 +173,24 @@
 					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
 					<button id="searchBtn" type="submit" class="btn btn-primary">글쓰기</button>
-					
+
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">
-					<a href="#" class="btn-prev" title="이전" id="boardB">이전
-						<em class="blind">목록에서 이전 페이지 이동</em>
-					</a>
-					<span class="paging-numbers">
-						<a href="#">1
-							<span class="blind">페이지로 이동</span>
+						<a href="#" class="btn-prev" title="이전" id="boardB">이전 <em
+							class="blind">목록에서 이전 페이지 이동</em>
+						</a> <span class="paging-numbers"> <a href="#">1 <span
+								class="blind">페이지로 이동</span>
+						</a> <a href="#" class="on">2 <span class="blind">페이지로 이동</span>
+						</a> <a href="#">3 <span class="blind">페이지로 이동</span>
+						</a> <a href="#">4 <span class="blind">페이지로 이동</span>
+						</a> <a href="#">5 <span class="blind">페이지로 이동</span>
 						</a>
-						<a href="#" class="on">2
-							<span class="blind">페이지로 이동</span>
-						</a>
-						<a href="#">3
-							<span class="blind">페이지로 이동</span>
-						</a>
-						<a href="#">4
-							<span class="blind">페이지로 이동</span>
-						</a>
-						<a href="#">5
-							<span class="blind">페이지로 이동</span>
-						</a>
-					</span>
-					<a href="#" class="btn-next" title="다음" id="boardB">다음
-						<span class="spr">
-							<em class="blind">목록에서 다음 페이지 이동</em>
+						</span> <a href="#" class="btn-next" title="다음" id="boardB">다음 <span
+							class="spr"> <em class="blind">목록에서 다음 페이지 이동</em>
 						</span>
-					</a>
+						</a>
 					</div>
-					
+
 					<!------------------------------ 검색 폼 ------------------------------>
 					<form name="search" method="post" class="searchForm">
 						<table>
@@ -181,7 +203,8 @@
 								<td><input id="boardInput" name=""
 									class="form-control input-short" type="text" placeholder="">
 								</td>
-								<td><button id="boardBtn" type="submit" class="btn btn-primary">검색</button></td>
+								<td><button id="boardBtn" type="submit"
+										class="btn btn-primary">검색</button></td>
 							</tr>
 						</table>
 					</form>

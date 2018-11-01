@@ -56,16 +56,23 @@ public class BoardController {
 	@RequestMapping(value="view.do", method=RequestMethod.GET)
 	public ModelAndView view(@RequestParam int board_no, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		/*List<HashMap<String, Object>> detail;*/
+		HashMap<String, Object> detail;
+		List<HashMap<String, Object>> commentList;
 		
 		try {
-			
 			//조회수 증가처리
 			boardService.increaseViewCnt(board_no, session);
-			//모델(데이터)+뷰(화면)를 함게 전달하는 객체
+			
+			//상세보기 board_no값 넘겨줌
+			detail = boardService.detail(board_no);
+			commentList = boardService.commentList(board_no);		
 			//뷰 이름
 			mv.setViewName("board/boardPage");
 			//뷰에 전달할 데이터
-			mv.addObject("dto", boardService.read(board_no));
+			mv.addObject("detail", detail);
+			mv.addObject("commentList", commentList);
+			
 			
 			return mv;
 			
@@ -75,9 +82,8 @@ public class BoardController {
 
 			return mv;
 		}
-		
-		
 	}
+	
 }
 
 
