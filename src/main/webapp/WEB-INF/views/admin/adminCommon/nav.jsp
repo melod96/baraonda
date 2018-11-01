@@ -2,36 +2,33 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="goDashboard.adm"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Main</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-github-alt fa-fw"></i> Member<span class="fa arrow"></span></a>
+                            <i class="fa fa-github-alt fa-fw"></i> Member<span class="fa arrow"></span>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Nomal</a>
+                                    <a href="goNomalMemberList.adm">Nomal</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Black</a>
+                                    <a href="goBlackMemberList.adm">Black</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-comments-o fa-fw"></i> Q & A</a>
+                            <a href="goQnAList.adm"><i class="fa fa-comments-o fa-fw"></i> Q & A</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-inbox fa-fw"></i> Advertising</a>
+                            <a href="goAdvertisingList.adm"><i class="fa fa-inbox fa-fw"></i> Advertising</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-group fa-fw"></i> Experience</a>
+                            <a href="goExperienceList.adm"><i class="fa fa-group fa-fw"></i> Experience</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bell fa-fw"></i> Declaration</a>
+                            <a href="goDeclarationList.adm"><i class="fa fa-bell fa-fw"></i> Declaration</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-leaf  fa-fw"></i> Order</a>
+                            <a href="goOrderList.adm"><i class="fa fa-leaf  fa-fw"></i> Order</a>
                         </li>
                     </ul>
                 </div>
