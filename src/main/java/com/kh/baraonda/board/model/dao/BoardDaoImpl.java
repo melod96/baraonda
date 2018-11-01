@@ -20,10 +20,10 @@ public class BoardDaoImpl implements BoardDao{
 
 	//게시글 전체 목록 조회
 	@Override
-	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession) throws BoardException  {
+	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession, int writing_type) throws BoardException  {
 		try {
 			//HashMap<Key, value>
-			List<HashMap<String, Object>> list = sqlSession.selectList("Board.listAll");
+			List<HashMap<String, Object>> list = sqlSession.selectList("Board.listAll", writing_type);
 			System.out.println("전 체목록 조회 : " + list);
 			if(list == null) {
 				throw new BoardException("리스트 값 널");

@@ -16,7 +16,6 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
 
 @Controller
-@RequestMapping("/board/*")
 public class BoardController {
 	@Inject
 	BoardService boardService;
@@ -24,11 +23,11 @@ public class BoardController {
 
 	//게시글 전체 목록 조회
 	@RequestMapping("list.do")
-	public ModelAndView list(ModelAndView mv) {
+	public ModelAndView list(ModelAndView mv, @RequestParam int writing_type) {
 		List<HashMap<String, Object>> list;
 
 		try {
-			list = boardService.listAll();
+			list = boardService.listAll(writing_type);
 
 			mv.setViewName("board/board");
 			mv.addObject("list", list);
@@ -49,6 +48,7 @@ public class BoardController {
 	//value="", method="전송방식"
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
 	public String write() {
+		System.out.println("write");
 		return "board/boardWrite";//boardWrite.jsp로 이동
 	}
 	

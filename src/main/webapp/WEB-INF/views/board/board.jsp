@@ -19,6 +19,14 @@
 		$('.gallery .gall_item').touchTouch();
 
 	});
+	
+	//게시글 작성 버튼
+	$(document).ready(function(){
+		$("#btnWrite").click(function(){
+			location.href="${path}/baraonda/write.do";
+		});
+	});
+	
 </script>
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
@@ -95,7 +103,7 @@
 	margin-bottom: 40px;
 }
 
-#searchBtn {
+#btnWrite {
 	float: right;
 	margin: auto;
 }
@@ -136,10 +144,9 @@
 						<tbody>
 
 							<c:forEach items="${list}" var="row">
-								<tr class="boardTr">
+								<tr class="boardTr" onClick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">
 									<th class="boardNo">${row.BOARD_NO}</th>
-									<th class="boardSubject2"><a
-										href="${path}/baraonda/board/view.do?board_no=${row.BOARD_NO}">${row.BOARD_TITLE}</a></th>
+									<th class="boardSubject2">${row.BOARD_TITLE}</th>
 									<!-- <th class="boardSubject2">{row.BOARD_TITLE}</th> -->
 									<th class="boardWriter">${row.NICK_NAME}</th>
 									<th class="boardDay">${row.BOARD_DATE}</th>
@@ -172,7 +179,7 @@
 					</table>
 					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
-					<button id="searchBtn" type="submit" class="btn btn-primary">글쓰기</button>
+					<button id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
 
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">

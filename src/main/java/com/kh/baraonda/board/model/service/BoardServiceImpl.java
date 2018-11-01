@@ -25,8 +25,8 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 전체 목록 조회
 	@Override
-	public List<HashMap<String, Object>> listAll() throws BoardException {
-		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession) ;
+	public List<HashMap<String, Object>> listAll(int writing_type) throws BoardException {
+		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession, writing_type) ;
 		
 		return list;
 	}

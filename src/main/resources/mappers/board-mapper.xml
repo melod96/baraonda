@@ -36,11 +36,11 @@
 	
  
  	<!-- 게시글 목록 조회 -->
-	<select id="listAll" resultType="java.util.HashMap">
+	<select id="listAll" resultType="java.util.HashMap" parameterType="java.util.List">
 		SELECT *
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
-		WHERE B.WRITING_TYPE = 15
+		WHERE B.WRITING_TYPE = #{WRITING_TYPE}
 		ORDER BY B.BOARD_NO DESC
 	</select>
 	
