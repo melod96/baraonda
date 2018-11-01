@@ -23,5 +23,7 @@ public interface MainDao {
 	ArrayList<Fame> selectFame(SqlSessionTemplate sqlSession);
 	//메인 다이어트꿀팁
 	ArrayList<Tips> selectTips(SqlSessionTemplate sqlSession);
+	//메인 다이어트꿀팁
+	ArrayList<Tips> selectProfile(SqlSessionTemplate sqlSession);
 	
 }
