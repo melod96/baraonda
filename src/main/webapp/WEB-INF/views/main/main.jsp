@@ -269,12 +269,12 @@ hr{
        <div class="grid_4">
         <div class="gall_block">
           <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig1.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig1.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item"><img src="${pageContext.request.contextPath}${t.files_root}" alt=""></a>
             <div class="gall_bot">
             <div class="text1"><a href="#">${t.board_title } </a></div>
-	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">0</label>
+	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
 	         <br>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
+	         	<img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">&nbsp;
 	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
             <a href="#" class="btn">more</a></div>
@@ -282,6 +282,7 @@ hr{
         </div>
       </div>
       </c:forEach>
+      
   <%--     <div class="grid_4">
         <div class="gall_block">
           <div class="maxheight">

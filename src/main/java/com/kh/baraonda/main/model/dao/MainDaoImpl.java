@@ -44,4 +44,10 @@ public class MainDaoImpl implements MainDao{
 			public ArrayList<Tips> selectTips(SqlSessionTemplate sqlSession) {
 				return (ArrayList)sqlSession.selectList("Main.selectTips");
 				}
+			
+			//메인 프로필 select
+			@Override
+			public ArrayList<Tips> selectProfile(SqlSessionTemplate sqlSession) {
+				return (ArrayList)sqlSession.selectList("Main.selectProfile");
+				}
 }

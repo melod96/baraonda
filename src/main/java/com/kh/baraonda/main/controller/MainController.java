@@ -44,6 +44,8 @@ public class MainController {
 		ArrayList<Fame> flist;
 		//다이어트꿀팁
 		ArrayList<Tips> tlist;
+		//프로필
+		ArrayList<Tips> plist;
 		try {
 			nlist = mainService.selectNotice();
 			model.addAttribute("nlist", nlist);
@@ -63,7 +65,12 @@ public class MainController {
 			
 			tlist = mainService.selectTips();
 			model.addAttribute("tlist", tlist);
+			System.out.println(tlist);
 			System.out.println(tlist.size());
+			
+			plist = mainService.selectProfile();
+			model.addAttribute("plist", plist);
+			System.out.println(plist.size());
 
 			return "main/main";
 			

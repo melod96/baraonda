@@ -54,7 +54,7 @@
 	<result property="marking_type" column="MARKING_TYPE"/>
 	</resultMap>
 	
-	<!-- 다이어트꿀팁 조회용(프로필사진 추가해야함) -->
+	<!-- 다이어트꿀팁 조회용 -->
  	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="tipsResultSet">
 		<result property="board_type" column="BOARD_TYPE"/>
 		<result property="writing_type" column="WRITING_TYPE"/>
@@ -67,9 +67,42 @@
 		<result property="board_count" column="BOARD_COUNT"/>
 		<result property="nick_name" column="NICK_NAME"/>
 		<result property="marking_type" column="MARKING_TYPE"/>
+		<result property="board_good" column="BOARD_GOOD"/>
+		<result property="files_no" column="FILES_NO"/>
+		<result property="f_reference_no" column="F_REFERENCE_NO"/>
+		<result property="files_title" column="FILES_TITLE"/>
+		<result property="files_change_title" column="FILES_CHANGE_TITLE"/>
+		<result property="files_type" column="FILES_TYPE"/>
+		<result property="files_root" column="FILES_ROOT"/>
+		<result property="files_secession" column="FILES_SECESSION"/>
+		<result property="profile_root" column="PROFILE_ROOT"/>
+		
 	</resultMap>
 	
+	<!-- 프로필 조회용 -->
 	
+	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="profileResultSet">
+		<result property="board_type" column="BOARD_TYPE"/>
+		<result property="writing_type" column="WRITING_TYPE"/>
+		<result property="board_title" column="BOARD_TITLE"/>
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="board_date" column="BOARD_DATE"/>
+		<result property="modify_date" column="MODIFY_DATE"/>
+		<result property="board_status" column="BOARD_STATUS"/>
+		<result property="board_count" column="BOARD_COUNT"/>
+		<result property="nick_name" column="NICK_NAME"/>
+		<result property="marking_type" column="MARKING_TYPE"/>
+		<result property="board_good" column="BOARD_GOOD"/>
+		<result property="files_no" column="FILES_NO"/>
+		<result property="f_reference_no" column="F_REFERENCE_NO"/>
+		<result property="files_title" column="FILES_TITLE"/>
+		<result property="files_change_title" column="FILES_CHANGE_TITLE"/>
+		<result property="files_type" column="FILES_TYPE"/>
+		<result property="files_root" column="FILES_ROOT"/>
+		<result property="files_secession" column="FILES_SECESSION"/>
+		
+	</resultMap>
 	
 	
 	<!-- 공지사항 목록 조회용 쿼리문 -->
@@ -119,15 +152,33 @@
 		order by m.board_no
 		</select>
 		
-	<!-- 다이어트꿀팁 목록 조회용 쿼리문(프로필사진 미추가) -->
+	<!-- 다이어트꿀팁 목록 조회용 쿼리문 -->
 	<select id="selectTips" resultMap="tipsResultSet" parameterType="Tips">
-		select b.board_title, b.board_date, b.board_count, count(m.board_no), me.nick_name
-		from board b
-		join member me on (b.member_no = me.member_no)
-		join marking m on (b.board_no = m.board_no)
-		where marking_type = 2 and board_status = 0
-		group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name
-		order by b.board_date DESC
+		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
+        FROM (     
+            select b.board_title, b.board_date, b.board_count, count(m.board_no) board_good, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join marking m on (b.board_no = m.board_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4
+            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            order by b.board_date DESC
+            ) T
+        JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
+        AND FF.FILES_SECESSION = 0
+        AND FF.FILES_TYPE = 1
+	
+		</select>
+		
+		<!-- 프로필 조회용 쿼리문 -->
+		<select id="selectProfile" resultMap="profileResultSet" parameterType="Tips">
+			select files_root, board_no, f.f_reference_no
+			from files f
+			join board b on (f.f_reference_no = b.board_no)
+			where FILES_TYPE = 1 and FILES_SECESSION = 0
+		
 		</select>
 	
 	</mapper>

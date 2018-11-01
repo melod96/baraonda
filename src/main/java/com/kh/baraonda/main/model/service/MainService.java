@@ -21,5 +21,7 @@ public interface MainService {
 	ArrayList<Fame> selectFame() throws MainSelectListException;
 	//메인 다이어트꿀팁 select
 	ArrayList<Tips> selectTips() throws MainSelectListException;
+	//메인 프로필사진 select
+	ArrayList<Tips> selectProfile() throws MainSelectListException;
 
 }
