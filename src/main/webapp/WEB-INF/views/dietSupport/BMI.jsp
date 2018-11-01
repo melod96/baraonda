@@ -67,7 +67,7 @@
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="/baraonda/src/main/webapp/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
 		<h2 class="title">나의 BMI 지수 확인</h2>
 		<form action="BMICal.ds" method="get">
 		<div class="tbl-y-wrap r5">

@@ -121,13 +121,13 @@ public class DietSupportController {
 			currentPage = pi.getCurrentPage();
 		}
 		
-		
 		try {
 			int listCount = dss.selectCenterListCount();
 			
 			PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
 			ArrayList<HealthCenter> centerlist = dss.selectCenter(pgif);
 			
+			model.addAttribute("clistcount", listCount);
 			model.addAttribute("centerlist",centerlist);
 			model.addAttribute("pi",pgif);
 			
@@ -137,8 +137,37 @@ public class DietSupportController {
 			model.addAttribute("msg",e.getMessage());
 			return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("searchHealthCenter.ds")
+	public String searchHealthCenter(String state,Model model, PageInfo pi) {
 		
-        
+		int currentPage =1;
+		
+		if(pi.getCurrentPage() > 0){
+			currentPage = pi.getCurrentPage();
+		}
+		
+		try {
+			int listCount = dss.searchCenterListCount(state);
+			
+			PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+			
+			ArrayList<HealthCenter> centerlist = dss.searchCenter(state, pgif);
+
+			model.addAttribute("clistcount",listCount);
+			model.addAttribute("centerlist",centerlist);
+			model.addAttribute("pi",pgif);
+			model.addAttribute("search",state);
+			
+			return "dietSupport/healthCenterList";
+		} catch (DietSupportSelectListException e) {
+			model.addAttribute("msg",e.getMessage());
+			return "common/errorPage";
+		}
+		
+		
+		
 	}
 	
 }
