@@ -15,12 +15,6 @@
 
 
 <!-- #### FONTS FILES #### -->
-<link href="${pageContext.request.contextPath}/resources/fonts/fontawesome-webfont.eot" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/fonts/fontawesome-webfont.svg" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/fonts/fontawesome-webfont.woff" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/fonts/FontAwesome.otf" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf" rel="stylesheet">
-
 <style>
 @font-face {
 	 font-family: 'Chungchunsidae'; src: url("${pageContext.request.contextPath}/resources/fonts/Chungchunsidae.ttf"); 
@@ -44,7 +38,6 @@
 <script src="${pageContext.request.contextPath}/resources/js/TMForm.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/tmStickUp.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/touchTouch.jquery.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/npm.js"></script>
 
 <!--181025 부트스트랩 js추가-->
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>

@@ -5,10 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +21,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.CommonUtils;
+import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.service.MyPageService;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -132,57 +140,120 @@ public class MyPageController {
 	public String showFootprintsView(HttpSession session, Model model) {
 		
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		
-		
-		
-		//파일 리스트 읽기
-		List<String> list = new ArrayList<String>();
-
-		File[] files = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log").listFiles();
-		
-		for (File file : files) {
-		    if (file.isFile()) {
-		        list.add(file.getName());
-		    }
-		}
-		    
-			for(String l : list) {
-			//파일 읽기
-				System.out.println("List : " + l);
-			File file = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log//"+l);
+		if(loginUser != null) {
+			HashSet<String> set = new HashSet<String>();
 			
-			FileReader filereader;
-			try {
-				filereader = new FileReader(file);
-				
-				BufferedReader bufReader = new BufferedReader(filereader);
-				
-				String line = "";
-				
-				while((line = bufReader.readLine()) != null) {
-					if(line.indexOf('$')>0) {
-						System.out.println(line.substring(line.indexOf('$')+1,line.lastIndexOf('$')));
-					}
-				}
-				
-				bufReader.close();
-				
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+			
+			
+			//파일 리스트 읽기
+			List<String> list = new ArrayList<String>();
+	
+			File[] files = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log").listFiles();
+			
+			for (File file : files) {
+			    if (file.isFile()) {
+			        list.add(file.getName());
+			    }
 			}
+			    
+				for(String l : list) {
+				//파일 읽기
+//					System.out.println("List : " + l);
+				File file = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log//"+l);
+				
+				FileReader filereader;
+				try {
+					filereader = new FileReader(file);
+					
+					BufferedReader bufReader = new BufferedReader(filereader);
+					
+					String line = "";
+					
+					
+					while((line = bufReader.readLine()) != null) {
+						if(line.indexOf('$')>0) {
+							System.out.println(line.substring(line.indexOf('$')+1,line.lastIndexOf('$')));
+							System.out.println(line.substring(line.indexOf("^")+1,line.lastIndexOf("^")));
+							if(Integer.parseInt(line.substring(line.indexOf("^")+1,line.lastIndexOf("^"))) == loginUser.getMember_no()) {
+								
+								set.add(line.substring(line.indexOf('$')+1,line.lastIndexOf('$')));
+							}
+						}
+					}
+					
+					bufReader.close();
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//6개중 5개 카운트 불러오기
+			Footprints footprints = mps.selectFootprints(loginUser);
+			
+			footprints.setCheck_count(set.size());
+			
+			model.addAttribute("footprints", footprints);
+			
+			return "myPage/footprints";
+		}else {
+			return "redirect:goMain.me";
 		}
-		
-		//6개중 5개 카운트 불러오기
-		Footprints footprints = mps.selectFootprints(loginUser);
-		
-		model.addAttribute("footprints", footprints);
-		
-		return "myPage/footprints";
 	}
 	
 	
+	
+	//활동내역 출력 ajax
+	@SuppressWarnings("null")
+	@RequestMapping(value="footList.my")
+	public @ResponseBody HashMap<String, Object> duplicationCheck(@RequestParam int member_no,
+			@RequestParam String name, @RequestParam int currentPage, HttpServletResponse response){
+		
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		
+		switch(name) {
+		
+		case "WriteBoard" : 
+			System.out.println("WriteBoard");
+			
+			int listCount = mps.selectListCount(member_no);
+			
+			System.out.println("listCount : " + listCount);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			ArrayList<Board> list = mps.selectBoardList(pi,member_no);
+			
+			String date[] = new String[10];
+			
+			for(int i = 0 ; i < list.size(); i++) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				date[i] = transFormat.format(list.get(i).getBoard_date());
+				
+				
+			}
+			
+			hmap.put("list", list);
+			hmap.put("date",date);
+			hmap.put("pi",pi);
+			
+			break;
+			
+		
+		case "WriteComments" : System.out.println("WriteComments");break;
+		case "GoodPoint" : System.out.println("GoodPoint");break;
+		case "LikeThis" : System.out.println("LikeThis");break;
+		case "Point" : System.out.println("Point");break;
+		case "ChangeGoods" : System.out.println("ChangeGoods");break;
+		
+		}
+		
+		return hmap;
+		
+	}
 	
 	
 	

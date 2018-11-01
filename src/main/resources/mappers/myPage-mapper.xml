@@ -6,7 +6,6 @@
   <!--Dao에서 Member.query로 작성을 했을 때 앞의 Member가 여기서 mapper의 namespace이고 query부분은 query의 이름부분이다.-->
 <mapper namespace="MyPage">
 
-<!--point 영역-->
 	<resultMap type="com.kh.baraonda.myPage.model.vo.Point" id="pointResultSet">
 		<id property="point_no" column="POINT_NO"/>
 		<result property="member_no" column="MEMBER_NO"/>
@@ -30,6 +29,19 @@
 		<result property="marking_count" column="MARKING_COUNT"/>
 		<result property="accrue_point" column="ACCRUE_POINT"/>
 		<result property="enroll_date" column="ENROLL_DATE"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.board.model.vo.Board" id="boardResultSet">
+		<id property="board_no" column="BOARD_NO"/>
+		<result property="board_type" column="BOARD_TYPE" />
+		<result property="writing_type" column="WRITING_TYPE" />
+		<result property="board_title" column="BOARD_TITLE" />
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO" />
+		<result property="board_date" column="BOARD_DATE" />
+		<result property="modify_date" column="MODIFY_DATE" />
+		<result property="board_status" column="BOARD_STATUS" />
+		<result property="board_count" column="BOARD_COUNT" />
 	</resultMap>
 	
 	
@@ -85,8 +97,19 @@
 	
 	</select>
 	
-<!--//point 영역-->
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE BOARD_STATUS = '0' AND MEMBER_NO = #{member_no}
+	</select>
 	
+	
+	<!-- 게시글 목록 조회 -->
+	<select id="selectBoardList" resultMap="boardResultSet">
+		SELECT * FROM BOARD 
+		WHERE BOARD_STATUS = '0' AND MEMBER_NO = #{member_no}
+		ORDER BY BOARD_NO DESC
+	</select>
 	
 </mapper>
 
