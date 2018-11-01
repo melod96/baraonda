@@ -29,6 +29,18 @@ public class DietSupportServiceImpl implements DietSupportService{
 
 		return dsd.selectCenter(sqlSession, pgif);
 	}
+
+	@Override
+	public int searchCenterListCount(String state) {
+		
+		return dsd.searchCenterListCount(sqlSession, state);
+	}
+
+	@Override
+	public ArrayList<HealthCenter> searchCenter(String state, PageInfo pgif) throws DietSupportSelectListException {
+		
+		return dsd.searchCenter(sqlSession, state, pgif);
+	}
 	
 	
 

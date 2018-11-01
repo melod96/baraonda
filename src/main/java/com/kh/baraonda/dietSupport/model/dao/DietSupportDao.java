@@ -14,6 +14,10 @@ public interface DietSupportDao {
 
 	ArrayList<HealthCenter> selectCenter(SqlSessionTemplate sqlSession, PageInfo pgif) throws DietSupportSelectListException;
 
+	int searchCenterListCount(SqlSessionTemplate sqlSession, String state);
+
+	ArrayList<HealthCenter> searchCenter(SqlSessionTemplate sqlSession, String state, PageInfo pgif) throws DietSupportSelectListException;
+
 	
 
 

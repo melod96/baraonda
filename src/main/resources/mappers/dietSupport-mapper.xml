@@ -26,6 +26,14 @@
 		SELECT * FROM HEALTH_CENTER
 	</select>
 	
+	<select id="searchListCount" resultType="_int">
+		SELECT COUNT(*) FROM HEALTH_CENTER WHERE CENTER_LOCATION = #{state}
+	</select>
+	
+	<select id="searchCenter" resultMap="healthCenterResultSet">
+		SELECT * FROM HEALTH_CENTER WHERE CENTER_LOCATION = #{state}
+	</select>
+	
 </mapper>
 
 

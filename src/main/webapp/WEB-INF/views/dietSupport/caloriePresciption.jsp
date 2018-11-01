@@ -67,7 +67,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="left">
-				<img src="images/berrywater.PNG"
+				<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG"
 					style="width: 732px; height: 180px;">
 				<h2 class="title">칼로리 처방 받기</h2>
 				<form action="calpre.ds" method="get">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,37 +58,39 @@
 	height:25px;
 	cursor:pointer;
 }
+
+
 </style>
 </head>
 <body>
+
 	<jsp:include page="../common/header.jsp" />
 	<div class="clear" style="height: 40px; background: white;"></div>
 	<div class="container">
 		<div class="row">
 			<div class="left">
-				<img src="images/berrywater.PNG"
+				<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG"
 					style="width: 732px; height: 180px;">
 				<h2 class="title">인바디 측정 가능 보건소 찾기</h2>
 				<p>
 					<i class="fas fa-exclamation-circle" style="font-size: 20px;"></i>&nbsp;
 					지역별 인바디 측정 가능 보건소를 찾아보세요.
 				</p>
-				<button onclick = "hcdata.ds">데이터 입력</button>
 				<div class="tab3-wrap">
 					<ul class="tab3 clfix">
-						<li><a href="#">서울특별시</a></li>
-						<li><a href="#">부산광역시</a></li>
-						<li><a href="#">인천광역시</a></li>
-						<li><a href="#">대전광역시</a></li>
-						<li><a href="#">대구광역시</a></li>
-						<li><a href="#">광주광역시</a></li>
-						<li><a href="#">울산광역시</a></li>
-						<li><a href="#">경기도</a></li>
-						<li><a href="#">전라도</a></li>
-						<li><a href="#">경상도</a></li>
-						<li><a href="#">강원도</a></li>
-						<li><a href="#">충청도</a></li>
-						<li><a href="#">제주도</a></li>
+						<li><a onclick="locations('서울')" style="color: #8c8b8b;">서울특별시</a></li>
+						<li><a onclick="locations('부산')" style="color: #8c8b8b;">부산광역시</a></li>
+						<li><a onclick="locations('인천')" style="color: #8c8b8b;">인천광역시</a></li>
+						<li><a onclick="locations('대전')" style="color: #8c8b8b;">대전광역시</a></li>
+						<li><a onclick="locations('대구')" style="color: #8c8b8b;">대구광역시</a></li>
+						<li><a onclick="locations('광주')" style="color: #8c8b8b;">광주광역시</a></li>
+						<li><a onclick="locations('울산')" style="color: #8c8b8b;">울산광역시</a></li>
+						<li><a onclick="locations('경기')" style="color: #8c8b8b;">경기도</a></li>
+						<li><a onclick="locations('전라')" style="color: #8c8b8b;">전라도</a></li>
+						<li><a onclick="locations('경상')" style="color: #8c8b8b;">경상도</a></li>
+						<li><a onclick="locations('강원')" style="color: #8c8b8b;">강원도</a></li>
+						<li><a onclick="locations('충청')" style="color: #8c8b8b;">충청도</a></li>
+						<li><a onclick="locations('제주')" style="color: #8c8b8b;">제주도</a></li>
 					</ul>
 				</div>
 				<script>
@@ -101,13 +104,15 @@
 							$(this).children('a').css({
 								"color" : "#8c8b8b"
 							});
-						}).click(
-								function() {
-									var bid = $(this).parents().children('td')
-											.eq(0).text();
-									location.href = "selectOne.bo?bid=" + bid;
-								})
+						})
 					});
+					
+				</script>
+				<script>
+					function locations(state){
+						console.log(state);
+						location.href="searchHealthCenter.ds?state="+state;
+					}
 				</script>
 				<br>
 				<br>
@@ -117,7 +122,7 @@
 				<br>
 				<br>
 				<h4>
-					<span class="p-red">전체 인바디 측정 가능 보건소</span> 254곳이 있습니다.
+					<span class="p-red">전체 인바디 측정 가능 보건소</span> ${clistcount}곳이 있습니다.
 				</h4>
 				<table class="tbl-type02">
 					<colgroup>
@@ -140,15 +145,20 @@
 							<td>${clist.center_name }</td>
 							<td>${clist.center_address}</td>
 							<td>${clist.center_tel }</td>
-							<td><img src="${pageContext.request.contextPath}/resources/images/dietSupportImg/marker.png" class="marker" onclick="setHealthMap('${clist.center_name}')"/></td>
+							<td>
+								<a href="javascript:void(0)" onclick="setHealthMap('${clist.center_name}')">
+									<img src="${pageContext.request.contextPath}/resources/images/dietSupportImg/marker.png" class="marker"/>
+								</a>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
 				</table>
+				
 				<script>
 				
 					function setHealthMap(location_name){
-						window.open ("http://map.daum.net/link/map/"+location_name+",");
+						window.open("http://map.daum.net/link/search/"+location_name);
 						console.log(location_name);
 					}
 				
@@ -165,40 +175,81 @@
 							class="blind">목록에서 다음 페이지 이동</em></span></a> <a href="#" class="btn-last"
 						title="끝"><span class="spr"><em class="blind">목록에서
 								끝 페이지 이동</em></span></a> -->
-			<c:if test="${ pi.currentPage <= 1 }">
-				[이전] &nbsp;
-			</c:if>
-			<c:if test="${ pi.currentPage > 1 }">
-				<c:url var="blistBack" value="/healthCenterList.ds">
-					<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
-				</c:url>
-				<a href="${ blistBack }">[이전]</a>
-			</c:if>
-			
-			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<c:if test="${ p eq pi.currentPage }">
-					<font color="red" size="4"><b>[${ p }]</b></font>
-				</c:if>
-				<c:if test="${ p ne pi.currentPage }">
-					<c:url var="blistCheck" value="healthCenterList.ds">
-						<c:param name="currentPage" value="${ p }"/>
-					</c:url>
-					<a href="${ blistCheck }">${ p }</a>
-				</c:if>
-			</c:forEach>
-			
-			
-			
-			<c:if test="${ pi.currentPage >= pi.maxPage }">
-				&nbsp; [다음]
-			</c:if>
-			<c:if test="${ pi.currentPage < pi.maxPage}">
-				<c:url var="blistEnd" value="healthCenterList.ds">
-					<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-				</c:url>
-				&nbsp; 
-				<a href="${ blistEnd }">[다음]</a>
-			</c:if>
+					<c:if test="${empty search }">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="healthCenterList.ds">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="healthCenterList.ds">
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="healthCenterList.ds">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
+					<c:if test="${! empty search}">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="searchHealthCenter.ds">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="state" value="${search}"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="searchHealthCenter.ds">
+									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="state" value="${search}"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="searchHealthCenter.ds">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="state" value="${search}"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
 				</div>
 			</div>
 			<jsp:include page="../common/rightBoard.jsp" />

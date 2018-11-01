@@ -11,6 +11,10 @@ public interface DietSupportService {
 	int selectCenterListCount();
 
 	ArrayList<HealthCenter> selectCenter(PageInfo pgif) throws DietSupportSelectListException;
+
+	int searchCenterListCount(String state);
+
+	ArrayList<HealthCenter> searchCenter(String state, PageInfo pgif) throws DietSupportSelectListException;
 	
 	
 
