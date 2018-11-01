@@ -37,7 +37,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	//게시글 작성
 	@Override
-	public void create(Board b, Member m) throws Exception {
+	public void create(Board b) throws BoardException {
 		SqlSession.insert("Board.insert", b);
 	}
 	

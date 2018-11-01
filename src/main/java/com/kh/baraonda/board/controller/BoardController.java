@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
+import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.member.model.vo.Member;
 
 @Controller
 public class BoardController {
@@ -43,7 +46,7 @@ public class BoardController {
 		}
 	}
 
-	//게시글 작성
+	//게시글 작성 페이지로 이동
 	//@RequestMapping("board/wirte.do")
 	//value="", method="전송방식"
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
@@ -51,13 +54,30 @@ public class BoardController {
 		System.out.println("write");
 		return "board/boardWrite";//boardWrite.jsp로 이동
 	}
+	//게시글 작성처리
+	@RequestMapping(value="insert.do", method=RequestMethod.POST)
+	public String insert(@ModelAttribute Board b) {
+		try {
+			boardService.create(b);
+			
+			return "redirect:list.do";
+		} catch (Exception e) {
+			
+			return null;
+		}
+	}
 	
-	//게시글 상세 보기, 조회수 증가 처리
+	
+	
+	
+	
+	//게시글 상세보기(댓글 포함), 조회수 증가 처리
 	@RequestMapping(value="view.do", method=RequestMethod.GET)
 	public ModelAndView view(@RequestParam int board_no, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		/*List<HashMap<String, Object>> detail;*/
+		//게시글 상세보기(제목,내용, 작성자, 날짜, 댓글수, 조회수) 
 		HashMap<String, Object> detail;
+		//댓글 조회(작성자, 내용, 날짜)
 		List<HashMap<String, Object>> commentList;
 		
 		try {

@@ -69,7 +69,7 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insert.bo" method="post">
+						<form action="insert.do" method="post">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -89,7 +89,7 @@ div#editor {
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
-										<td>제목</td>
+										<td id="title">제목</td>
 										<td><input type="text" class="form-control"
 											name="subject"></td>
 									<tr>
