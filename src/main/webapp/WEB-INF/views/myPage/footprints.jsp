@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,29 +60,29 @@
 						
 						<td class="lineTd2">
 							<img class="footIcon1 mov1" src="${pageContext.request.contextPath}/resources/images/myPageImages/fp2.png">
-							<div class="fpD mov2">게시글 작성 : <label>31회</label> </div>
+							<div class="fpD mov2">게시글 작성 : <label><c:out value="${footprints.board_count}"/>회</label> </div>
 						</td>
 						
 						<td>
 							<img class="footIcon1 mov1" src="${pageContext.request.contextPath}/resources/images/myPageImages/fp3.png">
-							<div class="fpD mov2">댓글 작성 : <label>261회</label> </div>
+							<div class="fpD mov2">댓글 작성 : <label><c:out value="${footprints.comments_count}"/>회</label> </div>
 						</td>
 					</tr>
 					
 					<tr>
 						<td>
 							<img class="footIcon2" src="${pageContext.request.contextPath}/resources/images/myPageImages/fp4.png">
-							<div class="fpD">받은 추천 : <label>34회</label> </div>
+							<div class="fpD">받은 추천 : <label><c:out value="${footprints.marking_count}"/>회</label> </div>
 						</td>					
 						
 						<td class="lineTd2">
 							<img class="footIcon2 mov1" src="${pageContext.request.contextPath}/resources/images/myPageImages/fp5.png">
-							<div class="fpD mov2">모은 경험치 : <label>534</label> </div>
+							<div class="fpD mov2">모은 경험치 : <label><c:out value="${footprints.accrue_point}"/></label> </div>
 						</td>
 						
 						<td>
 							<img class="footIcon2 mov1" src="${pageContext.request.contextPath}/resources/images/myPageImages/fp6.png">
-							<div class="fpD mov2">가입일 : <label>2018.10.27</label> </div>
+							<div class="fpD mov2">가입일 : <label><c:out value="${footprints.enroll_date}"/></label> </div>
 						</td>
 					</tr>
 				</table>

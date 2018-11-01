@@ -1,6 +1,12 @@
 package com.kh.baraonda.myPage.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +23,7 @@ import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.service.MyPageService;
 import com.kh.baraonda.myPage.model.vo.Files;
+import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Controller
@@ -29,6 +36,7 @@ public class MyPageController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
+//[마이페이지 : 내 정보 변경]
 	//마이페이지 - 내 정보 변경으로 이동하는 메소드
 	@RequestMapping("changeInfoView.my")
 	public String ChangeInfoView(HttpSession session, Model model) {
@@ -116,13 +124,69 @@ public class MyPageController {
 		return "redirect:changeInfoView.my";
 	}
 	
+
 	
-	
+//[마이페이지 : 내 활동 정보]
 	//마이페이지 - 내 활동 정보로 이동하는 메소드
 	@RequestMapping("footprintsView.my")
-	public String showFootprintsView() {
+	public String showFootprintsView(HttpSession session, Model model) {
+		
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		
+		
+		
+		//파일 리스트 읽기
+		List<String> list = new ArrayList<String>();
+
+		File[] files = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log").listFiles();
+		
+		for (File file : files) {
+		    if (file.isFile()) {
+		        list.add(file.getName());
+		    }
+		}
+		    
+			for(String l : list) {
+			//파일 읽기
+				System.out.println("List : " + l);
+			File file = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log//"+l);
+			
+			FileReader filereader;
+			try {
+				filereader = new FileReader(file);
+				
+				BufferedReader bufReader = new BufferedReader(filereader);
+				
+				String line = "";
+				
+				while((line = bufReader.readLine()) != null) {
+					if(line.indexOf('$')>0) {
+						System.out.println(line.substring(line.indexOf('$')+1,line.lastIndexOf('$')));
+					}
+				}
+				
+				bufReader.close();
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//6개중 5개 카운트 불러오기
+		Footprints footprints = mps.selectFootprints(loginUser);
+		
+		model.addAttribute("footprints", footprints);
+		
 		return "myPage/footprints";
 	}
+	
+	
+	
+	
+	
+	
 	
 	//마이페이지 - 병아리 키우기로 이동하는 메소드
 	@RequestMapping("growingChicksView.my")

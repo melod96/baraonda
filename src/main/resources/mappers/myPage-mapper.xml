@@ -24,6 +24,37 @@
 		<result property="files_secession" column="FILES_SECESSION"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Footprints" id="footprintsResultSet">
+		<id property="board_count" column="BOARD_COUNT"/>
+		<result property="comments_count" column="COMMENTS_COUNT"/>
+		<result property="marking_count" column="MARKING_COUNT"/>
+		<result property="accrue_point" column="ACCRUE_POINT"/>
+		<result property="enroll_date" column="ENROLL_DATE"/>
+	</resultMap>
+	
+	
+	
+	<select id="selectFootprints" resultMap="footprintsResultSet" parameterType="Footprints">
+	
+	SELECT BOARD_COUNT, COMMENTS_COUNT, MARKING_COUNT, ACCRUE_POINT, ENROLL_DATE
+	
+	FROM 
+    	(SELECT  COUNT(BOARD_NO) BOARD_COUNT FROM BOARD 
+	    WHERE MEMBER_NO = #{member_no} AND BOARD_STATUS = 0),
+	    
+  		(SELECT COUNT(COMMENTS_NO) COMMENTS_COUNT FROM COMMENTS
+  		WHERE MEMBER_NO = #{member_no} AND COMMENTS_STATUS = 0),
+  		
+	    (SELECT COUNT(M.MARKING_NO) MARKING_COUNT FROM MARKING M
+	  	JOIN BOARD B ON(M.BOARD_NO = B.BOARD_NO)
+	    WHERE B.MEMBER_NO = #{member_no}),
+	    
+	    (SELECT ENROLL_DATE FROM MEMBER
+	    WHERE MEMBER_NO = #{member_no}),
+	    
+	    (SELECT ACCRUE_POINT FROM POINT WHERE POINT_NO = ${member_no})	
+	</select>
+	
 	
 	<select id="selectPoint" resultMap="pointResultSet" parameterType="Point">
 		SELECT * FROM POINT
