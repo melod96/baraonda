@@ -61,6 +61,19 @@
 		<servlet-name>dietSupport</servlet-name>
 		<url-pattern>*.ds</url-pattern>
 	</servlet-mapping> 
+	
+	<servlet>
+		<servlet-name>dictionary</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/dictionary-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dictionary</servlet-name>
+		<url-pattern>*.dt</url-pattern>
+	</servlet-mapping> 
 
 	
 

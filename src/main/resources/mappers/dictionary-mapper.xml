@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--Dao에서 Member.query로 작성을 했을 때 앞의 Member가 여기서 mapper의 namespace이고 query부분은 query의 이름부분이다.-->
+<mapper namespace="Dictionary">
+	<resultMap type="com.kh.baraonda.dictionary.model.vo.FoodDictionary" id="foodDictionaryResultSet">
+		<!--property부분은 Member클래스에 있는 필드와 같아야 하고, column은 DB의 컬럼명과 같다.-->
+		<!--setter를 통해 자동으로 값을 넣기 때문에 해당 class에 setter가 생성되어 있어야 한다.-->
+		<!--mid가 result가 아닌 id인 이유는 식별자로 사용되기 때문이다.-->
+		<id property="food_no" column="FOOD_NO"/>
+		<result property="food_name" column="FOOD_NAME"/>
+		<result property="food_kcal" column="FOOD_KCAL"/>
+		<result property="food_carbohydrate" column="FOOD_CARBOHYDRATE"/>
+		<result property="food_protein" column="FOOD_PROTEIN"/>
+		<result property="food_fat" column="FOOD_FAT"/>
+		<result property="food_cholesterol" column="FOOD_CHOLESTEROL"/>
+		<result property="food_fiber" column="FOOD_FIBER"/>
+		<result property="food_natrium" column="FOOD_NATRIUM"/>
+	</resultMap>
+	
+	<select id="selectFoodListCount" resultType="_int">
+		SELECT COUNT(*) FROM FOOD_CALORIE
+	</select>
+	
+	<select id="selectFoodList" resultMap="foodDictionaryResultSet">
+		SELECT * FROM FOOD_CALORIE
+	</select>
+	
+	<select id="selectSearchFoodListCount" resultType="_int">
+		SELECT COUNT(*) FROM FOOD_CALORIE WHERE FOOD_NAME LIKE #{searchf}
+	</select>
+	
+	<select id="selectSearchFoodList" resultMap="foodDictionaryResultSet">
+		SELECT * FROM FOOD_CALORIE WHERE FOOD_NAME LIKE #{searchf}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

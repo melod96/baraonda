@@ -27,6 +27,8 @@
 
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Footprints" alias="Footprints"/>
 			
+			<typeAlias type="com.kh.baraonda.dictionary.model.vo.FoodDictionary" alias="Dictionary"/>
+			
 
   		</typeAliases>
   		
@@ -42,6 +44,8 @@
 			<mapper resource="mappers/admin-mapper.xml"/>
 			
 			<mapper resource="mappers/dietSupport-mapper.xml"/>
+			
+			<mapper resource="mappers/dictionary-mapper.xml"/>
 
 		</mappers>
   		
