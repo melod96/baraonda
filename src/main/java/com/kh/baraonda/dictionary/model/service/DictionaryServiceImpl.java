@@ -43,5 +43,11 @@ public class DictionaryServiceImpl implements DictionaryService{
 		
 		return dd.selectSearchFoodList(sqlSession, search, pgif);
 	}
+
+	@Override
+	public FoodDictionary selectFoodInfo(String food_no) {
+		
+		return dd.selectFoodInfo(sqlSession, food_no);
+	}
 	
 }

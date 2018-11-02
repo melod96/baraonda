@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BMI</title>
+<title>Notice</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <jsp:include page="../common/head.jsp" />
@@ -73,18 +74,18 @@
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="/baraonda/src/main/webapp/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
 		<h2 class="title">공지사항</h2>
 		<div class="search">
-			<select class="form-control input-xshort" style="float:left; margin-right:10px;">
+			<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;">
 				<option>제목</option>
 				<option>내용</option>
 				<option>작성자</option>
 			</select>
 			<div class="ui action input">
 				<input type="text" placeholder="Search...">
-				<button class="ui icon button">
-					<i class="search icon"></i>
+				<button class="ui icon button" type="submit">
+					<img src="${pageContext.request.contextPath}/resources/images/dictionaryImg/Search.png" style="width:20px; height:20px;"/>
 				</button>
 			</div>
 			<button type="button" class="btn btn-primary" style="float:right; margin:0;">작성하기</button>
@@ -106,66 +107,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
-							<tr>
-								<td>아삭킹 체험단 발표</td>
-								<td>관리자</td>
-								<td>57</td>
-								<td>2018.10.17</td>
-							</tr>
+							<c:forEach items="${noticelist}" var ="nlist">
+								<tr>
+									<td>${nlist.board_title }</td>
+									<td>관리자</td>
+									<td>${nlist.board_count }</td>
+									<td>${nlist.board_date }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

@@ -51,7 +51,6 @@ public class DictionaryController {
 		if(pi.getCurrentPage() > 0){
 			currentPage = pi.getCurrentPage();
 		}
-		System.out.println(search);
 		
 		try {
 			int listCount = ds.selectSearchFoodListCount(search);
@@ -67,5 +66,20 @@ public class DictionaryController {
 			model.addAttribute("msg",e.getMessage());
 			return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("exerciseDictionary.dt")
+	public String exerciseDictionaryPage() {
+		
+		return "dictionary/exerciseDictionary";
+	}
+	
+	@RequestMapping("foodDetail.dt")
+	public String foodInfo(String food_no, Model model) {
+		FoodDictionary fd = ds.selectFoodInfo(food_no);
+		
+		model.addAttribute("foodinfo", fd);
+		
+		return "dictionary/foodDetail";
 	}
 }

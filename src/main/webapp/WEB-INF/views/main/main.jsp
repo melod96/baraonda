@@ -228,7 +228,7 @@ hr{
 	              ${ n.board_title }<input type="hidden" value="${n.board_no }"></label>
 	              <br>
               </c:forEach>
-              <a href="#" class="btn" id="nq_btn">more</a>
+              <a href="noticelist.nt" class="btn" id="nq_btn">more</a>
             </div>
               <!-- 공지사항 -->
               

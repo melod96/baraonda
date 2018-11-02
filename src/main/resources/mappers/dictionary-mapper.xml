@@ -36,6 +36,10 @@
 		SELECT * FROM FOOD_CALORIE WHERE FOOD_NAME LIKE #{searchf}
 	</select>
 	
+	<select id="selectFoodInfo" resultMap="foodDictionaryResultSet">
+		SELECT * FROM FOOD_CALORIE WHERE FOOD_NO = #{food_no}
+	</select>
+	
 </mapper>
 
 

@@ -68,7 +68,10 @@
 		</table>
 		<table border="1" class="t1">
 			<tr>
-				<th>공지사항</th>
+				<th>
+					공지사항
+					<a href="noticelist.nt" style="float:right; background:black;color:white; width:20px;">+</a>	
+				</th>
 			</tr>
 			<tr>
 				<td>베리워터 체험단 모집(10.17 ~ 10.25)</td>

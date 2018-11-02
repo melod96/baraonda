@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BMI</title>
+<title>exerciseDictionary</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <jsp:include page="../common/head.jsp" />
@@ -65,15 +65,28 @@
 	margin-top:20px;
 	margin-bottom:20px;
 }
+
+.category{
+	margin-top:15px;
+}
+
+.category a{
+	margin-right:30px;
+}
+
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
+	<div class="container category">
+    	<a href="foodDictionary.dt" >음식 칼로리</a>
+    	<a href="exerciseDictionary.dt">운동 칼로리</a>
+    </div>
 	<div class="clear" style="height:40px;background:white;"></div>
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="/baraonda/src/main/webapp/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
 		<h2 class="title">운동 칼로리</h2>
 		<div class="search">
 			<div class="ui action input" style="width:100%;">
