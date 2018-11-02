@@ -29,6 +29,26 @@
 	<!--프록시 설정 추가 : 스키마 등록을 해야 한다.-->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 		
+		
+		<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	
+	<!-- 뷰 리졸버 설정 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
+		<!-- 자바 객체를 자바스크립트 객체로 바꿔주는 역할을 한다. -->
+	<beans:bean id="jacksonMessageConverter" 
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonMessageConverter"/>
+			</beans:list>
+		</beans:property>
+	
+	</beans:bean>
+	
 	 <annotation-driven />
 		
 		

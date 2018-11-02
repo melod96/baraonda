@@ -1,7 +1,11 @@
 package com.kh.baraonda.myPage.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
@@ -18,6 +22,11 @@ public interface MyPageDao {
 	Files selectPhoto(SqlSessionTemplate sqlSession, Member loginUser);
 
 	Footprints selectFootprints(SqlSessionTemplate sqlSession, Member loginUser);
+
+	int selectListCount(SqlSessionTemplate sqlSession, int id);
+
+	ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, int member_no);
+
 
 
 }

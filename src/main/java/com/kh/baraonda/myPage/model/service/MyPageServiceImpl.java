@@ -1,9 +1,13 @@
 package com.kh.baraonda.myPage.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.dao.MyPageDao;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -44,6 +48,20 @@ public class MyPageServiceImpl implements MyPageService{
 	public Footprints selectFootprints(Member loginUser) {
 		return mpd.selectFootprints(sqlSession, loginUser);
 	}
+
+	@Override
+	public int selectListCount(int id) {
+		return mpd.selectListCount(sqlSession, id);
+	}
+
+	@Override
+	public ArrayList<Board> selectBoardList(PageInfo pi, int member_no) {
+		System.out.println("service실행");
+		return mpd.selectBoardList(sqlSession,pi, member_no);
+	}
+
+
+
 
 
 

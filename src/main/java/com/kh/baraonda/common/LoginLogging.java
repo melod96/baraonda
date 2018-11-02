@@ -26,11 +26,13 @@ public class LoginLogging {
 	public void loginLog(JoinPoint jp, Object returnObj) {
 		System.out.println("login ReturnObject : " + returnObj);
 		
-		String date = "" + new Date();
+		String date ="" + new Date();
+		//시간을 제외한 년, 월, 일만 담아서 출력
+		String date1 = date.split("\\s")[0] + date.split("\\s")[1] + date.split("\\s")[2];
 		
 		if(returnObj instanceof Member) {
 			Member m = (Member)returnObj;
-			logger.info("$"  + m.getMember_no()+ m.getId() + "$");
+			logger.info("$"+ date1 +"^"+ m.getMember_no()+"^"+ m.getId() + "$");
 		}
 		
 	}

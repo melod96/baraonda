@@ -1,5 +1,9 @@
 package com.kh.baraonda.myPage.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
@@ -16,6 +20,11 @@ public interface MyPageService {
 	Files selectPhoto(Member loginUser);
 
 	Footprints selectFootprints(Member loginUser);
+
+	int selectListCount(int member_no);
+
+	ArrayList<Board> selectBoardList(PageInfo pi, int member_no);
+
 
 
 }
