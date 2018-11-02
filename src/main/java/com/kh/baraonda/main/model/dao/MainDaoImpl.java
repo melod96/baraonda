@@ -39,15 +39,16 @@ public class MainDaoImpl implements MainDao{
 				return (ArrayList)sqlSession.selectList("Main.selectFame");
 				}
 
-		//메인 명예의전당 select
+		//메인 다이어트꿀팁 select
 			@Override
 			public ArrayList<Tips> selectTips(SqlSessionTemplate sqlSession) {
 				return (ArrayList)sqlSession.selectList("Main.selectTips");
 				}
 			
-			//메인 프로필 select
+			//메인 베스트다이어터 select
 			@Override
-			public ArrayList<Tips> selectProfile(SqlSessionTemplate sqlSession) {
-				return (ArrayList)sqlSession.selectList("Main.selectProfile");
+			public ArrayList<Ranking> selectBest(SqlSessionTemplate sqlSession) {
+				return (ArrayList)sqlSession.selectList("Main.selectBest");
 				}
+
 }

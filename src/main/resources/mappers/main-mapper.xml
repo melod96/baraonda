@@ -44,6 +44,17 @@
 	<result property="member_status" column="MEMBER_STATUS"/>
 	<result property="point_no" column="POINT_NO"/>
 	<result property="accrue_point" column="ACCRUE_POINT"/>
+	<result property="self_introduction" column="SELF_INTRODUCTION"/>
+	
+	<result property="files_no" column="FILES_NO"/>
+	<result property="f_reference_no" column="F_REFERENCE_NO"/>
+	<result property="files_title" column="FILES_TITLE"/>
+	<result property="files_change_title" column="FILES_CHANGE_TITLE"/>
+	<result property="files_type" column="FILES_TYPE"/>
+	<result property="files_root" column="FILES_ROOT"/>
+	<result property="files_ssecession" column="FILES_SSECESSION"/>
+	<result property="profile_root" column="PROFILE_ROOT"/>
+	
 	</resultMap>
 	
 	<!-- 명예의 전당 조회용 -->
@@ -79,31 +90,6 @@
 		
 	</resultMap>
 	
-	<!-- 프로필 조회용 -->
-	
-	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="profileResultSet">
-		<result property="board_type" column="BOARD_TYPE"/>
-		<result property="writing_type" column="WRITING_TYPE"/>
-		<result property="board_title" column="BOARD_TITLE"/>
-		<result property="board_content" column="BOARD_CONTENT"/>
-		<result property="member_no" column="MEMBER_NO"/>
-		<result property="board_date" column="BOARD_DATE"/>
-		<result property="modify_date" column="MODIFY_DATE"/>
-		<result property="board_status" column="BOARD_STATUS"/>
-		<result property="board_count" column="BOARD_COUNT"/>
-		<result property="nick_name" column="NICK_NAME"/>
-		<result property="marking_type" column="MARKING_TYPE"/>
-		<result property="board_good" column="BOARD_GOOD"/>
-		<result property="files_no" column="FILES_NO"/>
-		<result property="f_reference_no" column="F_REFERENCE_NO"/>
-		<result property="files_title" column="FILES_TITLE"/>
-		<result property="files_change_title" column="FILES_CHANGE_TITLE"/>
-		<result property="files_type" column="FILES_TYPE"/>
-		<result property="files_root" column="FILES_ROOT"/>
-		<result property="files_secession" column="FILES_SECESSION"/>
-		
-	</resultMap>
-	
 	
 	<!-- 공지사항 목록 조회용 쿼리문 -->
 	<select id="selectNotice" resultMap="noticeResultSet" parameterType="Notice">
@@ -133,14 +119,14 @@
 	
 			<!-- 다이어터랭킹 목록 조회용 쿼리문(프로필사진 미추가) -->
 	<select id="selectRanking" resultMap="rankingResultSet" parameterType="Ranking">
-		SELECT RANK, NICK_NAME
+		  SELECT RANK, NICK_NAME, files_root, accrue_point
 		FROM(
-				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK, 
-				NICK_NAME FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO) 
-                WHERE MEMBER_STATUS = 0
-			)
+				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK,
+				NICK_NAME, files_root, accrue_point FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
+                join files f on (m.member_no = f.f_reference_no)
+                WHERE MEMBER_STATUS = 0 and files_type = 1
+			) 
 		WHERE RANK BETWEEN 1 AND 5
-		
 	</select>
 	
 	<!-- 명예의전당 목록 조회용 쿼리문 -->
@@ -172,13 +158,17 @@
 	
 		</select>
 		
-		<!-- 프로필 조회용 쿼리문 -->
-		<select id="selectProfile" resultMap="profileResultSet" parameterType="Tips">
-			select files_root, board_no, f.f_reference_no
-			from files f
-			join board b on (f.f_reference_no = b.board_no)
-			where FILES_TYPE = 1 and FILES_SECESSION = 0
+		<!-- 베스트 다이어터 조회용 쿼리문 -->
+	<select id="selectBest" resultMap="rankingResultSet" parameterType="Ranking">
+		SELECT RANK, NICK_NAME, files_root, SELF_INTRODUCTION
+		FROM(
+				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK,
+				NICK_NAME, files_root, self_introduction FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
+                join files f on (m.member_no = f.f_reference_no)
+                WHERE MEMBER_STATUS = 0 and files_type = 1
+			) 
+		WHERE RANK BETWEEN 1 AND 1
+	</select>
 		
-		</select>
 	
 	</mapper>
