@@ -38,11 +38,12 @@ public class BoardDaoImpl implements BoardDao{
 	//게시글 작성
 	@Override
 	public void create(Board b) throws BoardException {
+		System.out.println("dao : " + b);
 		SqlSession.insert("Board.insert", b);
 	}
 	
 	
-	//게시글 조화수 증가
+	//게시글 조회수 증가
 	@Override
 	public void increaseViewCnt(int board_no) throws BoardException{
 		SqlSession.update("Board.increaseViewCnt", board_no);

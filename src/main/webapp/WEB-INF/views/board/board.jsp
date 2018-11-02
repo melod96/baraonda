@@ -180,7 +180,7 @@
 					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
 					<button id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
-
+					
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">
 						<a href="#" class="btn-prev" title="이전" id="boardB">이전 <em

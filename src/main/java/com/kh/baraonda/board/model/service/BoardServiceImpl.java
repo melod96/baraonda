@@ -34,23 +34,19 @@ public class BoardServiceImpl implements BoardService{
 	//게시글 작성
 	@Override
 	public void create(Board b) throws BoardException {
-		String title = b.getBoard_title();
+		/*String title = b.getBoard_title();
 		String content = b.getBoard_content();
-		String writer = b.getMember_no();
 		//*태그문자 처리(<==> &it; > == > &gt;)
 		//replace(A,B)A를 B로 변경
 		title = title.replace("<", "&lt;");
 		title = title.replace("<", "&gt;");
-		writer = writer.replace("<", "&lt;");
-		writer = writer.replace("<", "&gt;");
 		//*공백문자 처리
 		title = title.replace("  ",    "&nbsp;&nbsp;");
-		writer = writer.replace("  ",    "&nbsp;&nbsp;");
 		//*줄바꿈 문자 처리
 		content = content.replace("\n", "<br>");
 		b.setBoard_title(title);
-		b.setBoard_content(content);
-		b.setMember_no(writer);
+		b.setBoard_content(content);*/
+		System.out.println("service : " + b);
 		boardDao.create(b);
 		
 		
