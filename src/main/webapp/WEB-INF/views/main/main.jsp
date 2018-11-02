@@ -34,17 +34,7 @@
 
   }); 
 </script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
 
-
-<![endif]-->
 
 <style>
 /* *{font-family:'Easop' !important;} */
@@ -234,20 +224,35 @@ hr{
               <h2>Notice</h2>
               <br>
               <c:forEach var="n" items="${nlist}" end="4">
-	              <label><img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img">
-	              ${ n.board_title }</label>
+	              <label class="noticeTitle"><img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img" style="margin-top:8px;">
+	              ${ n.board_title }<input type="hidden" value="${n.board_no }"></label>
 	              <br>
               </c:forEach>
               <a href="#" class="btn" id="nq_btn">more</a>
             </div>
               <!-- 공지사항 -->
               
+              <script>
+     		 $(function(){
+			
+			$(".noticeTitle").mouseenter(function(){
+				$(this).css({ "cursor":"pointer"});
+			}).click(function(){
+				var num = $(this).children().val();
+			
+				location.href = "/baraonda/selectDetail.nb?num="+num;
+
+				});
+			});
+      </script>
+              
+              
               <!-- 고객문의 -->
             <div class="grid_5">
               <h2>Question</h2>
               <br>
               <c:forEach var="q" items="${qlist}" end="4">
-              <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img">
+              <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img" style="margin-top:8px;">
                ${ q.board_title }</label>
               <br>
               </c:forEach> 
@@ -283,83 +288,7 @@ hr{
       </div>
       </c:forEach>
       
-  <%--     <div class="grid_4">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig3.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig3.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         <br>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="grid_4">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig8.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig8.jpg" alt=""></a>
-            <div class="gall_bot">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         <br>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="clear sep__1"></div>
-      <div class="grid_4">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig5.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig5.jpg" alt=""></a>
-            <div class="gall_bot">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         <br>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="grid_4">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig6.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig6.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         <br>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="grid_4">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig7.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig7.jpg" alt=""></a>
-            <div class="gall_bot">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         <br>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-          </div>
-        </div>
-      </div>
-    --%>
+
     <!-- 비포에프터 -->
       
       
@@ -369,14 +298,16 @@ hr{
         <br>
         <br>
         <blockquote class="bq1">
-          <img src="${pageContext.request.contextPath}/resources/images/main/참치프로필.png" alt="" class="${pageContext.request.contextPath}/resources/img_inner fleft noresize">
+        <c:forEach var="b" items="${blist}" end="1">
+          <img src="${pageContext.request.contextPath}${b.files_root}" alt="" class="${pageContext.request.contextPath}/resources/img_inner fleft noresize" style="height:100px; width:250px;">
           <div class="extra_wrapper">
-            <div class="bq_title color1">태평양이참치</div>
+            <div class="bq_title color1">${b.nick_name }</div>
             <div>
-          	  자기소개입니다.자기소개입니다.자기소개입니다.자기소개입니다.자기소개입니다.자기소개입니다.자기소개입니다.자기소개입니다.자기소개입니다.
+          	 ${b.self_introduction }
             </div>
             <a href="#" id="user"><span class="fa fa-chevron-right"></span>정보 보기</a>
           </div>
+          </c:forEach>
         </blockquote>
       </div>
       <!-- 베스트 다이어터 -->
@@ -395,8 +326,11 @@ hr{
       
       <c:forEach var="r" items="${rlist}" end="4">
 	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/profile3.png" id="profile_img" style="margin-left:15px;">
+	     	 <div style="float:right; margin-left:100px;"> 
+	      <img src="${pageContext.request.contextPath}${r.files_root}" id="profile_img" style="margin-left:15px; width:30px; height:30px; border-radius:20px;">
 	      <a id="profile_font">${ r.nick_name } </a>
+	  	    </div> 
+	      <a style="float:left; margin-top:4px;">누적경험치 :&nbsp;</a><a style="float:left; margin-top:4px;">${ r.accrue_point}</a>&nbsp;&nbsp;&nbsp;
 	      </label>
 	      <br>
 	      <hr>
@@ -418,28 +352,7 @@ hr{
 	      <br>
 	      <hr>
 	      </c:forEach>
-	   <%--    <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
-	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
-	      </label>
-	      <br>
-	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
-	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
-	      </label>
-	      <br>
-	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
-	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
-	      </label>
-	      <br>
-	      <hr>
-	      <label>
-	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
-	      <a id="fame_font">제목제목제목제목제목제목제목제목</a>
-	      </label> --%>
+	
 	       </div> 
       </div>
       </div>

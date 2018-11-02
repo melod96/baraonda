@@ -57,13 +57,15 @@ private MainDao md;
 			
 			return md.selectTips(sqlSession);
 		}
+		
+		//메인 베스트 다이어터
+				@Override
+				public ArrayList<Ranking> selectBest() throws MainSelectListException {
+					
+					return md.selectBest(sqlSession);
+				}
 	
-	//메인 프로필사진
-		@Override
-		public ArrayList<Tips> selectProfile() throws MainSelectListException {
-			
-			return md.selectProfile(sqlSession);
-		}
+
 
 }
 
