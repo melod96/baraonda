@@ -17,6 +17,14 @@
   $('.gallery .gall_item').touchTouch();
 
   }); 
+ 
+	//게시글 작성 버튼
+	$(document).ready(function(){
+		$("#writeBtn").click(function(){
+			location.href="${path}/baraonda/write.do";
+		});
+	});
+ 
 </script>
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
@@ -292,7 +300,7 @@
 .modifyB2:hover, .deleteB2:hover{cursor: pointer;}
 .paging-numbers a.on{background:#f13d3d;}
 .container1{margin: auto; width:75%;}
-
+#writeBtn:hover{cursor: pointer;}
 
 </style>
 <body class="page1" id="top">
@@ -353,11 +361,8 @@
 					</div>
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<div class="btn_ar">
-						<a href="#"> <img class="pageWriteBtn"
-							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
-						</a> <a href="#"> <img
-							src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
-						</a>
+						<img id="writeBtn" class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
+						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 					</div>
 					<div id="commList">
 						<p class="tit_comment">

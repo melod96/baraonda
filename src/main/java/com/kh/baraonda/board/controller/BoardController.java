@@ -47,7 +47,7 @@ public class BoardController {
 	}
 
 	//게시글 작성 페이지로 이동
-	//@RequestMapping("board/wirte.do")
+	//@RequestMapping("board/write.do")
 	//value="", method="전송방식"
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
 	public String write() {
@@ -58,12 +58,14 @@ public class BoardController {
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
 	public String insert(@ModelAttribute Board b) {
 		try {
+			System.out.println("dsa" + b);
+			
 			boardService.create(b);
 			
-			return "redirect:list.do";
+			return "redirect:list.do?writing_type=1";
 		} catch (Exception e) {
-			
-			return null;
+
+			return "common/errorPage";
 		}
 	}
 	

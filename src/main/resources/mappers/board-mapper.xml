@@ -72,15 +72,27 @@
 		WHERE C.BOARD_NO = #{BOARD_NO}
 	</select>
 	
-	<!-- 게시글 작성 -->
+	<!-- 게시글 작성(게시글 유형,이미지는 아직 설정 안함)#{writing_type} -->
 	<insert id="insert">
-		
-	
+		INSERT INTO BOARD
+		VALUES(
+			SEQ_BOARD_NO.NEXTVAL, 1, #{writing_type}, #{board_title}, #{board_content},
+			#{member_no}, SYSDATE, SYSDATE, DEFAULT, DEFAULT
+			)
+		<!-- insert into board values(seq_board_no.nextval, 1, 1, '꿀팁-칼럼입니다.', '꿀팁이에요!', 1, sysdate, sysdate, default, default); -->
 	</insert>
 	
-	
-	
-	
+	<!--test-->
+	<select id="detailTest" resultMap="boardResultSet" parameterType = "int">
+		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME,
+             (SELECT COUNT(*)
+              FROM COMMENTS C
+              JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
+              WHERE B.BOARD_NO = #{BOARD_NO}) AS COMMENTS_COUNT
+		FROM BOARD B
+		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+		WHERE B.BOARD_NO = #{BOARD_NO}
+	</select>
 	
 	
 	

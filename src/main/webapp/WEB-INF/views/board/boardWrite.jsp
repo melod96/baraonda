@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +53,8 @@ div#editor {
 	margin-bottom: 4px;
 }
 #form_control {width: 150px; float:left;}
-
+#board_content{height: 470px; width: 700px; margin-top: 20px;}
+.boardC{height: 500px; width: 730px; margin-top: -18px; border: 1px solid #dee2e6;}
 </style>
 
 </head>
@@ -69,43 +71,47 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insert.do" method="post">
+						<form action="insert.do" method="post" name="form1">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
 										<td class="cateTd">카테고리</td>
-										<td><select id="form_control" class="form-control input-xshort">
-												<option>다이어트 꿀팁</option>
-												<option>다이어트 식단</option>
-												<option>칼로리 사전</option>
-												<option>홈트레이닝</option>
-												<option>체험단</option>
-												<option>자유게시판</option>
-												<option>고객문의</option>
+										<td>
+											<select name="writing_type" id="form_control" class="form-control input-xshort">
+												<option value="1">다이어트 꿀팁</option>
+												<option value="2">다이어트 식단</option>
+												<option value="3">칼로리 사전</option>
+												<option value="4">홈트레이닝</option>
+												<option value="5">체험단</option>
+												<option value="6">자유게시판</option>
+												<option value="7">고객문의</option>
 												<!-- 공지사항 게시판은 관리자만 사용가능하게 설정  -->
 												<!-- <option>공지사항</option> -->
-												
-										</select></td>
+											</select>
+										</td>
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
-									<tr>
+									<tr><%-- ${loginUser.member_no } --%>
 										<td id="title">제목</td>
-										<td><input type="text" class="form-control"
-											name="subject"></td>
+										<td>
+											<input id="board_title" name="board_title" type="text" class="form-control">
+											<input name="member_no" type="hidden" value= "${loginUser.member_no}">
+										</td>
 									<tr>
 									</tr>
 
 								</table>
 								</tr>
 								<!------------------------------ 글작성 공간 에디터 ------------------------------>
-								<div id="editor" >
+								<!-- <div id="editor" >
 									<div id='edit' style="margin-top: 30px;">
-										
 									</div>
+								</div> -->
+								<div class="boardC">
+									<textarea id="board_content" name="board_content" rows="2" cols="40"></textarea>
 								</div>
-
 							</div>
-						<input type="submit" value="작성하기" class="btn btn-success">
+						<input id="btnSave" type="submit" value="작성하기" class="btn btn-success">
 						<input type="reset" value="취소" class="btn btn-warning">
 						</form>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
@@ -135,6 +141,45 @@ div#editor {
 						return false;
 					})
 		});
+		
+		$(document).ready(function(){
+			$("#btnSave").click(function(){
+				var title = $("#board_title").val();
+				if(title == ""){
+					alert("제목을 입력하세요.");
+					document.form1.title.focus();
+				}
+			});
+		});
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
