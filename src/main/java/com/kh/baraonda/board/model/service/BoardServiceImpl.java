@@ -25,33 +25,33 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 전체 목록 조회
 	@Override
-	public List<HashMap<String, Object>> listAll() throws BoardException {
-		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession) ;
+	public List<HashMap<String, Object>> listAll(int writing_type) throws BoardException {
+		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession, writing_type) ;
 		
 		return list;
 	}
 	
 	//게시글 작성
 	@Override
-	public void create(Board b, Member m) throws Exception {
+	public void create(Board b) throws BoardException {
 		String title = b.getBoard_title();
 		String content = b.getBoard_content();
-		String writer = m.getNick_name();
+		String writer = b.getMember_no();
 		//*태그문자 처리(<==> &it; > == > &gt;)
 		//replace(A,B)A를 B로 변경
-		title = title.replace("<", "&It");
+		title = title.replace("<", "&lt;");
 		title = title.replace("<", "&gt;");
-		writer = writer.replace("<", "&It;");
+		writer = writer.replace("<", "&lt;");
 		writer = writer.replace("<", "&gt;");
 		//*공백문자 처리
-		title = title.replace(" ", "&nbsp;&nbsp;");
-		writer = writer.replace(" ", "&nbsp;&nbsp;");
+		title = title.replace("  ",    "&nbsp;&nbsp;");
+		writer = writer.replace("  ",    "&nbsp;&nbsp;");
 		//*줄바꿈 문자 처리
 		content = content.replace("\n", "<br>");
 		b.setBoard_title(title);
 		b.setBoard_content(content);
-		m.setNick_name(writer);
-		boardDao.create(b, m);
+		b.setMember_no(writer);
+		boardDao.create(b);
 		
 		
 	}
