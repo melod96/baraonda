@@ -16,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
 import com.kh.baraonda.board.model.vo.Board;
-import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.Pagination;
 
 @Controller
 public class BoardController {
@@ -26,16 +27,28 @@ public class BoardController {
 
 	//게시글 전체 목록 조회
 	@RequestMapping("list.do")
-	public ModelAndView list(ModelAndView mv, @RequestParam int writing_type) {
+	public ModelAndView list(ModelAndView mv, @RequestParam int writing_type, PageInfo pi) {
+		int currentPage = 1;
+		
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		
 		List<HashMap<String, Object>> list;
-
+		
 		try {
+			int listCount = boardService.selectBoardListCount();
+			
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			
 			list = boardService.listAll(writing_type);
 
 			mv.setViewName("board/board");
 			mv.addObject("list", list);
+			mv.addObject("pi", info);
 			
-			//System.out.println("list : " + list);
+			System.out.println("pageInfo : " + info);
+			
 			return mv;
 
 		} catch (BoardException e) {

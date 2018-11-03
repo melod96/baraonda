@@ -91,7 +91,7 @@ div#editor {
 										</td>
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
-									<tr><%-- ${loginUser.member_no } --%>
+									<tr>
 										<td id="title">제목</td>
 										<td>
 											<input id="board_title" name="board_title" type="text" class="form-control">
@@ -147,11 +147,19 @@ div#editor {
 				var title = $("#board_title").val();
 				if(title == ""){
 					alert("제목을 입력하세요.");
+					location.href="${path}/baraonda/write.do";
 					document.form1.title.focus();
 				}
 			});
 		});
 	</script>
+	
+	<c:if test="${empty sessionScope.loginUser}">
+		<script>
+			alert("로그인 후 이용해주세요.");
+			location.href="${path}/baraonda/main.m";
+		</script>
+	</c:if>
 </body>
 </html>
 

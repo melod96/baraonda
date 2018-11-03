@@ -13,6 +13,8 @@ public interface BoardDao {
 	
 	//게시글 전체 목록 조회
 	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession, int writing_type) throws BoardException;
+	//게시글 페이징 처리
+	public int selectBoardListCount(SqlSessionTemplate sqlSession);
 	
 	//게시글 작성
 	public void create(Board b) throws BoardException;
@@ -26,4 +28,5 @@ public interface BoardDao {
 	
 	//댓글 조회
 	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no) throws BoardException;
+	
 }

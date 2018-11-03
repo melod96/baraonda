@@ -30,6 +30,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		return list;
 	}
+	//게시글 페이징 처리
+	@Override
+	public int selectBoardListCount() {
+		return boardDao.selectBoardListCount(sqlSession);
+	}
 	
 	//게시글 작성
 	@Override
@@ -91,6 +96,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		return commentList;
 	}
+
 }
 
 
