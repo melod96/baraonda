@@ -34,6 +34,11 @@ public class BoardDaoImpl implements BoardDao{
 			throw new BoardException(e.getMessage());
 		}
 	}
+	//게시글 페이징 처리
+	@Override
+	public int selectBoardListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Board.selectBoardListCount");
+	}
 
 	//게시글 작성
 	@Override
@@ -92,6 +97,7 @@ public class BoardDaoImpl implements BoardDao{
 			throw new BoardException(e.getMessage());
 		}
 	}
+
 }
 
 

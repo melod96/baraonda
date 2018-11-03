@@ -26,8 +26,9 @@
 			location.href="${path}/baraonda/write.do";
 		});
 	});
-	
 </script>
+
+
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -179,11 +180,11 @@
 					</table>
 					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
-					<button id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
+					<button onclick="btnWrite" id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
 					
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">
-						<a href="#" class="btn-prev" title="이전" id="boardB">이전 <em
+						<!-- <a href="#" class="btn-prev" title="이전" id="boardB">이전 <em
 							class="blind">목록에서 이전 페이지 이동</em>
 						</a> <span class="paging-numbers"> <a href="#">1 <span
 								class="blind">페이지로 이동</span>
@@ -195,7 +196,43 @@
 						</span> <a href="#" class="btn-next" title="다음" id="boardB">다음 <span
 							class="spr"> <em class="blind">목록에서 다음 페이지 이동</em>
 						</span>
-						</a>
+						</a> -->
+						<c:if test="${empty search }">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="list.do">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="list.do">
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="list.do">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
 					</div>
 
 					<!------------------------------ 검색 폼 ------------------------------>
@@ -242,5 +279,6 @@
 			</div>
 		</div>
 	</footer>
+	
 </body>
 </html>
