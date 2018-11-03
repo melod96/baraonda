@@ -75,13 +75,18 @@
 	margin-right:30px;
 }
 
+.info:hover{
+	cursor:pointer;
+	background:#dee2e6;
+}
+
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
     <div class="container category">
-    	<a href="" >음식 칼로리</a>
-    	<a href="">운동 칼로리</a>
+    	<a href="foodDictionary.dt" >음식 칼로리</a>
+    	<a href="exerciseDictionary.dt">운동 칼로리</a>
     </div>
 	<div class="clear" style="height:40px;background:white;"></div>
 	<div class="container">
@@ -113,9 +118,9 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${foodlist}" var ="flist">
-								<tr>
+								<tr class="info" onclick="location.href='${path}/baraonda/foodDetail.dt?food_no=${flist.food_no}'">
 									<td>${flist.food_name }</td>
-									<td>${flist.food_kcal}kcal</td>
+									<td>${flist.food_kcal} kcal</td>
 								</tr>								
 							</c:forEach>
 						</tbody>

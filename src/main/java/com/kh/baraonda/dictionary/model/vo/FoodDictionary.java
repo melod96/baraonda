@@ -6,19 +6,19 @@ public class FoodDictionary implements Serializable{
 	private int food_no;
 	private String food_name;
 	private int food_kcal;
-	private int food_carbohydrate;
-	private int food_protein;
-	private int food_fat;
-	private int food_cholesterol;
-	private int food_fiber;
-	private int food_natrium;
+	private double food_carbohydrate;
+	private double food_protein;
+	private double food_fat;
+	private double food_cholesterol;
+	private double food_fiber;
+	private double food_natrium;
 	
 	public FoodDictionary() {
 		
 	}
 
-	public FoodDictionary(int food_no, String food_name, int food_kcal, int food_carbohydrate, int food_protein,
-			int food_fat, int food_cholesterol, int food_fiber, int food_natrium) {
+	public FoodDictionary(int food_no, String food_name, int food_kcal, double food_carbohydrate, double food_protein,
+			double food_fat, double food_cholesterol, double food_fiber, double food_natrium) {
 		super();
 		this.food_no = food_no;
 		this.food_name = food_name;
@@ -55,51 +55,51 @@ public class FoodDictionary implements Serializable{
 		this.food_kcal = food_kcal;
 	}
 
-	public int getFood_carbohydrate() {
+	public double getFood_carbohydrate() {
 		return food_carbohydrate;
 	}
 
-	public void setFood_carbohydrate(int food_carbohydrate) {
+	public void setFood_carbohydrate(double food_carbohydrate) {
 		this.food_carbohydrate = food_carbohydrate;
 	}
 
-	public int getFood_protein() {
+	public double getFood_protein() {
 		return food_protein;
 	}
 
-	public void setFood_protein(int food_protein) {
+	public void setFood_protein(double food_protein) {
 		this.food_protein = food_protein;
 	}
 
-	public int getFood_fat() {
+	public double getFood_fat() {
 		return food_fat;
 	}
 
-	public void setFood_fat(int food_fat) {
+	public void setFood_fat(double food_fat) {
 		this.food_fat = food_fat;
 	}
 
-	public int getFood_cholesterol() {
+	public double getFood_cholesterol() {
 		return food_cholesterol;
 	}
 
-	public void setFood_cholesterol(int food_cholesterol) {
+	public void setFood_cholesterol(double food_cholesterol) {
 		this.food_cholesterol = food_cholesterol;
 	}
 
-	public int getFood_fiber() {
+	public double getFood_fiber() {
 		return food_fiber;
 	}
 
-	public void setFood_fiber(int food_fiber) {
+	public void setFood_fiber(double food_fiber) {
 		this.food_fiber = food_fiber;
 	}
 
-	public int getFood_natrium() {
+	public double getFood_natrium() {
 		return food_natrium;
 	}
 
-	public void setFood_natrium(int food_natrium) {
+	public void setFood_natrium(double food_natrium) {
 		this.food_natrium = food_natrium;
 	}
 
@@ -110,6 +110,7 @@ public class FoodDictionary implements Serializable{
 				+ food_fat + ", food_cholesterol=" + food_cholesterol + ", food_fiber=" + food_fiber + ", food_natrium="
 				+ food_natrium + "]";
 	}
+	
 	
 	
 }

@@ -18,4 +18,6 @@ public interface DictionaryDao {
 
 	ArrayList<FoodDictionary> selectSearchFoodList(SqlSessionTemplate sqlSession, String search, PageInfo pgif) throws DictionaryException;
 
+	FoodDictionary selectFoodInfo(SqlSessionTemplate sqlSession, String food_no);
+
 }

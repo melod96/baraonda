@@ -16,4 +16,6 @@ public interface DictionaryService {
 
 	ArrayList<FoodDictionary> selectSearchFoodList(String search, PageInfo pgif) throws DictionaryException;
 
+	FoodDictionary selectFoodInfo(String food_no);
+
 }

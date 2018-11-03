@@ -71,4 +71,10 @@ public class DictionaryDaoImpl implements DictionaryDao{
 		return list;
 	}
 
+	@Override
+	public FoodDictionary selectFoodInfo(SqlSessionTemplate sqlSession, String food_no) {
+		
+		return sqlSession.selectOne("Dictionary.selectFoodInfo",food_no);
+	}
+
 }

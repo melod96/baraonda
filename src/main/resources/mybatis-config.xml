@@ -29,6 +29,8 @@
 			
 			<typeAlias type="com.kh.baraonda.dictionary.model.vo.FoodDictionary" alias="Dictionary"/>
 			
+			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="Notice2"/>
+			
 
   		</typeAliases>
   		
@@ -46,6 +48,8 @@
 			<mapper resource="mappers/dietSupport-mapper.xml"/>
 			
 			<mapper resource="mappers/dictionary-mapper.xml"/>
+			
+			<mapper resource="mappers/notice-mapper.xml"/>
 
 		</mappers>
   		
