@@ -29,11 +29,11 @@
 	</select>
 	
 	<select id="selectSearchFoodListCount" resultType="_int">
-		SELECT COUNT(*) FROM FOOD_CALORIE WHERE FOOD_NAME LIKE #{searchf}
+		SELECT COUNT(*) FROM FOOD_CALORIE WHERE FOOD_NAME LIKE '%' || #{search} || '%'
 	</select>
 	
 	<select id="selectSearchFoodList" resultMap="foodDictionaryResultSet">
-		SELECT * FROM FOOD_CALORIE WHERE FOOD_NAME LIKE #{searchf}
+		SELECT * FROM FOOD_CALORIE WHERE FOOD_NAME LIKE '%' || #{search} || '%'
 	</select>
 	
 	<select id="selectFoodInfo" resultMap="foodDictionaryResultSet">

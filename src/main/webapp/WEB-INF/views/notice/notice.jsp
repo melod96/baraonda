@@ -66,6 +66,11 @@
 	margin-top:20px;
 	margin-bottom:20px;
 }
+
+.tbl-type02 tr:hover{
+	cursor:pointer;
+	background: #dedede;
+}
 </style>
 </head>
 <body>
@@ -76,20 +81,22 @@
 	<div class="left">
 		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
 		<h2 class="title">공지사항</h2>
-		<div class="search">
-			<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;">
-				<option>제목</option>
-				<option>내용</option>
-				<option>작성자</option>
-			</select>
-			<div class="ui action input">
-				<input type="text" placeholder="Search...">
-				<button class="ui icon button" type="submit">
-					<img src="${pageContext.request.contextPath}/resources/images/dictionaryImg/Search.png" style="width:20px; height:20px;"/>
-				</button>
+		<form action="searchNotice.nt" method="get">
+			<div class="search">
+				<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;" name = "searchtype">
+					<option value = "title">제목</option>
+					<option value = "content">내용</option>
+					<option value = "writer">작성자</option>
+				</select>
+				<div class="ui action input">
+					<input type="text" placeholder="Search..." name = "search">
+					<button class="ui icon button" type="submit">
+						<img src="${pageContext.request.contextPath}/resources/images/dictionaryImg/Search.png" style="width:20px; height:20px;"/>
+					</button>
+				</div>
+				<button type="button" class="btn btn-primary" style="float:right; margin:0;" onclick = "location.href='noticeWrite.nt'">작성하기</button>
 			</div>
-			<button type="button" class="btn btn-primary" style="float:right; margin:0;">작성하기</button>
-		</div>
+		</form>
 		<div class="list">
 					<table class="tbl-type02">
 						<colgroup>
@@ -108,7 +115,7 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${noticelist}" var ="nlist">
-								<tr>
+								<tr onclick= "location.href='noticeDetail.nt?notice_no='+${nlist.board_no}">
 									<td>${nlist.board_title }</td>
 									<td>관리자</td>
 									<td>${nlist.board_count }</td>
@@ -119,7 +126,7 @@
 					</table>
 				</div>
 				<div class="paginate">
-                        <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
+                       <!-- <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
                         <a href="#" class="btn-prev" title="이전"><em class="blind">목록에서 이전 페이지 이동</em></a>
                         <span class="paging-numbers">
                             <a href="#">1<span class="blind">페이지로 이동</span></a>
@@ -129,7 +136,82 @@
                             <a href="#">5<span class="blind">페이지로 이동</span></a>
                         </span>
                         <a href="#" class="btn-next" title="다음"><span class="spr"><em class="blind">목록에서 다음 페이지 이동</em></span></a>
-                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a>
+                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a> -->
+					<c:if test="${empty search }">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="searchNotice.nt">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="searchNotice.nt">
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="searchNotice.nt">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
+					<c:if test="${! empty search}">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="searchNotice.nt">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="search" value="${search}"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="searchNotice.nt">
+									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="search" value="${search}"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="searchNotice.nt">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="search" value="${search}"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
 				</div>
 	</div>
 	<jsp:include page="../common/rightBoard.jsp" />

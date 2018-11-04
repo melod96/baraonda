@@ -60,6 +60,7 @@ public class DictionaryController {
 			
 			model.addAttribute("foodlist",foodlist);
 			model.addAttribute("pi",pgif);
+			model.addAttribute("search", search);
 			
 			return "dictionary/foodDictionary";
 		} catch (DictionaryException e) {

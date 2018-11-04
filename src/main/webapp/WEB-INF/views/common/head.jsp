@@ -27,7 +27,7 @@
 </style>
 
 <!-- #### JAVASCRIPT FILES #### -->
-<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-migrate-1.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.equalheights.js"></script>
@@ -58,10 +58,11 @@
 
 
 
-<!-- #### FLOALA EDITOR #### -->
-
-
-
-
+<!-- #### 181104 FLOALA EDITOR 추가 #### -->
+<link href="${pageContext.request.contextPath}/resources/css/froala_editor.pkgd.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/froala_editor.pkgd.min.js"></script>
 
 

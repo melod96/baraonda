@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Notice Detail</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 <jsp:include page="../common/head.jsp"></jsp:include>
 <style>
@@ -341,12 +342,12 @@
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
 					<span class="modifyB">수정</span>
 					<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic1">
-					<span class="deleteB">삭제</span>
+					<span class="deleteB" onclick = "location.href='deleteNotice.nt?notice_no='+${ninfo.board_no}">삭제</span>
 					</h2>
 					
 					<!-- 게시글 제목 -->
 					<div>
-						<span class="bSubject">아삭킹 체험단 발표</span>
+						<span class="bSubject">${ninfo.board_title }</span>
 					</div>
 					<hr class="hrline">
 					<div class="boardInfo">
@@ -364,9 +365,9 @@
 						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
 							<div class="group_inner">
 								<ul class="date_menu">
-									<li class="da01"><span>2018-10-25 14:20</span></li>
-									<li class="da02"><span>12</span></li>
-									<li class="da03"><span>1</span></li>
+									<li class="da01"><span>${ninfo.board_date }</span></li>
+									<li class="da02"><span>${ninfo.board_count }</span></li>
+									<li class="da03"><span>${cCount }</span></li>
 								</ul>
 							</div>
 						</span>
@@ -375,9 +376,7 @@
 
 					<!------------------------------------ 게시글 내용 ------------------------------------>
 					<div class="viewContent">
-						<p class="view_text">천지는 얼마나 기쁘며 얼마나 아름다우냐? 이것을 얼음 속에서 불러 내는
-							것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의
-							동산에는 사랑의 풀이 돋고 이상의 꽃이</p>
+						<p class="view_text">${ninfo.board_content }</p>
 					</div>
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
@@ -388,10 +387,10 @@
 					</div>
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<div class="btn_ar">
-						<a href="#"> 
+						<a href="noticeWrite.nt"> 
 							<img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
 						</a> 
-						<a href="#"> 
+						<a href="noticelist.nt"> 
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 						</a>
 					</div>
@@ -416,32 +415,34 @@
 					<!------------------------------------ 게시글에 작성된 댓글 수 ------------------------------------>
 					<div class="comment-count">
 						<p class="comment-count-1">댓글</p>
-						<p class="comment-count-2">1</p>
+						<p class="comment-count-2">${cCount }</p>
 					</div>
 					<table class="comment-list">
-						<ul>
-							<li class="comment-list-li">
-								<div class="comment-pic">
-									<img class="commentPro" 
-										src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
-								</div>
-								<div class="comment-txt">
-									<!--------------------------------- 댓글 작성자명 ---------------------------------->
-									<strong id="ntxt">으랏차</strong>
-									<!---------------------------------- 댓글 작성 시간---------------------------------->
-									<span>2018-10-17 15:30</span>
-									<div class="remd">
-									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-									<span class="modifyB2">수정</span>
-										<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
-										<span class="deleteB2">삭제</span>
+						<c:forEach items="${comment }" var = "clist">
+							<ul>
+								<li class="comment-list-li">
+									<div class="comment-pic">
+										<img class="commentPro" 
+											src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
 									</div>
-									<!-- 댓글 내용 -->
-									<p id="ptxt">와 당첨되신 분들 너무 부러워요 ㅠㅠ</p>
-								</div>
-							</li>
-							<hr class="hrline">
-						</ul>
+									<div class="comment-txt">
+										<!--------------------------------- 댓글 작성자명 ---------------------------------->
+										<strong id="ntxt">${clist.nick_name }</strong>
+										<!---------------------------------- 댓글 작성 시간---------------------------------->
+										<span>${clist.comments_date }</span>
+										<div class="remd">
+										<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
+										<span class="modifyB2">수정</span>
+											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
+											<span class="deleteB2">삭제</span>
+										</div>
+										<!-- 댓글 내용 -->
+										<p id="ptxt">${clist.comments_content }</p>
+									</div>
+								</li>
+								<hr class="hrline">
+							</ul>
+						</c:forEach>
 					</table>
 					<div class="paginate">
                         <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
