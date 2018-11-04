@@ -1,11 +1,19 @@
 package com.kh.baraonda.admin.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.service.AdminService;
+import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
+import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.Pagination;
 
 @Controller
 public class AdminController {
@@ -18,9 +26,27 @@ public class AdminController {
 		return "admin/dashboard/dashboard";
 	}
 	
+	//Member>General 목록 조회용
 	@RequestMapping(value="goGeneralMemberAdminList.adm")
-	public String goGeneralMemberAdminList() {
-		return "admin/memberAdmin/generalMemberAdminList";
+	public ModelAndView goGeneralMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi) {
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		ArrayList<AdminGeneralMember> list;
+		try {
+			int listCount = as.selectGeneralMemberCount();
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			list = as.selectGeneralMemberList(info);
+			
+			mv.setViewName("admin/memberAdmin/generalMemberAdminList");
+			mv.addObject("list", list);
+			mv.addObject("pi", info);
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "GeneralMember 조회 실패!");
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="goCompanyMemberAdminList.adm")

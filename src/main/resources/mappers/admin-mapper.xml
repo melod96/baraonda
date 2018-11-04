@@ -5,6 +5,56 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Admin">
+
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminGeneralMember" id="adminGeneralMemberResultSet">
+		<id property="member_no" column="member_no"/>
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="nick_name" column="nick_name"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="enroll_date" column="enroll_date"/>
+		<result property="member_status" column="member_status"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminCompanyMember" id="adminCompanyMemberReulst">
+		<id property="member_no" column="member_no"/>
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="nick_name" column="nick_name"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="company_name" column="company_name"/>
+		<result property="company_no" column="company_no"/>
+		<result property="bank" column="bank"/>
+		<result property="account" column="account"/>
+		<result property="ceo_name" column="ceo_name"/>
+		<result property="ceo_type" column="ceo_type"/>
+		<result property="enroll_date" column="enroll_date"/>
+		<result property="member_status" column="member_status"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminBlackMember" id="adminBlackMemberResultMap">
+		<id property="member_no" column="member_no"/>
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="nick_name" column="nick_name"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="enroll_date" column="enroll_date"/>
+		<result property="black_date" column="black_date"/>
+		<result property="lift_date" column="lift_date"/>
+	</resultMap>
+	
+	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+	
+	<select id="selectGeneralMemberList" resultMap="adminGeneralMemberResultSet">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
+		FROM MEMBER
+	</select>
 	
 </mapper> 
   
