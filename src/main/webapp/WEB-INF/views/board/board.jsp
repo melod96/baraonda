@@ -197,13 +197,14 @@
 							class="spr"> <em class="blind">목록에서 다음 페이지 이동</em>
 						</span>
 						</a> -->
-						<c:if test="${empty search }">
-						<c:if test="${ pi.currentPage <= 1 }">
+						
+					<c:if test="${ pi.currentPage <= 1 }">
 							[이전] &nbsp;
-						</c:if>
+					</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
 							<c:url var="blistBack" value="list.do">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="search" value="${search}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -215,6 +216,7 @@
 							<c:if test="${ p ne pi.currentPage }">
 								<c:url var="blistCheck" value="list.do">
 									<c:param name="currentPage" value="${ p }"/>
+									<%-- <c:param name="search" value="${search}"/> --%>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
@@ -226,13 +228,16 @@
 							&nbsp; [다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="list.do">
+							<c:url var="blistEnd" value="searchNotice.nt">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<%-- <c:param name="search" value="${search}"/> --%>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
 						</c:if>
-					</c:if>
+					
+					
+					
 					</div>
 
 					<!------------------------------ 검색 폼 ------------------------------>

@@ -24,8 +24,23 @@
 			location.href="${path}/baraonda/write.do";
 		});
 	});
- 
+	 //댓글 작성
+ 	$("#btncmm").click(function(){
+ 		var comment=$("#comment").val();
+ 		var bno="${detail.board_no}"
+ 		var param="comment="+comment+"&board_no"+bno;
+ 		$.ajax({
+ 			type:"post",
+ 			url:"${path}/insertComment.do",
+ 			data:param,
+ 			success:function(){
+ 				alert("댓글이 등록되었습니다.");
+ 				
+ 			}
+ 		});
+ 	});
 </script>
+
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -371,13 +386,18 @@
 						</p>
 
 						<!------------------------------------ 댓글 작성 폼 ------------------------------------>
-						<div id="comment-write" class="comment-write"">
-							<form>
-								<textarea id="comment" class="txtarea r5 placeholder"
+						<div id="comment-write" class="comment-write">
+							<form action="insertComment.do" method="post">
+								<textarea name="COMMENTS_CONTENT" id="comment" class="txtarea r5 placeholder"
 									placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~
 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
 									onfocus="setFlag();"></textarea>
-								<button "type="submit" id="btncmm" class="btn btn-primary">입력</button>
+								<input name="MEMBER_NO" type="hidden" value= "${loginUser.member_no}">
+								<input name="NICK_NAME" type="hidden" value= "${loginUser.nick_name}">
+								
+								<input name="BOARD_NO" type="hidden" value= "${BOARD_NO}">
+								
+								<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
 							</form>
 						</div>
 					</div>

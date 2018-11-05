@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.baraonda.admin.model.dao.AdminDao;
 import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
+import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
 @Service
@@ -20,13 +21,13 @@ public class AdminServiceImpl implements AdminService {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public int selectGeneralMemberCount() throws AdminException {
-		return ad.selectGeneralMemberCount(sqlSession);
+	public int selectGeneralMemberCount(Search search) throws AdminException {
+		return ad.selectGeneralMemberCount(sqlSession, search);
 	}
 
 	@Override
-	public ArrayList<AdminGeneralMember> selectGeneralMemberList(PageInfo pi) throws AdminException {
-		return ad.selectGeneralMemberList(sqlSession, pi);
+	public ArrayList<AdminGeneralMember> selectGeneralMemberList(PageInfo pi, Search search) throws AdminException {
+		return ad.selectGeneralMemberList(sqlSession, pi, search);
 	}
 	
 }

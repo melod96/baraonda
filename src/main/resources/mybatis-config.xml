@@ -30,9 +30,10 @@
 			<typeAlias type="com.kh.baraonda.dictionary.model.vo.FoodDictionary" alias="Dictionary"/>
 			
 			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="Notice2"/>
-			
+
 			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="TipsComment"/>
-			
+
+			<typeAlias type="com.kh.baraonda.admin.model.vo.Search" alias="Search"/>
 
   		</typeAliases>
   		

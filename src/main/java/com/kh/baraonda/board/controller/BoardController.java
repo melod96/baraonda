@@ -1,23 +1,32 @@
 package com.kh.baraonda.board.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
 import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.vo.Files;
 
 @Controller
 public class BoardController {
@@ -41,7 +50,7 @@ public class BoardController {
 			
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			
-			list = boardService.listAll(writing_type);
+			list = boardService.listAll(writing_type,info);
 
 			mv.setViewName("board/board");
 			mv.addObject("list", list);
@@ -69,7 +78,9 @@ public class BoardController {
 	}
 	//게시글 작성처리
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-	public String insert(@ModelAttribute Board b) {
+	public String insert(HttpSession session,
+				@ModelAttribute Board b, HttpServletRequest request) {
+		
 		try {
 			System.out.println("dsa" + b);
 			
@@ -82,8 +93,22 @@ public class BoardController {
 		}
 	}
 	
-	
-	
+	//댓글 작성
+	@RequestMapping(value="insertComment.do", method=RequestMethod.POST)
+	public String comment(HttpSession session, @ModelAttribute Comments c) {
+
+		try {
+			
+			System.out.println("댓글 : " + c);
+			
+			boardService.comment(c);
+			
+			return "redirect:list.do?writing_type=1";
+		} catch (Exception e) {
+
+			return "common/errorPage";
+		}
+	}
 	
 	
 	//게시글 상세보기(댓글 포함), 조회수 증가 처리
