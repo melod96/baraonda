@@ -17,6 +17,7 @@
 		<result property="modify_date" column="MODIFY_DATE" />
 		<result property="board_status" column="BOARD_STATUS" />
 		<result property="board_count" column="BOARD_COUNT" />
+		<result property="profile" column = "FILES_CHANGE_TITLE"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.baraonda.notice.model.vo.NoticeComment" id="CommentResultSet2">
@@ -27,6 +28,7 @@
 		<result property="comments_date" column="COMMENTS_DATE" />
 		<result property="comments_status" column="COMMENTS_STATUS"/>
 		<result property="nick_name" column="NICK_NAME" />
+		<result property="profile" column = "FILES_CHANGE_TITLE"/>
 	</resultMap>
  
 	
@@ -39,7 +41,14 @@
 	</select>
 	
 	<select id="selectNoticeOne" resultMap="NoticeResultSet2">
-		SELECT * FROM BOARD WHERE BOARD_NO = #{notice_no}
+		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,MEMBER_NO,BOARD_DATE,MODIFY_DATE,BOARD_STATUS,BOARD_COUNT, FILES_CHANGE_TITLE
+		FROM BOARD B
+		JOIN FILES F ON (F.F_REFERENCE_NO = B.MEMBER_NO)
+		WHERE BOARD_NO = #{notice_no} AND FILES_TYPE = 1
+	</select>
+	
+	<select id="selectHeart" resultType = "_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{notice_no} AND MARKING_TYPE = 2
 	</select>
 	
 	<select id="selectCommentListCount" resultType="_int">
@@ -47,9 +56,10 @@
 	</select>
 	
 	<select id="selectComment" resultMap="CommentResultSet2">
-		SELECT C.COMMENTS_NO, C.COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME FROM COMMENTS C
+		SELECT C.COMMENTS_NO, C.COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,FILES_CHANGE_TITLE FROM COMMENTS C
 		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
-		WHERE BOARD_NO = #{notice_no} AND COMMENTS_STATUS = 0 ORDER BY COMMENTS_NO DESC
+        JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)
+		WHERE BOARD_NO = 286 AND COMMENTS_STATUS = 0 ORDER BY COMMENTS_NO DESC
 	</select>
 	
 	<update id="updateNoticeCount">
@@ -99,6 +109,49 @@
 		UPDATE BOARD SET BOARD_STATUS = 1 WHERE BOARD_NO = #{notice_no}
 	</update>
 	
+	<update id="updateNotice">
+		UPDATE BOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
+	</update>
+	
+	<insert id="insertComment">
+		INSERT INTO COMMENTS VALUES(SEQ_COMMENTS_NO.NEXTVAL, #{comments_content}, #{board_no}, #{member_no}, SYSDATE, 0)
+	</insert>
+	
+	<update id="deleteComment">
+		UPDATE COMMENTS SET COMMENTS_STATUS = 1 WHERE COMMENTS_NO = #{comment_no}
+	</update>
+	
+	<select id="checkBookmark" resultType = "_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 1
+	</select>
+	
+	<insert id="insertBookmark">
+		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 1, SYSDATE, #{board_no}, #{member_no})
+	</insert>
+	
+	<delete id="deleteBookmark">
+		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 1
+	</delete>
+	
+	<select id="checkHeart" resultType = "_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
+	</select>
+	
+	<insert id="insertHeart">
+		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 2, SYSDATE, #{board_no}, #{member_no})
+	</insert>
+	
+	<delete id="deleteHeart">
+		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
+	</delete>
+	
+	<select id="selectNextNo" resultType="_int">
+		select MIN(board_no) from board  where <![CDATA[board_no > #{notice_no}]]> and board_type = 6 and board_status = 0
+	</select>
+	
+	<select id="selectBeforeNo" resultType="_int">
+		select MAX(board_no) from board where <![CDATA[board_no < #{notice_no}]]> and board_type = 6 and board_status = 0
+	</select>
 </mapper> 
 
 

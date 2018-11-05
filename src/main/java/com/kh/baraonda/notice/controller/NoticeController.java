@@ -16,6 +16,7 @@ import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.service.NoticeService;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
+import com.kh.baraonda.notice.model.vo.NoticeMarking;
 
 @Controller
 public class NoticeController {
@@ -57,6 +58,8 @@ public class NoticeController {
 		
 		Notice ninfo = ns.selectNoticeOne(notice_no);
 		
+		int heartCount = ns.selectHeart(notice_no);
+		
 		//댓글
 		int currentPage =1;
 		
@@ -70,10 +73,17 @@ public class NoticeController {
 		
 		ArrayList<NoticeComment> comment = ns.selectComment(notice_no,pgif);
 		
+		//이전글 | 다음글
+		Notice nextBoard = ns.selectNextBoard(notice_no);
+		Notice beforeBoard = ns.selectBeforeBoard(notice_no);
+		
 		model.addAttribute("ninfo", ninfo);
 		model.addAttribute("pi",pgif);
 		model.addAttribute("comment", comment);
 		model.addAttribute("cCount", listCount);
+		model.addAttribute("hcount", heartCount);
+		model.addAttribute("before", beforeBoard);
+		model.addAttribute("next", nextBoard);
 		
 		return "notice/noticeDetail";
 	}
@@ -120,14 +130,7 @@ public class NoticeController {
 	
 	//공지사항 insert
 	@RequestMapping("insertNotice.nt")
-	public String insertNotice(@SessionAttribute("loginUser") Member m,String title, String content, Model model) {
-		Notice n = new Notice();
-		
-		if(title != null && content != null && m != null) {
-			n.setBoard_title(title);
-			n.setBoard_content(content);
-			n.setMember_no(m.getMember_no());
-		}
+	public String insertNotice(@SessionAttribute("loginUser") Member m,Notice n, Model model) {
 		
 		int insert = ns.insertNotice(n);
 		
@@ -149,4 +152,80 @@ public class NoticeController {
 		return "redirect:noticelist.nt";
 	}
 	
+	//공지사항 수정 페이지
+	@RequestMapping("noticeUpdatePage.nt")
+	public String noticeUpdatePage(String notice_no, Model model) {
+		Notice ninfo = ns.selectNoticeOne(notice_no);
+		
+		model.addAttribute("ninfo",ninfo);
+		
+		return "notice/noticeUpdate";
+	}
+	
+	//공지사항 update
+	@RequestMapping("updateNotice.nt")
+	public String updateNotice(@SessionAttribute("loginUser") Member m,Notice n, Model model) {
+		n.setMember_no(m.getMember_no());
+		
+		int update = ns.updateNotice(n);
+		
+		return "redirect:noticelist.nt";
+	}
+	
+	//댓글 insert
+	@RequestMapping("insertComment.nt")
+	public String insertComment(@SessionAttribute("loginUser") Member m,NoticeComment c, Model model) {
+		c.setMember_no(m.getMember_no());
+		
+		int insert = ns.insertComment(c);
+		return "redirect:noticeDetail.nt?notice_no="+c.getBoard_no();
+	}
+	
+	//댓글 delete
+	@RequestMapping("deleteComment.nt")
+	public String deleteComment(String notice_no, String comment_no) {
+		
+		int delete = ns.deleteComment(comment_no);
+		
+		return "redirect:noticeDetail.nt?notice_no="+notice_no;
+	}
+	
+	//북마크
+	@RequestMapping("bookmark.nt")
+	public String bookmark(@SessionAttribute("loginUser") Member m, String notice_no) {
+		NoticeMarking nm = new NoticeMarking();
+		nm.setBoard_no(Integer.parseInt(notice_no));
+		nm.setMember_no(m.getMember_no());
+		
+		int check = -99;
+		
+		check = ns.checkBookmark(nm);
+		
+		if(check==0) {
+			int insert = ns.insertBookmark(nm);
+		}else {
+			int delete = ns.deleteBookmark(nm);
+		}
+		
+		return "redirect:noticeDetail.nt?notice_no="+notice_no;
+	}
+	
+	//좋아요
+	@RequestMapping("heart.nt")
+	public String heart(@SessionAttribute("loginUser") Member m, String notice_no) {
+		NoticeMarking nm = new NoticeMarking();
+		nm.setBoard_no(Integer.parseInt(notice_no));
+		nm.setMember_no(m.getMember_no());
+		
+		int check = -99;
+		
+		check = ns.checkHeart(nm);
+		if(check==0) {
+			int insert = ns.insertHeart(nm);
+		}else {
+			int delete = ns.deleteHeart(nm);
+		}
+		
+		return "redirect:noticeDetail.nt?notice_no="+notice_no;
+	}
 }

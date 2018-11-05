@@ -94,7 +94,9 @@
 						<img src="${pageContext.request.contextPath}/resources/images/dictionaryImg/Search.png" style="width:20px; height:20px;"/>
 					</button>
 				</div>
-				<button type="button" class="btn btn-primary" style="float:right; margin:0;" onclick = "location.href='noticeWrite.nt'">작성하기</button>
+				<c:if test="${sessionScope.loginUser.admin_right == 1}">
+					<button type="button" class="btn btn-primary" style="float:right; margin:0;" onclick = "location.href='noticeWrite.nt'">작성하기</button>
+				</c:if>
 			</div>
 		</form>
 		<div class="list">

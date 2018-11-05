@@ -11,6 +11,7 @@ import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
+import com.kh.baraonda.notice.model.vo.NoticeMarking;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao{
@@ -49,6 +50,13 @@ public class NoticeDaoImpl implements NoticeDao{
 	public Notice selectNoticeOne(SqlSessionTemplate sqlSession, String notice_no) {
 		
 		return sqlSession.selectOne("Notice2.selectNoticeOne",notice_no);
+	}
+	
+	//좋아요 개수
+	@Override
+	public int selectHeart(SqlSessionTemplate sqlSession, String notice_no) {
+		
+		return sqlSession.selectOne("Notice2.selectHeart", notice_no);
 	}
 
 	//댓글 수
@@ -123,4 +131,118 @@ public class NoticeDaoImpl implements NoticeDao{
 		i = 1;
 		return i;
 	}
+
+	//공지사항 update
+	@Override
+	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.updateNotice",n);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//댓글 insert
+	@Override
+	public int insertComment(SqlSessionTemplate sqlSession, NoticeComment c) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.insertComment",c);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//댓글 delete
+	@Override
+	public int deleteComment(SqlSessionTemplate sqlSession, String comment_no) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.deleteComment",comment_no);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//북마크 체크 여부
+	@Override
+	public int checkBookmark(SqlSessionTemplate sqlSession, NoticeMarking nm) {
+		
+		return sqlSession.selectOne("Notice2.checkBookmark", nm);
+	}
+
+	//북마크 등록
+	@Override
+	public int insertBookmark(SqlSessionTemplate sqlSession, NoticeMarking nm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.insertBookmark",nm);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//북마크 삭제
+	@Override
+	public int deleteBookmark(SqlSessionTemplate sqlSession, NoticeMarking nm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.deleteBookmark",nm);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//좋아요 체크 여부
+	@Override
+	public int checkHeart(SqlSessionTemplate sqlSession, NoticeMarking nm) {
+		
+		return sqlSession.selectOne("Notice2.checkHeart", nm);
+	}
+
+	//좋아요 등록
+	@Override
+	public int insertHeart(SqlSessionTemplate sqlSession, NoticeMarking nm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.insertHeart",nm);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//좋아요 삭제
+	@Override
+	public int deleteHeart(SqlSessionTemplate sqlSession, NoticeMarking nm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Notice2.deleteHeart",nm);
+		
+		i = 1;
+		
+		return i;
+	}
+
+	//다음글 번호 
+	@Override
+	public int selectNextNo(SqlSessionTemplate sqlSession, String notice_no) {
+		
+		return sqlSession.selectOne("Notice2.selectNextNo", notice_no);
+	}
+
+	//이전글 번호
+	@Override
+	public int selectBeforeNo(SqlSessionTemplate sqlSession, String notice_no) {
+		
+		return sqlSession.selectOne("Notice2.selectBeforeNo", notice_no);
+	}
+
+
 }
