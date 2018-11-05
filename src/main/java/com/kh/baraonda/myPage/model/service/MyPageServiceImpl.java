@@ -10,8 +10,10 @@ import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.dao.MyPageDao;
+import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
+import com.kh.baraonda.myPage.model.vo.Marking;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Service
@@ -58,6 +60,21 @@ public class MyPageServiceImpl implements MyPageService{
 	public ArrayList<Board> selectBoardList(PageInfo pi, int member_no) {
 		System.out.println("service실행");
 		return mpd.selectBoardList(sqlSession,pi, member_no);
+	}
+
+	@Override
+	public ArrayList<Marking> selectLikeCount(int member_no) {
+		return mpd.selectLikeCount(sqlSession, member_no);
+	}
+
+	@Override
+	public int selectCommentsListCount(int member_no) {
+		return mpd.selectCommentsListCount(sqlSession, member_no);
+	}
+
+	@Override
+	public ArrayList<Comments> selectCommentList(PageInfo cPi, int member_no) {
+		return mpd.selectCommentList(sqlSession,cPi, member_no);
 	}
 
 

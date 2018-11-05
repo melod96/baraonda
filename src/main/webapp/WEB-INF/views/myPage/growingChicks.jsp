@@ -6,6 +6,9 @@
 
 	<style>
 	
+	/*버튼 구역*/
+	#growingChicks{background:#B7E6A8;color:white;}
+	
 	/*병아리 구역*/
 	.chicksArea{width:800px; height:auto; margin-left:auto;margin-right:auto; border:3px solid #A8FFE5; background:#FAFCE1;
 				border-radius:10px;margin-top:30px;margin-bottom:50px;}

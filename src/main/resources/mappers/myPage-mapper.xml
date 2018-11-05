@@ -44,6 +44,26 @@
 		<result property="board_count" column="BOARD_COUNT" />
 	</resultMap>
 	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Marking" id="markingResultSet">
+		<id property="marking_no" column="MARKING_NO"/>
+		<result property="marking_type" column="MARKING_TYPE" />
+		<result property="marking_date" column="MARKING_DATE" />
+		<result property="board_no" column="BOARD_NO" />
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="marking_count" column="MARKING_COUNT"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Comments" id="commentsResultSet2">
+		<id property="comments_no" column="COMMENTS_NO"/>
+		<result property="comments_content" column="COMMENTS_CONTENT" />
+		<result property="board_no" column="BOARD_NO" />
+		<result property="member_no" column="MEMBER_NO" />
+		<result property="comments_date" column="COMMENTS_DATE"/>
+		<result property="comments_status" column="COMMENTS_STATUS"/>
+		<result property="board_title" column="BOARD_TITLE"/>
+		<result property="board_type" column="BOARD_TYPE"/>
+	</resultMap>
+	
 	
 	
 	<select id="selectFootprints" resultMap="footprintsResultSet" parameterType="Footprints">
@@ -64,7 +84,7 @@
 	    (SELECT ENROLL_DATE FROM MEMBER
 	    WHERE MEMBER_NO = #{member_no}),
 	    
-	    (SELECT ACCRUE_POINT FROM POINT WHERE POINT_NO = ${member_no})	
+	    (SELECT ACCRUE_POINT FROM POINT WHERE POINT_NO = ${member_no})
 	</select>
 	
 	
@@ -109,6 +129,29 @@
 		SELECT * FROM BOARD 
 		WHERE BOARD_STATUS = '0' AND MEMBER_NO = #{member_no}
 		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!--추천 개수 조회-->
+	<select id="selectLikeCount" resultMap="markingResultSet">
+		SELECT COUNT(M.MARKING_NO) MARKING_COUNT, B.BOARD_NO FROM MARKING M
+    	JOIN BOARD B ON(M.BOARD_NO = B.BOARD_NO)
+  		WHERE B.MEMBER_NO = #{member_no} group by B.BOARD_NO
+	</select>
+	
+	<select id="selectCommentsListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM COMMENTS
+		WHERE COMMENTS_STATUS = '0' AND MEMBER_NO = #{member_no}
+	</select>
+	
+	
+	<!--댓글 목록 조회-->
+	<select id="selectCommentList" resultMap="commentsResultSet2">
+		SELECT C.COMMENTS_NO, C.COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS
+                ,B.BOARD_TITLE, B.BOARD_TYPE FROM COMMENTS C 
+        JOIN BOARD B ON(C.BOARD_NO = B.BOARD_NO)
+		WHERE C.COMMENTS_STATUS = '0' AND C.MEMBER_NO = #{member_no}
+		ORDER BY COMMENTS_NO DESC
 	</select>
 	
 </mapper>

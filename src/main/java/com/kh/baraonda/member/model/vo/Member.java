@@ -18,7 +18,7 @@ public class Member implements Serializable{
 	private int admin_right;
 	private int company_right;
 	private String company_name;
-	private int company_no;
+	private String company_no;
 	private String bank;
 	private String account;
 	private String ceo_name;
@@ -28,7 +28,7 @@ public class Member implements Serializable{
 	public Member() {}
 	public Member(int member_no, String id, String password, String name, String nick_name, String phone, String token,
 			Date enroll_date, Date modify_date, int member_status, int admin_right, int company_right,
-			String company_name, int company_no, String bank, String account, String ceo_name, String ceo_type,
+			String company_name, String company_no, String bank, String account, String ceo_name, String ceo_type,
 			String self_introduction, String email) {
 		super();
 		this.member_no = member_no;
@@ -139,10 +139,10 @@ public class Member implements Serializable{
 	public void setCompany_name(String company_name) {
 		this.company_name = company_name;
 	}
-	public int getCompany_no() {
+	public String getCompany_no() {
 		return company_no;
 	}
-	public void setCompany_no(int company_no) {
+	public void setCompany_no(String company_no) {
 		this.company_no = company_no;
 	}
 	public String getBank() {

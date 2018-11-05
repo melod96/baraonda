@@ -30,8 +30,10 @@ import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.service.MyPageService;
+import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
+import com.kh.baraonda.myPage.model.vo.Marking;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Controller
@@ -148,7 +150,7 @@ public class MyPageController {
 			//파일 리스트 읽기
 			List<String> list = new ArrayList<String>();
 	
-			File[] files = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log").listFiles();
+			File[] files = new File("C://sts//log").listFiles();
 			
 			for (File file : files) {
 			    if (file.isFile()) {
@@ -159,7 +161,7 @@ public class MyPageController {
 				for(String l : list) {
 				//파일 읽기
 //					System.out.println("List : " + l);
-				File file = new File("C://Users//HyeongWoo//git//baraonda//src//main//resources//log//"+l);
+				File file = new File("C://sts//log//"+l);
 				
 				FileReader filereader;
 				try {
@@ -225,6 +227,7 @@ public class MyPageController {
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
 			ArrayList<Board> list = mps.selectBoardList(pi,member_no);
+			ArrayList<Marking> mList = mps.selectLikeCount(member_no);
 			
 			String date[] = new String[10];
 			
@@ -232,18 +235,37 @@ public class MyPageController {
 				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 				
 				date[i] = transFormat.format(list.get(i).getBoard_date());
-				
-				
 			}
 			
 			hmap.put("list", list);
 			hmap.put("date",date);
 			hmap.put("pi",pi);
+			hmap.put("mList",mList);
 			
 			break;
 			
 		
-		case "WriteComments" : System.out.println("WriteComments");break;
+		case "WriteComments" : 
+			
+			int commentsListCount = mps.selectCommentsListCount(member_no);
+			PageInfo cPi = Pagination.getPageInfo(currentPage, commentsListCount);
+			
+			ArrayList<Comments> cList = mps.selectCommentList(cPi,member_no);
+			
+			String cDate[] = new String[10];
+			
+			for(int i = 0 ; i < cList.size(); i++) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				cDate[i] = transFormat.format(cList.get(i).getComments_date());
+			}
+			
+			hmap.put("cList", cList);
+			hmap.put("cDate",cDate);
+			hmap.put("pi",cPi);
+			
+			break;
+			
 		case "GoodPoint" : System.out.println("GoodPoint");break;
 		case "LikeThis" : System.out.println("LikeThis");break;
 		case "Point" : System.out.println("Point");break;
@@ -265,4 +287,10 @@ public class MyPageController {
 		return "myPage/growingChicks";
 	}
 	
+	//마이페이지 - 기업 화면으로 이동하는 메소드
+		@RequestMapping("companyView.my")
+		public String showCompanyPage() {
+			return "myPage/company";
+		}
+		
 }
