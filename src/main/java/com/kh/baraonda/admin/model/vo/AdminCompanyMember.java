@@ -2,7 +2,7 @@ package com.kh.baraonda.admin.model.vo;
 
 import java.sql.Date;
 
-public class adminCompanyMember {
+public class AdminCompanyMember {
 	
 	private int member_no;
 	private String id;
@@ -19,11 +19,11 @@ public class adminCompanyMember {
 	private Date enroll_date;
 	private int member_status;
 	
-	public adminCompanyMember() {
+	public AdminCompanyMember() {
 		
 	}
 
-	public adminCompanyMember(int member_no, String id, String name, String nick_name, String phone, String email,
+	public AdminCompanyMember(int member_no, String id, String name, String nick_name, String phone, String email,
 			String company_name, int company_no, String bank, String account, String ceo_name, String ceo_type,
 			Date enroll_date, int member_status) {
 		super();

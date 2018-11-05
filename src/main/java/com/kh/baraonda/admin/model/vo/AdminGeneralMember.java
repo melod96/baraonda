@@ -2,7 +2,7 @@ package com.kh.baraonda.admin.model.vo;
 
 import java.sql.Date;
 
-public class adminBlackMember implements java.io.Serializable{
+public class AdminGeneralMember implements java.io.Serializable{
 
 	private int member_no;
 	private String id;
@@ -11,15 +11,14 @@ public class adminBlackMember implements java.io.Serializable{
 	private String phone;
 	private String email;
 	private Date enroll_date;
-	private Date black_date;
-	private Date lift_date;
+	private int member_status;
 	
-	public adminBlackMember() {
+	public AdminGeneralMember() {
 		
 	}
 
-	public adminBlackMember(int member_no, String id, String name, String nick_name, String phone, String email,
-			Date enroll_date, Date black_date, Date lift_date) {
+	public AdminGeneralMember(int member_no, String id, String name, String nick_name, String phone, String email,
+			Date enroll_date, int member_status) {
 		super();
 		this.member_no = member_no;
 		this.id = id;
@@ -28,8 +27,7 @@ public class adminBlackMember implements java.io.Serializable{
 		this.phone = phone;
 		this.email = email;
 		this.enroll_date = enroll_date;
-		this.black_date = black_date;
-		this.lift_date = lift_date;
+		this.member_status = member_status;
 	}
 
 	public int getMember_no() {
@@ -88,29 +86,21 @@ public class adminBlackMember implements java.io.Serializable{
 		this.enroll_date = enroll_date;
 	}
 
-	public Date getBlack_date() {
-		return black_date;
+	public int getMember_status() {
+		return member_status;
 	}
 
-	public void setBlack_date(Date black_date) {
-		this.black_date = black_date;
-	}
-
-	public Date getLift_date() {
-		return lift_date;
-	}
-
-	public void setLift_date(Date lift_date) {
-		this.lift_date = lift_date;
+	public void setMember_status(int member_status) {
+		this.member_status = member_status;
 	}
 
 	@Override
 	public String toString() {
-		return "adminBlackMember [member_no=" + member_no + ", id=" + id + ", name=" + name + ", nick_name=" + nick_name
-				+ ", phone=" + phone + ", email=" + email + ", enroll_date=" + enroll_date + ", black_date="
-				+ black_date + ", lift_date=" + lift_date + "]";
+		return "adminGeneralMember [member_no=" + member_no + ", id=" + id + ", name=" + name + ", nick_name="
+				+ nick_name + ", phone=" + phone + ", email=" + email + ", enroll_date=" + enroll_date
+				+ ", member_status=" + member_status + "]";
 	}
-
+	
 	
 	
 }
