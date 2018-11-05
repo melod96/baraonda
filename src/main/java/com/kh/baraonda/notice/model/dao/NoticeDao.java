@@ -9,6 +9,7 @@ import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
+import com.kh.baraonda.notice.model.vo.NoticeMarking;
 
 public interface NoticeDao {
 
@@ -20,6 +21,9 @@ public interface NoticeDao {
 
 	//공지사항 상세
 	Notice selectNoticeOne(SqlSessionTemplate sqlSession, String notice_no);
+
+	//좋아요 개수
+	int selectHeart(SqlSessionTemplate sqlSession, String notice_no);
 
 	//댓글 수
 	int selectCommentListCount(SqlSessionTemplate sqlSession, String notice_no);
@@ -41,6 +45,41 @@ public interface NoticeDao {
 
 	//공지사항 delete
 	int deleteNotice(SqlSessionTemplate sqlSession, String notice_no);
+
+	//공지사항 update
+	int updateNotice(SqlSessionTemplate sqlSession, Notice n);
+
+	//댓글 insert
+	int insertComment(SqlSessionTemplate sqlSession, NoticeComment c);
+
+	//댓글 delete
+	int deleteComment(SqlSessionTemplate sqlSession, String comment_no);
+
+	//북마크 체크 여부
+	int checkBookmark(SqlSessionTemplate sqlSession, NoticeMarking nm);
+
+	//북마크 등록
+	int insertBookmark(SqlSessionTemplate sqlSession, NoticeMarking nm);
+
+	//북마크 삭제
+	int deleteBookmark(SqlSessionTemplate sqlSession, NoticeMarking nm);
+
+	//좋아요 체크 여부
+	int checkHeart(SqlSessionTemplate sqlSession, NoticeMarking nm);
+
+	//좋아요 등록
+	int insertHeart(SqlSessionTemplate sqlSession, NoticeMarking nm);
+
+	//좋아요 삭제
+	int deleteHeart(SqlSessionTemplate sqlSession, NoticeMarking nm);
+
+	//다음글 번호
+	int selectNextNo(SqlSessionTemplate sqlSession, String notice_no);
+
+	//이전글 번호
+	int selectBeforeNo(SqlSessionTemplate sqlSession, String notice_no);
+
+
 
 
 
