@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.service.AdminService;
+import com.kh.baraonda.admin.model.vo.AdminBlackMember;
+import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
@@ -34,9 +36,7 @@ public class AdminController {
 												@RequestParam(value="searchContent", required=false)String content, 
 												@RequestParam(value="option1", required=false)String option1) {
 		
-		Search search = new Search();
-		search.setContent(content);
-		search.setOption1(option1);
+		Search search = new Search(content, option1);
 		int currentPage = 1;
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
@@ -45,12 +45,14 @@ public class AdminController {
 		try {
 			int listCount = as.selectGeneralMemberCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
-			list = as.selectGeneralMemberList(info, search);
+			if(listCount != 0) {
+				list = as.selectGeneralMemberList(info, search);
+				mv.addObject("list", list);
+			}
 			
-			mv.setViewName("admin/memberAdmin/generalMemberAdminList");
-			mv.addObject("list", list);
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
+			mv.setViewName("admin/memberAdmin/generalMemberAdminList");
 		} catch (AdminException e){
 			mv.setViewName("common/errerPage");
 			mv.addObject("errorMessage", "GeneralMember 조회 실패!");
@@ -59,13 +61,57 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="goCompanyMemberAdminList.adm")
-	public String goCompanyMemberAdminList() {
-		return "admin/memberAdmin/companyMemberAdminList";
+	public ModelAndView goCompanyMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
+										@RequestParam(value="searchContent", required=false)String content) {
+		Search search = new Search(content);
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		ArrayList<AdminCompanyMember> list;
+		try {
+			int listCount = as.selectCompanyMemberCount(search);
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			if(listCount != 0) {
+				list = as.selectCompanyMemberList(info, search);
+				mv.addObject("list", list);
+			}
+			
+			mv.addObject("pi", info);
+			mv.addObject("search", search);
+			mv.setViewName("admin/memberAdmin/companyMemberAdminList");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "CompanyMember 조회 실패!");
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="goBlackMemberAdminList.adm")
-	public String goBlackMemberAdminList() {
-		return "admin/memberAdmin/blackMemberAdminList";
+	public ModelAndView goBlackMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
+										@RequestParam(value="searchContent", required=false)String content) {
+		Search search = new Search(content);
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		ArrayList<AdminBlackMember> list;
+		try {
+			int listCount = as.selectBlackMemberCount(search);
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			if(listCount != 0) {
+				list = as.selectBlackMemberList(info, search);
+				mv.addObject("list", list);
+			}
+			
+			mv.addObject("pi", info);
+			mv.addObject("search", search);
+			mv.setViewName("admin/memberAdmin/blackMemberAdminList");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "BlackMember 조회 실패!");
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="goQnAAdminList.adm")

@@ -79,20 +79,22 @@
                                         <th width="10%">상태</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                               		<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
-                               			<tr class="odd gradeX">
-	                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-	                                        <td>${ list.id }</td>
-	                                        <td>${ list.name }</td>
-	                                        <td>${ list.nick_name }</td>
-	                                        <td>${ list.phone }</td>
-	                                        <td>${ list.email }</td>
-	                                        <td>${ list.enroll_date }</td>
-	                                        <td>${ list.member_status }</td>
-                                    	</tr>
-                               		</c:forEach>
-                                </tbody>
+                                <c:if test="${ list != null }">
+	                                <tbody>
+	                               		<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
+	                               			<tr class="odd gradeX">
+		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
+		                                        <td>${ list.id }</td>
+		                                        <td>${ list.name }</td>
+		                                        <td>${ list.nick_name }</td>
+		                                        <td>${ list.phone }</td>
+		                                        <td>${ list.email }</td>
+		                                        <td>${ list.enroll_date }</td>
+		                                        <td>${ list.member_status }</td>
+	                                    	</tr>
+	                               		</c:forEach>
+	                                </tbody>
+                                </c:if>
                             </table>
 
                             <div class="paginate">
