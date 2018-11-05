@@ -54,6 +54,8 @@ div#editor {
 }
 #form_control {width: 150px; float:left;}
 #board_content{height: 470px; width: 700px; margin-top: 20px;}
+#froala-editor{{height: 470px; width: 700px; margin-top: 20px;}}
+.fr-box{border: 1px solid #dee2e6; margin-top: -16px;}
 .boardC{height: 500px; width: 730px; margin-top: -18px; border: 1px solid #dee2e6;}
 </style>
 
@@ -71,7 +73,7 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insert.do" method="post" name="form1">
+						<form action="insert.do" method="post" name="form1" enctype="multipart/form-data">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -97,19 +99,25 @@ div#editor {
 											<input id="board_title" name="board_title" type="text" class="form-control">
 											<input name="member_no" type="hidden" value= "${loginUser.member_no}">
 										</td>
-									<tr>
 									</tr>
 
 								</table>
-								</tr>
-								<!------------------------------ 글작성 공간 에디터 ------------------------------>
+								<!------------------------------ 글작성 공간 (froala editor) ------------------------------>
+								<textarea id="froala-editor" name="board_content"></textarea>
 								<!-- <div id="editor" >
 									<div id='edit' style="margin-top: 30px;">
 									</div>
 								</div> -->
-								<div class="boardC">
+								<!-- <div class="boardC">
 									<textarea id="board_content" name="board_content" rows="2" cols="40"></textarea>
-								</div>
+								</div> -->
+								
+								<!-- <div id="editor">
+									<div id='edit' style="margin-top: 30px;">
+										
+									</div>
+								</div> -->
+								
 							</div>
 						<input id="btnSave" type="submit" value="작성하기" class="btn btn-success">
 						<input type="reset" value="취소" class="btn btn-warning">
@@ -122,6 +130,11 @@ div#editor {
 			<br><br><br><br><br><br><br><br><br>
 
 	<script>
+		/* froala editor를 textarea에 적용 */
+	  	$(function() {
+	   		$('textarea#froala-editor').froalaEditor()
+	  	});
+		
 		$(function() {
 			$('#edit').froalaEditor().on(
 					'froalaEditor.image.beforeUpload',
@@ -142,6 +155,7 @@ div#editor {
 					})
 		});
 		
+		/* 전송 버튼 클릭시 해당 컨트롤러로 전송 */
 		$(document).ready(function(){
 			$("#btnSave").click(function(){
 				var title = $("#board_title").val();

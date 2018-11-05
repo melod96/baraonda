@@ -35,6 +35,10 @@
 			
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Comments" alias="Comments2"/>
 
+			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="TipsComment"/>
+
+			<typeAlias type="com.kh.baraonda.admin.model.vo.Search" alias="Search"/>
+
   		</typeAliases>
   		
   		<mappers>
@@ -53,6 +57,8 @@
 			<mapper resource="mappers/dictionary-mapper.xml"/>
 			
 			<mapper resource="mappers/notice-mapper.xml"/>
+			
+			<mapper resource="mappers/tips-mapper.xml"/>
 
 		</mappers>
   		

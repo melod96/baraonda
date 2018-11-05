@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Notice Detail</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
 <jsp:include page="../common/head.jsp"></jsp:include>
 <style>
 .boardName {
@@ -326,6 +326,9 @@
 .modifyB2:hover, .deleteB2:hover {
 	cursor: pointer;
 }
+.login:hover{
+	cursor:pointer;
+}
 </style>
 <body class="page1" id="top">
 	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
@@ -340,9 +343,11 @@
 					<!-- 게시판 명 -->
 					<h2 class="boardName">공지사항
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
-					<span class="modifyB">수정</span>
-					<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic1">
-					<span class="deleteB" onclick = "location.href='deleteNotice.nt?notice_no='+${ninfo.board_no}">삭제</span>
+					<c:if test="${sessionScope.loginUser.admin_right == 1}">
+						<span class="modifyB" onclick= "location.href='noticeUpdatePage.nt?notice_no='+${ninfo.board_no}">수정</span>
+						<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic1">
+						<span class="deleteB" onclick = "location.href='deleteNotice.nt?notice_no='+${ninfo.board_no}">삭제</span>
+					</c:if>
 					</h2>
 					
 					<!-- 게시글 제목 -->
@@ -354,7 +359,7 @@
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic">
+							<img src="${pageContext.request.contextPath}/resources/images/uploadFiles/${ninfo.profile }" class="proic">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
@@ -381,15 +386,23 @@
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
 					<div class="allmark">
-						<a href="#" onclick="#" class="bmark"> <span>북마크</span></a> 
-						<a href="#" onclick="#" class="heart"> <span>1</span></a>
-						<a href="#" onclick="#" class="report"><i class="fas fa-concierge-bell" style="font-size:30px;line-height:45px;color: #ec434a;"></i> <span>신고하기</span></a>
+					<c:if test="${! empty sessionScope.loginUser}">
+						<a href="bookmark.nt?notice_no=${ninfo.board_no }" class="bmark"> <span>북마크</span></a> 
+						<a href="heart.nt?notice_no=${ninfo.board_no }" class="heart"> <span>${hcount }</span></a>
+					</c:if>
+					<c:if test="${empty sessionScope.loginUser}">
+						<a class="bmark login"  data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a> 
+						<a class="heart login"  data-toggle="modal" data-target="#login-modal"> <span>${hcount }</span></a>
+					</c:if>
+						<!-- <a href="#" onclick="#" class="report"><i class="fas fa-concierge-bell" style="font-size:30px;line-height:45px;color: #ec434a;"></i> <span>신고하기</span></a> -->
 					</div>
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<div class="btn_ar">
-						<a href="noticeWrite.nt"> 
-							<img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
-						</a> 
+						<c:if test="${sessionScope.loginUser.admin_right == 1}">
+							<a href="noticeWrite.nt"> 
+								<img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
+							</a> 
+						</c:if>
 						<a href="noticelist.nt"> 
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 						</a>
@@ -401,13 +414,18 @@
 						</p>
 
 						<!------------------------------------ 댓글 작성 폼 ------------------------------------>
-						<div id="comment-write" class="comment-write"">
-							<form>
+						<div id="comment-write" class="comment-write">
+							<form action="insertComment.nt" method="post">
+								<input type="hidden" name = "board_no" value = "${ninfo.board_no }" />
 								<textarea id="comment" class="txtarea r5 placeholder"
 									placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~
-댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
-									onfocus="setFlag();"></textarea>
-								<button "type="submit" id="btncmm" class="btn btn-primary">입력</button>
+댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다." name = "comments_content"></textarea>
+								<c:if test="${! empty sessionScope.loginUser}">
+									<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
+								</c:if>
+								<c:if test="${empty sessionScope.loginUser}">
+									<button type="button" id="btncmm" class="btn btn-primary login"  data-toggle="modal" data-target="#login-modal">입력</button>
+								</c:if>
 							</form>
 						</div>
 					</div>
@@ -423,7 +441,7 @@
 								<li class="comment-list-li">
 									<div class="comment-pic">
 										<img class="commentPro" 
-											src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
+											src="${pageContext.request.contextPath}/resources/images/uploadFiles/${clist.profile }">
 									</div>
 									<div class="comment-txt">
 										<!--------------------------------- 댓글 작성자명 ---------------------------------->
@@ -432,9 +450,11 @@
 										<span>${clist.comments_date }</span>
 										<div class="remd">
 										<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-										<span class="modifyB2">수정</span>
-											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
-											<span class="deleteB2">삭제</span>
+										<!-- <span class="modifyB2">수정</span>
+											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2"> -->
+											<c:if test="${clist.member_no == sessionScope.loginUser.member_no}">
+												<span class="deleteB2" onclick = "location.href='deleteComment.nt?comment_no='+${clist.comments_no}+'&notice_no='+${ninfo.board_no}">삭제</span>
+											</c:if>
 										</div>
 										<!-- 댓글 내용 -->
 										<p id="ptxt">${clist.comments_content }</p>
@@ -460,24 +480,24 @@
 
 					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
 					<div class="balist1">
-						<a href="#" class="aflist1">다음글 ▲
-							<p class="aflist2">저녁추천좀요</p>
+						<a href="noticeDetail.nt?notice_no=${next.board_no }" class="aflist1">다음글 ▲
+							<p class="aflist2">${next.board_title }</p>
 						</a>
 						<div class="aflist3">
-							<p class="aflistp">17:30</p>
+							<p class="aflistp">${next.board_date }</p>
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
-							<p class="aflistp">조회수 10</p>
+							<p class="aflistp">조회수 ${next.board_count }</p>
 						</div>
 					</div>
 					<!------------------------------------ 이전글 제목, 날짜, 조회수 ------------------------------------>
 					<div>
-						<a href="#" class="belist1">이전글 ▼
-							<p class="belist2">오늘 먹은 점심임니다</p>
+						<a href="noticeDetail.nt?notice_no=${before.board_no }" class="belist1">이전글 ▼
+							<p class="belist2">${before.board_title }</p>
 						</a>
 						<div class="belist3">
-							<p class="aflistp">13:30</p>
+							<p class="aflistp">${before.board_date }</p>
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
-							<p class="aflistp">조회수 32</p>
+							<p class="aflistp">조회수 ${before.board_count }</p>
 						</div>
 					</div>
 				</div>

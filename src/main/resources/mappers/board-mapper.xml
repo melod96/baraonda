@@ -68,6 +68,13 @@
 		WHERE B.BOARD_NO = #{BOARD_NO}
 	</select>
 	
+	<!-- 댓글 작성 -->
+	<insert id="commentInsert">
+		INSERT INTO COMMENTS
+		VALUES(
+			SEQ_COMMENTS_NO.NEXTVAL, #{comment}, #{board_no}, #{member_no}, SYSDATE, DEFAULT
+			)
+	</insert>
 	<!-- 댓글 조회(작성자, 내용, 날짜) -->
 	<select id="commentList" resultType="java.util.HashMap" parameterType="java.util.List" resultMap="Comments">
 		SELECT C.COMMENTS_CONTENT, C.COMMENTS_DATE, M.NICK_NAME
@@ -99,7 +106,15 @@
 		WHERE B.BOARD_NO = #{BOARD_NO}
 	</select>
 	
+	<insert id="insertPhoto" parameterType="Files">
+		INSERT INTO FILES
+		VALUES(
+			SEQ_FILES_NO.NEXTVAL, #{f_reference_no},
+			 #{files_title}, #{files_change_title}, 
+			 #{files_type}, #{files_root}, 0
+		)
 	
+	</insert>
 	
 	
 	

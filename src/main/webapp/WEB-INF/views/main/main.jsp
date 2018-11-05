@@ -49,7 +49,7 @@
 }
 
 #nq_box{
-	background-color: #fff7fb;
+	background-color: #f1f0f1;
 	
 }
 
@@ -163,7 +163,7 @@ hr{
             <div class="maxheight">
               <img src="${pageContext.request.contextPath}/resources/images/main/커뮤아이콘.png" alt="">
               <div class="bann_title">Baraonda<br>Community</div>
-              <a href="#">more</a>
+              <a href="list.do?writing_type=1">more</a>
             </div>
           </div>
           <!-- 커뮤니티 이미지 -->
@@ -224,27 +224,13 @@ hr{
               <h2>Notice</h2>
               <br>
               <c:forEach var="n" items="${nlist}" end="4">
-	              <label class="noticeTitle"><img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img" style="margin-top:8px;">
-	              ${ n.board_title }<input type="hidden" value="${n.board_no }"></label>
+	              <label class="noticeTitle"><img src="${pageContext.request.contextPath}/resources/images/main/공지사항아이콘.png" id="notice_img" style="margin-top:5px;">
+	              <a onclick= "location.href='noticeDetail.nt?notice_no=' + ${n.board_no}" style="font-size:16px;" >${ n.board_title }</a><input type="hidden" value="${n.board_no }"></label>
 	              <br>
               </c:forEach>
               <a href="noticelist.nt" class="btn" id="nq_btn">more</a>
             </div>
               <!-- 공지사항 -->
-              
-              <script>
-     		 $(function(){
-			
-			$(".noticeTitle").mouseenter(function(){
-				$(this).css({ "cursor":"pointer"});
-			}).click(function(){
-				var num = $(this).children().val();
-			
-				location.href = "/baraonda/selectDetail.nb?num="+num;
-
-				});
-			});
-      </script>
               
               
               <!-- 고객문의 -->
@@ -252,7 +238,7 @@ hr{
               <h2>Question</h2>
               <br>
               <c:forEach var="q" items="${qlist}" end="4">
-              <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img" style="margin-top:8px;">
+              <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img" style="margin-top:5px;">
                ${ q.board_title }</label>
               <br>
               </c:forEach> 
@@ -274,7 +260,7 @@ hr{
        <div class="grid_4">
         <div class="gall_block">
           <div class="maxheight">
-            <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item"><img src="${pageContext.request.contextPath}${t.files_root}" alt=""></a>
+            <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item"><img src="${pageContext.request.contextPath}${t.files_root}" alt="" style="width:370px;height:230px;"></a>
             <div class="gall_bot">
             <div class="text1"><a href="#">${t.board_title } </a></div>
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
@@ -282,7 +268,7 @@ hr{
 	         	<img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">&nbsp;
 	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
-            <a href="#" class="btn">more</a></div>
+            <a onclick= "location.href='view.do?board_no=' + ${t.board_no}" class="btn">more</a></div>
           </div>
         </div>
       </div>
@@ -305,7 +291,7 @@ hr{
             <div>
           	 ${b.self_introduction }
             </div>
-            <a href="#" id="user"><span class="fa fa-chevron-right"></span>정보 보기</a>
+            <a id="user"><span class="fa fa-chevron-right"></span>정보 보기</a>
           </div>
           </c:forEach>
         </blockquote>

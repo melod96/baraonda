@@ -11,13 +11,14 @@ public class NoticeComment implements Serializable{
 	private Date comments_date;
 	private int comments_status;
 	private String nick_name;
+	private String profile;
 	
 	public NoticeComment() {
 		
 	}
 
 	public NoticeComment(int comments_no, String comments_content, int board_no, int member_no, Date comments_date,
-			int comments_status, String nick_name) {
+			int comments_status, String nick_name, String profile) {
 		super();
 		this.comments_no = comments_no;
 		this.comments_content = comments_content;
@@ -26,6 +27,7 @@ public class NoticeComment implements Serializable{
 		this.comments_date = comments_date;
 		this.comments_status = comments_status;
 		this.nick_name = nick_name;
+		this.profile = profile;
 	}
 
 	public int getComments_no() {
@@ -56,6 +58,10 @@ public class NoticeComment implements Serializable{
 		return nick_name;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+
 	public void setComments_no(int comments_no) {
 		this.comments_no = comments_no;
 	}
@@ -84,13 +90,16 @@ public class NoticeComment implements Serializable{
 		this.nick_name = nick_name;
 	}
 
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeComment [comments_no=" + comments_no + ", comments_content=" + comments_content + ", board_no="
 				+ board_no + ", member_no=" + member_no + ", comments_date=" + comments_date + ", comments_status="
-				+ comments_status + ", nick_name=" + nick_name + "]";
+				+ comments_status + ", nick_name=" + nick_name + ", profile=" + profile + "]";
 	}
 
-	
 	
 }
