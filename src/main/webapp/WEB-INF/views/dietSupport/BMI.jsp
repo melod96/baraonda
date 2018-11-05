@@ -106,7 +106,8 @@
 				</table>
 		</div>
 		<p class="fbold">
-			<i class="fas fa-exclamation-circle" style="font-size:20px;"></i>&nbsp;비만도 측정(BMI) 이란?
+			<i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size:20px;"></i>
+			&nbsp;비만도 측정(BMI) 이란?
 			<br>
 			<span class="p-gray">나이, 신장(cm)과 체중(kg)만으로 비만을 판정하는 비만 지수</span>
 		</p>

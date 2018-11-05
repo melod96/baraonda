@@ -4,12 +4,12 @@
 <style>
 	.menu1{display:inline-block;}
 	.menu1:hover{color:white;cursor:pointer;}
-	*{font-family:'Chungchunsidae' !important;}
+	*{font-family:'Chungchunsidae'}
 </style>
 
 <jsp:include page="loginModal.jsp"/>
 <jsp:include page="joinModal.jsp"/>
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="head.jsp"/>
 
 
     <header>

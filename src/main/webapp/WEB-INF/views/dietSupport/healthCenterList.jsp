@@ -73,7 +73,7 @@
 					style="width: 732px; height: 180px;">
 				<h2 class="title">인바디 측정 가능 보건소 찾기</h2>
 				<p>
-					<i class="fas fa-exclamation-circle" style="font-size: 20px;"></i>&nbsp;
+					<i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size:20px;"></i>&nbsp;
 					지역별 인바디 측정 가능 보건소를 찾아보세요.
 				</p>
 				<div class="tab3-wrap">

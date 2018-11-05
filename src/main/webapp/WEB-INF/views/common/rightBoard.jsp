@@ -70,7 +70,9 @@
 			<tr>
 				<th>
 					공지사항
-					<a href="noticelist.nt" style="float:right; background:black;color:white; width:20px;">+</a>	
+					<a href="noticelist.nt" >
+						<i class="fa fa-plus-square" aria-hidden="true" style="float:right; font-size:25px;"></i>
+					</a>	
 				</th>
 			</tr>
 			<tr>

@@ -180,9 +180,9 @@
 							[이전] &nbsp;
 						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="blistBack" value="searchHealthCenter.ds">
+							<c:url var="blistBack" value="searchFoodDictionary.dt">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
-								<c:param name="state" value="${search}"/>
+								<c:param name="search" value="${search}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -192,9 +192,9 @@
 								<font color="red" size="4"><b>[${ p }]</b></font>
 							</c:if>
 							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="blistCheck" value="searchHealthCenter.ds">
+								<c:url var="blistCheck" value="searchFoodDictionary.dt">
 									<c:param name="currentPage" value="${ p }"/>
-									<c:param name="state" value="${search}"/>
+									<c:param name="search" value="${search}"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
@@ -206,9 +206,9 @@
 							&nbsp; [다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="searchHealthCenter.ds">
+							<c:url var="blistEnd" value="searchFoodDictionary.dt">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-								<c:param name="state" value="${search}"/>
+								<c:param name="search" value="${search}"/>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
