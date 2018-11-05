@@ -21,6 +21,8 @@ public interface BoardDao {
 	
 	//게시글 작성
 	public void create(Board b) throws BoardException;
+	//게시글 update
+	public void updateBoard(Board b) throws BoardException;
 	
 	//게시글 조화수 증가
 	public void increaseViewCnt(int board_no) throws BoardException;

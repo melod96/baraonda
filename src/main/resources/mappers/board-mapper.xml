@@ -25,13 +25,15 @@
  	   <result property="NICK_NAME" column="NICK_NAME" />
 	</resultMap>
 	
-	<resultMap id="boardDetail" type="com.kh.baraonda.board.model.vo.BoardDetail" >
+	<resultMap id="boardDetail" type="HashMap" >
  	   <result property="BOARD_CONTENT" column="BOARD_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
  	   <result property="BOARD_TITLE" column="BOARD_TITLE" />
  	   <result property="BOARD_DATE" column="BOARD_DATE" />
  	   <result property="BOARD_COUNT" column="BOARD_COUNT" />
  	   <result property="NICK_NAME" column="NICK_NAME" />
  	   <result property="COMMENTS_COUNT" column="COMMENTS_COUNT" />
+ 	   <result property="BOARD_NO" column="BOARD_NO" />
+ 	   
 	</resultMap>
 	
  
@@ -57,8 +59,8 @@
 	</update>
 	
 	<!-- 게시글 상세보기(작성자, 제목, 내용, 날짜, 조회수, 댓글수) -->
-	<select id="detail" resultType="java.util.HashMap" parameterType = "int">
-		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME,
+	<select id="Board.detail" resultType="java.util.HashMap" parameterType = "int" resultMap="boardDetail">
+		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME, BOARD_NO,
              (SELECT COUNT(*)
               FROM COMMENTS C
               JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
@@ -93,6 +95,9 @@
 			)
 		<!-- insert into board values(seq_board_no.nextval, 1, 1, '꿀팁-칼럼입니다.', '꿀팁이에요!', 1, sysdate, sysdate, default, default); -->
 	</insert>
+	<update id="update">
+		UPDATE BOARD SET WRITING_TYPE = #{writing_type}, BOARD_TITLE=#{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
+	</update>
 	
 	<!--test-->
 	<select id="detailTest" resultMap="boardResultSet" parameterType = "int">
@@ -115,7 +120,6 @@
 		)
 	
 	</insert>
-	
 	
 	
 	

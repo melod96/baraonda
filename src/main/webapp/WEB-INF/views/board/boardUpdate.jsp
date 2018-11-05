@@ -76,7 +76,8 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insert.do" method="post" name="form1" enctype="multipart/form-data">
+						<form action="updateBoard.do" method="post" name="form1" enctype="multipart/form-data">
+						<input type="hidden" name = "board_no" value = "${detail.board_no }" />
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -97,16 +98,17 @@ div#editor {
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
-										<td id="title">제목</td>
+										<td>제목</td>
+										<td><input type="text" class="form-control"
+											name="board_title" value= "${detail.BOARD_TITLE}"></td>
 										<td>
-											<input id="board_title" name="board_title" type="text" class="form-control">
 											<input name="member_no" type="hidden" value= "${loginUser.member_no}">
 										</td>
 									</tr>
 
 								</table>
 								<!------------------------------ 글작성 공간 (froala editor) ------------------------------>
-								<textarea id="edit" name="board_content"></textarea>
+								<textarea id="edit" name="board_content">${detail.BOARD_CONTENT}</textarea>
 								<!-- <div id="editor" >
 									<div id='edit' style="margin-top: 30px;">
 									</div>

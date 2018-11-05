@@ -21,8 +21,11 @@ public interface BoardService {
 	
 	//게시글 작성
 	public void create(Board b) throws BoardException;
+	//게시글 update
+	public void updateBoard(Board b) throws BoardException;
 	
-	//게시글 조화수 증가
+	
+	//게시글 조회수 증가
 	public void increaseViewCnt(int board_no, HttpSession session) throws BoardException;
 	
 	//게시글 상세 보기
