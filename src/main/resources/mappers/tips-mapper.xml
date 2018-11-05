@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Tips">
+
+	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="tipsResultSet2">
+	
+		<id property="board_no" column="BOARD_NO"/>
+		<result property="board_type" column="BOARD_TYPE" />
+		<result property="writing_type" column="WRITING_TYPE" />
+		<result property="board_title" column="BOARD_TITLE" />
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO" />
+		<result property="board_date" column="BOARD_DATE" />
+		<result property="modify_date" column="MODIFY_DATE" />
+		<result property="board_status" column="BOARD_STATUS" />
+		<result property="board_count" column="BOARD_COUNT" />
+		<result property="board_good" column="BOARD_GOOD" />
+		
+		<result property="nick_name" column="NICK_NAME" />
+		<result property="marking_type" column="MARKING_TYPE" />
+		
+		<result property="files_no" column="FILES_NO" />
+		<result property="f_reference_no" column="F_REFERENCE_NO" />
+		<result property="files_title" column="FILES_TITLE" />
+		<result property="files_change_title" column="FILES_CHANGE_TITLE" />
+		<result property="files_type" column="FILES_TYPE" />
+		<result property="files_root" column="FILES_ROOT" />
+		<result property="files_secession" column="FILES_SECESSION" />
+		<result property="profile_root" column="PROFILE_ROOT" />
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.tips.model.vo.TipsComment" id="tipsCommentResultSet">
+		<id property="comments_no" column="COMMENTS_NO"/>
+		<result property="comments_content" column="COMMENTS_CONTENT"/>
+		<result property="board_no" column="BOARD_NO"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="comments_date" column="COMMENTS_DATE" />
+		<result property="comments_status" column="COMMENTS_STATUS"/>
+		<result property="nick_name" column="NICK_NAME" />
+	</resultMap>
+ 
+
+ 	<!-- 게시글 목록 조회 -->
+ 	<!-- WRITING_TYPE값만 사용해서 출력 -->
+	<select id="listAll" resultType="java.util.HashMap" parameterType="java.util.List">
+		SELECT *
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+		WHERE B.WRITING_TYPE = #{WRITING_TYPE}
+		ORDER BY B.BOARD_NO DESC
+	</select>
+
+	<select id="selectTipsListCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_TYPE = 1 AND BOARD_STATUS = 0
+	</select>
+	
+	<!-- 꿀팁 목록 조회 -->
+	<select id="selectTipsList" resultMap="tipsResultSet2">
+		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
+        FROM (     
+            select b.board_title, b.board_date, b.board_count, count(m.board_no) board_good, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join marking m on (b.board_no = m.board_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
+            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            order by b.board_no desc
+            ) T
+        JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
+        AND FF.FILES_SECESSION = 0
+        AND FF.FILES_TYPE = 1
+	</select>
+	
+	<!-- 꿀팁 상세 -->
+	<select id="selectTipsOne" resultMap="tipsResultSet2">
+		SELECT * FROM BOARD WHERE BOARD_NO = #{board_no}
+	</select>
+	
+	<!-- 꿀팁 코멘트 수 -->
+	<select id="selectCommentListCount" resultType="_int">
+		SELECT COUNT(*) FROM COMMENTS WHERE BOARD_NO = #{board_no} AND COMMENTS_STATUS = 0
+	</select>
+	
+	<!-- 꿀팁 코멘트 -->
+	<select id="selectComment" resultMap="tipsCommentResultSet">
+		SELECT C.COMMENTS_NO, C.COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME FROM COMMENTS C
+		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
+		WHERE BOARD_NO = #{board_no} AND COMMENTS_STATUS = 0 ORDER BY COMMENTS_NO DESC
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="updateTipsCount">
+		UPDATE BOARD SET BOARD_COUNT = BOARD_COUNT + 1 WHERE BOARD_NO = #{board_no}
+	</update>
+	
+	<!-- 검색수 -->
+	<select id="searchTipsCount" resultType = "_int">
+		SELECT COUNT(*) FROM BOARD B
+		JOIN MEMBER M ON (B.MEMBER_NO = M.MEMBER_NO)
+		WHERE B.BOARD_STATUS = 0
+		<choose>
+			<when test="writer != null">
+				AND M.NICK_NAME LIKE '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				AND BOARD_TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<otherwise>
+				AND BOARD_CONTENT LIKE '%' || #{content} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 검색목록 -->
+	<select id="searchTipsList" resultMap="tipsResultSet2">
+		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
+        FROM (     
+            select b.board_title, b.board_date, b.board_count, count(m.board_no) board_good, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join marking m on (b.board_no = m.board_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
+            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            ) T
+        JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
+        AND FF.FILES_SECESSION = 0
+        AND FF.FILES_TYPE = 1
+		<choose>
+			<when test="writer != null">
+				AND M.NICK_NAME LIKE '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				AND BOARD_TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<otherwise>
+				AND BOARD_CONTENT LIKE '%' || #{content} || '%'
+			</otherwise>
+		</choose>
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+	
+	
+	
+</mapper> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

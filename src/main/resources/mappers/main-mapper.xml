@@ -65,7 +65,7 @@
 	<result property="marking_type" column="MARKING_TYPE"/>
 	</resultMap>
 	
-	<!-- 다이어트꿀팁 조회용 -->
+	<!-- 비포에프터 조회용 -->
  	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="tipsResultSet">
 		<result property="board_type" column="BOARD_TYPE"/>
 		<result property="writing_type" column="WRITING_TYPE"/>
@@ -93,11 +93,11 @@
 	
 	<!-- 공지사항 목록 조회용 쿼리문 -->
 	<select id="selectNotice" resultMap="noticeResultSet" parameterType="Notice">
-		SELECT RANK, BOARD_TITLE
+		SELECT RANK, BOARD_TITLE, board_no
 		
 		FROM(
 				SELECT RANK() OVER (ORDER BY BOARD_DATE DESC) AS RANK, 
-				BOARD_TITLE FROM BOARD WHERE BOARD_TYPE = 6 AND BOARD_STATUS = 0
+				BOARD_TITLE, board_no FROM BOARD WHERE BOARD_TYPE = 6 AND BOARD_STATUS = 0
 			)
 			
 		WHERE RANK BETWEEN 1 AND 5
@@ -138,7 +138,7 @@
 		order by m.board_no
 		</select>
 		
-	<!-- 다이어트꿀팁 목록 조회용 쿼리문 -->
+	<!-- 비포에프터 목록 조회용 쿼리문 -->
 	<select id="selectTips" resultMap="tipsResultSet" parameterType="Tips">
 		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
         FROM (     
@@ -148,9 +148,9 @@
             join member me on (b.member_no = me.member_no)
             join marking m on (b.board_no = m.board_no)
             join files f on (b.board_no = f.f_reference_no)
-            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4
+            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and WRITING_TYPE = 11
             group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
-            order by b.board_date DESC
+            order by b.board_date desc
             ) T
         JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
         AND FF.FILES_SECESSION = 0
@@ -160,10 +160,10 @@
 		
 		<!-- 베스트 다이어터 조회용 쿼리문 -->
 	<select id="selectBest" resultMap="rankingResultSet" parameterType="Ranking">
-		SELECT RANK, NICK_NAME, files_root, SELF_INTRODUCTION
+		SELECT RANK, NICK_NAME, files_root, SELF_INTRODUCTION, member_no
 		FROM(
 				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK,
-				NICK_NAME, files_root, self_introduction FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
+				NICK_NAME, files_root, self_introduction, member_no FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
                 join files f on (m.member_no = f.f_reference_no)
                 WHERE MEMBER_STATUS = 0 and files_type = 1
 			) 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,181 +141,122 @@ margin-top: -10px;
 			 <a id="tipsBtn">식단</a>&nbsp;|&nbsp;<a id="tipsBtn">운동</a>&nbsp;|&nbsp;<a id="tipsBtn">칼럼</a>
 		</div>
 		
-		
-		<div class="list">
-		<div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig1.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig1.jpg" alt=""></a>
-            <div class="gall_bot">
-            
-            <div class="boxbox">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-            <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
+		<c:forEach items="${tipslist}" var ="t" end="8">
+	<div class="list">
       <div class="grid_4" id="tips">
         <div class="gall_block">
           <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig3.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig3.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item" ><img src="${pageContext.request.contextPath}${t.files_root}" alt="" style="width:300px; height:170px;"></a>
             <div class="gall_bot">
             <div class="boxbox">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-            <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig8.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig8.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="boxbox">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
+           <div class="text1"><a>${t.board_title }</a></div>
            <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
+	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
 	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
+	         <img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">
+	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
-            <a href="#" class="btn">more</a></div>
+            <a onclick= "location.href='tipsDetail.tp?board_no='+${t.board_no}" class="btn">more</a></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig5.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig5.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="boxbox">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-           <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	        </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig6.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig6.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="boxbox">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-            <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig7.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig7.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="boxbox">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-           <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
+</div> 
+      </c:forEach>
       
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig1.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig1.jpg" alt=""></a>
-            <div class="gall_bot">
-            
-            <div class="boxbox">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-            <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig3.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig3.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="boxbox">
-            <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-            <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="grid_4" id="tips">
-        <div class="gall_block">
-          <div class="maxheight">
-            <a href="${pageContext.request.contextPath}/resources/images/bbig8.jpg" class="gall_item"><img src="${pageContext.request.contextPath}/resources/images/bbig8.jpg" alt=""></a>
-            <div class="gall_bot">
-            <div class="boxbox">
-           <div class="text1"><a href="#">수지 다이어트 컬럼 </a></div>
-           <div id="fonts">
-	         <label>2018-10-23</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">0</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">6</label>
-	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/profile4.png">
-	         <a id="ba_font">태평양이참치</a>
-	         <br>
-            <a href="#" class="btn">more</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
 
 				<div class="clear sep__1"></div>
+				
+				
 				<div class="paginate">
+                       <!-- <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
+                        <a href="#" class="btn-prev" title="이전"><em class="blind">목록에서 이전 페이지 이동</em></a>
+                        <span class="paging-numbers">
+                            <a href="#">1<span class="blind">페이지로 이동</span></a>
+                            <a href="#" class="on">2<span class="blind">페이지로 이동</span></a>
+                            <a href="#">3<span class="blind">페이지로 이동</span></a>
+                            <a href="#">4<span class="blind">페이지로 이동</span></a>
+                            <a href="#">5<span class="blind">페이지로 이동</span></a>
+                        </span>
+                        <a href="#" class="btn-next" title="다음"><span class="spr"><em class="blind">목록에서 다음 페이지 이동</em></span></a>
+                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a> -->
+					<c:if test="${empty search }">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="searchTips.tp">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="searchTips.tp">
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="searchTips.tp">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
+					<c:if test="${! empty search}">
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="searchTips.tp">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="search" value="${search}"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="searchTips.tp">
+									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="search" value="${search}"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="searchTips.tp">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="search" value="${search}"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+					</c:if>
+				</div>
+				<!-- <div class="paginate">
                         <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
                         <a href="#" class="btn-prev" title="이전"><em class="blind">목록에서 이전 페이지 이동</em></a>
                         <span class="paging-numbers">
@@ -326,27 +268,47 @@ margin-top: -10px;
                         </span>
                         <a href="#" class="btn-next" title="다음"><span class="spr"><em class="blind">목록에서 다음 페이지 이동</em></span></a>
                         <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a>
-				</div>
+				</div> -->
 				
 				<br>
 
-				<form name="search" method="post" class="searchForm">
+
+	<form action="searchTips.tp" method="get">
+			<div class="search">
+				<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;" name = "searchtype">
+					<option value = "title">제목</option>
+					<option value = "content">내용</option>
+					<option value = "writer">작성자</option>
+				</select>
+				<div class="ui action input">
+					<input type="text" placeholder="Search..." name = "search">
+					<button class="ui icon button" type="submit">
+						<img src="${pageContext.request.contextPath}/resources/images/dictionaryImg/Search.png" style="width:20px; height:20px;"/>
+					</button>
+				</div>
+	<!-- 			<button type="button" class="btn btn-primary" style="float:right; margin:0;" onclick = "location.href='noticeWrite.nt'">작성하기</button> -->
+			</div>
+		</form>
+			<!-- 	<form action="searchTips.tp" method="get">
 				<div id="searchForm">
 						<table>
 							<tr>
-								<td><select class="form-control input-xshort" id="select">
-										<option>제목</option>
-										<option>내용</option>
-										<option>작성자</option>
+								<td><select class="form-control input-xshort" id="select" name = "searchtype">
+										<option value = "title">제목</option>
+										<option value = "content">내용</option>
+										<option value = "writer">작성자</option>
 								</select></td>
-								<td><input id="boardInput" name=""
+								<td>
+								
+								<input id="boardInput" name=""
 									class="form-control input-short" type="text" placeholder="">
+									
 								</td>
 								<td><button id="boardBtn" type="submit" class="btn btn-primary">검색</button></td>
 							</tr>
 						</table>
 						</div>
-					</form>
+					</form> -->
 					<br>
 					<br>
 					
