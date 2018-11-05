@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import com.kh.baraonda.board.model.dao.BoardDao;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.vo.Files;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -25,8 +28,8 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 전체 목록 조회
 	@Override
-	public List<HashMap<String, Object>> listAll(int writing_type) throws BoardException {
-		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession, writing_type) ;
+	public List<HashMap<String, Object>> listAll(int writing_type, PageInfo info) throws BoardException {
+		List<HashMap<String, Object>> list = boardDao.listAll(sqlSession, writing_type, info) ;
 		
 		return list;
 	}
@@ -57,7 +60,7 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 	
-	//게시글 조화수 증가
+	//게시글 조회수 증가
 	@Override
 	public void increaseViewCnt(int board_no, HttpSession session) throws BoardException{
 		long update_time = 0;
@@ -89,12 +92,24 @@ public class BoardServiceImpl implements BoardService{
 		return detail;
 	}
 	
+	//댓글 작성
+	@Override
+	public void comment(Comments c) throws BoardException {
+		boardDao.comment(c);
+	}
 	//댓글 조회
 	@Override
 	public List<HashMap<String, Object>> commentList(int board_no) throws BoardException {
 		List<HashMap<String, Object>> commentList = boardDao.commentList(sqlSession, board_no) ;
 		
 		return commentList;
+	}
+	
+	//게시글 작성시 사진 업로드
+	@Override
+	public void insertPhoto(Files file)  throws BoardException{
+		boardDao.insertPhoto(sqlSession, file);
+		
 	}
 
 }

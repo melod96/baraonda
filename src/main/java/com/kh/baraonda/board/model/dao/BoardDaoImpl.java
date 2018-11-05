@@ -7,8 +7,12 @@ import javax.inject.Inject;
 
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
+import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.vo.Files;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,11 +24,15 @@ public class BoardDaoImpl implements BoardDao{
 
 	//게시글 전체 목록 조회
 	@Override
-	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession, int writing_type) throws BoardException  {
+	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession, int writing_type,  PageInfo info) throws BoardException  {
 		try {
+			int offset = (info.getCurrentPage() -1) * info.getLimit();
+			
+			RowBounds rowBounds = new RowBounds(offset, info.getLimit());
+			
 			//HashMap<Key, value>
-			List<HashMap<String, Object>> list = sqlSession.selectList("Board.listAll", writing_type);
-			System.out.println("전 체목록 조회 : " + list);
+			List<HashMap<String, Object>> list = sqlSession.selectList("Board.listAll", writing_type, rowBounds);
+			System.out.println("전체목록 조회 : " + list);
 			if(list == null) {
 				throw new BoardException("리스트 값 널");
 			}
@@ -78,6 +86,12 @@ public class BoardDaoImpl implements BoardDao{
 		}
 	}
 	
+	//댓글 작성
+	@Override
+	public void comment(Comments c) throws BoardException {
+		SqlSession.insert("Board.commentInsert", c);
+		
+	}
 	//댓글 조회
 	@Override
 	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no) throws BoardException {
@@ -96,6 +110,13 @@ public class BoardDaoImpl implements BoardDao{
 		}catch(Exception e) {
 			throw new BoardException(e.getMessage());
 		}
+	}
+	
+	//게시글 작성시 사진 업로드
+	@Override
+	public void insertPhoto(SqlSessionTemplate sqlSession, Files file) throws BoardException{
+		sqlSession.insert("board.insertPhoto", file);
+		
 	}
 
 }
