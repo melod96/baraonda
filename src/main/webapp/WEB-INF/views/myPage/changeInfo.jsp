@@ -6,6 +6,10 @@
 <head>
 
 	<style>
+		/*헤더 버튼 구역*/
+		#changeInfo{background:#B7E6A8;color:white;}
+	
+	
 		/*내 프로필 구역*/
 		.mainFrame{width:800px;height:auto;margin-right:auto;margin-left:auto;margin-top:0px;margin-bottom:150px;}
 		.profileFrame{
@@ -60,7 +64,8 @@
 		<div class="mainFrame">
 			<div class="profileFrame">
 				<div class="profileImg">
-					<img id="photo" src="${pageContext.request.contextPath}/resources/images/uploadFiles/${file.files_change_title}">
+					<img id="photo" src="${pageContext.request.contextPath}/resources/images/uploadFiles/${file.files_change_title}"
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/myPageImages/level.png'">
 					<form action="uploadPhoto.my" method="post"  enctype="multipart/form-data">
 						<div class="Position1">
 							<button type="button" id="uploadBtn" class="btn btn-default" onclick="uploadPhoto();">사진 불러오기</button>

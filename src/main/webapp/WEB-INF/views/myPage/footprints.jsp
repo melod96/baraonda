@@ -5,7 +5,12 @@
 <html>
 <head>
 	
+		<jsp:include page="../common/header.jsp"/>
+		<jsp:include page="../common/myHeader.jsp"/>
 	<style type="text/css">
+	/*헤더 옵션*/
+		#footprints{background:#B7E6A8;color:white;}
+	
 	/*첫 번째 div*/
 		.firstDiv{margin-right:auto;margin-left:auto;margin-top:20px;margin-bottom:50px;width:800px;height:350px;border-radius:5px;border:3px solid #ddd;}
 		
@@ -23,7 +28,7 @@
 	/*두 번째 div*/
 		.secondDiv{margin-right:auto;margin-left:auto;margin-top:20px;width:800px;margin-bottom:100px;height:auto;}
 		.pickTable{margin-right:auto;margin-left:auto;}
-		.pickBtn{width:200px;height:30px;margin:5px;margin-top:12px;}
+		.pickBtn{width:150px;height:30px;margin:5px;margin-top:12px;}
 		
 	/*세 번째 div*/
 		.thirdDiv{margin-right:auto;margin-left:auto;width:800px;margin-bottom:100px;height:350px;margin-top:-80px;
@@ -36,6 +41,7 @@
 		/*페이징 버튼*/
 		.pagingArea{margin-right:auto;margin-left:auto;text-align:center;margin-top:15px;margin-bottom:20px;}
 		.paginate>button{background:white !important;}		
+		
 	</style>
 
 	
@@ -44,8 +50,6 @@
 </head>
 <body>
 
-		<jsp:include page="../common/header.jsp"/>
-		<jsp:include page="../common/myHeader.jsp"/>
 
 
 		<div>
@@ -94,13 +98,9 @@
 					<tr>
 						<td><button name="WriteBoard" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">작성한 게시물</button></td>
 						<td><button name="WriteComments" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">작성한 댓글</button></td>
-						<td><button name="GoodPoint" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">받은 추천</button></td>
 						<td><button name="LikeThis" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">북마크</button></td>
 						<td><button name="Point" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">경험치</button></td>
-					</tr>
-					
-					<tr>
-						<td><button name="ChangeGoods" type="button" class="btn btn-default pickBtn" onclick="ViewList(name)">교환한 상품</button></td>
+						<td><button name="ChangeGoods" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">교환한 상품</button></td>
 					</tr>
 					
 				</table>
@@ -128,14 +128,15 @@
 			var member_no = ${loginUser.member_no};
 			var $paginate = $(".paginate");
 			
-			$.ajax({
+			 $.ajax({
 				url:"footList.my",
 				type:"post",
 				data:{member_no:member_no, name:name, currentPage:currentPage},
 				success:function(data){
 					
+					switch(name){
 					//--게시판 조회--
-					if(name="WriteBoard"){
+					case 'WriteBoard' :
 						var $viewBody = $(".viewBody");
 						$viewBody.append(
 								"<tr class='hTr'>" +
@@ -149,44 +150,98 @@
 							
 					 	for(var key in data["list"]){
 							var $tr = $("<tr class='hTr'>");
+							var likeCount = 0;
 							
+							for(var mKey in data["mList"]){
+								if(data["list"][key].board_no == data["mList"][mKey].board_no){
+									likeCount = data["mList"][mKey].marking_count;
+								}
+							}							
 							
+							var board_type = "";
+							
+							switch(data["list"][key].board_type){
+							case 1 : board_type = "다이어트 꿀팁";
+							break;
+							case 2 : board_type = "칼로리 사전";
+							break;
+							case 3 : board_type = "홈 트레이닝";
+							break;
+							case 4 : board_type = "커뮤니티";
+							break;
+							case 5 : board_type = "바다 체험단";
+							break;
+							case 6 : board_type = "공지사항";
+							break;
+							case 7 : board_type = "고객센터";
+							break;
+							case 8 : board_type = "바다 서비스";
+							break;
+							default : board_type = "게시판";
+							}
 							
 							$viewBody.append(
 								"<tr class='hTr'>" +
-									"<td>"+data["list"][key].board_type + "</td>"+
+									"<td>"+board_type + "</td>"+
 									"<td colspan='2'>"+data["list"][key].board_title+"</td>"+
-									"<td>"+55+"</td>"+
+									"<td>"+likeCount+"</td>"+
 									"<td>"+data["list"][key].board_count+"</td>"+
 									"<td>"+data["date"][key]+"</td>"+
 								"</tr>"
 							); 
-						};
-					};
-					//--게시판조회 끝--
-					
-					//--댓글 조회--
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+						}
+					 	break;
+					 //--게시판 조회 끝--
+					 
+					 
+					 //--댓글 조회--	
+					case 'WriteComments' :
+						var $viewBody = $(".viewBody");
+						$viewBody.append(
+								"<tr class='hTr'>" +
+									"<th>게시판</th>"+
+									"<th>게시글 제목</th>"+
+									"<th colspan='2'>댓글 내용</th>"+
+									"<th>작성일</th>"+
+								"</tr>"
+							); 
+							
+					 	for(var key in data["cList"]){
+							var $tr = $("<tr class='hTr'>");
+							
+							var board_type = "";
+							
+							switch(data["cList"][key].board_type){
+							case 1 : board_type = "다이어트 꿀팁";
+							break;
+							case 2 : board_type = "칼로리 사전";
+							break;
+							case 3 : board_type = "홈 트레이닝";
+							break;
+							case 4 : board_type = "커뮤니티";
+							break;
+							case 5 : board_type = "바다 체험단";
+							break;
+							case 6 : board_type = "공지사항";
+							break;
+							case 7 : board_type = "고객센터";
+							break;
+							case 8 : board_type = "바다 서비스";
+							break;
+							default : board_type = "게시판";
+							}						
+							
+							$viewBody.append(
+								"<tr class='hTr'>" +
+									"<td>"+board_type + "</td>"+
+									"<td>"+data["cList"][key].board_title+"</td>"+
+									"<td colspan='2'>"+data["cList"][key].comments_content+"</td>"+
+									"<td>"+data["cDate"][key]+"</td>"+
+								"</tr>"
+							); 
+						}
+					}
+					//--댓글조회 끝--
 					
 					//--페이징 버튼--
 				 	if(data["pi"].currentPage == 1){
@@ -212,7 +267,7 @@
 				 		$paginate.append("<button name='"+name+"' disabled class='btn-next' value="+(data["pi"].currentPage+1)+" onclick='ViewList(name,value)'>></button>");
 				 		$paginate.append("<button name='"+name+"' disabled class='btn-next' value="+(data["pi"].endPage)+" onclick='ViewList(name,value)'>>></button>");
 				 	} 
-		 		
+		 		 
 				},
 				error:function(){
 					console.log("에러 발생!");

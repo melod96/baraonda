@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
+import com.kh.baraonda.myPage.model.vo.Marking;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 public interface MyPageDao {
@@ -26,6 +28,13 @@ public interface MyPageDao {
 	int selectListCount(SqlSessionTemplate sqlSession, int id);
 
 	ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, int member_no);
+
+	ArrayList<Marking> selectLikeCount(SqlSessionTemplate sqlSession, int member_no);
+
+	int selectCommentsListCount(SqlSessionTemplate sqlSession, int member_no);
+
+	ArrayList<Comments> selectCommentList(SqlSessionTemplate sqlSession, PageInfo cPi, int member_no);
+
 
 
 

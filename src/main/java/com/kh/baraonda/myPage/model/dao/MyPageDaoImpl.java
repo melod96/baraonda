@@ -2,17 +2,17 @@ package com.kh.baraonda.myPage.model.dao;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.javassist.expr.Instanceof;
 import org.apache.ibatis.session.RowBounds;
-import org.apache.tools.ant.types.resources.selectors.InstanceOf;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
+import com.kh.baraonda.myPage.model.vo.Marking;
 import com.kh.baraonda.myPage.model.vo.Point;
 
 @Repository
@@ -60,6 +60,27 @@ public class MyPageDaoImpl implements MyPageDao{
 		
 		return (ArrayList)sqlSession.selectList("MyPage.selectBoardList",member_no,rowBounds);
 	}
+
+	@Override
+	public ArrayList<Marking> selectLikeCount(SqlSessionTemplate sqlSession, int member_no) {
+		return (ArrayList)sqlSession.selectList("MyPage.selectLikeCount",member_no);
+	}
+
+	@Override
+	public int selectCommentsListCount(SqlSessionTemplate sqlSession, int member_no) {
+		return sqlSession.selectOne("MyPage.selectCommentsListCount",member_no);
+	}
+
+	@Override
+	public ArrayList<Comments> selectCommentList(SqlSessionTemplate sqlSession, PageInfo cPi, int member_no) {
+		
+		int offset = (cPi.getCurrentPage() - 1) * cPi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, cPi.getLimit());
+		
+		return (ArrayList)sqlSession.selectList("MyPage.selectCommentList",member_no, rowBounds);
+	}
+
 
 
 
