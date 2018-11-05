@@ -31,6 +31,10 @@
 			
 			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="Notice2"/>
 			
+			
+			<!-- admin -->
+			<typeAlias type="com.kh.baraonda.admin.model.vo.Search" alias="Search"/>
+
 
   		</typeAliases>
   		

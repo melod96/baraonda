@@ -49,11 +49,53 @@
 	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM MEMBER
+		WHERE 1 = 1
+		AND ADMIN_RIGHT = 0 
+		AND COMPANY_RIGHT = 0
+		<if test="option1 != null and option1 != ''">
+			<choose>
+				<when test="option1 == 'general'">
+					AND MEMBER_STATUS = 0
+				</when>
+				<when test="option1 == 'black'">
+					AND MEMBER_STATUS = 1
+				</when>
+				<when test="option1 == 'secession'">
+					AND MEMBER_STATUS = 2
+				</when>
+			</choose>
+		</if>
+		<if test="content != null and content != ''">
+			AND (ID LIKE '%' || #{content} || '%' 
+			OR NAME LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
 	</select>
 	
 	<select id="selectGeneralMemberList" resultMap="adminGeneralMemberResultSet">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
 		FROM MEMBER
+		WHERE 1 = 1
+		AND ADMIN_RIGHT = 0 
+		AND COMPANY_RIGHT = 0
+		<if test="option1 != null and option1 != ''">
+			<choose>
+				<when test="option1 == 'general'">
+					AND MEMBER_STATUS = 0
+				</when>
+				<when test="option1 == 'black'">
+					AND MEMBER_STATUS = 1
+				</when>
+				<when test="option1 == 'secession'">
+					AND MEMBER_STATUS = 2
+				</when>
+			</choose>
+		</if>
+		<if test="content != null and content != ''">
+			AND (ID LIKE '%' || #{content} || '%' 
+			OR NAME LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
 	</select>
 	
 </mapper> 

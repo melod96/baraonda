@@ -49,7 +49,7 @@
                         <div class="panel-body">
                             <div class="form-inline">
                                 <div class="input-group custom-search-form" >
-                                    <input type="text" class="form-control" placeholder="Search..." id="search-content">
+                                    <input type="text" class="form-control" placeholder="Search..." id="search-content" value="${ search.content }">
                                     <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" onclick="search();">
                                         <i class="fa fa-search"></i>
@@ -111,7 +111,7 @@
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
 		                               	<c:forEach begin="${ pi.currentPage }" end="${ pi.currentPage + 2 }" step="1" var="num">
-		                               		<c:if test="${ num > 0 }">
+		                               		<c:if test="${ num > 0 && num <= pi.endPage }">
 			                               		<c:if test="${ num == pi.currentPage }">
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
@@ -133,7 +133,7 @@
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
-									<c:if test="${ pi.currentPage > (pi.maxPage - 1) }">
+									<c:if test="${ pi.currentPage > 1 && (pi.currentPage > (pi.maxPage - 1)) }">
 		                               	<c:forEach begin="${ pi.currentPage - 2 }" end="${ pi.currentPage }" step="1" var="num">
 		                               		<c:if test="${ num <= pi.maxPage }">
 			                               		<c:if test="${ num == pi.currentPage }">
@@ -189,10 +189,19 @@
     
     function search(){
     	var content = $('#search-content').val();
-    	var option = $('#search-option-1 option:selected').val();
+    	var option1 = $('#search-option-1 option:selected').val();
     	
-    	location.href="goGeneralMemberAdminList.adm?currentPage=1&search-content=" + content + "&option=" + option;
+    	location.href="goGeneralMemberAdminList.adm?currentPage=1&searchContent=" + content + "&option1=" + option1;
     }
+    
+    $(document).ready(function(){
+    	$("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
+    }); 
+    
     </script>
     
 </body>

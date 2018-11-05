@@ -59,18 +59,18 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th width="5%">NO</th>
-                                        <th width="7%">ID</th>
-                                        <th width="7%">사업자명</th>
+                                        <th width="6%">NO</th>
+                                        <th width="6%">ID</th>
+                                        <th width="10%">사업자명</th>
                                         <th width="9%">닉네임</th>
                                         <th width="8%">연락처</th>
                                         <th width="10%">이메일</th>
-                                        <th width="10%">회사명</th>
+                                        <th width="8%">회사명</th>
                                         <th width="10%">사업자 번호</th>
                                         <th width="14%">계좌</th>
-                                        <th width="5%">법인</th>
-                                        <th width="10%">가입일</th>
-                                        <th width="5%">상태</th>
+                                        <th width="6%">법인</th>
+                                        <th width="7%">가입일</th>
+                                        <th width="6%">상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
