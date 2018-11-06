@@ -84,10 +84,10 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-    <div class="container category">
+    <!-- <div class="container category">
     	<a href="foodDictionary.dt" >음식 칼로리</a>
     	<a href="exerciseDictionary.dt">운동 칼로리</a>
-    </div>
+    </div> -->
 	<div class="clear" style="height:40px;background:white;"></div>
 	<div class="container">
     <div class="row">
