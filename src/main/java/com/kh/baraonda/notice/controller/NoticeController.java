@@ -72,6 +72,7 @@ public class NoticeController {
 		PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<NoticeComment> comment = ns.selectComment(notice_no,pgif);
+		System.out.println(comment);
 		
 		//이전글 | 다음글
 		Notice nextBoard = ns.selectNextBoard(notice_no);
