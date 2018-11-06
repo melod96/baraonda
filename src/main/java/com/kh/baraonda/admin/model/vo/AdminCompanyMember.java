@@ -11,7 +11,7 @@ public class AdminCompanyMember {
 	private String phone;
 	private String email;
 	private String company_name;
-	private int company_no;
+	private String company_no;
 	private String bank;
 	private String account;
 	private String ceo_name;
@@ -24,7 +24,7 @@ public class AdminCompanyMember {
 	}
 
 	public AdminCompanyMember(int member_no, String id, String name, String nick_name, String phone, String email,
-			String company_name, int company_no, String bank, String account, String ceo_name, String ceo_type,
+			String company_name, String company_no, String bank, String account, String ceo_name, String ceo_type,
 			Date enroll_date, int member_status) {
 		super();
 		this.member_no = member_no;
@@ -99,11 +99,11 @@ public class AdminCompanyMember {
 		this.company_name = company_name;
 	}
 
-	public int getCompany_no() {
+	public String getCompany_no() {
 		return company_no;
 	}
 
-	public void setCompany_no(int company_no) {
+	public void setCompany_no(String company_no) {
 		this.company_no = company_no;
 	}
 
@@ -157,7 +157,7 @@ public class AdminCompanyMember {
 
 	@Override
 	public String toString() {
-		return "adminCompanyMember [member_no=" + member_no + ", id=" + id + ", name=" + name + ", nick_name="
+		return "AdminCompanyMember [member_no=" + member_no + ", id=" + id + ", name=" + name + ", nick_name="
 				+ nick_name + ", phone=" + phone + ", email=" + email + ", company_name=" + company_name
 				+ ", company_no=" + company_no + ", bank=" + bank + ", account=" + account + ", ceo_name=" + ceo_name
 				+ ", ceo_type=" + ceo_type + ", enroll_date=" + enroll_date + ", member_status=" + member_status + "]";

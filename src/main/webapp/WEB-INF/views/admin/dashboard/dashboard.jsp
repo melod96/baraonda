@@ -46,7 +46,6 @@
                         <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">새로운 문의 수</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
@@ -67,7 +66,6 @@
                         <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">새로운 게시글 수</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
@@ -88,7 +86,6 @@
                         <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">새로운 광고 문의 수</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
@@ -109,7 +106,6 @@
                         <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">새로운 회원 수</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>

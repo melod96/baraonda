@@ -13,13 +13,14 @@ public class AdminBlackMember implements java.io.Serializable{
 	private Date enroll_date;
 	private Date black_date;
 	private Date lift_date;
+	private int declarationCount;
 	
 	public AdminBlackMember() {
 		
 	}
 
 	public AdminBlackMember(int member_no, String id, String name, String nick_name, String phone, String email,
-			Date enroll_date, Date black_date, Date lift_date) {
+			Date enroll_date, Date black_date, Date lift_date, int declarationCount) {
 		super();
 		this.member_no = member_no;
 		this.id = id;
@@ -30,6 +31,7 @@ public class AdminBlackMember implements java.io.Serializable{
 		this.enroll_date = enroll_date;
 		this.black_date = black_date;
 		this.lift_date = lift_date;
+		this.declarationCount = declarationCount;
 	}
 
 	public int getMember_no() {
@@ -104,13 +106,21 @@ public class AdminBlackMember implements java.io.Serializable{
 		this.lift_date = lift_date;
 	}
 
-	@Override
-	public String toString() {
-		return "adminBlackMember [member_no=" + member_no + ", id=" + id + ", name=" + name + ", nick_name=" + nick_name
-				+ ", phone=" + phone + ", email=" + email + ", enroll_date=" + enroll_date + ", black_date="
-				+ black_date + ", lift_date=" + lift_date + "]";
+	public int getDeclarationCount() {
+		return declarationCount;
 	}
 
+	public void setDeclarationCount(int declarationCount) {
+		this.declarationCount = declarationCount;
+	}
+
+	@Override
+	public String toString() {
+		return "AdminBlackMember [member_no=" + member_no + ", id=" + id + ", name=" + name + ", nick_name=" + nick_name
+				+ ", phone=" + phone + ", email=" + email + ", enroll_date=" + enroll_date + ", black_date="
+				+ black_date + ", lift_date=" + lift_date + ", declarationCount=" + declarationCount + "]";
+	}
+	
 	
 	
 }

@@ -17,7 +17,7 @@
 		<result property="member_status" column="member_status"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminCompanyMember" id="adminCompanyMemberReulst">
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminCompanyMember" id="adminCompanyMemberReulstSet">
 		<id property="member_no" column="member_no"/>
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
@@ -34,7 +34,7 @@
 		<result property="member_status" column="member_status"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminBlackMember" id="adminBlackMemberResultMap">
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminBlackMember" id="adminBlackMemberResultSet">
 		<id property="member_no" column="member_no"/>
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
@@ -44,6 +44,7 @@
 		<result property="enroll_date" column="enroll_date"/>
 		<result property="black_date" column="black_date"/>
 		<result property="lift_date" column="lift_date"/>
+		<result property="declarationCount" column="declarationCount"/>
 	</resultMap>
 	
 	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
@@ -96,6 +97,63 @@
 			OR NAME LIKE '%' || #{content} || '%' 
 			OR NICK_NAME LIKE '%' || #{content} || '%')
 		</if>
+	</select>
+	
+	<select id="selectCompanyMemberCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE 1 = 1
+		AND ADMIN_RIGHT = 0 
+		AND COMPANY_RIGHT = 1
+		<if test="content != null and content != ''">
+			AND (ID LIKE '%' || #{content} || '%' 
+			OR NAME LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectCompanyMemberList" resultMap="adminCompanyMemberReulstSet">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, CEO_TYPE, ENROLL_DATE, MEMBER_STATUS
+		FROM MEMBER
+		WHERE 1 = 1
+		AND ADMIN_RIGHT = 0 
+		AND COMPANY_RIGHT = 1
+		<if test="content != null and content != ''">
+			AND (ID LIKE '%' || #{content} || '%' 
+			OR NAME LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectBlackMemberCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+			FROM (SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
+				FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
+	      			  FROM MEMBER M
+	      			  JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
+	      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO))
+			WHERE 1 = 1
+	     	<if test="content != null and content != ''">
+				AND (ID LIKE '%' || #{content} || '%' 
+				OR NAME LIKE '%' || #{content} || '%' 
+				OR NICK_NAME LIKE '%' || #{content} || '%')
+			</if>
+			GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE)
+	</select>
+	
+	<select id="selectBlackMemberList" resultMap="adminBlackMemberResultSet">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
+			FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
+      			  FROM MEMBER M
+      			  JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
+      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO))
+		WHERE 1 = 1
+		<if test="content != null and content != ''">
+			AND (ID LIKE '%' || #{content} || '%' 
+			OR NAME LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+		GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE
 	</select>
 	
 </mapper> 
