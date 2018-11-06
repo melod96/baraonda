@@ -66,13 +66,11 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>NO</th>
-                                        <th>ID</th>
-                                        <th>이름</th>
-                                        <th>닉네임</th>
-                                        <th>연락처</th>
-                                        <th>가입일</th>
-                                        <th>상태</th>
+                                        <th width="7%">NO</th>
+                                        <th width="63%">제목</th>
+                                        <th width="10%">이름</th>
+                                        <th width="10%">조회수</th>
+                                        <th width="10">등록일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,8 +80,6 @@
                                         <td>name01</td>
                                         <td>nickName01</td>
                                         <td>010-0000-1111</td>
-                                        <td>2018-10-10</td>
-                                        <td> - </td>
                                     </tr>
                                     <tr class="odd gradeX">
                                         <td>2</td>
@@ -91,8 +87,6 @@
                                         <td>name02</td>
                                         <td>nickName02</td>
                                         <td>010-0000-1111</td>
-                                        <td>2018-10-10</td>
-                                        <td> - </td>
                                     </tr>
                                     <tr class="odd gradeX">
                                         <td>3</td>
@@ -100,8 +94,6 @@
                                         <td>name03</td>
                                         <td>nickName03</td>
                                         <td>010-0000-1111</td>
-                                        <td>2018-10-10</td>
-                                        <td> - </td>
                                     </tr>
                                 </tbody>
                             </table>

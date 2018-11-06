@@ -33,7 +33,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">회원</h1>
+                    <h1 class="page-header">주문</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            회원 목록
+                            	주문 목록
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -67,12 +67,11 @@
                                 <thead>
                                     <tr>
                                         <th width="10%">NO</th>
-                                        <th width="15%">ID</th>
-                                        <th width="15%">이름</th>
-                                        <th width="15%">닉네임</th>
-                                        <th width="20%">연락처</th>
-                                        <th width="15%">가입일</th>
-                                        <th width="10%">상태</th>
+                                        <th width="17%">주문자</th>
+                                        <th width="17%">상품</th>
+                                        <th width="17%">수량</th>
+                                        <th width="17%">주문날짜</th>
+                                        <th width="22%">연락처</th>
                                     </tr>
                                 </thead>
                                 <tbody>
