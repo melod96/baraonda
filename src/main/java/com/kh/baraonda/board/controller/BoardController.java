@@ -1,6 +1,5 @@
 package com.kh.baraonda.board.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,19 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
-import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
-import com.kh.baraonda.member.model.vo.Member;
-import com.kh.baraonda.myPage.model.vo.Files;
 
 @Controller
 public class BoardController {
@@ -83,7 +78,7 @@ public class BoardController {
 		
 		try {
 			System.out.println("dsa" + b);
-			
+		
 			boardService.create(b);
 			
 			return "redirect:list.do?writing_type=1";
@@ -92,7 +87,46 @@ public class BoardController {
 			return "common/errorPage";
 		}
 	}
+	//게시물 수정
+	@RequestMapping(value="updateBoardPage.do")
+	public ModelAndView updateBoardPage(@RequestParam int board_no, Model model) {
+		ModelAndView mv = new ModelAndView();
+		HashMap<String, Object> detail;
+		
+		try {
+			detail = boardService.detail(board_no);
+			//뷰 이름
+			mv.setViewName("board/boardUpdate");
+			//뷰에 전달할 데이터
+			mv.addObject("detail", detail);
+			
+			return mv;
+			
+		} catch (BoardException e) {
+			mv.setViewName("board/boardUpdate");
+			mv.addObject("errorMessgae", "게시물 수정 실패");
+
+			return mv;
+		}
+	}
+	//게시물 update
+	@RequestMapping(value="updateBoard.do", method=RequestMethod.POST)
+	public String updateBoard(HttpSession session,
+			@ModelAttribute Board b, HttpServletRequest request) {
 	
+	try {
+		System.out.println("dsa" + b);
+	
+		boardService.updateBoard(b);
+		
+		return "redirect:list.do?writing_type=1";
+	} catch (Exception e) {
+
+		return "common/errorPage";
+	}
+}
+	
+
 	//댓글 작성
 	@RequestMapping(value="insertComment.do", method=RequestMethod.POST)
 	public String comment(HttpSession session, @ModelAttribute Comments c) {
@@ -115,7 +149,7 @@ public class BoardController {
 	@RequestMapping(value="view.do", method=RequestMethod.GET)
 	public ModelAndView view(@RequestParam int board_no, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		//게시글 상세보기(제목,내용, 작성자, 날짜, 댓글수, 조회수) 
+		//게시글 상세보기(제목, 내용, 작성자, 날짜, 댓글수, 조회수) 
 		HashMap<String, Object> detail;
 		//댓글 조회(작성자, 내용, 날짜)
 		List<HashMap<String, Object>> commentList;

@@ -54,6 +54,11 @@ public class BoardDaoImpl implements BoardDao{
 		System.out.println("dao : " + b);
 		SqlSession.insert("Board.insert", b);
 	}
+	//게시글 update
+	@Override
+	public void updateBoard(Board b) throws BoardException {
+		SqlSession.selectOne("Board.update", b);
+	}
 	
 	
 	//게시글 조회수 증가

@@ -15,7 +15,6 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.common.PageInfo;
-import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
 
 @Service
@@ -57,6 +56,13 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println("service : " + b);
 		boardDao.create(b);
 		
+		
+	}
+	//게시글 update
+	@Override
+	public void updateBoard(Board b) throws BoardException {
+		System.out.println("게시물update : " + b);
+		boardDao.updateBoard(b);
 		
 	}
 	

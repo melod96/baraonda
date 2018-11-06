@@ -24,6 +24,14 @@
 			location.href="${path}/baraonda/write.do";
 		});
 	});
+	
+	/* $(document).ready(function(){
+		$("#modifyB").click(function(){
+			location.href="${path}/baraonda/updateBoardPage.do?board_no=${board.board_no}";
+		});
+	}); */
+			
+			
 	 //댓글 작성
  	$("#btncmm").click(function(){
  		var comment=$("#comment").val();
@@ -329,9 +337,11 @@
 					<!-- 게시판 명 -->
 					<h2 class="boardName">자유게시판
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
-					<span class="modifyB">수정</span>
+					<%-- <c:if test="${sessionScope.loginUser == detail.member_no}"> --%>
+					<span class="modifyB" id="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span>
 					<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic1">
-					<span class="deleteB">삭제</span>
+					<span class="deleteB"">삭제</span>
+					<%-- </c:if> --%>
 					</h2>
 					
 					<!-- 게시글 제목 -->
@@ -375,10 +385,19 @@
 						</a>
 					</div>
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
+					<c:if test="${! empty sessionScope.loginUser}">
 					<div class="btn_ar">
 						<img id="writeBtn" class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
 						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 					</div>
+					</c:if>
+					<c:if test="${empty sessionScope.loginUser}">
+					<div class="btn_ar login">
+						<img id="writeBtn" class="pageWriteBtn login" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif"
+						 data-toggle="modal" data-target="#login-modal">
+						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
+					</div>
+					</c:if>
 					<div id="commList">
 						<p class="tit_comment">
 							<img
@@ -394,10 +413,14 @@
 									onfocus="setFlag();"></textarea>
 								<input name="MEMBER_NO" type="hidden" value= "${loginUser.member_no}">
 								<input name="NICK_NAME" type="hidden" value= "${loginUser.nick_name}">
+			 						
 								
-								<input name="BOARD_NO" type="hidden" value= "${BOARD_NO}">
-								
-								<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
+								<c:if test="${! empty sessionScope.loginUser}">
+									<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
+								</c:if>
+								<c:if test="${empty sessionScope.loginUser}">
+									<button type="button" id="btncmm" class="btn btn-primary login"  data-toggle="modal" data-target="#login-modal">입력</button>
+								</c:if>
 							</form>
 						</div>
 					</div>
