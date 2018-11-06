@@ -8,10 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.notice.model.vo.Notice;
+import com.kh.baraonda.notice.model.vo.NoticeComment;
+import com.kh.baraonda.notice.model.vo.NoticeMarking;
 import com.kh.baraonda.tips.model.dao.TipsDao;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
+import com.kh.baraonda.tips.model.vo.TipsMarking;
 
 @Repository
 public class TipsDaoImpl implements TipsDao{
@@ -48,21 +52,28 @@ public class TipsDaoImpl implements TipsDao{
 		
 		//꿀팁 상세
 		@Override
-		public Tips selectTipsOne(SqlSessionTemplate sqlSession, String board_no) {
+		public Tips selectTipsOne(SqlSessionTemplate sqlSession, String tips_no) {
 			
-			return sqlSession.selectOne("Tips.selectTipsOne",board_no);
+			return sqlSession.selectOne("Tips.selectTipsOne",tips_no);
+		}
+		
+		//좋아요 개수
+		@Override
+		public int selectHeartTips(SqlSessionTemplate sqlSession, String tips_no) {
+			
+			return sqlSession.selectOne("Tips.selectHeartTips", tips_no);
 		}
 
 		//댓글 수
 		@Override
-		public int selectCommentListCount(SqlSessionTemplate sqlSession,String board_no) {
+		public int selectCommentListCountTips(SqlSessionTemplate sqlSession,String tips_no) {
 			
-			return sqlSession.selectOne("Tips.selectCommentListCount", board_no);
+			return sqlSession.selectOne("Tips.selectCommentListCountTips", tips_no);
 		}
 		
 		//댓글 리스트
 		@Override
-		public ArrayList<TipsComment> selectComment(SqlSessionTemplate sqlSession, String board_no, PageInfo pgif) {
+		public ArrayList<TipsComment> selectCommentTips(SqlSessionTemplate sqlSession, String tips_no, PageInfo pgif) {
 			ArrayList<TipsComment> list = null;
 			
 			//건너 뛸 게시물의 수
@@ -72,16 +83,16 @@ public class TipsDaoImpl implements TipsDao{
 							
 			//오브젝트로 받아오기 때문에 arraylist로 다운캐스팅 해준다
 			//제네릭을 설정하면 오류가 나서 넣으면 안된다
-			list = (ArrayList) sqlSession.selectList("Tips.selectComment", board_no, rowBounds);
+			list = (ArrayList) sqlSession.selectList("Tips.selectCommentTips", tips_no, rowBounds);
 			
 			return list;
 		}
 		
 		//조회수 업데이트
 		@Override
-		public Tips updateTipsCount(SqlSessionTemplate sqlSession, String board_no) {
+		public Tips updateTipsCount(SqlSessionTemplate sqlSession, String tips_no) {
 			
-			return sqlSession.selectOne("Tips.updateTipsCount", board_no);
+			return sqlSession.selectOne("Tips.updateTipsCount", tips_no);
 		}
 
 		//꿀팁 검색 개수
@@ -107,4 +118,138 @@ public class TipsDaoImpl implements TipsDao{
 			
 			return list;
 		}
+		
+		
+		//공지사항 insert
+		@Override
+		public int insertTips(SqlSessionTemplate sqlSession, Tips t) {
+			int i = -99;
+			sqlSession.selectOne("Tips.insertTips",t);
+			i = 1;
+			return i;
+		}
+
+		//공지사항 delete
+		@Override
+		public int deleteTips(SqlSessionTemplate sqlSession, String tips_no) {
+			int i = -99;
+			sqlSession.selectOne("Tips.deleteTips", tips_no);
+			i = 1;
+			return i;
+		}
+
+		//공지사항 update
+		@Override
+		public int updateTips(SqlSessionTemplate sqlSession, Tips t) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.updateTips",t);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//댓글 insert
+		@Override
+		public int insertCommentTips(SqlSessionTemplate sqlSession, TipsComment tc) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.insertCommentTips",tc);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//댓글 delete
+		@Override
+		public int deleteCommentTips(SqlSessionTemplate sqlSession, String tcomment_no) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.deleteCommentTips",tcomment_no);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//북마크 체크 여부
+		@Override
+		public int checkBookmarkTips(SqlSessionTemplate sqlSession, TipsMarking tm) {
+			
+			return sqlSession.selectOne("Tips.checkBookmarkTips", tm);
+		}
+
+		//북마크 등록
+		@Override
+		public int insertBookmarkTips(SqlSessionTemplate sqlSession, TipsMarking tm) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.insertBookmarkTips",tm);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//북마크 삭제
+		@Override
+		public int deleteBookmarkTips(SqlSessionTemplate sqlSession, TipsMarking tm) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.deleteBookmarkTips",tm);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//좋아요 체크 여부
+		@Override
+		public int checkHeartTips(SqlSessionTemplate sqlSession, TipsMarking tm) {
+			
+			return sqlSession.selectOne("Tips.checkHeartTips", tm);
+		}
+
+		//좋아요 등록
+		@Override
+		public int insertHeartTips(SqlSessionTemplate sqlSession, TipsMarking tm) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.insertHeartTips",tm);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//좋아요 삭제
+		@Override
+		public int deleteHeartTips(SqlSessionTemplate sqlSession, TipsMarking tm) {
+			int i = -99;
+			
+			sqlSession.selectOne("Tips.deleteHeartTips",tm);
+			
+			i = 1;
+			
+			return i;
+		}
+
+		//다음글 번호 
+		@Override
+		public int selectNextNoTips(SqlSessionTemplate sqlSession, String tips_no) {
+			
+			return sqlSession.selectOne("Tips.selectNextNoTips", tips_no);
+		}
+
+		//이전글 번호
+		@Override
+		public int selectBeforeNoTips(SqlSessionTemplate sqlSession, String tips_no) {
+			
+			return sqlSession.selectOne("Tips.selectBeforeNoTips", tips_no);
+		}
+
+		
+		
 }

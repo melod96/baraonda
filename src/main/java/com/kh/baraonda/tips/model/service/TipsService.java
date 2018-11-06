@@ -2,11 +2,14 @@ package com.kh.baraonda.tips.model.service;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
+import com.kh.baraonda.tips.model.vo.TipsMarking;
 
 public interface TipsService {
 	
@@ -17,18 +20,63 @@ public interface TipsService {
 	ArrayList<Tips> selectTipsList(PageInfo pgif) throws TipsSelectListException;
 	
 	//꿀팁 상세
-	Tips selectTipsOne(String board_no);
+	Tips selectTipsOne(String tips_no);
+	
+	//좋아요 개수
+	int selectHeartTips(String tips_no);
 
 	//댓글 수
-	int selectCommentListCount(String board_no);
+	int selectCommentListCountTips(String tips_no);
 		
 	//댓글 리스트
-	ArrayList<TipsComment> selectComment(String board_no, PageInfo pgif);
+	ArrayList<TipsComment> selectCommentTips(String tips_no, PageInfo pgif);
 	
 	//꿀팁 검색 개수
 	int searchTipsCount(SearchCondition sc);
 
 	//꿀팁 검색 리스트
 	ArrayList<Tips> searchTipsList(SearchCondition sc, PageInfo pgif);
+	
+	
+	
+		//꿀팁 insert
+		int insertTips(Tips t);
+
+		//꿀팁 delete
+		int deleteTips(String tips_no);
+
+		//꿀팁 update
+		int updateTips(Tips t);
+
+		//꿀팁 insert
+		int insertCommentTips(TipsComment tc);
+
+		//꿀팁 delete
+		int deleteCommentTips(String tcomment_no);
+
+		//북마크 체크 여부
+		int checkBookmarkTips(TipsMarking tm);
+
+		//북마크 등록
+		int insertBookmarkTips(TipsMarking tm);
+
+		//북마크 삭제
+		int deleteBookmarkTips(TipsMarking tm);
+
+		//좋아요 체크 여부
+		int checkHeartTips(TipsMarking tm);
+
+		//좋아요 등록
+		int insertHeartTips(TipsMarking tm);
+
+		//좋아요 삭제
+		int deleteHeartTips(TipsMarking tm);
+
+		//다음글
+		Tips selectNextNoTips(String tips_no);
+
+		//이전글
+		Tips selectBeforeNoTips(String tips_no);
+
 
 }

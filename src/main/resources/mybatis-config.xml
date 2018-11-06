@@ -35,7 +35,9 @@
 			
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Comments" alias="Comments2"/>
 
-			<typeAlias type="com.kh.baraonda.notice.model.vo.Notice" alias="TipsComment"/>
+			<typeAlias type="com.kh.baraonda.tips.model.vo.TipsComment" alias="TipsComment"/>
+			
+			<typeAlias type="com.kh.baraonda.tips.model.vo.TipsMarking" alias="TipsMarking"/>
 
 			<typeAlias type="com.kh.baraonda.admin.model.vo.Search" alias="Search"/>
 

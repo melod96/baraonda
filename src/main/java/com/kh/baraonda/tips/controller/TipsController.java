@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.service.TipsService;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
+import com.kh.baraonda.tips.model.vo.TipsMarking;
 
 
 @Controller
@@ -57,9 +60,11 @@ public class TipsController {
 		
 		//공지사항 상세보기
 		@RequestMapping("tipsDetail.tp")
-		public String noticeDetail(String board_no, Model model, PageInfo pi) {
+		public String tipsDetail(String tips_no, Model model, PageInfo pi) {
 			
-			Tips tinfo = ts.selectTipsOne(board_no);
+			Tips tinfo = ts.selectTipsOne(tips_no);
+			
+			int heartCount = ts.selectHeartTips(tips_no);
 			
 			//댓글
 			int currentPage =1;
@@ -68,16 +73,23 @@ public class TipsController {
 				currentPage = pi.getCurrentPage();
 			}
 			
-			int listCount = ts.selectCommentListCount(board_no);
+			int listCount = ts.selectCommentListCountTips(tips_no);
 			
 			PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
 			
-			ArrayList<TipsComment> comment = ts.selectComment(board_no,pgif);
+			ArrayList<TipsComment> tcomment = ts.selectCommentTips(tips_no,pgif);
+			
+			/*//이전글 | 다음글
+			Tips nextBoard = ts.selectNextNoTips(tips_no);
+			Tips beforeBoard = ts.selectBeforeNoTips(tips_no);*/
 			
 			model.addAttribute("tinfo", tinfo);
 			model.addAttribute("pi",pgif);
-			model.addAttribute("comment", comment);
+			model.addAttribute("tcomment", tcomment);
 			model.addAttribute("cCount", listCount);
+			model.addAttribute("hcount", heartCount);
+	/*		model.addAttribute("before", beforeBoard);
+			model.addAttribute("next", nextBoard);*/
 			
 			return "tips/tipsDetail";
 		}
@@ -115,6 +127,122 @@ public class TipsController {
 			
 			return "tips/tips";
 		}
+		
+		
+		
+		
+		//공지사항 작성 페이지
+		@RequestMapping("tipsWrite.tp")
+		public String tipsWrite() {
+			return "tips/tipsWrite";
+		}
+		
+		//공지사항 insert
+		@RequestMapping("insertTips.tp")
+		public String insertTips(@SessionAttribute("loginUser") Member m,Tips t, Model model) {
+			
+			int insert = ts.insertTips(t);
+			
+			if(insert > 0) {
+				return "redirect:tipslist.tp";			
+			}else {
+				model.addAttribute("msg","다이어트꿀팁 등록 실패");
+				return "common/errorPage";
+				
+			}
+			
+		}
+		
+		//공지사항 delete
+		@RequestMapping("deleteTips.tp")
+		public String deleteTips(String tips_no) {
+			int delete = ts.deleteTips(tips_no);
+			
+			return "redirect:tipslist.tp";
+		}
+		
+		//공지사항 수정 페이지
+		@RequestMapping("tipsUpdatePage.tp")
+		public String tipsUpdatePage(String tips_no, Model model) {
+			Tips tinfo = ts.selectTipsOne(tips_no);
+			
+			model.addAttribute("tinfo",tinfo);
+			
+			return "tips/tipsUpdate";
+		}
+		
+		//공지사항 update
+		@RequestMapping("updateTips.tp")
+		public String updateTips(@SessionAttribute("loginUser") Member m,Tips t, Model model) {
+			t.setMember_no(m.getMember_no());
+			
+			int update = ts.updateTips(t);
+			
+			return "redirect:tipslist.tp";
+		}
+		
+		//댓글 insert
+		@RequestMapping("insertCommentTips.tp")
+		public String insertCommentTips(@SessionAttribute("loginUser") Member m,TipsComment tc, Model model) {
+			tc.setMember_no(m.getMember_no());
+			
+			int insert = ts.insertCommentTips(tc);
+			return "redirect:tipsDetail.tp?tips_no="+tc.getBoard_no();
+		}
+		
+		//댓글 delete
+		@RequestMapping("deleteCommentTips.tp")
+		public String deleteCommentTips(String tips_no, String tcomment_no) {
+			
+			int delete = ts.deleteCommentTips(tcomment_no);
+			
+			return "redirect:tipsDetail.tp?tips_no="+tips_no;
+		}
+		
+		//북마크
+		@RequestMapping("bookmarkTips.tp")
+		public String bookmarkTips(@SessionAttribute("loginUser") Member m, String tips_no) {
+			TipsMarking tm = new TipsMarking();
+			tm.setBoard_no(Integer.parseInt(tips_no));
+			tm.setMember_no(m.getMember_no());
+			
+			int check = -99;
+			
+			check = ts.checkBookmarkTips(tm);
+			
+			if(check==0) {
+				int insert = ts.insertBookmarkTips(tm);
+			}else {
+				int delete = ts.deleteBookmarkTips(tm);
+			}
+			
+			return "redirect:tipsDetail.tp?tips_no="+tips_no;
+		}
+		
+		//좋아요
+		@RequestMapping("heartTips.tp")
+		public String heartTips(@SessionAttribute("loginUser") Member m, String tips_no) {
+			TipsMarking tm = new TipsMarking();
+			tm.setBoard_no(Integer.parseInt(tips_no));
+			tm.setMember_no(m.getMember_no());
+			
+			int check = -99;
+			
+			check = ts.checkHeartTips(tm);
+			if(check==0) {
+				int insert = ts.insertHeartTips(tm);
+			}else {
+				int delete = ts.deleteHeartTips(tm);
+			}
+			
+			return "redirect:tipsDetail.tp?tips_no="+tips_no;
+		}
+		
+		
+		
+		
+		
+		
 		/*//다이어트꿀팁으로 이동하는 페이지
 		@RequestMapping("tips.tp")
 		public String selectTips() {

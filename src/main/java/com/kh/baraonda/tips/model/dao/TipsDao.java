@@ -9,6 +9,7 @@ import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
+import com.kh.baraonda.tips.model.vo.TipsMarking;
 
 public interface TipsDao {
 
@@ -19,21 +20,63 @@ public interface TipsDao {
 	ArrayList<Tips> selectTipsList(SqlSessionTemplate sqlSession, PageInfo pgif) throws TipsSelectListException;
 	
 	//꿀팁 상세
-	Tips selectTipsOne(SqlSessionTemplate sqlSession, String board_no);
+	Tips selectTipsOne(SqlSessionTemplate sqlSession, String tips_no);
+	
+	//좋아요 개수
+	int selectHeartTips(SqlSessionTemplate sqlSession, String tips_no);
 
 	//댓글 수
-	int selectCommentListCount(SqlSessionTemplate sqlSession, String board_no);
+	int selectCommentListCountTips(SqlSessionTemplate sqlSession, String tips_no);
 	
 	//댓글 리스트
-	ArrayList<TipsComment> selectComment(SqlSessionTemplate sqlSession, String board_no, PageInfo pgif);
+	ArrayList<TipsComment> selectCommentTips(SqlSessionTemplate sqlSession, String tips_no, PageInfo pgif);
 
 	//조회수 업데이트
-	Tips updateTipsCount(SqlSessionTemplate sqlSession, String board_no);
+	Tips updateTipsCount(SqlSessionTemplate sqlSession, String tips_no);
 
 	//꿀팁 검색 개수
 	int searchTipsCount(SqlSessionTemplate sqlSession, SearchCondition sc);
 
 	//꿀팁 검색 리스트
 	ArrayList<Tips> searchTipsList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo pgif);
+	
+		//공지사항 insert
+		int insertTips(SqlSessionTemplate sqlSession, Tips t);
+
+		//공지사항 delete
+		int deleteTips(SqlSessionTemplate sqlSession, String tips_no);
+
+		//공지사항 update
+		int updateTips(SqlSessionTemplate sqlSession, Tips t);
+
+		//댓글 insert
+		int insertCommentTips(SqlSessionTemplate sqlSession, TipsComment tc);
+
+		//댓글 delete
+		int deleteCommentTips(SqlSessionTemplate sqlSession, String tcomment_no);
+
+		//북마크 체크 여부
+		int checkBookmarkTips(SqlSessionTemplate sqlSession, TipsMarking tm);
+
+		//북마크 등록
+		int insertBookmarkTips(SqlSessionTemplate sqlSession, TipsMarking tm);
+
+		//북마크 삭제
+		int deleteBookmarkTips(SqlSessionTemplate sqlSession, TipsMarking tm);
+
+		//좋아요 체크 여부
+		int checkHeartTips(SqlSessionTemplate sqlSession, TipsMarking tm);
+
+		//좋아요 등록
+		int insertHeartTips(SqlSessionTemplate sqlSession, TipsMarking tm);
+
+		//좋아요 삭제
+		int deleteHeartTips(SqlSessionTemplate sqlSession, TipsMarking tm);
+
+		//다음글 번호
+		int selectNextNoTips(SqlSessionTemplate sqlSession, String tips_no);
+
+		//이전글 번호
+		int selectBeforeNoTips(SqlSessionTemplate sqlSession, String tips_no);
 
 }
