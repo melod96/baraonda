@@ -149,14 +149,14 @@ margin-top: -10px;
             <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item" ><img src="${pageContext.request.contextPath}${t.files_root}" alt="" style="width:300px; height:170px;"></a>
             <div class="gall_bot">
             <div class="boxbox">
-           <div class="text1"><a>${t.board_title }</a></div>
+           <div class="text1"><a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}">${t.board_title }</a></div>
            <div id="fonts">
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
 	         </div>
 	         <img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">
 	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
-            <a onclick= "location.href='tipsDetail.tp?board_no='+${t.board_no}" class="btn">more</a></div>
+            <a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}" class="btn">more</a></div>
             </div>
           </div>
         </div>
@@ -256,19 +256,6 @@ margin-top: -10px;
 						</c:if>
 					</c:if>
 				</div>
-				<!-- <div class="paginate">
-                        <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
-                        <a href="#" class="btn-prev" title="이전"><em class="blind">목록에서 이전 페이지 이동</em></a>
-                        <span class="paging-numbers">
-                            <a href="#">1<span class="blind">페이지로 이동</span></a>
-                            <a href="#" class="on">2<span class="blind">페이지로 이동</span></a>
-                            <a href="#">3<span class="blind">페이지로 이동</span></a>
-                            <a href="#">4<span class="blind">페이지로 이동</span></a>
-                            <a href="#">5<span class="blind">페이지로 이동</span></a>
-                        </span>
-                        <a href="#" class="btn-next" title="다음"><span class="spr"><em class="blind">목록에서 다음 페이지 이동</em></span></a>
-                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a>
-				</div> -->
 				
 				<br>
 

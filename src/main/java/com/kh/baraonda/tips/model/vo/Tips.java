@@ -19,6 +19,7 @@ public class Tips {
 		private String nick_name;
 		private int marking_type;
 		
+		
 		//파일 관련 추가해야함
 		private int files_no; //파일번호
 		private int f_reference_no; //참조번호
@@ -28,14 +29,15 @@ public class Tips {
 		private String files_root; //파일 경로
 		private int files_secession; //파일 삭제여부
 		private String profile_root;
+		private String profile;
 		
 		public Tips() {}
 
 		public Tips(int board_no, int board_type, int writing_type, String board_title, String board_content,
 				int member_no, Date board_date, Date modify_date, int board_status, int board_count, int board_good,
 				String nick_name, int marking_type, int files_no, int f_reference_no, String files_title,
-				String files_change_title, int files_type, String files_root, int files_secession,
-				String profile_root) {
+				String files_change_title, int files_type, String files_root, int files_secession, String profile_root,
+				String profile) {
 			super();
 			this.board_no = board_no;
 			this.board_type = board_type;
@@ -58,6 +60,7 @@ public class Tips {
 			this.files_root = files_root;
 			this.files_secession = files_secession;
 			this.profile_root = profile_root;
+			this.profile = profile;
 		}
 
 		public int getBoard_no() {
@@ -228,6 +231,14 @@ public class Tips {
 			this.profile_root = profile_root;
 		}
 
+		public String getProfile() {
+			return profile;
+		}
+
+		public void setProfile(String profile) {
+			this.profile = profile;
+		}
+
 		@Override
 		public String toString() {
 			return "Tips [board_no=" + board_no + ", board_type=" + board_type + ", writing_type=" + writing_type
@@ -237,9 +248,10 @@ public class Tips {
 					+ ", marking_type=" + marking_type + ", files_no=" + files_no + ", f_reference_no=" + f_reference_no
 					+ ", files_title=" + files_title + ", files_change_title=" + files_change_title + ", files_type="
 					+ files_type + ", files_root=" + files_root + ", files_secession=" + files_secession
-					+ ", profile_root=" + profile_root + "]";
+					+ ", profile_root=" + profile_root + ", profile=" + profile + "]";
 		}
 
+	
 		
 
 		

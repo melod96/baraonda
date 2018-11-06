@@ -12,6 +12,7 @@ import com.kh.baraonda.tips.model.dao.TipsDao;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
+import com.kh.baraonda.tips.model.vo.TipsMarking;
 
 
 
@@ -40,24 +41,31 @@ public class TipsServiceImpl implements TipsService{
 
 		//꿀팁 상세
 		@Override
-		public Tips selectTipsOne(String board_no) {
-			Tips update = td.updateTipsCount(sqlSession, board_no);
+		public Tips selectTipsOne(String tips_no) {
+			Tips update = td.updateTipsCount(sqlSession, tips_no);
 			
-			return td.selectTipsOne(sqlSession, board_no);
+			return td.selectTipsOne(sqlSession, tips_no);
+		}
+		
+		//좋아요 수
+		@Override
+		public int selectHeartTips(String tips_no) {
+			
+			return td.selectHeartTips(sqlSession, tips_no);
 		}
 		
 		//댓글 수
 		@Override
-		public int selectCommentListCount(String board_no) {
+		public int selectCommentListCountTips(String tips_no) {
 			
-			return td.selectCommentListCount(sqlSession, board_no);
+			return td.selectCommentListCountTips(sqlSession, tips_no);
 		}
 		
 		//댓글 리스트
 		@Override
-		public ArrayList<TipsComment> selectComment(String board_no, PageInfo pgif) {
+		public ArrayList<TipsComment> selectCommentTips(String tips_no, PageInfo pgif) {
 			
-			return td.selectComment(sqlSession, board_no, pgif);
+			return td.selectCommentTips(sqlSession, tips_no, pgif);
 		}
 
 		//꿀팁 검색 개수
@@ -72,6 +80,101 @@ public class TipsServiceImpl implements TipsService{
 		public ArrayList<Tips> searchTipsList(SearchCondition sc,PageInfo pgif) {
 			
 			return td.searchTipsList(sqlSession, sc,pgif);
+		}
+		
+		
+		
+		
+		//공지사항 insert
+		@Override
+		public int insertTips(Tips t) {
+			
+			return td.insertTips(sqlSession, t);
+		}
+
+		//공지사항 delete
+		@Override
+		public int deleteTips(String tips_no) {
+			
+			return td.deleteTips(sqlSession, tips_no);
+		}
+
+		//공지사항 update
+		@Override
+		public int updateTips(Tips t) {
+			
+			return td.updateTips(sqlSession, t);
+		}
+
+		//댓글 insert
+		@Override
+		public int insertCommentTips(TipsComment tc) {
+			
+			return td.insertCommentTips(sqlSession,tc);
+		}
+
+		//댓글 delete
+		@Override
+		public int deleteCommentTips(String tcomment_no) {
+			
+			return td.deleteCommentTips(sqlSession, tcomment_no);
+		}
+
+		//북마크 체크 여부
+		@Override
+		public int checkBookmarkTips(TipsMarking tm) {
+			
+			return td.checkBookmarkTips(sqlSession,tm);
+		}
+
+		//북마크 등록
+		@Override
+		public int insertBookmarkTips(TipsMarking tm) {
+			
+			return td.insertBookmarkTips(sqlSession, tm);
+		}
+
+		//북마크 삭제
+		@Override
+		public int deleteBookmarkTips(TipsMarking tm) {
+			
+			return td.deleteBookmarkTips(sqlSession, tm);
+		}
+
+		//좋아요 체크 여부
+		@Override
+		public int checkHeartTips(TipsMarking tm) {
+			
+			return td.checkHeartTips(sqlSession, tm);
+		}
+
+		//좋아요 등록
+		@Override
+		public int insertHeartTips(TipsMarking tm) {
+			
+			return td.insertHeartTips(sqlSession, tm);
+		}
+
+		//좋아요 삭제
+		@Override
+		public int deleteHeartTips(TipsMarking tm) {
+			
+			return td.deleteHeartTips(sqlSession, tm);
+		}
+
+		//다음글
+		@Override
+		public Tips selectNextNoTips(String tips_no) {
+			int tnextno= td.selectNextNoTips(sqlSession,tips_no);
+			
+			return td.selectTipsOne(sqlSession, String.valueOf(tnextno));
+		}
+
+		//이전글
+		@Override
+		public Tips selectBeforeNoTips(String tips_no) {
+			int tbeforeno= td.selectBeforeNoTips(sqlSession,tips_no);
+			return td.selectTipsOne(sqlSession, String.valueOf(tbeforeno));
 		}
 		
 
