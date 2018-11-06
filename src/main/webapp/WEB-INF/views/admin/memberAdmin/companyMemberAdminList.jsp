@@ -87,9 +87,16 @@
 		                                        <td>${ list.company_name }</td>
 		                                        <td>${ list.company_no }</td>
 		                                        <td>${ list.bank } ${ list.account }</td>
-		                                        <td>${ list.ceo_type }</td>
+		                                        <td>
+		                                        	<c:if test="${ list.ceo_type == 0 }">개인</c:if>
+		                                        	<c:if test="${ list.ceo_type == 1 }">법인</c:if>
+		                                        </td>
 		                                        <td>${ list.enroll_date }</td>
-		                                        <td>${ list.member_status }</td>
+		                                        <td>
+		                                        	<c:if test="${ list.member_status == 0 }">일반</c:if>
+		                                        	<c:if test="${ list.member_status == 1 }">블랙</c:if>
+		                                        	<c:if test="${ list.member_status == 2 }">탈퇴</c:if>
+		                                        </td>
 	                                    	</tr>
 	                               		</c:forEach>
                                		</c:if>

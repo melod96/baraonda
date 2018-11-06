@@ -55,13 +55,6 @@
                                     </button>
                                     </span>
                                 </div>
-                                <div class="form-group">
-                                    <select class="form-control custom-select-form">
-                                        <option>답변상태</option>
-                                        <option>답변</option>
-                                        <option>미답변</option>
-                                    </select>
-                                </div>
                             </div>
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>

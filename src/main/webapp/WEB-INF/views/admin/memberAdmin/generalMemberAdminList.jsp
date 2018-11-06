@@ -79,8 +79,8 @@
                                         <th width="10%">상태</th>
                                     </tr>
                                 </thead>
-                                <c:if test="${ list != null }">
-	                                <tbody>
+                                <tbody>
+                                	<c:if test="${ list != null }">
 	                               		<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
@@ -90,11 +90,15 @@
 		                                        <td>${ list.phone }</td>
 		                                        <td>${ list.email }</td>
 		                                        <td>${ list.enroll_date }</td>
-		                                        <td>${ list.member_status }</td>
+		                                        <td>
+		                                        	<c:if test="${ list.member_status == 0 }">일반</c:if>
+		                                        	<c:if test="${ list.member_status == 1 }">블랙</c:if>
+		                                        	<c:if test="${ list.member_status == 2 }">탈퇴</c:if>
+		                                        </td>
 	                                    	</tr>
 	                               		</c:forEach>
-	                                </tbody>
-                                </c:if>
+	                                </c:if>
+                                </tbody>
                             </table>
 
                             <div class="paginate">
