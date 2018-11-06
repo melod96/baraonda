@@ -26,14 +26,17 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession, int writing_type,  PageInfo info) throws BoardException  {
 		try {
+			List<HashMap<String, Object>> list = null;
+			
 			int offset = (info.getCurrentPage() -1) * info.getLimit();
 			
 			RowBounds rowBounds = new RowBounds(offset, info.getLimit());
 			
 			//HashMap<Key, value>
-			List<HashMap<String, Object>> list = sqlSession.selectList("Board.listAll", writing_type, rowBounds);
-			System.out.println("전체목록 조회 : " + list);
+			list = sqlSession.selectList("Board.listAll", writing_type, rowBounds);
+			
 			if(list == null) {
+				sqlSession.close();
 				throw new BoardException("리스트 값 널");
 			}
 
@@ -48,16 +51,20 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectOne("Board.selectBoardListCount");
 	}
 
-	//게시글 작성
+	//게시글 insert
 	@Override
 	public void create(Board b) throws BoardException {
-		System.out.println("dao : " + b);
-		SqlSession.insert("Board.insert", b);
+		SqlSession.insert("Board.insertBoard", b);
 	}
 	//게시글 update
 	@Override
 	public void updateBoard(Board b) throws BoardException {
-		SqlSession.selectOne("Board.update", b);
+		SqlSession.selectOne("Board.updateBoard", b);
+	}
+	//게시글 delete
+	@Override
+	public void deleteBoard(int board_no) throws BoardException{
+		SqlSession.selectOne("Board.deleteBoard", board_no);
 	}
 	
 	
@@ -72,14 +79,7 @@ public class BoardDaoImpl implements BoardDao{
 	/*public List<HashMap<String, Object>> detail(SqlSessionTemplate sqlSession, int board_no) throws BoardException {*/
 	public HashMap<String, Object> detail(SqlSessionTemplate sqlSession, int board_no) throws BoardException {
 		try {
-			//HashMap<Key, value>
-			/*List<HashMap<String, Object>> detail = sqlSession.selectOne("Board.detail", board_no);*/
-			System.out.println("board_no : "+ board_no);
-			/*List<HashMap<String, Object>> detail = sqlSession.selectList("Board.detail", board_no);*/
 			HashMap<String, Object> detail = sqlSession.selectOne("Board.detail", board_no);
-			System.out.println("detail : " + detail);
-			
-			
 			
 			if(detail == null) {
 				throw new BoardException("리스트 값 널");
@@ -90,22 +90,12 @@ public class BoardDaoImpl implements BoardDao{
 			throw new BoardException(e.getMessage());
 		}
 	}
-	
-	//댓글 작성
-	@Override
-	public void comment(Comments c) throws BoardException {
-		SqlSession.insert("Board.commentInsert", c);
-		
-	}
+
 	//댓글 조회
 	@Override
 	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no) throws BoardException {
 		try {
-			//HashMap<Key, value>
-			
 			List<HashMap<String, Object>> commentList = sqlSession.selectList("Board.commentList", board_no);
-			
-			System.out.println("commentList : " + commentList);
 			
 			if(commentList == null) {
 				throw new BoardException("리스트 값 널");
@@ -117,12 +107,18 @@ public class BoardDaoImpl implements BoardDao{
 		}
 	}
 	
-	//게시글 작성시 사진 업로드
+	//댓글 insert
 	@Override
-	public void insertPhoto(SqlSessionTemplate sqlSession, Files file) throws BoardException{
-		sqlSession.insert("board.insertPhoto", file);
+	public int insertComment(SqlSessionTemplate sqlSession, Comments c) {
+		int i = -99;
 		
+		sqlSession.selectOne("Board.insertComment", c);
+		
+		i = 1;
+		
+		return i;
 	}
+
 
 }
 

@@ -16,6 +16,7 @@ import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.myPage.model.vo.Files;
+import com.kh.baraonda.notice.model.vo.NoticeComment;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -38,32 +39,20 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectBoardListCount(sqlSession);
 	}
 	
-	//게시글 작성
+	//게시글 insert
 	@Override
 	public void create(Board b) throws BoardException {
-		/*String title = b.getBoard_title();
-		String content = b.getBoard_content();
-		//*태그문자 처리(<==> &it; > == > &gt;)
-		//replace(A,B)A를 B로 변경
-		title = title.replace("<", "&lt;");
-		title = title.replace("<", "&gt;");
-		//*공백문자 처리
-		title = title.replace("  ",    "&nbsp;&nbsp;");
-		//*줄바꿈 문자 처리
-		content = content.replace("\n", "<br>");
-		b.setBoard_title(title);
-		b.setBoard_content(content);*/
-		System.out.println("service : " + b);
 		boardDao.create(b);
-		
-		
 	}
 	//게시글 update
 	@Override
 	public void updateBoard(Board b) throws BoardException {
-		System.out.println("게시물update : " + b);
 		boardDao.updateBoard(b);
-		
+	}
+	//게시글 delete
+	@Override
+	public void deleteBoard(int board_no) throws BoardException {
+		boardDao.deleteBoard(board_no);
 	}
 	
 	//게시글 조회수 증가
@@ -84,7 +73,6 @@ public class BoardServiceImpl implements BoardService{
 			
 			session.setAttribute("update_time_" + board_no, current_time);
 		}
-		
 	}
 	
 	//게시글 상세보기
@@ -93,30 +81,21 @@ public class BoardServiceImpl implements BoardService{
 	public HashMap<String, Object> detail(int board_no) throws BoardException {
 		/*List<HashMap<String, Object>> detail = boardDao.detail(sqlSession, board_no) ;*/
 		HashMap<String, Object> detail = boardDao.detail(sqlSession, board_no) ;
-	
-		
 		return detail;
-	}
-	
-	//댓글 작성
-	@Override
-	public void comment(Comments c) throws BoardException {
-		boardDao.comment(c);
 	}
 	//댓글 조회
 	@Override
 	public List<HashMap<String, Object>> commentList(int board_no) throws BoardException {
 		List<HashMap<String, Object>> commentList = boardDao.commentList(sqlSession, board_no) ;
-		
 		return commentList;
 	}
 	
-	//게시글 작성시 사진 업로드
+	//댓글 insert
 	@Override
-	public void insertPhoto(Files file)  throws BoardException{
-		boardDao.insertPhoto(sqlSession, file);
-		
+	public int insertComment(Comments c) {
+		return boardDao.insertComment(sqlSession, c);
 	}
+	
 
 }
 

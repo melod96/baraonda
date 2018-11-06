@@ -10,11 +10,13 @@ public class BoardDetail {
 	private String NICK_NAME;
 	private int COMMENTS_COUNT;
 	private int BOARD_NO;
+	private int WRITING_TYPE;
+	private int MEMBER_NO;
 	
 	public BoardDetail() {}
 
 	public BoardDetail(String bOARD_TITLE, String bOARD_CONTENT, Date bOARD_DATE, int bOARD_COUNT, String nICK_NAME,
-			int cOMMENTS_COUNT, int bOARD_NO) {
+			int cOMMENTS_COUNT, int bOARD_NO, int wRITING_TYPE, int mEMBER_NO) {
 		super();
 		BOARD_TITLE = bOARD_TITLE;
 		BOARD_CONTENT = bOARD_CONTENT;
@@ -23,6 +25,8 @@ public class BoardDetail {
 		NICK_NAME = nICK_NAME;
 		COMMENTS_COUNT = cOMMENTS_COUNT;
 		BOARD_NO = bOARD_NO;
+		WRITING_TYPE = wRITING_TYPE;
+		MEMBER_NO = mEMBER_NO;
 	}
 
 	public String getBOARD_TITLE() {
@@ -53,6 +57,14 @@ public class BoardDetail {
 		return BOARD_NO;
 	}
 
+	public int getWRITING_TYPE() {
+		return WRITING_TYPE;
+	}
+
+	public int getMEMBER_NO() {
+		return MEMBER_NO;
+	}
+
 	public void setBOARD_TITLE(String bOARD_TITLE) {
 		BOARD_TITLE = bOARD_TITLE;
 	}
@@ -81,12 +93,22 @@ public class BoardDetail {
 		BOARD_NO = bOARD_NO;
 	}
 
+	public void setWRITING_TYPE(int wRITING_TYPE) {
+		WRITING_TYPE = wRITING_TYPE;
+	}
+
+	public void setMEMBER_NO(int mEMBER_NO) {
+		MEMBER_NO = mEMBER_NO;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardDetail [BOARD_TITLE=" + BOARD_TITLE + ", BOARD_CONTENT=" + BOARD_CONTENT + ", BOARD_DATE="
 				+ BOARD_DATE + ", BOARD_COUNT=" + BOARD_COUNT + ", NICK_NAME=" + NICK_NAME + ", COMMENTS_COUNT="
-				+ COMMENTS_COUNT + ", BOARD_NO=" + BOARD_NO + "]";
+				+ COMMENTS_COUNT + ", BOARD_NO=" + BOARD_NO + ", WRITING_TYPE=" + WRITING_TYPE + ", MEMBER_NO="
+				+ MEMBER_NO + "]";
 	}
+	
 	
 	
 	

@@ -10,7 +10,7 @@ public class Comments {
 	private int BOARD_NO;
 	private int MEMBER_NO;
 	private int COMMENTS_STATUS;
-
+	
 
 
 	public Comments() {
