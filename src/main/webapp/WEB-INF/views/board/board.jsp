@@ -72,6 +72,7 @@
 .container1 {
 	margin: auto;
 	width: 65%;
+	margin-top: -35px;
 }
 
 #boardInput {
@@ -112,25 +113,34 @@
 .boardHr2 {
 	margin-top: -15px;
 }
+
+#boardCategory:hover{cursor:pointer; color : #aaccaa;}
+
+
 </style>
 
 </head>
 
 <body class="page1" id="top">
 
+
 	<!-------------------------------------Content------------------------------------------->
 	<section class="content">
-		<div class="ic">More Website Templates @ TemplateMonster.com -
-			July 30, 2014!</div>
 		<br>
 		<div class="container">
 			<div class="row">
 				<!------------------------------ 작업 공간 ------------------------------>
-
 				<div class="container1">
 					<h2>자유게시판</h2>
 					<hr class="boardHr">
-
+					
+					<div style="margin-bottom:10px; margin-left:10px;">
+			 			<a id="boardCategory">자유게시판</a>&nbsp;|&nbsp;<a id="boardCategory">일기</a>&nbsp;|&nbsp;<a id="boardCategory">고민/질문</a>&nbsp;|&nbsp;
+			 			<a id="boardCategory">식단</a>&nbsp;|&nbsp;<a id="boardCategory">자극사진</a>&nbsp;|&nbsp;<a id="boardCategory">관리자에게</a>
+			 			<!-- 13일기 15고민/질문 -->
+					</div>
+					
+					
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -143,39 +153,15 @@
 							</tr>
 						</thead>
 						<tbody>
-
 							<c:forEach items="${list}" var="row">
-								<tr class="boardTr" onClick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">
+								<tr class="boardTr" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'"> 
 									<th class="boardNo">${row.BOARD_NO}</th>
 									<th class="boardSubject2">${row.BOARD_TITLE}</th>
-									<!-- <th class="boardSubject2">{row.BOARD_TITLE}</th> -->
 									<th class="boardWriter">${row.NICK_NAME}</th>
 									<th class="boardDay">${row.BOARD_DATE}</th>
 									<th class="boardCount">${row.BOARD_COUNT}</th>
 								</tr>
 							</c:forEach>
-
-							<!-- <tr class="boardTr">
-								<th class="boardNo">164</th>
-								<th class="boardSubject2">게시판 만드는중입니다....</th>
-								<th class="boardWriter">다신</th>
-								<th class="boardDay">2018-10-25</th>
-								<th class="boardCount">12</th>
-							</tr>
-							<tr class="boardTr">
-								<th class="boardNo">163</th>
-								<th class="boardSubject2">가나다라마바사</th>
-								<th class="boardWriter">훈민정음</th>
-								<th class="boardDay">2018-10-25</th>
-								<th class="boardCount">8</th>
-							</tr>
-							<tr class="boardTr">
-								<th class="boardNo">162</th>
-								<th class="boardSubject2">오늘이 목요일이구나?</th>
-								<th class="boardWriter">목요일</th>
-								<th class="boardDay">2018-10-25</th>
-								<th class="boardCount">0</th>
-							</tr> -->
 						</tbody>
 					</table>
 					<hr class="boardHr2">

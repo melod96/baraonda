@@ -72,18 +72,18 @@ div#editor {
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<h2 class="text-left">글쓰기</h2>
+						<h2 class="text-left">수정하기</h2>
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
 						<form action="updateBoard.do" method="post" name="form1" enctype="multipart/form-data">
-						<input type="hidden" name = "board_no" value = "${detail.board_no }" />
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
 										<td class="cateTd">카테고리</td>
 										<td>
-											<select name="writing_type" id="form_control" class="form-control input-xshort">
+											<select name="writing_type" id="form_control" class="form-control input-xshort"
+											 value="${detail.WRITING_TYPE}">
 												<option value="1">다이어트 꿀팁</option>
 												<option value="2">다이어트 식단</option>
 												<option value="3">칼로리 사전</option>
@@ -95,6 +95,8 @@ div#editor {
 												<!-- <option>공지사항</option> -->
 											</select>
 										</td>
+										<td>
+										</td>
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
@@ -102,7 +104,7 @@ div#editor {
 										<td><input type="text" class="form-control"
 											name="board_title" value= "${detail.BOARD_TITLE}"></td>
 										<td>
-											<input name="member_no" type="hidden" value= "${loginUser.member_no}">
+											<input type="hidden" name = "board_no" value = "${detail.BOARD_NO}" />
 										</td>
 									</tr>
 

@@ -25,28 +25,17 @@
 		});
 	});
 	
-	/* $(document).ready(function(){
-		$("#modifyB").click(function(){
-			location.href="${path}/baraonda/updateBoardPage.do?board_no=${board.board_no}";
+	//게시물 삭제 버튼
+	$(document).ready(function(){
+		$("#deleteB").click(function(){
+			if(confirm("삭제하시겠습니까?") == true){
+				document.form.submit();
+			}else{ //취소
+				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+			}
 		});
-	}); */
-			
-			
-	 //댓글 작성
- 	$("#btncmm").click(function(){
- 		var comment=$("#comment").val();
- 		var bno="${detail.board_no}"
- 		var param="comment="+comment+"&board_no"+bno;
- 		$.ajax({
- 			type:"post",
- 			url:"${path}/insertComment.do",
- 			data:param,
- 			success:function(){
- 				alert("댓글이 등록되었습니다.");
- 				
- 			}
- 		});
- 	});
+	});
+
 </script>
 
 <!--[if lt IE 9]>
@@ -337,13 +326,15 @@
 					<!-- 게시판 명 -->
 					<h2 class="boardName">자유게시판
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
-					<%-- <c:if test="${sessionScope.loginUser == detail.member_no}"> --%>
-					<span class="modifyB" id="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span>
+					<c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}">
+					<span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span>
 					<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic1">
-					<span class="deleteB"">삭제</span>
-					<%-- </c:if> --%>
+					<span class="deleteB" id="deleteB" onClick="location.href='${path}/baraonda/deleteBoard.do?board_no=${detail.BOARD_NO}'">삭제</span>
+					</c:if>
 					</h2>
-					
+					<td>
+					<input type="hidden" name="MEMBER_NO" value="${detail.MEMBER_NO}">
+					</td>
 					<!-- 게시글 제목 -->
 					<div>
 						<span class="bSubject">${detail.BOARD_TITLE}</span>
@@ -411,10 +402,8 @@
 									placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~
 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
 									onfocus="setFlag();"></textarea>
-								<input name="MEMBER_NO" type="hidden" value= "${loginUser.member_no}">
-								<input name="NICK_NAME" type="hidden" value= "${loginUser.nick_name}">
-			 						
-								
+			 					<input name="BOARD_NO" type="hidden" value="${detail.BOARD_NO}">
+			 					
 								<c:if test="${! empty sessionScope.loginUser}">
 									<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
 								</c:if>
@@ -445,11 +434,14 @@
 									<!---------------------------------- 댓글 작성 시간---------------------------------->
 									<span>${row.COMMENTS_DATE}</span>
 									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
+									<c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}">
 									<div class="remd">
-										<span class="modifyB2">수정</span>
+										<%-- <span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span> --%>
+										<span class="modifyB2" onclick>수정</span>
 											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
 											<span class="deleteB2">삭제</span>
 									</div>
+									</c:if>
 									<!-- 댓글 내용 -->
 									<p id="ptxt">${row.COMMENTS_CONTENT}</p>
 								</div>

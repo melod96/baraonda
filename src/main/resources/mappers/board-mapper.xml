@@ -22,6 +22,10 @@
  	<resultMap id="Comments" type="com.kh.baraonda.board.model.vo.Comments" >
  	   <result property="COMMENTS_CONTENT" column="COMMENTS_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
  	   <result property="COMMENTS_DATE" column="COMMENTS_DATE" />
+ 	   <result property="COMMENTS_NO" column="COMMENTS_NO" />
+ 	   <result property="BOARD_NO" column="BOARD_NO" />
+ 	   <result property="MEMBER_NO" column="MEMBER_NO" />
+ 	   <result property="COMMENTS_STATUS" column="COMMENTS_STATUS" />
  	   <result property="NICK_NAME" column="NICK_NAME" />
 	</resultMap>
 	
@@ -33,7 +37,8 @@
  	   <result property="NICK_NAME" column="NICK_NAME" />
  	   <result property="COMMENTS_COUNT" column="COMMENTS_COUNT" />
  	   <result property="BOARD_NO" column="BOARD_NO" />
- 	   
+ 	   <result property="WRITING_TYPE" column="WRITING_TYPE" />
+ 	   <result property="MEMBER_NO" column="MEMBER_NO" />
 	</resultMap>
 	
  
@@ -43,8 +48,9 @@
 		SELECT *
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
-		WHERE B.WRITING_TYPE = #{WRITING_TYPE}
+		WHERE B.WRITING_TYPE = #{WRITING_TYPE} AND B.BOARD_STATUS = 0
 		ORDER BY B.BOARD_NO DESC
+		
 	</select>
 	<!-- 게시글 페이징 처리 -->
 	<select id="selectBoardListCount" resultType="_int">
@@ -60,7 +66,7 @@
 	
 	<!-- 게시글 상세보기(작성자, 제목, 내용, 날짜, 조회수, 댓글수) -->
 	<select id="Board.detail" resultType="java.util.HashMap" parameterType = "int" resultMap="boardDetail">
-		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME, BOARD_NO,
+		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME, B.BOARD_NO, B.WRITING_TYPE, B.MEMBER_NO,
              (SELECT COUNT(*)
               FROM COMMENTS C
               JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
@@ -70,13 +76,6 @@
 		WHERE B.BOARD_NO = #{BOARD_NO}
 	</select>
 	
-	<!-- 댓글 작성 -->
-	<insert id="commentInsert">
-		INSERT INTO COMMENTS
-		VALUES(
-			SEQ_COMMENTS_NO.NEXTVAL, #{comment}, #{board_no}, #{member_no}, SYSDATE, DEFAULT
-			)
-	</insert>
 	<!-- 댓글 조회(작성자, 내용, 날짜) -->
 	<select id="commentList" resultType="java.util.HashMap" parameterType="java.util.List" resultMap="Comments">
 		SELECT C.COMMENTS_CONTENT, C.COMMENTS_DATE, M.NICK_NAME
@@ -86,42 +85,27 @@
 		WHERE C.BOARD_NO = #{BOARD_NO}
 	</select>
 	
-	<!-- 게시글 작성(이미지는 아직 설정 안함)#{writing_type} -->
-	<insert id="insert">
+	<!-- 게시글 작성 #{writing_type} -> 카테고리 설정 -->
+	<insert id="insertBoard">
 		INSERT INTO BOARD
 		VALUES(
 			SEQ_BOARD_NO.NEXTVAL, 1, #{writing_type}, #{board_title}, #{board_content},
 			#{member_no}, SYSDATE, SYSDATE, DEFAULT, DEFAULT
 			)
-		<!-- insert into board values(seq_board_no.nextval, 1, 1, '꿀팁-칼럼입니다.', '꿀팁이에요!', 1, sysdate, sysdate, default, default); -->
 	</insert>
-	<update id="update">
+	<!-- 게시글 수정 -->
+	<update id="updateBoard">
 		UPDATE BOARD SET WRITING_TYPE = #{writing_type}, BOARD_TITLE=#{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
 	</update>
+	<!-- 게시글 삭제 -->
+	<update id="deleteBoard">
+		UPDATE BOARD SET BOARD_STATUS = 1 WHERE BOARD_NO = #{board_no}
+	</update>
 	
-	<!--test-->
-	<select id="detailTest" resultMap="boardResultSet" parameterType = "int">
-		SELECT B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_COUNT, M.NICK_NAME,
-             (SELECT COUNT(*)
-              FROM COMMENTS C
-              JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
-              WHERE B.BOARD_NO = #{BOARD_NO}) AS COMMENTS_COUNT
-		FROM BOARD B
-		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
-		WHERE B.BOARD_NO = #{BOARD_NO}
-	</select>
-	
-	<insert id="insertPhoto" parameterType="Files">
-		INSERT INTO FILES
-		VALUES(
-			SEQ_FILES_NO.NEXTVAL, #{f_reference_no},
-			 #{files_title}, #{files_change_title}, 
-			 #{files_type}, #{files_root}, 0
-		)
-	
+	<!-- 댓글 insert -->
+	<insert id="insertComment">
+		INSERT INTO COMMENTS VALUES(SEQ_COMMENTS_NO.NEXTVAL, #{COMMENTS_CONTENT}, #{BOARD_NO}, #{MEMBER_NO}, SYSDATE, 0)
 	</insert>
-	
-	
 	
 	
 	
