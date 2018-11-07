@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,19 +49,12 @@
                         <div class="panel-body">
                             <div class="form-inline">
                                 <div class="input-group custom-search-form" >
-                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <input type="text" class="form-control" placeholder="Search..." id="search-content" value="${ search.content }">
                                     <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" onclick="#">
+                                    <button class="btn btn-default" type="button" onclick="search();">
                                         <i class="fa fa-search"></i>
                                     </button>
                                     </span>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control custom-select-form">
-                                        <option>회원상태</option>
-                                        <option>탈퇴</option>
-                                        <option>블랙</option>
-                                    </select>
                                 </div>
                             </div>
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -75,46 +69,84 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>1</td>
-                                        <td>user01</td>
-                                        <td>name01</td>
-                                        <td>nickName01</td>
-                                        <td>010-0000-1111</td>
-                                        <td>2018-10-10</td>
-                                        <td> - </td>
-                                    </tr>
-                                    <tr class="odd gradeX">
-                                        <td>2</td>
-                                        <td>user02</td>
-                                        <td>name02</td>
-                                        <td>nickName02</td>
-                                        <td>010-0000-1111</td>
-                                        <td>2018-10-10</td>
-                                        <td> - </td>
-                                    </tr>
-                                    <tr class="odd gradeX">
-                                        <td>3</td>
-                                        <td>user03</td>
-                                        <td>name03</td>
-                                        <td>nickName03</td>
-                                        <td>010-0000-1111</td>
-                                        <td>2018-10-10</td>
-                                        <td> - </td>
-                                    </tr>
+                                    <c:if test="${ list != null }">
+	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
+	                               			<tr class="odd gradeX">
+		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
+		                                        <td>${ list.name }</td>
+		                                        <td>${ list.product_name }</td>
+		                                        <td>${ list.product_quantity }</td>
+		                                        <td>${ list.orders_date }</td>
+		                                        <td>${ list.phone }</td>
+	                                    	</tr>
+	                               		</c:forEach>
+                               		</c:if>
                                 </tbody>
                             </table>
 
                             <div class="paginate">
-                                <button type="button" class="btn btn-outline btn-primary"><</button>
+                            	<c:if test="${ pi.currentPage <= 1 }">
+                            		<button type="button" class="btn btn-outline btn-primary" disabled>&laquo;</button>
+                            	</c:if>
+                            	<c:if test="${ pi.currentPage > 1}">
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.startPage }">&laquo;</button>
+                            	</c:if>
+                            	<c:if test="${ pi.currentPage <= 1 }">
+                            		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
+                            	</c:if>
+                            	<c:if test="${ pi.currentPage > 1}">
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.currentPage - 1 }">&lt;</button>
+                            	</c:if>
                                 <span class="paging-numbers">
-                                    <button type="button" class="btn btn-primary">1</button>
-                                    <button type="button" class="btn btn-outline btn-primary">2</button>
-                                    <button type="button" class="btn btn-outline btn-primary">3</button>
-                                    <button type="button" class="btn btn-outline btn-primary">4</button>
-                                    <button type="button" class="btn btn-outline btn-primary">5</button>
+                                	<c:if test="${ pi.currentPage <= 1 }">
+		                               	<c:forEach begin="${ pi.currentPage }" end="${ pi.currentPage + 2 }" step="1" var="num">
+		                               		<c:if test="${ num > 0 && num <= pi.endPage }">
+			                               		<c:if test="${ num == pi.currentPage }">
+			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
+			                               		</c:if>
+			                               		<c:if test="${ num != pi.currentPage }">
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               		</c:if>
+		                               		</c:if>
+										</c:forEach>
+									</c:if>
+									<c:if test="${ pi.currentPage > 1 && pi.currentPage <= (pi.maxPage - 1) }">
+		                               	<c:forEach begin="${ pi.currentPage - 2 }" end="${ pi.currentPage + 2 }" step="1" var="num">
+		                               		<c:if test="${ num > 0 && num <= pi.endPage}">
+			                               		<c:if test="${ num == pi.currentPage }">
+			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
+			                               		</c:if>
+			                               		<c:if test="${ num != pi.currentPage }">
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               		</c:if>
+		                               		</c:if>
+										</c:forEach>
+									</c:if>
+									<c:if test="${ pi.currentPage > 1 && (pi.currentPage > (pi.maxPage - 1)) }">
+		                               	<c:forEach begin="${ pi.currentPage - 2 }" end="${ pi.currentPage }" step="1" var="num">
+		                               		<c:if test="${ num <= pi.maxPage }">
+			                               		<c:if test="${ num == pi.currentPage }">
+			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
+			                               		</c:if>
+			                               		<c:if test="${ num != pi.currentPage }">
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               		</c:if>
+		                               		</c:if>
+										</c:forEach>
+									</c:if>
                                 </span>
-                                <button type="button" class="btn btn-outline btn-primary">></button>
+                                <c:if test="${ pi.currentPage < pi.endPage }">
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.currentPage + 1 }">&gt;</button>
+                                </c:if>
+                                <c:if test="${ pi.currentPage >= pi.endPage }">
+                                	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
+                                </c:if>
+                                <c:if test="${ pi.currentPage < pi.endPage }">
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.endPage }">&raquo;</button>
+                                </c:if>
+                                <c:if test="${ pi.currentPage >= pi.endPage }">
+                                	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>
+                                </c:if>
                             </div>
 
                         </div>
@@ -143,6 +175,20 @@
             filter : false
         });
     });
+    
+    function search(){
+    	var content = $('#search-content').val();
+    	
+    	location.href="goCompanyMemberAdminList.adm?currentPage=1&searchContent=" + content;
+    }
+    
+    $(document).ready(function(){
+    	$("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
+    }); 
     </script>
     
 </body>

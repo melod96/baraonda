@@ -14,7 +14,10 @@ import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.service.AdminService;
 import com.kh.baraonda.admin.model.vo.AdminBlackMember;
 import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
+import com.kh.baraonda.admin.model.vo.AdminDeclaration;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
+import com.kh.baraonda.admin.model.vo.AdminNotice;
+import com.kh.baraonda.admin.model.vo.AdminOrder;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
@@ -30,7 +33,7 @@ public class AdminController {
 		return "admin/dashboard/dashboard";
 	}
 	
-	//Member>General 목록 조회용
+	//Member>General 목록 조회
 	@RequestMapping(value="goGeneralMemberAdminList.adm")
 	public ModelAndView goGeneralMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
 												@RequestParam(value="searchContent", required=false)String content, 
@@ -60,9 +63,10 @@ public class AdminController {
 		return mv;
 	}
 	
+	//Member>Company 목록 조회
 	@RequestMapping(value="goCompanyMemberAdminList.adm")
 	public ModelAndView goCompanyMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
-										@RequestParam(value="searchContent", required=false)String content) {
+													@RequestParam(value="searchContent", required=false)String content) {
 		Search search = new Search(content);
 		int currentPage = 1;
 		if(pi.getCurrentPage() > 0) {
@@ -87,9 +91,10 @@ public class AdminController {
 		return mv;
 	}
 	
+	//Member>Black 목록 조회
 	@RequestMapping(value="goBlackMemberAdminList.adm")
 	public ModelAndView goBlackMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
-										@RequestParam(value="searchContent", required=false)String content) {
+												@RequestParam(value="searchContent", required=false)String content) {
 		Search search = new Search(content);
 		int currentPage = 1;
 		if(pi.getCurrentPage() > 0) {
@@ -114,7 +119,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="goQnAAdminList.adm")
+	/*@RequestMapping(value="goQnAAdminList.adm")
 	public String goQnAAdminList() {
 		return "admin/QnAAdmin/QnAAdminList";
 	}
@@ -127,16 +132,87 @@ public class AdminController {
 	@RequestMapping(value="goExperienceAdminList.adm")
 	public String goExperienceAdminList() {
 		return "admin/experienceAdmin/experienceAdminList";
+	}*/
+	
+	@RequestMapping(value="goNoticeAdminList.adm")
+	public ModelAndView goNoticeAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
+											@RequestParam(value="searchContent", required=false)String content) {
+		Search search = new Search(content);
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		ArrayList<AdminNotice> list;
+		try {
+			int listCount = as.selectNoticeCount(search);
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			if(listCount != 0) {
+				list = as.selectNoticeList(info, search);
+				mv.addObject("list", list);
+			}
+			
+			mv.addObject("pi", info);
+			mv.addObject("search", search);
+			mv.setViewName("admin/noticeAdmin/noticeAdminList");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 조회 실패!");
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="goDeclarationAdminList.adm")
-	public String goDeclarationAdminList() {
-		return "admin/declarationAdmin/declarationAdminList";
+	public ModelAndView goDeclarationAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
+												@RequestParam(value="searchContent", required=false)String content) {
+		Search search = new Search(content);
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		ArrayList<AdminDeclaration> list;
+		try {
+			int listCount = as.selectDeclarationCount(search);
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			if(listCount != 0) {
+				list = as.selectDeclarationList(info, search);
+				mv.addObject("list", list);
+			}
+			
+			mv.addObject("pi", info);
+			mv.addObject("search", search);
+			mv.setViewName("admin/declarationAdmin/declarationAdminList");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 조회 실패!");
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="goOrderAdminList.adm")
-	public String goOrderAdminList() {
-		return "admin/orderAdmin/orderAdminList";
+	public ModelAndView goOrderAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
+											@RequestParam(value="searchContent", required=false)String content) {
+		Search search = new Search(content);
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		ArrayList<AdminOrder> list;
+		try {
+			int listCount = as.selectOrderCount(search);
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			if(listCount != 0) {
+				list = as.selectOrderList(info, search);
+				mv.addObject("list", list);
+			}
+			
+			mv.addObject("pi", info);
+			mv.addObject("search", search);
+			mv.setViewName("admin/orderAdmin/orderAdminList");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 조회 실패!");
+		}
+		return mv;
 	}
 	
 	

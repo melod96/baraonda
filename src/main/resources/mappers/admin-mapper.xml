@@ -47,6 +47,32 @@
 		<result property="declarationCount" column="declarationCount"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminNotice" id="adminNoticeResultSet">
+		<id property="board_no" column="board_no"/>
+		<result property="board_title" column="board_title"/>
+		<result property="nick_name" column="ncik_name"/>
+		<result property="board_count" column="board_count"/>
+		<result property="board_date" column="board_date"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminDeclaration" id="adminDeclarationResultSet">
+		<id property="report_no" column="report_no"/>
+		<result property="report_type" column="report_type"/>
+		<result property="give_nick_name" column="give_ncik_name"/>
+		<result property="get_nick_name" column="get_nick_name"/>
+		<result property="report_date" column="report_date"/>
+		<result property="report_approval" column="report_approval"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminOrder" id="adminOrderResultSet">
+		<id property="order_no" column="order_no"/>
+		<result property="name" column="name"/>
+		<result property="product_name" column="product_name"/>
+		<result property="product_quantity" column="product_quantity"/>
+		<result property="orders_date" column="orders_date"/>
+		<result property="phone" column="phone"/>
+	</resultMap>
+	
 	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -154,6 +180,82 @@
 			OR NICK_NAME LIKE '%' || #{content} || '%')
 		</if>
 		GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE
+	</select>
+	
+	<select id="selectNoticeCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BOARD B
+		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+		WHERE 1 = 1
+		AND BOARD_TYPE = 6
+	    <if test="content != null and content != ''">
+			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectNoticeList" resultMap="adminNoticeResultSet">
+		SELECT B.BOARD_NO, B.BOARD_TITLE, M.NICK_NAME, B.BOARD_COUNT, B.BOARD_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+		WHERE 1 = 1
+		AND BOARD_TYPE = 6
+	    <if test="content != null and content != ''">
+			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
+			OR NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectDeclarationCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM REPORT R 
+		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
+		JOIN MEMBER M2 ON(R.REPORT_GET_NO = M2.MEMBER_NO)
+		WHERE 1 = 1
+	    <if test="content != null and content != ''">
+			AND (GIVE_NICK_NAME LIKE '%' || #{content} || '%' 
+			OR GET_NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectDeclarationList" resultMap="adminDeclarationResultSet">
+		SELECT R.REPORT_NO, R.REPORT_TYPE, M1.NICK_NAME AS GIVE_NICK_NAME, M2.NICK_NAME AS GET_NICK_NAME, R.REPORT_DATE, R.REPORT_APPROVAL
+		FROM REPORT R 
+		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
+		JOIN MEMBER M2 ON(R.REPORT_GET_NO = M2.MEMBER_NO)
+		WHERE 1 = 1
+	    <if test="content != null and content != ''">
+			AND (GIVE_NICK_NAME LIKE '%' || #{content} || '%' 
+			OR GET_NICK_NAME LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectOrderCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ORDERS O
+		JOIN MEMBER M ON(O.MEMBER_NO = M.MEMBER_NO)
+		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE 1 = 1 
+		AND PRODUCT_TYPE = 1
+	    <if test="content != null and content != ''">
+			AND (NAME LIKE '%' || #{content} || '%' 
+			OR PRODUCT_NAME LIKE '%' || #{content} || '%' 
+			OR PHONE LIKE '%' || #{content} || '%')
+		</if>
+	</select>
+	
+	<select id="selectOrderList" resultMap="adminOrderResultSet">
+		SELECT O.ORDERS_NO, M.NAME, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE, M.PHONE
+		FROM ORDERS O
+		JOIN MEMBER M ON(O.MEMBER_NO = M.MEMBER_NO)
+		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE 1 = 1 
+		AND PRODUCT_TYPE = 1
+	    <if test="content != null and content != ''">
+			AND (NAME LIKE '%' || #{content} || '%' 
+			OR PRODUCT_NAME LIKE '%' || #{content} || '%' 
+			OR PHONE LIKE '%' || #{content} || '%')
+		</if>
 	</select>
 	
 </mapper> 

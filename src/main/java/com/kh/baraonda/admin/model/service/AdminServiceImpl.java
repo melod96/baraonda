@@ -10,7 +10,10 @@ import com.kh.baraonda.admin.model.dao.AdminDao;
 import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.vo.AdminBlackMember;
 import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
+import com.kh.baraonda.admin.model.vo.AdminDeclaration;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
+import com.kh.baraonda.admin.model.vo.AdminNotice;
+import com.kh.baraonda.admin.model.vo.AdminOrder;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -50,6 +53,36 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public ArrayList<AdminBlackMember> selectBlackMemberList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectBlackMemberList(sqlSession, pi, search);
+	}
+
+	@Override
+	public int selectNoticeCount(Search search) throws AdminException {
+		return ad.selectNoticeCount(sqlSession, search);
+	}
+
+	@Override
+	public ArrayList<AdminNotice> selectNoticeList(PageInfo pi, Search search) throws AdminException {
+		return ad.selectNoticeList(sqlSession, pi, search);
+	}
+
+	@Override
+	public int selectDeclarationCount(Search search) throws AdminException {
+		return ad.selectDeclarationCount(sqlSession, search);
+	}
+
+	@Override
+	public ArrayList<AdminDeclaration> selectDeclarationList(PageInfo pi, Search search) throws AdminException {
+		return ad.selectDeclarationList(sqlSession, pi, search);
+	}
+
+	@Override
+	public int selectOrderCount(Search search) throws AdminException {
+		return ad.selectOrderCount(sqlSession, search);
+	}
+
+	@Override
+	public ArrayList<AdminOrder> selectOrderList(PageInfo pi, Search search) throws AdminException {
+		return ad.selectOrderList(sqlSession, pi, search);
 	}
 	
 }

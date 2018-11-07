@@ -183,6 +183,20 @@
             filter : false
         });
     });
+    
+    function search(){
+    	var content = $('#search-content').val();
+    	
+    	location.href="goCompanyMemberAdminList.adm?currentPage=1&searchContent=" + content;
+    }
+    
+    $(document).ready(function(){
+    	$("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
+    }); 
     </script>
     
 </body>

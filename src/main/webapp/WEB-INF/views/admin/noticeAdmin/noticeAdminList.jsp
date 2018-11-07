@@ -34,7 +34,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">신고</h1>
+                    <h1 class="page-header">공지</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -43,7 +43,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	신고 목록
+                           	 공지 목록
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -60,33 +60,25 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th width="10%">NO</th>
-                                        <th width="20%">유형</th>
-                                        <th width="20%">신고자</th>
-                                        <th width="20%">신고대상</th>
-                                        <th width="20%">신고일</th>
-                                        <th width="10%">처리여부</th>
+                                        <th width="7%">NO</th>
+                                        <th width="63%">제목</th>
+                                        <th width="10%">이름</th>
+                                        <th width="10%">조회수</th>
+                                        <th width="10">등록일</th>
                                     </tr>
                                 </thead>
                                  <tbody>
                                 	<c:if test="${ list != null }">
-	                               		<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
+	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-		                                        <td>
-		                                        	<c:if test="${ list.report_type == 1 }">댓글</c:if>
-		                                        	<c:if test="${ list.report_type == 2 }">게시글</c:if>
-		                                        </td>
-		                                        <td>${ list.give_nick_name }</td>
-		                                        <td>${ list.get_nick_name }</td>
-		                                        <td>${ list.report_date }</td>
-		                                        <td>
-													<c:if test="${ list.report_approval == 0 }">미처리</c:if>
-													<c:if test="${ list.report_approval == 1 }">처리</c:if>
-												</td>
+		                                        <td>${ list.board_title }</td>
+		                                        <td>${ list.nick_name }</td>
+		                                        <td>${ list.board_count }</td>
+		                                        <td>${ list.board_date }</td>
 	                                    	</tr>
 	                               		</c:forEach>
-	                                </c:if>
+                               		</c:if>
                                 </tbody>
                             </table>
 
@@ -95,13 +87,13 @@
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ pi.startPage }">&laquo;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goCompanyMemberAdminList.adm?currentPage=' + ${ pi.startPage }">&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage <= 1 }">
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ pi.currentPage - 1 }">&lt;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goCompanyMemberAdminList.adm?currentPage=' + ${ pi.currentPage - 1 }">&lt;</button>
                             	</c:if>
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
@@ -111,7 +103,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goCompanyMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -123,7 +115,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goCompanyMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -135,7 +127,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goCompanyMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -184,9 +176,8 @@
     
     function search(){
     	var content = $('#search-content').val();
-    	var option1 = $('#search-option-1 option:selected').val();
     	
-    	location.href="goGeneralMemberAdminList.adm?currentPage=1&searchContent=" + content + "&option1=" + option1;
+    	location.href="goCompanyMemberAdminList.adm?currentPage=1&searchContent=" + content;
     }
     
     $(document).ready(function(){
