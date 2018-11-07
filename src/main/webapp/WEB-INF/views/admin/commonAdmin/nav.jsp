@@ -18,15 +18,18 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="goQnAAdminList.adm"><i class="fa fa-comments-o fa-fw"></i> Q & A</a>
                         </li>
-                        <!-- <li>
+                        <li>
                             <a href="goAdvertisingAdminList.adm"><i class="fa fa-inbox fa-fw"></i> Advertising</a>
                         </li>
                         <li>
                             <a href="goExperienceAdminList.adm"><i class="fa fa-group fa-fw"></i> Experience</a>
                         </li> -->
+						<li>
+                            <a href="goNoticeAdminList.adm"><i class="fa fa-bullhorn fa-fw"></i> Notice</a>
+                        </li>
                         <li>
                             <a href="goDeclarationAdminList.adm"><i class="fa fa-bell fa-fw"></i> Declaration</a>
                         </li>
