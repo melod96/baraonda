@@ -118,6 +118,17 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return i;
 	}
+	//댓글 delete
+	@Override
+	public int deleteComment(SqlSessionTemplate sqlSession, int comments_no) {
+		int i = -99;
+		
+		sqlSession.selectOne("Board.deleteComment", comments_no);
+		
+		i = 1;
+		
+		return i;
+	}
 
 
 }

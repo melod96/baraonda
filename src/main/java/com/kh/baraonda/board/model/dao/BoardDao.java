@@ -38,6 +38,8 @@ public interface BoardDao {
 	
 	//댓글 insert
 	int insertComment(SqlSessionTemplate sqlSession, Comments c);
+	//댓글 delete
+	int deleteComment(SqlSessionTemplate sqlSession, int comments_no);
 	
 
 	

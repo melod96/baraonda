@@ -83,15 +83,13 @@ div#editor {
 										<td class="cateTd">카테고리</td>
 										<td>
 											<select name="writing_type" id="form_control" class="form-control input-xshort">
-												<option value="1">다이어트 꿀팁</option>
-												<option value="2">다이어트 식단</option>
-												<option value="3">칼로리 사전</option>
-												<option value="4">홈트레이닝</option>
-												<option value="5">체험단</option>
-												<option value="6">자유게시판</option>
-												<option value="7">고객문의</option>
-												<!-- 공지사항 게시판은 관리자만 사용가능하게 설정  -->
-												<!-- <option>공지사항</option> -->
+												<option value="11">비포&애프터</option>
+												<option value="12">자극사진</option>
+												<option value="13">일기</option>
+												<option value="14">식단</option>
+												<option value="15">고민/질문</option>
+												<option value="18">자유게시판</option>
+												<option value="19">관리자에게</option>
 											</select>
 										</td>
 									</tr>
@@ -123,7 +121,7 @@ div#editor {
 								
 							</div>
 						<div class="boardWriteBtn">
-							<input id="btnSave" type="submit" value="작성하기" class="btn btn-success">
+							<input id="btnSave" type="button" value="작성하기" class="btn btn-success">
 							<input type="reset" value="취소" class="btn btn-warning">
 						</div>
 						</form>
@@ -164,11 +162,18 @@ div#editor {
 		$(document).ready(function(){
 			$("#btnSave").click(function(){
 				var title = $("#board_title").val();
+				var content = $("#edit").val();
 				if(title == ""){
 					alert("제목을 입력하세요.");
-					location.href="${path}/baraonda/write.do";
-					document.form1.title.focus();
+					document.getElementById('title').focus();
+					return;
 				}
+				if(content == ""){
+					alert("내용을 입력하세요.");
+					document.getElementById('edit').focus();
+					return;
+				}
+				document.form1.submit();
 			});
 		});
 	</script>

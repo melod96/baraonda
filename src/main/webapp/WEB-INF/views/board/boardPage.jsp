@@ -24,10 +24,26 @@
 			location.href="${path}/baraonda/write.do";
 		});
 	});
+	//목록 버튼
+	$(document).ready(function(){
+		$("#boardList").click(function(){
+			location.href="${path}/baraonda/list.do?writing_type=${detail.WRITING_TYPE}";
+		});
+	});	
 	
 	//게시물 삭제 버튼
 	$(document).ready(function(){
 		$("#deleteB").click(function(){
+			if(confirm("삭제하시겠습니까?") == true){
+				document.form.submit();
+			}else{ //취소
+				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+			}
+		});
+	});
+	//댓글 삭제 버튼
+	$(document).ready(function(){
+		$(".deleteB2").click(function(){
 			if(confirm("삭제하시겠습니까?") == true){
 				document.form.submit();
 			}else{ //취소
@@ -312,7 +328,7 @@
 .modifyB2:hover, .deleteB2:hover{cursor: pointer;}
 .paging-numbers a.on{background:#f13d3d;}
 .container1{margin: auto; width:75%;}
-#writeBtn:hover{cursor: pointer;}
+#writeBtn:hover, #boardList:hover {cursor: pointer;}
 
 </style>
 <body class="page1" id="top">
@@ -324,7 +340,35 @@
 				<!---------------------------------------------------------------------------------------------------------------------------------------------->
 				<div class="container1">
 					<!-- 게시판 명 -->
-					<h2 class="boardName">자유게시판
+					<%-- <c:if test="${detail.WRITING_TYPE == 1}">
+						<h2 class="boardName">자유게시판				
+					</c:if> --%>
+					
+					<c:choose>
+						<c:when test="${detail.WRITING_TYPE eq 11}">
+							<h2 class="boardName">비포&애프터
+						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 12}">
+							<h2 class="boardName">자극사진
+						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 13}">
+							<h2 class="boardName">일기
+						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 14}">
+							<h2 class="boardName">식단
+						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 15}">
+							<h2 class="boardName">고민/질문
+						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 18}">
+							<h2 class="boardName">자유게시판
+						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 19}">
+							<h2 class="boardName">관리자에게
+						</c:when>
+ 					</c:choose>
+
+
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
 					<c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}">
 					<span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span>
@@ -379,14 +423,14 @@
 					<c:if test="${! empty sessionScope.loginUser}">
 					<div class="btn_ar">
 						<img id="writeBtn" class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
-						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
+						<img id="boardList" class="boardList" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 					</div>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
 					<div class="btn_ar login">
 						<img id="writeBtn" class="pageWriteBtn login" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif"
 						 data-toggle="modal" data-target="#login-modal">
-						<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
+						<img id="boardList" class="boardList" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 					</div>
 					</c:if>
 					<div id="commList">
@@ -431,15 +475,19 @@
 								<div class="comment-txt">
 									<!--------------------------------- 댓글 작성자명 ---------------------------------->
 									<strong id="ntxt">${row.NICK_NAME}</strong>
+									<input type="hidden" >
 									<!---------------------------------- 댓글 작성 시간---------------------------------->
 									<span>${row.COMMENTS_DATE}</span>
 									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-									<c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}">
+									<%-- <input type="hidden" name="COMMENTS_NO" value="${row.COMMENTS_NO}"> --%>
+									<%-- <c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}"> --%>
+									<c:if test="${sessionScope.loginUser.member_no == row.MEMBER_NO}">
 									<div class="remd">
 										<%-- <span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span> --%>
 										<span class="modifyB2" onclick>수정</span>
 											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
-											<span class="deleteB2">삭제</span>
+											<span class="deleteB2" id="deleteB2" onClick="location.href='deleteComment.do?comments_no='+${row.COMMENTS_NO}+'&board_no='+${detail.BOARD_NO}">삭제</span>
+											<%-- <span class="deleteB2" id="deleteB2" onClick="location.href='${path}/baraonda/deleteComment.do?comments_no=${row.COMMENTS_NO}'">삭제</span> --%>
 									</div>
 									</c:if>
 									<!-- 댓글 내용 -->

@@ -95,6 +95,11 @@ public class BoardServiceImpl implements BoardService{
 	public int insertComment(Comments c) {
 		return boardDao.insertComment(sqlSession, c);
 	}
+	//댓글 delete
+	@Override
+	public int deleteComment(int comments_no) {
+		return boardDao.deleteComment(sqlSession, comments_no);
+	}
 	
 
 }

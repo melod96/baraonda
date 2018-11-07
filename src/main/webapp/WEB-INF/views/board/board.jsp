@@ -115,7 +115,7 @@
 }
 
 #boardCategory:hover{cursor:pointer; color : #aaccaa;}
-
+.boardName{font-weight: bold;}
 
 </style>
 
@@ -131,13 +131,19 @@
 			<div class="row">
 				<!------------------------------ 작업 공간 ------------------------------>
 				<div class="container1">
-					<h2>자유게시판</h2>
+					<h2 class="boardName">커뮤니티</h2>
+					
 					<hr class="boardHr">
 					
+			 		<!-- writing_type: 11.비포&애프터 12.자극사진 13.일기 14.식단 15.고민/질문 18.자유게시판 19관리자에게 -->
 					<div style="margin-bottom:10px; margin-left:10px;">
-			 			<a id="boardCategory">자유게시판</a>&nbsp;|&nbsp;<a id="boardCategory">일기</a>&nbsp;|&nbsp;<a id="boardCategory">고민/질문</a>&nbsp;|&nbsp;
-			 			<a id="boardCategory">식단</a>&nbsp;|&nbsp;<a id="boardCategory">자극사진</a>&nbsp;|&nbsp;<a id="boardCategory">관리자에게</a>
-			 			<!-- 13일기 15고민/질문 -->
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=11">비포&애프터</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=12">자극사진</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=13">일기</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=14">식단</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=15">고민/질문</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=18">자유게시판</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=19">관리자에게</a>
 					</div>
 					
 					
@@ -190,7 +196,7 @@
 						<c:if test="${ pi.currentPage > 1 }">
 							<c:url var="blistBack" value="list.do">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
-								<c:param name="search" value="${search}"/>
+								<c:param name="writing_type" value="${writing_type}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -202,21 +208,19 @@
 							<c:if test="${ p ne pi.currentPage }">
 								<c:url var="blistCheck" value="list.do">
 									<c:param name="currentPage" value="${ p }"/>
-									<%-- <c:param name="search" value="${search}"/> --%>
+									<c:param name="writing_type" value="${writing_type}"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
 						</c:forEach>
 						
-						
-						
 						<c:if test="${ pi.currentPage >= pi.maxPage }">
 							&nbsp; [다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="searchNotice.nt">
+							<c:url var="blistEnd" value="list.do">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-								<%-- <c:param name="search" value="${search}"/> --%>
+								<c:param name="writing_type" value="${writing_type}"/>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
