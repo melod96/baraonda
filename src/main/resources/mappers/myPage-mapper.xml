@@ -51,6 +51,8 @@
 		<result property="board_no" column="BOARD_NO" />
 		<result property="member_no" column="MEMBER_NO"/>
 		<result property="marking_count" column="MARKING_COUNT"/>
+		<result property="board_type" column="BOARD_TYPE"/>
+		<result property="board_title" column="BOARD_TITLE"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.baraonda.myPage.model.vo.Comments" id="commentsResultSet2">
@@ -63,6 +65,34 @@
 		<result property="board_title" column="BOARD_TITLE"/>
 		<result property="board_type" column="BOARD_TYPE"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.PointRecord" id="pointRecordResultSet">
+		<id property="point_record_no" column="POINT_RECORD_NO"/>
+		<result property="point_no" column="POINT_NO" />
+		<result property="point_record_date" column="POINT_RECORD_DATE" />
+		<result property="before_point" column="BEFORE_POINT" />
+		<result property="after_point" column="AFTER_POINT"/>
+		<result property="point_type" column="POINT_TYPE"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Orders" id="ordersResultSet">
+		<id property="orders_no" column="ORDERS_NO"/>
+		<result property="member_no" column="MEMBER_NO" />
+		<result property="product_no" column="PRODUCT_NO" />
+		<result property="orders_date" column="ORDERS_DATE" />
+		<result property="orders_type" column="ORDERS_TYPE"/>
+		<result property="product_quantity" column="PRODUCT_QUANTITY"/>
+		<result property="banner_start_date" column="BANNER_START_DATE"/>
+		<result property="banner_end_date" column="BANNER_END_DATE"/>
+		<result property="banner_content" column="BANNER_CONTENT"/>
+		<result property="addressee_name" column="ADDRESSEE_NAME"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="addressee_phone" column="ADDRESSEE_PHONE"/>
+		<result property="product_name" column="PRODUCT_NAME"/>
+	</resultMap>
+	
+	
+	
 	
 	
 	
@@ -79,7 +109,7 @@
   		
 	    (SELECT COUNT(M.MARKING_NO) MARKING_COUNT FROM MARKING M
 	  	JOIN BOARD B ON(M.BOARD_NO = B.BOARD_NO)
-	    WHERE B.MEMBER_NO = #{member_no}),
+	    WHERE B.MEMBER_NO = #{member_no} AND M.MARKING_TYPE = 2),
 	    
 	    (SELECT ENROLL_DATE FROM MEMBER
 	    WHERE MEMBER_NO = #{member_no}),
@@ -138,6 +168,7 @@
   		WHERE B.MEMBER_NO = #{member_no} group by B.BOARD_NO
 	</select>
 	
+	<!--댓글 목록 개수 조회-->
 	<select id="selectCommentsListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM COMMENTS
@@ -152,6 +183,56 @@
         JOIN BOARD B ON(C.BOARD_NO = B.BOARD_NO)
 		WHERE C.COMMENTS_STATUS = '0' AND C.MEMBER_NO = #{member_no}
 		ORDER BY COMMENTS_NO DESC
+	</select>
+	
+	<!--북마크 목록 개수 조회-->
+	<select id="selectBookMarkListCount" resultType="_int">
+		SELECT COUNT(*)
+   		FROM MARKING
+    	WHERE MARKING_TYPE = 1 AND MEMBER_NO = #{member_no}
+	</select>
+	
+	<!--북마크 목록 조회-->
+	<select id="selectBookMarkList" resultMap="markingResultSet">
+		SELECT M.MARKING_NO, M.MARKING_TYPE, M.MARKING_DATE, M.BOARD_NO,
+        M.MEMBER_NO, B.BOARD_TYPE, B.BOARD_TITLE FROM MARKING  M
+    	JOIN BOARD B ON(B.BOARD_NO = M.BOARD_NO)
+   		WHERE M.MARKING_TYPE = 1 AND M.MEMBER_NO = #{member_no}
+	</select>
+	
+	<!--경험치 획득 목록 개수 조회-->
+	<select id="selectPointListCount" resultType="_int">
+		SELECT COUNT(*)
+	    FROM POINT_RECORD
+	    WHERE POINT_NO = #{member_no}
+	</select>
+	
+	<!--경험치 획득 목록 조회-->
+	<select id="selectPointList" resultMap="pointRecordResultSet">
+		SELECT *
+	    FROM POINT_RECORD
+	    WHERE POINT_NO = #{member_no}
+	</select>
+	
+	<!--교환한 상품 목록 개수 조회-->
+	<select id="selectChangeGoodsListCount" resultType="_int">
+		SELECT COUNT(*)
+ 	    FROM ORDERS
+ 	    WHERE MEMBER_NO = #{member_no} AND ORDERS_TYPE = 1
+	</select>
+	
+	
+	
+	<!--교환한 상품 목록 조회-->
+	<select id="selectChangeGoodsList" resultMap="ordersResultSet">
+		SELECT O.ORDERS_NO, O.MEMBER_NO, O.PRODUCT_NO,
+		O.ORDERS_DATE, O.ORDERS_TYPE, 
+		A.ADDRESSEE_NAME, A.ADDRESS, A.ADDRESSEE_PHONE,
+		P.PRODUCT_NAME
+		FROM ORDERS O
+		JOIN ADDRESS A ON(O.MEMBER_NO = A.MEMBER_NO)
+		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE O.MEMBER_NO = #{member_no} AND O.ORDERS_TYPE = 1
 	</select>
 	
 </mapper>
