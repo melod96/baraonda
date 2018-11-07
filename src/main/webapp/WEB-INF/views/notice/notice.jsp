@@ -144,7 +144,7 @@
 							[이전] &nbsp;
 						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="blistBack" value="searchNotice.nt">
+							<c:url var="blistBack" value="noticelist.nt">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
@@ -155,7 +155,7 @@
 								<font color="red" size="4"><b>[${ p }]</b></font>
 							</c:if>
 							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="blistCheck" value="searchNotice.nt">
+								<c:url var="blistCheck" value="noticelist.nt">
 									<c:param name="currentPage" value="${ p }"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
@@ -168,7 +168,7 @@
 							&nbsp; [다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="searchNotice.nt">
+							<c:url var="blistEnd" value="noticelist.nt">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 							</c:url>
 							&nbsp; 

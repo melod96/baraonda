@@ -233,15 +233,32 @@ public class NoticeDaoImpl implements NoticeDao{
 	//다음글 번호 
 	@Override
 	public int selectNextNo(SqlSessionTemplate sqlSession, String notice_no) {
+		String next = String.valueOf(sqlSession.selectOne("Notice2.selectNextNo", notice_no));
+		System.out.println("길이" + next.length());
+		System.out.println(next);
 		
-		return sqlSession.selectOne("Notice2.selectNextNo", notice_no);
+		if(next.equals("null")) {
+			System.out.println("????");
+			return 0;
+		}else{	
+			int n = Integer.parseInt(next);
+			System.out.println(n);
+			return n;
+		}
 	}
 
 	//이전글 번호
 	@Override
 	public int selectBeforeNo(SqlSessionTemplate sqlSession, String notice_no) {
-		
-		return sqlSession.selectOne("Notice2.selectBeforeNo", notice_no);
+		String before = null;
+		before = String.valueOf(sqlSession.selectOne("Notice2.selectBeforeNo", notice_no));
+		if(before.equals("null")) {
+			return 0;
+		}else{
+			int befo = Integer.parseInt(before);
+			
+			return befo;
+		}
 	}
 
 

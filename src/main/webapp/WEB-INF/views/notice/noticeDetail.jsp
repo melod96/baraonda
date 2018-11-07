@@ -479,27 +479,31 @@
 					</div>
 
 					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
-					<div class="balist1">
-						<a href="noticeDetail.nt?notice_no=${next.board_no }" class="aflist1">다음글 ▲
-							<p class="aflist2">${next.board_title }</p>
-						</a>
-						<div class="aflist3">
-							<p class="aflistp">${next.board_date }</p>
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
-							<p class="aflistp">조회수 ${next.board_count }</p>
+					<c:if test="${ ! empty next }">
+						<div class="balist1">
+							<a href="noticeDetail.nt?notice_no=${next.board_no }" class="aflist1">다음글 ▲
+								<p class="aflist2">${next.board_title }</p>
+							</a>
+							<div class="aflist3">
+								<p class="aflistp">${next.board_date }</p>
+								<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
+								<p class="aflistp">조회수 ${next.board_count }</p>
+							</div>
 						</div>
-					</div>
+					</c:if>
 					<!------------------------------------ 이전글 제목, 날짜, 조회수 ------------------------------------>
-					<div>
-						<a href="noticeDetail.nt?notice_no=${before.board_no }" class="belist1">이전글 ▼
-							<p class="belist2">${before.board_title }</p>
-						</a>
-						<div class="belist3">
-							<p class="aflistp">${before.board_date }</p>
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
-							<p class="aflistp">조회수 ${before.board_count }</p>
+					<c:if test="${! empty before }">
+						<div>
+							<a href="noticeDetail.nt?notice_no=${before.board_no }" class="belist1">이전글 ▼
+								<p class="belist2">${before.board_title }</p>
+							</a>
+							<div class="belist3">
+								<p class="aflistp">${before.board_date }</p>
+								<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
+								<p class="aflistp">조회수 ${before.board_count }</p>
+							</div>
 						</div>
-					</div>
+					</c:if>
 				</div>
 				<!-------------------------------------------------------------------------->
 			</div>

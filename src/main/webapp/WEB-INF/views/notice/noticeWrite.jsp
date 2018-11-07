@@ -78,12 +78,12 @@ div#editor {
 									<tr>
 										<td>제목</td>
 										<td><input type="text" class="form-control"
-											name="title"></td>
+											name="board_title"></td>
 								
 								</table>
 								<!------------------------------ 글작성 공간 에디터 ------------------------------>
 							
-								<textarea id="edit" name="content" style="margin-top: 30px;"></textarea>
+								<textarea id="edit" name="board_content" style="margin-top: 30px;"></textarea>
 
 							</div>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
