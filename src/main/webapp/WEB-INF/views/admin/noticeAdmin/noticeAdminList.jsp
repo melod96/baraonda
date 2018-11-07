@@ -177,7 +177,7 @@
     function search(){
     	var content = $('#search-content').val();
     	
-    	location.href="goCompanyMemberAdminList.adm?currentPage=1&searchContent=" + content;
+    	location.href="goNoticeAdminList.adm?currentPage=1&searchContent=" + content;
     }
     
     $(document).ready(function(){

@@ -63,6 +63,14 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="goGeneralMemberAdminDetail.adm")
+	public ModelAndView goGeneralMemberAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		
+		mv.setViewName("admin/memberAdmin/generalMemberAdminDetail");
+		
+		return mv;
+	}
+	
 	//Member>Company 목록 조회
 	@RequestMapping(value="goCompanyMemberAdminList.adm")
 	public ModelAndView goCompanyMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
