@@ -132,7 +132,7 @@ public class NoticeController {
 	//공지사항 insert
 	@RequestMapping("insertNotice.nt")
 	public String insertNotice(@SessionAttribute("loginUser") Member m,Notice n, Model model) {
-		
+		n.setMember_no(m.getMember_no());
 		int insert = ns.insertNotice(n);
 		
 		if(insert > 0) {

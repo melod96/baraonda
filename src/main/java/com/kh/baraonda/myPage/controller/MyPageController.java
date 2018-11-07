@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.baraonda.board.model.vo.Board;
@@ -348,11 +349,18 @@ public class MyPageController {
 	
 	//마이페이지 - 병아리 키우기로 이동하는 메소드
 	@RequestMapping("growingChicksView.my")
-	public String showGrowingChicksView(HttpSession session) {
+	public String showGrowingChicksView(@SessionAttribute("loginUser") Member m, Model model) {
 		
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if(loginUser != null) {
+		
+    if(loginUser != null) {
+    
+      Point point = mps.selectPoint(m);
+		
+		  model.addAttribute("point", point);
+      
 			return "myPage/growingChicks";
+      
 		}else {
 			return "redirect:goMain.me";
 		}

@@ -49,10 +49,10 @@
 			<div class="chicksDiv1">
 				<label>병아리 등급</label>
 				<br>
-				<label>경험치양 (900/1000)</label>
+				<label>경험치양 (${point.accrue_point})</label>
 				
 				<div class="progress">
-				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point}px">
 						<span class="sr-only">70% Complete</span>
 					</div>
 				</div>
