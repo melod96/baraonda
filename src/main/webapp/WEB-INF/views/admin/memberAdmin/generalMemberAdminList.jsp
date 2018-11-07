@@ -16,6 +16,9 @@
         margin-top: 10px;
         text-align: center;
     }
+    .gradeX td:hover{
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -83,6 +86,7 @@
                                 	<c:if test="${ list != null }">
 	                               		<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
+	                               				<input type="hidden" value="${ list.member_no }" id="member_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
 		                                        <td>${ list.id }</td>
 		                                        <td>${ list.name }</td>
@@ -191,6 +195,19 @@
             info : false,
             filter : false
         });
+        
+        $("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
+        
+        $(".gradeX").children().each(function(){
+    		$(this).click(function(){
+    			var member_no = $(this).parent().children("#member_no").val();
+        		location.href="goGeneralMemberAdminDetail.adm?num=" + member_no;
+    		});
+    	});
     });
     
     function search(){
@@ -199,15 +216,6 @@
     	
     	location.href="goGeneralMemberAdminList.adm?currentPage=1&searchContent=" + content + "&option1=" + option1;
     }
-    
-    $(document).ready(function(){
-    	$("#search-option-1").children().each(function(){
-    		if($(this).val() == "${ search.option1 }"){
-    			$(this).attr("selected","selected"); 
-    		}
-    	});
-    }); 
-    
     </script>
     
 </body>

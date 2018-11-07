@@ -9,6 +9,7 @@
 
 <jsp:include page="loginModal.jsp"/>
 <jsp:include page="joinModal.jsp"/>
+<jsp:include page="joinCompanyModal.jsp"/>
 <jsp:include page="head.jsp"/>
 
 

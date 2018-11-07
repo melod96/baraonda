@@ -11,11 +11,13 @@ public class Marking {
 	private int board_no;
 	private int member_no;
 	private int marking_count;
+	private int board_type;
+	private String board_title;
 
 	public Marking() {}
 
-	public Marking(int marking_no, int marking_type, Date marking_date, int board_no, int member_no,
-			int marking_count) {
+	public Marking(int marking_no, int marking_type, Date marking_date, int board_no, int member_no, int marking_count,
+			int board_type, String board_title) {
 		super();
 		this.marking_no = marking_no;
 		this.marking_type = marking_type;
@@ -23,12 +25,15 @@ public class Marking {
 		this.board_no = board_no;
 		this.member_no = member_no;
 		this.marking_count = marking_count;
+		this.board_type = board_type;
+		this.board_title = board_title;
 	}
 
 	@Override
 	public String toString() {
 		return "Marking [marking_no=" + marking_no + ", marking_type=" + marking_type + ", marking_date=" + marking_date
-				+ ", board_no=" + board_no + ", member_no=" + member_no + ", marking_count=" + marking_count + "]";
+				+ ", board_no=" + board_no + ", member_no=" + member_no + ", marking_count=" + marking_count
+				+ ", board_type=" + board_type + ", board_title=" + board_title + "]";
 	}
 
 	public int getMarking_no() {
@@ -79,5 +84,24 @@ public class Marking {
 		this.marking_count = marking_count;
 	}
 
+	public int getBoard_type() {
+		return board_type;
+	}
+
+	public void setBoard_type(int board_type) {
+		this.board_type = board_type;
+	}
+
+	public String getBoard_title() {
+		return board_title;
+	}
+
+	public void setBoard_title(String board_title) {
+		this.board_title = board_title;
+	}
+
+	
+
+	
 	
 }

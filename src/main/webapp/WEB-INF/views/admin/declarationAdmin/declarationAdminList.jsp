@@ -186,7 +186,7 @@
     	var content = $('#search-content').val();
     	var option1 = $('#search-option-1 option:selected').val();
     	
-    	location.href="goGeneralMemberAdminList.adm?currentPage=1&searchContent=" + content + "&option1=" + option1;
+    	location.href="goDeclarationAdminList.adm?currentPage=1&searchContent=" + content;
     }
     
     $(document).ready(function(){

@@ -35,7 +35,9 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
+import com.kh.baraonda.myPage.model.vo.PointRecord;
 
 @Controller
 public class MyPageController {
@@ -53,17 +55,22 @@ public class MyPageController {
 	public String ChangeInfoView(HttpSession session, Model model) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		
-		//포인트 불러오기
-		Point point = mps.selectPoint(loginUser);
-		//request.setAttribute("point", point);
-		model.addAttribute("point", point);
-		
-		//프로필사진 불러오기
-		Files file = mps.selectPhoto(loginUser);
-		//request.setAttribute("file", file);
-		model.addAttribute("file", file);
-		
-		return "myPage/changeInfo";
+		if(loginUser != null) {
+			
+			//포인트 불러오기
+			Point point = mps.selectPoint(loginUser);
+			//request.setAttribute("point", point);
+			model.addAttribute("point", point);
+			
+			//프로필사진 불러오기
+			Files file = mps.selectPhoto(loginUser);
+			//request.setAttribute("file", file);
+			model.addAttribute("file", file);
+			
+			return "myPage/changeInfo";
+		}else {
+			return "redirect:goMain.me";
+		}
 	}
 	
 	//마이페이지 - 내 정보 변경 메소드
@@ -176,10 +183,13 @@ public class MyPageController {
 					while((line = bufReader.readLine()) != null) {
 						if(line.indexOf('$')>0) {
 							System.out.println(line.substring(line.indexOf('$')+1,line.lastIndexOf('$')));
-							System.out.println(line.substring(line.indexOf("^")+1,line.lastIndexOf("^")));
+							System.out.println("test2 : "+line.substring(line.indexOf("^")+1,line.lastIndexOf("^")));
+							System.out.println("loginUser_member_no : " + loginUser.getMember_no());
+							
 							if(Integer.parseInt(line.substring(line.indexOf("^")+1,line.lastIndexOf("^"))) == loginUser.getMember_no()) {
 								
 								set.add(line.substring(line.indexOf('$')+1,line.lastIndexOf('$')));
+								System.out.println("set.size() : " + set.size());
 							}
 						}
 					}
@@ -267,10 +277,65 @@ public class MyPageController {
 			
 			break;
 			
-		case "GoodPoint" : System.out.println("GoodPoint");break;
-		case "LikeThis" : System.out.println("LikeThis");break;
-		case "Point" : System.out.println("Point");break;
-		case "ChangeGoods" : System.out.println("ChangeGoods");break;
+		case "BookMark" :
+			int bookMarkListCount = mps.selectBookMarkListCount(member_no);
+			PageInfo bPi = Pagination.getPageInfo(currentPage, bookMarkListCount);
+			
+			ArrayList<Marking> bList = mps.selectBookMarkList(bPi,member_no);
+			
+			String bDate[] = new String[10];
+			
+			for(int i = 0 ; i < bList.size(); i++) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				bDate[i] = transFormat.format(bList.get(i).getMarking_date());
+			}
+			
+			hmap.put("bList", bList);
+			hmap.put("bDate",bDate);
+			hmap.put("pi",bPi);
+			
+			break;
+			
+		case "Point" : 
+			int pointListCount = mps.selectPointListCount(member_no);
+			PageInfo pPi = Pagination.getPageInfo(currentPage, pointListCount);
+			
+			ArrayList<PointRecord> pList = mps.selectPointList(pPi,member_no);
+			
+			String pDate[] = new String[10];
+			
+			for(int i = 0 ; i < pList.size(); i++) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				pDate[i] = transFormat.format(pList.get(i).getPoint_record_date());
+			}
+			
+			hmap.put("pList", pList);
+			hmap.put("pDate",pDate);
+			hmap.put("pi",pPi);
+			
+			break;
+			
+		case "ChangeGoods" : 
+			int changeGoodsCount = mps.selectChangeGoodsListCount(member_no);
+			PageInfo gPi = Pagination.getPageInfo(currentPage, changeGoodsCount);
+			
+			ArrayList<Orders> gList = mps.selectChangeGoodsList(gPi,member_no);
+			
+			String gDate[] = new String[10];
+			
+			for(int i = 0 ; i < gList.size(); i++) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				gDate[i] = transFormat.format(gList.get(i).getOrders_date());
+			}
+			
+			hmap.put("gList", gList);
+			hmap.put("gDate",gDate);
+			hmap.put("pi",gPi);
+			
+			break;
 		
 		}
 		
@@ -285,17 +350,40 @@ public class MyPageController {
 	//마이페이지 - 병아리 키우기로 이동하는 메소드
 	@RequestMapping("growingChicksView.my")
 	public String showGrowingChicksView(@SessionAttribute("loginUser") Member m, Model model) {
-		Point point = mps.selectPoint(m);
 		
-		model.addAttribute("point", point);
+		Member loginUser = (Member) session.getAttribute("loginUser");
 		
-		return "myPage/growingChicks";
+    if(loginUser != null) {
+    
+      Point point = mps.selectPoint(m);
+		
+		  model.addAttribute("point", point);
+      
+			return "myPage/growingChicks";
+      
+		}else {
+			return "redirect:goMain.me";
+		}
 	}
 	
 	//마이페이지 - 기업 화면으로 이동하는 메소드
 		@RequestMapping("companyView.my")
-		public String showCompanyPage() {
-			return "myPage/company";
-		}
+	public String showCompanyPage(HttpSession session) {
+			
+		Member loginUser = (Member) session.getAttribute("loginUser");
 		
+		if(loginUser != null) {
+			return "myPage/company";
+		}else {
+			return "redirect:goMain.me";
+		}
+	}
+		
+	//마이페이지 - 다른사람이 보는 개인정보 화면으로 이동하는 메소드
+			@RequestMapping("othersView.my")
+		public String showOthersView(HttpSession session) {
+				
+				return "myPage/othersView";
+		}
+	
 }

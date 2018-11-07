@@ -13,7 +13,9 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
+import com.kh.baraonda.myPage.model.vo.PointRecord;
 
 @Repository
 public class MyPageDaoImpl implements MyPageDao{
@@ -79,6 +81,51 @@ public class MyPageDaoImpl implements MyPageDao{
 		RowBounds rowBounds = new RowBounds(offset, cPi.getLimit());
 		
 		return (ArrayList)sqlSession.selectList("MyPage.selectCommentList",member_no, rowBounds);
+	}
+
+	@Override
+	public int selectBookMarkListCount(SqlSessionTemplate sqlSession, int member_no) {
+		return sqlSession.selectOne("MyPage.selectBookMarkListCount",member_no);
+	}
+
+	@Override
+	public ArrayList<Marking> selectBookMarkList(SqlSessionTemplate sqlSession, PageInfo bPi, int member_no) {
+		
+		int offset = (bPi.getCurrentPage() - 1) * bPi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, bPi.getLimit());
+		
+		return (ArrayList)sqlSession.selectList("MyPage.selectBookMarkList",member_no, rowBounds);
+	}
+
+	@Override
+	public int selectPointListCount(SqlSessionTemplate sqlSession, int member_no) {
+		return sqlSession.selectOne("MyPage.selectPointListCount",member_no);
+	}
+
+	@Override
+	public ArrayList<PointRecord> selectPointList(SqlSessionTemplate sqlSession, PageInfo pPi, int member_no) {
+
+		int offset = (pPi.getCurrentPage() - 1) * pPi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pPi.getLimit());
+		
+		return (ArrayList)sqlSession.selectList("MyPage.selectPointList",member_no, rowBounds);
+	}
+
+	@Override
+	public int selectChangeGoodsListCount(SqlSessionTemplate sqlSession, int member_no) {
+		return sqlSession.selectOne("MyPage.selectChangeGoodsListCount",member_no);
+	}
+
+	@Override
+	public ArrayList<Orders> selectChangeGoodsList(SqlSessionTemplate sqlSession, PageInfo gPi, int member_no) {
+		
+		int offset = (gPi.getCurrentPage() - 1) * gPi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, gPi.getLimit());
+		
+		return (ArrayList)sqlSession.selectList("MyPage.selectChangeGoodsList",member_no, rowBounds);
 	}
 
 

@@ -29,7 +29,7 @@
 		#exe3{margin-top:30px; margin-left:auto; margin-right:auto;width:150px;text-align:center;
 				font-weight:bold; font-size:16px; }	
 		.introInfo{width:250px;margin-top:20px;display:inline-block;}
-		#introText{width:300px;height:300px; border:1px solid darkgray; border-radius:3px;}
+		#introText{width:300px;height:300px; border:1px solid darkgray; border-radius:3px;overflow-y:scroll;overflow-x:hidden;}
 		#myExe{margin-bottom:10px;}
 		 .profileArea1, .profileArea2{display:inline-block;}
 		 .profileArea1{margin-top:20px;}
@@ -93,7 +93,15 @@
 					<div class="profileArea2">
 						<div class="introInfo">
 							<h5>[한 줄 다짐]</h5>
-							<pre id="introText">다들 한 번 열심히 해봅시다.</pre>
+							<div id="introText">
+								<c:if test="${!empty loginUser.self_introduction}">
+									${loginUser.self_introduction }
+								</c:if>
+								
+								<c:if test="${empty loginUser.self_introduction}">
+								자기소개가 없습니다.
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</div>

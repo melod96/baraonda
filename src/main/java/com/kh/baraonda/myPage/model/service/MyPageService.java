@@ -9,7 +9,9 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
+import com.kh.baraonda.myPage.model.vo.PointRecord;
 
 public interface MyPageService {
 
@@ -32,6 +34,21 @@ public interface MyPageService {
 	int selectCommentsListCount(int member_no);
 
 	ArrayList<Comments> selectCommentList(PageInfo cPi, int member_no);
+
+	int selectBookMarkListCount(int member_no);
+
+	ArrayList<Marking> selectBookMarkList(PageInfo bPi, int member_no);
+
+	int selectPointListCount(int member_no);
+
+	ArrayList<PointRecord> selectPointList(PageInfo pPi, int member_no);
+
+	int selectChangeGoodsListCount(int member_no);
+
+	ArrayList<Orders> selectChangeGoodsList(PageInfo gPi, int member_no);
+
+
+
 
 
 

@@ -187,7 +187,7 @@
     function search(){
     	var content = $('#search-content').val();
     	
-    	location.href="goCompanyMemberAdminList.adm?currentPage=1&searchContent=" + content;
+    	location.href="goBlackMemberAdminList.adm?currentPage=1&searchContent=" + content;
     }
     
     $(document).ready(function(){

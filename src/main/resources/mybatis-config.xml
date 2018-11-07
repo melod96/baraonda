@@ -40,6 +40,10 @@
 			<typeAlias type="com.kh.baraonda.tips.model.vo.TipsMarking" alias="TipsMarking"/>
 
 			<typeAlias type="com.kh.baraonda.admin.model.vo.Search" alias="Search"/>
+			
+			<typeAlias type="com.kh.baraonda.myPage.model.vo.PointRecord" alias="PointRecord"/>
+			
+			<typeAlias type="com.kh.baraonda.myPage.model.vo.Orders" alias="Orders"/>
 
   		</typeAliases>
   		

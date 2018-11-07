@@ -50,7 +50,7 @@
 	<resultMap type="com.kh.baraonda.admin.model.vo.AdminNotice" id="adminNoticeResultSet">
 		<id property="board_no" column="board_no"/>
 		<result property="board_title" column="board_title"/>
-		<result property="nick_name" column="ncik_name"/>
+		<result property="nick_name" column="nick_name"/>
 		<result property="board_count" column="board_count"/>
 		<result property="board_date" column="board_date"/>
 	</resultMap>
