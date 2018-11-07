@@ -11,7 +11,9 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
+import com.kh.baraonda.myPage.model.vo.PointRecord;
 
 public interface MyPageDao {
 
@@ -34,6 +36,18 @@ public interface MyPageDao {
 	int selectCommentsListCount(SqlSessionTemplate sqlSession, int member_no);
 
 	ArrayList<Comments> selectCommentList(SqlSessionTemplate sqlSession, PageInfo cPi, int member_no);
+
+	int selectBookMarkListCount(SqlSessionTemplate sqlSession, int member_no);
+
+	ArrayList<Marking> selectBookMarkList(SqlSessionTemplate sqlSession, PageInfo bPi, int member_no);
+
+	int selectPointListCount(SqlSessionTemplate sqlSession, int member_no);
+
+	ArrayList<PointRecord> selectPointList(SqlSessionTemplate sqlSession, PageInfo pPi, int member_no);
+
+	int selectChangeGoodsListCount(SqlSessionTemplate sqlSession, int member_no);
+
+	ArrayList<Orders> selectChangeGoodsList(SqlSessionTemplate sqlSession, PageInfo gPi, int member_no);
 
 
 

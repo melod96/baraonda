@@ -14,7 +14,9 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
+import com.kh.baraonda.myPage.model.vo.PointRecord;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
@@ -76,6 +78,37 @@ public class MyPageServiceImpl implements MyPageService{
 	public ArrayList<Comments> selectCommentList(PageInfo cPi, int member_no) {
 		return mpd.selectCommentList(sqlSession,cPi, member_no);
 	}
+
+	@Override
+	public int selectBookMarkListCount(int member_no) {
+		return mpd.selectBookMarkListCount(sqlSession, member_no);
+	}
+
+	@Override
+	public ArrayList<Marking> selectBookMarkList(PageInfo bPi, int member_no) {
+		return mpd.selectBookMarkList(sqlSession,bPi, member_no);
+	}
+
+	@Override
+	public int selectPointListCount(int member_no) {
+		return mpd.selectPointListCount(sqlSession, member_no);
+	}
+
+	@Override
+	public ArrayList<PointRecord> selectPointList(PageInfo pPi, int member_no) {
+		return mpd.selectPointList(sqlSession,pPi, member_no);
+	}
+
+	@Override
+	public int selectChangeGoodsListCount(int member_no) {
+		return mpd.selectChangeGoodsListCount(sqlSession, member_no);
+	}
+
+	@Override
+	public ArrayList<Orders> selectChangeGoodsList(PageInfo gPi, int member_no) {
+		return mpd.selectChangeGoodsList(sqlSession,gPi, member_no);
+	}
+
 
 
 

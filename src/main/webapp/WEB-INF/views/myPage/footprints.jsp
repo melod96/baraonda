@@ -98,7 +98,7 @@
 					<tr>
 						<td><button name="WriteBoard" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">작성한 게시물</button></td>
 						<td><button name="WriteComments" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">작성한 댓글</button></td>
-						<td><button name="LikeThis" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">북마크</button></td>
+						<td><button name="BookMark" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">북마크</button></td>
 						<td><button name="Point" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">경험치</button></td>
 						<td><button name="ChangeGoods" type="button" class="btn btn-default pickBtn" value=1 onclick="ViewList(name,value)">교환한 상품</button></td>
 					</tr>
@@ -240,8 +240,134 @@
 								"</tr>"
 							); 
 						}
-					}
+					 	break;
 					//--댓글조회 끝--
+					
+					//--북마크 조회--
+					case 'BookMark' :
+						var $viewBody = $(".viewBody");
+						$viewBody.append(
+								"<tr class='hTr'>" +
+									"<th>게시판</th>"+
+									"<th>게시글 제목</th>"+
+									"<th>북마크 날짜</th>"+
+								"</tr>"
+							); 
+							
+					 	for(var key in data["bList"]){
+							var $tr = $("<tr class='hTr'>");
+							
+							var board_type = "";
+							
+							switch(data["bList"][key].board_type){
+							case 1 : board_type = "다이어트 꿀팁";
+							break;
+							case 2 : board_type = "칼로리 사전";
+							break;
+							case 3 : board_type = "홈 트레이닝";
+							break;
+							case 4 : board_type = "커뮤니티";
+							break;
+							case 5 : board_type = "바다 체험단";
+							break;
+							case 6 : board_type = "공지사항";
+							break;
+							case 7 : board_type = "고객센터";
+							break;
+							case 8 : board_type = "바다 서비스";
+							break;
+							default : board_type = "게시판";
+							}						
+							
+							$viewBody.append(
+								"<tr class='hTr'>" +
+									"<td>"+board_type + "</td>"+
+									"<td>"+data["bList"][key].board_title+"</td>"+
+									"<td>"+data["bDate"][key]+"</td>"+
+								"</tr>"
+							); 
+						}
+					 	break;
+					//--북마크 조회 끝--
+					
+					//--경험치 조회--
+					case 'Point' :
+						var $viewBody = $(".viewBody");
+						$viewBody.append(
+								"<tr class='hTr'>" +
+									"<th>경험치 획들 날짜</th>"+
+									"<th>종류</th>"+
+									"<th>얻은 양</th>"+
+									"<th>총 합</th>"+
+								"</tr>"
+							); 
+							
+					 	for(var key in data["pList"]){
+							var $tr = $("<tr class='hTr'>");
+							
+							var point_type = "";
+							
+							switch(data["pList"][key].point_type){
+							
+							case 1 : point_type = "게시글 작성";
+							break;
+							
+							case 2 : point_type = "댓글 작성";
+							break;
+							
+							case 3 : point_type = "출석";
+							break;
+							
+							case 4 : point_type = "좋아요";
+							break;
+							
+							default : board_type = "보너스";
+							}
+							
+							var GetPoint = "";
+							GetPoint = data["pList"][key].after_point - data["pList"][key].before_point;
+							
+							$viewBody.append(
+								"<tr class='hTr'>" +
+									"<td>"+data["pDate"][key]+ "</td>"+
+									"<td>"+point_type+"</td>"+
+									"<td>"+ GetPoint +"</td>"+
+									"<td>"+data["pList"][key].after_point+"</td>"+
+								"</tr>"
+							); 
+						}
+					 	break;
+					//--경험치 조회 끝--
+					
+					//--교환한 상품 조회--
+					case 'ChangeGoods' :
+						var $viewBody = $(".viewBody");
+						$viewBody.append(
+								"<tr class='hTr'>" +
+									"<th>상품 신청 날짜</th>"+
+									"<th>상품 명</th>"+
+									"<th>수취인</th>"+
+									"<th>수취인 번호</th>"+
+									"<th>수취인주소</th>"+
+								"</tr>"
+							); 
+							
+					 	for(var key in data["gList"]){
+							
+							$viewBody.append(
+								"<tr class='hTr'>" +
+									"<td>"+data["gDate"][key]+ "</td>"+
+									"<td>"+data["gList"][key].product_name+"</td>"+
+									"<td>"+data["gList"][key].addressee_name+"</td>"+
+									"<td>"+data["gList"][key].address+"</td>"+
+									"<td>"+data["gList"][key].addressee_phone+"</td>"+
+								"</tr>"
+							); 
+						}
+					 	break;
+					//--교환한 상품 조회 끝--
+					}
+					
 					
 					//--페이징 버튼--
 				 	if(data["pi"].currentPage == 1){

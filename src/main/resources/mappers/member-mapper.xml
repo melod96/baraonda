@@ -53,6 +53,15 @@
 				 null, null, null, null, null, null, null, null
 		)
 	</insert>
+	<insert id="insertCompany"  parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(
+				 SEQ_MEMBER_NO.NEXTVAL, #{id}, #{password}, #{name}, #{nick_name},
+				 null, null, SYSDATE, SYSDATE, default, default, 1, 
+				 #{company_name}, #{company_no}, null, null, #{ceo_name}, #{ceo_type},
+				 null, null
+		)
+	</insert>
 	
 	<!--회원1명 조회-->
 	<select id="selectOne" resultMap="memberResultSet" parameterType="Member">

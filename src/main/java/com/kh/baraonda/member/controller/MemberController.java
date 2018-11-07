@@ -94,7 +94,17 @@ public class MemberController {
 		
 		System.out.println("암호화 후 : " + m);
 		
-		int result = ms.insertMember(m);
+		int result = -99;
+		
+		if(m.getCompany_right() == 1 ) {
+			m.setCompany_name(m.getNick_name());
+			m.setName(m.getCeo_name());
+			System.out.println("기업 가입시 : " + m);
+			result = ms.insertCompany(m);
+		}else {
+			result = ms.insertMember(m);
+		}
+		
 		Member member = ms.selectOne(m);
 		
 		if(result > 0) {
@@ -107,7 +117,7 @@ public class MemberController {
 				return "common/errorPage";
 			}
 		}else {
-			model.addAttribute("msg", "회원가입실패");
+			model.addAttribute("msg", "기업회원가입실패");
 			return "common/errorPage";
 		}
 	}

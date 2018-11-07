@@ -15,4 +15,6 @@ public interface MemberService {
 
 	Member selectOne(Member m);
 
+	int insertCompany(Member m);
+
 }
