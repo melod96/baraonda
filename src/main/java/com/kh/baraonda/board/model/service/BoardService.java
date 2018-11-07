@@ -39,6 +39,8 @@ public interface BoardService {
 	
 	//댓글 insert
 	int insertComment(Comments c);
+	//댓글 delete
+	int deleteComment(int comments_no);
 	
 	
 	

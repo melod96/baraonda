@@ -33,7 +33,7 @@ public class BoardController {
 
 	//게시글 전체 목록 조회
 	@RequestMapping("list.do")
-	public ModelAndView list(ModelAndView mv, @RequestParam int writing_type, PageInfo pi) {
+	public ModelAndView list(ModelAndView mv, int writing_type, PageInfo pi) {
 		int currentPage = 1;
 
 		if(pi.getCurrentPage() > 0) {
@@ -52,7 +52,7 @@ public class BoardController {
 			mv.setViewName("board/board");
 			mv.addObject("list", list);
 			mv.addObject("pi", info);
-
+			mv.addObject("writing_type", writing_type);
 			return mv;
 
 		} catch (BoardException e) {
@@ -65,7 +65,7 @@ public class BoardController {
 	
 	//게시글 상세보기(댓글 포함), 조회수 증가 처리
 	@RequestMapping(value="view.do")
-	public ModelAndView view(@RequestParam int board_no, HttpSession session) {
+	public ModelAndView view(int board_no, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		//게시글 상세보기(제목, 내용, 작성자, 날짜, 댓글수, 조회수) 
 		HashMap<String, Object> detail;
@@ -73,12 +73,13 @@ public class BoardController {
 		List<HashMap<String, Object>> commentList;
 		
 		try {
+			
 			//조회수 증가처리
 			boardService.increaseViewCnt(board_no, session);
 			
 			//상세보기 board_no값 넘겨줌
 			detail = boardService.detail(board_no);
-			commentList = boardService.commentList(board_no);		
+			commentList = boardService.commentList(board_no);
 			//뷰 이름
 			mv.setViewName("board/boardPage");
 			//뷰에 전달할 데이터
@@ -106,11 +107,11 @@ public class BoardController {
 	//게시글 작성처리
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
 	public String insert(HttpSession session,
-			@ModelAttribute Board b, HttpServletRequest request) {
+			@ModelAttribute Board b, HttpServletRequest request, int writing_type) {
 		try {
 			boardService.create(b);
 
-			return "redirect:list.do?writing_type=1";
+			return "redirect:list.do?writing_type=" + writing_type;
 		} catch (Exception e) {
 
 			return "common/errorPage";
@@ -119,7 +120,7 @@ public class BoardController {
 	
 	//게시물 수정
 	@RequestMapping(value="updateBoardPage.do")
-	public ModelAndView updateBoardPage(@RequestParam int board_no) {
+	public ModelAndView updateBoardPage(int board_no) {
 		ModelAndView mv = new ModelAndView();
 		HashMap<String, Object> detail;
 		try {
@@ -156,7 +157,7 @@ public class BoardController {
 	}
 	//게시물 delete
 	@RequestMapping(value="deleteBoard.do")
-	public String deleteBoard(@RequestParam int board_no) {
+	public String deleteBoard(int board_no) {
 		try {
 			boardService.deleteBoard(board_no);
 			
@@ -176,7 +177,15 @@ public class BoardController {
 		
 		return "redirect:view.do?board_no="+c.getBOARD_NO();
 	}
-	
+	//댓글 delete
+	@RequestMapping("deleteComment.do")
+	public String deleteComment(int board_no, int comments_no) {
+		
+		int delete = boardService.deleteComment(comments_no);
+		
+		return "redirect:view.do?board_no="+board_no;
+
+	}
 
 }
 
