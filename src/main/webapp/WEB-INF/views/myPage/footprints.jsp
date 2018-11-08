@@ -31,7 +31,7 @@
 		.pickBtn{width:150px;height:30px;margin:5px;margin-top:12px;}
 		
 	/*세 번째 div*/
-		.thirdDiv{margin-right:auto;margin-left:auto;width:800px;margin-bottom:100px;height:350px;margin-top:-80px;
+		.thirdDiv{margin-right:auto;margin-left:auto;width:800px;margin-bottom:100px;height:450px;margin-top:-80px;
 					border-radius:5px;border:3px solid #ddd;}
 		.viewTable{margin-right:auto;margin-left:auto;width:97%;margin-top:30px;margin-bottom:10px;}
 		.viewTable th{border:2px solid #ddd;text-align:center;width:100px;}
