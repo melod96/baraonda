@@ -14,6 +14,7 @@ import com.kh.baraonda.board.model.dao.BoardDao;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
@@ -99,6 +100,22 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int deleteComment(int comments_no) {
 		return boardDao.deleteComment(sqlSession, comments_no);
+	}
+	
+	//좋아요 수
+	@Override
+	public int selectLike(int board_no) throws BoardException{
+		return boardDao.selectLike(sqlSession, board_no);
+	}
+	//좋아요 체크 여부
+	@Override
+	public int checkLike(boardMarking bm) {
+		return boardDao.checkLike(sqlSession, bm);
+	}
+	//좋아요 등록
+	@Override
+	public void insertLike(boardMarking bm) {
+		boardDao.insertLike(sqlSession, bm);
 	}
 	
 

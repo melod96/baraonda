@@ -112,9 +112,20 @@
 		UPDATE COMMENTS SET COMMENTS_STATUS = 1 WHERE COMMENTS_NO = #{comments_no}
 	</update>
 	
-	
-	
-	
+	<!-- 좋아요 수 -->
+	<select id="selectLike" resultType="_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{board_no} AND MARKING_TYPE = 2
+	</select>
+	<!-- 좋아요 체크 여부(카운트) -->
+	<select id="checkLike" resultType="_int">
+		SELECT COUNT(*)
+		FROM MARKING
+		WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
+	</select>
+	<!-- 좋아요 등록 -->
+	<insert id="insertLike">
+		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 2, SYSDATE, #{board_no}, #{member_no})
+	</insert>
 	
 	
 </mapper> 

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -129,6 +130,23 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return i;
 	}
+	
+	//좋아요 수 
+	@Override
+	public int selectLike(SqlSessionTemplate sqlSession, int board_no) throws BoardException{
+		return sqlSession.selectOne("Board.selectLike", board_no);
+	}
+	//좋아요 체크 여부
+	@Override
+	public int checkLike(SqlSessionTemplate sqlSession, boardMarking bm) {
+		return sqlSession.selectOne("Board.checkLike", bm);
+	}
+	//좋아요 등록
+	@Override
+	public void insertLike(SqlSessionTemplate sqlSession, boardMarking bm) {
+		sqlSession.selectOne("Board.insertLike", bm);
+	}
+
 
 
 }
