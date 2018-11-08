@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -40,6 +41,13 @@ public interface BoardDao {
 	int insertComment(SqlSessionTemplate sqlSession, Comments c);
 	//댓글 delete
 	int deleteComment(SqlSessionTemplate sqlSession, int comments_no);
+	
+	//좋아요 수
+	int selectLike(SqlSessionTemplate sqlSession, int board_no) throws BoardException;
+	//좋아요 체크 여부
+	int checkLike(SqlSessionTemplate sqlSession, boardMarking bm);
+	//좋아요 등록
+	public void insertLike(SqlSessionTemplate sqlSession, boardMarking bm);
 	
 
 	

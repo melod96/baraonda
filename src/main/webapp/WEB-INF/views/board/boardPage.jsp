@@ -415,9 +415,14 @@
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
 					<div class="allmark">
-						<a href="#" class="bmark"> <span>북마크</span>
-						</a> <a href="#" class="heart"> <span>1</span>
-						</a>
+					<c:if test="${! empty sessionScope.loginUser}">
+						<a href="#" class="bmark"> <span>북마크</span></a>
+						<a href="like.do?board_no=${detail.BOARD_NO}" class="heart"><span>${likeCount}</span></a>
+					</c:if>
+					<c:if test="${empty sessionScope.loginUser}">
+						<a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
+						<a href="#" class="heart login" data-toggle="modal" data-target="#login-modal"> <span>${likeCount}</span></a>
+					</c:if>
 					</div>
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<c:if test="${! empty sessionScope.loginUser}">
@@ -484,8 +489,8 @@
 									<c:if test="${sessionScope.loginUser.member_no == row.MEMBER_NO}">
 									<div class="remd">
 										<%-- <span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span> --%>
-										<span class="modifyB2" onclick>수정</span>
-											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2">
+											<!-- <span class="modifyB2" onclick>수정</span>
+											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2"> -->
 											<span class="deleteB2" id="deleteB2" onClick="location.href='deleteComment.do?comments_no='+${row.COMMENTS_NO}+'&board_no='+${detail.BOARD_NO}">삭제</span>
 											<%-- <span class="deleteB2" id="deleteB2" onClick="location.href='${path}/baraonda/deleteComment.do?comments_no=${row.COMMENTS_NO}'">삭제</span> --%>
 									</div>
@@ -493,9 +498,9 @@
 									<!-- 댓글 내용 -->
 									<p id="ptxt">${row.COMMENTS_CONTENT}</p>
 								</div>
-								<div class="re">
+								<!-- <div class="re">
 									<a href="#" class="btn-re">답글 ▼</a>
-								</div>
+								</div> -->
 							</li>
 							<hr class="hrline">
 						</ul>

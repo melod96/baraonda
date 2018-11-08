@@ -20,6 +20,7 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.member.model.vo.Member;
@@ -72,10 +73,14 @@ public class BoardController {
 		//댓글 조회(작성자, 내용, 날짜)
 		List<HashMap<String, Object>> commentList;
 		
+		
 		try {
 			
 			//조회수 증가처리
 			boardService.increaseViewCnt(board_no, session);
+			
+			//좋아요 수
+			int likeCount = boardService.selectLike(board_no);
 			
 			//상세보기 board_no값 넘겨줌
 			detail = boardService.detail(board_no);
@@ -85,6 +90,7 @@ public class BoardController {
 			//뷰에 전달할 데이터
 			mv.addObject("detail", detail);
 			mv.addObject("commentList", commentList);
+			mv.addObject("likeCount", likeCount);
 			
 			return mv;
 			
@@ -184,8 +190,26 @@ public class BoardController {
 		int delete = boardService.deleteComment(comments_no);
 		
 		return "redirect:view.do?board_no="+board_no;
-
 	}
+	
+	//좋아요
+	@RequestMapping("like.do")
+	public String like(@SessionAttribute("loginUser") Member m, int board_no) {
+		boardMarking bm = new boardMarking();
+		bm.setBoard_no(board_no);
+		bm.setMember_no(m.getMember_no());
+		
+		int check = -99;
+		
+		check = boardService.checkLike(bm);
+		
+		boardService.insertLike(bm);
+	
+		return "redirect.view.do?board_no="+board_no;
+		
+	}
+	
+	
 
 }
 

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -41,6 +42,13 @@ public interface BoardService {
 	int insertComment(Comments c);
 	//댓글 delete
 	int deleteComment(int comments_no);
+	
+	//좋아요 수
+	int selectLike(int board_no) throws BoardException;
+	//좋아요 체크 여부
+	int checkLike(boardMarking bm);
+	//좋아요 등록
+	void insertLike(boardMarking bm);
 	
 	
 	
