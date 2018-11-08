@@ -118,10 +118,10 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${foodlist}" var ="flist">
-								<tr class="info" onclick="location.href='${path}/baraonda/foodDetail.dt?food_no=${flist.food_no}'">
+								<tr class="info" onclick="location.href='foodDetail.dt?food_no=${flist.food_no}'">
 									<td>${flist.food_name }</td>
 									<td>${flist.food_kcal} kcal</td>
-								</tr>								
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>

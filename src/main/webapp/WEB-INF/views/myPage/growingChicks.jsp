@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +46,46 @@
 		<jsp:include page="../common/myHeader.jsp"/>
 		
 		<div class="chicksArea">
-			<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/chicks.png">
+			<c:if test="${point.accrue_point < 100 }">
+					<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/egg.png">
+				</c:if>
+				<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+					<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/chicks.png">
+				</c:if>
+				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+					<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/chick.png">
+				</c:if>
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point < 1000}">
+					<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/adultchick.png">
+				</c:if>
+			
 			<div class="chicksDiv1">
-				<label>병아리 등급</label>
+				<c:if test="${point.accrue_point < 100 }">
+					<label>알 등급</label>
+				</c:if>
+				<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+					<label>병아리 등급</label>
+				</c:if>
+				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+					<label>사춘기 닭 등급</label>
+				</c:if>
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point < 1000}">
+					<label>성인 닭 등급</label>
+				</c:if>
 				<br>
-				<label>경험치양 (${point.accrue_point})</label>
+				<c:if test="${point.accrue_point < 100 }">
+					<label>경험치양 (${point.accrue_point} / 100)</label>
+				</c:if>
+				<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+					<label>경험치양 (${point.accrue_point} / 300)</label>
+				</c:if>
+				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+					<label>경험치양 (${point.accrue_point} / 600)</label>
+				</c:if>
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point < 1000}">
+					<label>경험치양 (${point.accrue_point} / 1000)</label>
+				</c:if>
+				
 				
 				<div class="progress">
 				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point}px">
