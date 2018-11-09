@@ -17,6 +17,8 @@
 .title {
 	border-bottom: 2px solid #5d5d5d;
 	font-size: 30px;
+	margin-bottom:20px;
+	line-height:50px;
 }
 
 .tbl-y th {

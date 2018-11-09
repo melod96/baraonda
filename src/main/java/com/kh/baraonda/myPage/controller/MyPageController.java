@@ -359,8 +359,19 @@ public class MyPageController {
 		
 		  model.addAttribute("point", point);
       
+  //머지하는데 에러떠서 일단 주석 처리..
+  //public String showGrowingChicksView(Model model,HttpSession session) {
+
+		//Member loginUser = (Member)session.getAttribute("loginUser");
+
+		//if(loginUser != null) {
+
+		  //Point point = mps.selectPoint(loginUser);
+
+		//model.addAttribute("point", point);
+
 			return "myPage/growingChicks";
-      
+
 		}else {
 			return "redirect:goMain.me";
 		}

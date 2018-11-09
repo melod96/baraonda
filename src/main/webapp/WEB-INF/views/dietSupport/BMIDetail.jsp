@@ -17,6 +17,8 @@
 .title {
 	border-bottom: 2px solid #5d5d5d;
 	font-size: 30px;
+	margin-bottom:20px;
+	line-height:50px;
 }
 
 .tbl-y th {
@@ -106,7 +108,7 @@
 					</form>
 				</div>
 				<p class="fbold">비만도(BMI) 검사 결과</p>
-				<div class="progress">
+				<div class="progress" style="height:30px;">
 					<c:if test="${b.gender=='F'}">
 						<c:choose>
 							<c:when test="${b.bmi<18.5}">
