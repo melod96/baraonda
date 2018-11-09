@@ -33,7 +33,6 @@ public class AdminController {
 		return "admin/dashboard/dashboard";
 	}
 	
-	//Member>General 목록 조회
 	@RequestMapping(value="goGeneralMemberAdminList.adm")
 	public ModelAndView goGeneralMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
 												@RequestParam(value="searchContent", required=false)String content, 
@@ -71,7 +70,6 @@ public class AdminController {
 		return mv;
 	}
 	
-	//Member>Company 목록 조회
 	@RequestMapping(value="goCompanyMemberAdminList.adm")
 	public ModelAndView goCompanyMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
 													@RequestParam(value="searchContent", required=false)String content) {
@@ -99,7 +97,14 @@ public class AdminController {
 		return mv;
 	}
 	
-	//Member>Black 목록 조회
+	@RequestMapping(value="goCompanyMemberAdminDetail.adm")
+	public ModelAndView goCompanyMemberAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		
+		mv.setViewName("admin/memberAdmin/companyMemberAdminDetail");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="goBlackMemberAdminList.adm")
 	public ModelAndView goBlackMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
 												@RequestParam(value="searchContent", required=false)String content) {

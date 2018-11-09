@@ -16,6 +16,9 @@
         margin-top: 10px;
         text-align: center;
     }
+    .gradeX td:hover{
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -64,33 +67,27 @@
                                         <th width="6%">ID</th>
                                         <th width="10%">사업자명</th>
                                         <th width="9%">닉네임</th>
-                                        <th width="8%">연락처</th>
-                                        <th width="10%">이메일</th>
-                                        <th width="8%">회사명</th>
-                                        <th width="10%">사업자 번호</th>
+                                        <th width="12%">연락처</th>
+                                        <th width="12%">회사명</th>
+                                        <th width="12%">사업자 번호</th>
                                         <th width="14%">계좌</th>
-                                        <th width="6%">법인</th>
-                                        <th width="7%">가입일</th>
-                                        <th width="6%">상태</th>
+                                        <th width="11%">가입일</th>
+                                        <th width="8%">상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 	<c:if test="${ list != null }">
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
+		                                        <input type="hidden" value="${ list.member_no }" id="member_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
 		                                        <td>${ list.id }</td>
 		                                        <td>${ list.name }</td>
 		                                        <td>${ list.ceo_name }</td>
 		                                        <td>${ list.phone }</td>
-		                                        <td>${ list.email }</td>
 		                                        <td>${ list.company_name }</td>
 		                                        <td>${ list.company_no }</td>
 		                                        <td>${ list.bank } ${ list.account }</td>
-		                                        <td>
-		                                        	<c:if test="${ list.ceo_type == 0 }">개인</c:if>
-		                                        	<c:if test="${ list.ceo_type == 1 }">법인</c:if>
-		                                        </td>
 		                                        <td>${ list.enroll_date }</td>
 		                                        <td>
 		                                        	<c:if test="${ list.member_status == 0 }">일반</c:if>
@@ -193,6 +190,19 @@
             info : false,
             filter : false
         });
+        
+        $("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
+        
+        $(".gradeX").children().each(function(){
+    		$(this).click(function(){
+    			var member_no = $(this).parent().children("#member_no").val();
+        		location.href="goCompanyMemberAdminDetail.adm?num=" + member_no;
+    		});
+    	});
     });
     
     function search(){
@@ -200,14 +210,6 @@
     	
     	location.href="goCompanyMemberAdminList.adm?currentPage=1&searchContent=" + content;
     }
-    
-    $(document).ready(function(){
-    	$("#search-option-1").children().each(function(){
-    		if($(this).val() == "${ search.option1 }"){
-    			$(this).attr("selected","selected"); 
-    		}
-    	});
-    }); 
     </script>
     
 </body>
