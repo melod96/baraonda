@@ -143,8 +143,25 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	//좋아요 등록
 	@Override
-	public void insertLike(SqlSessionTemplate sqlSession, boardMarking bm) {
+	public int insertLike(SqlSessionTemplate sqlSession, boardMarking bm) {
+		int i = -99;
+		
 		sqlSession.selectOne("Board.insertLike", bm);
+		
+		i = 1;
+		
+		return i;
+	}
+	//좋아요 삭제
+	@Override
+	public int deleteLike(SqlSessionTemplate sqlSession, boardMarking bm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Board.deleteLike", bm);
+		
+		i = 1;
+		
+		return i;
 	}
 
 

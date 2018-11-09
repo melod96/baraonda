@@ -126,6 +126,10 @@
 	<insert id="insertLike">
 		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 2, SYSDATE, #{board_no}, #{member_no})
 	</insert>
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteLike">
+		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
+	</delete>
 	
 	
 </mapper> 

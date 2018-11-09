@@ -48,7 +48,9 @@ public interface BoardService {
 	//좋아요 체크 여부
 	int checkLike(boardMarking bm);
 	//좋아요 등록
-	void insertLike(boardMarking bm);
+	int insertLike(boardMarking bm);
+	//좋아요 삭제
+	int deleteLike(boardMarking bm);
 	
 	
 	

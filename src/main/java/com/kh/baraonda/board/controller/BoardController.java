@@ -124,7 +124,7 @@ public class BoardController {
 		}
 	}
 	
-	//게시물 수정
+	//게시물 update
 	@RequestMapping(value="updateBoardPage.do")
 	public ModelAndView updateBoardPage(int board_no) {
 		ModelAndView mv = new ModelAndView();
@@ -146,7 +146,7 @@ public class BoardController {
 		}
 	}
 	
-	//게시물 update
+	//게시물 수정 페이지
 	@RequestMapping(value="updateBoard.do")
 	public String updateBoard(@SessionAttribute("loginUser") Member m, @ModelAttribute Board b) {
 
@@ -192,7 +192,7 @@ public class BoardController {
 		return "redirect:view.do?board_no="+board_no;
 	}
 	
-	//좋아요
+	//좋아요 등록/삭제
 	@RequestMapping("like.do")
 	public String like(@SessionAttribute("loginUser") Member m, int board_no) {
 		boardMarking bm = new boardMarking();
@@ -203,10 +203,13 @@ public class BoardController {
 		
 		check = boardService.checkLike(bm);
 		
-		boardService.insertLike(bm);
+		if(check == 0) {
+			int insert = boardService.insertLike(bm);
+		}else {
+			int delete = boardService.deleteLike(bm);
+		}
 	
-		return "redirect.view.do?board_no="+board_no;
-		
+		return "redirect:view.do?board_no=" + board_no;
 	}
 	
 	
