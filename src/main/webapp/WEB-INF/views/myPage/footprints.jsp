@@ -36,7 +36,7 @@
 		.viewTable{margin-right:auto;margin-left:auto;width:97%;margin-top:30px;margin-bottom:10px;}
 		.viewTable th{border:2px solid #ddd;text-align:center;width:100px;}
 		.viewTable td{text-align:center;font-size:0.8em;}
-		.hTr:hover{background:orangered;color:white;cursor:pointer;}
+		.hTr:hover{background:#ddd;color:black;cursor:pointer;}
 		
 		/*페이징 버튼*/
 		.pagingArea{margin-right:auto;margin-left:auto;text-align:center;margin-top:15px;margin-bottom:20px;}
@@ -139,7 +139,7 @@
 					case 'WriteBoard' :
 						var $viewBody = $(".viewBody");
 						$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr>" +
 									"<th>게시판</th>"+
 									"<th colspan='2'>제목</th>"+
 									"<th>추천수</th>"+
@@ -198,7 +198,7 @@
 					case 'WriteComments' :
 						var $viewBody = $(".viewBody");
 						$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr>" +
 									"<th>게시판</th>"+
 									"<th>게시글 제목</th>"+
 									"<th colspan='2'>댓글 내용</th>"+
@@ -247,7 +247,7 @@
 					case 'BookMark' :
 						var $viewBody = $(".viewBody");
 						$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr>" +
 									"<th>게시판</th>"+
 									"<th>게시글 제목</th>"+
 									"<th>북마크 날짜</th>"+
@@ -294,7 +294,7 @@
 					case 'Point' :
 						var $viewBody = $(".viewBody");
 						$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr>" +
 									"<th>경험치 획들 날짜</th>"+
 									"<th>종류</th>"+
 									"<th>얻은 양</th>"+
@@ -343,7 +343,7 @@
 					case 'ChangeGoods' :
 						var $viewBody = $(".viewBody");
 						$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr>" +
 									"<th>상품 신청 날짜</th>"+
 									"<th>상품 명</th>"+
 									"<th>수취인</th>"+

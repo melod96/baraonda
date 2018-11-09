@@ -109,6 +109,11 @@ public class MyPageServiceImpl implements MyPageService{
 		return mpd.selectChangeGoodsList(sqlSession,gPi, member_no);
 	}
 
+	@Override
+	public Member selectMemberView(int member_no) {
+		return mpd.selectMemberView(sqlSession, member_no);
+	}
+
 
 
 

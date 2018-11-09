@@ -128,6 +128,11 @@ public class MyPageDaoImpl implements MyPageDao{
 		return (ArrayList)sqlSession.selectList("MyPage.selectChangeGoodsList",member_no, rowBounds);
 	}
 
+	@Override
+	public Member selectMemberView(SqlSessionTemplate sqlSession, int member_no) {
+		return sqlSession.selectOne("MyPage.selectMemberView", member_no);
+	}
+
 
 
 

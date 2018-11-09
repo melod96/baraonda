@@ -1,10 +1,16 @@
 package com.kh.baraonda.member.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,20 +67,6 @@ public class MemberController {
 		return "member/memberJoin";
 	}
 		
-	//ajax통신
-	@RequestMapping("duplicationCheck.me")
-	public ModelAndView duplication(String id, ModelAndView mv) {
-		System.out.println("UserId : " + id);
-		
-		Member m = new Member();
-		m.setId(id);
-		
-		mv.addObject("member", m);
-		mv.setViewName("jsonView");
-		
-		
-		return mv;
-	}
 	
 	@RequestMapping("goMain.me")
 	public String goMain() {
@@ -121,4 +113,27 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	
+/*	@SuppressWarnings("null")
+	@RequestMapping("checkId.me")
+	public @ResponseBody boolean duplicationCheck(@RequestParam String id){
+		
+		Member m = new Member();
+		m.setId(id);
+		
+		System.out.println("cont id : " + id);
+		
+		boolean result;
+		
+		if( ms.selectIdCheck(m) != 0) {
+			result = false;
+		}else {
+			result = true;
+		}
+		
+		return result;
+	}
+*/	
 }

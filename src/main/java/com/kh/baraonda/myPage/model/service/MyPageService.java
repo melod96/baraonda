@@ -47,6 +47,8 @@ public interface MyPageService {
 
 	ArrayList<Orders> selectChangeGoodsList(PageInfo gPi, int member_no);
 
+	Member selectMemberView(int member_no);
+
 
 
 

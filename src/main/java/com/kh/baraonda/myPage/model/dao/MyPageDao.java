@@ -49,6 +49,8 @@ public interface MyPageDao {
 
 	ArrayList<Orders> selectChangeGoodsList(SqlSessionTemplate sqlSession, PageInfo gPi, int member_no);
 
+	Member selectMemberView(SqlSessionTemplate sqlSession, int member_no);
+
 
 
 

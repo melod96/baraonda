@@ -18,5 +18,8 @@ public interface MemberDao {
 
 	int insertCompany(SqlSessionTemplate sqlSession, Member m);
 
+	int selectIdCheck(SqlSessionTemplate sqlSession, Member m);
+
+
 
 }
