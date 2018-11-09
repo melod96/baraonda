@@ -349,26 +349,16 @@ public class MyPageController {
 	
 	//마이페이지 - 병아리 키우기로 이동하는 메소드
 	@RequestMapping("growingChicksView.my")
-	public String showGrowingChicksView(@SessionAttribute("loginUser") Member m, Model model, HttpSession session) {
-		
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-    if(loginUser != null) {
-    
-      Point point = mps.selectPoint(m);
-		
-		  model.addAttribute("point", point);
       
-  //머지하는데 에러떠서 일단 주석 처리..
-  //public String showGrowingChicksView(Model model,HttpSession session) {
+	public String showGrowingChicksView(Model model,HttpSession session) {
 
-		//Member loginUser = (Member)session.getAttribute("loginUser");
+		Member loginUser = (Member)session.getAttribute("loginUser");
 
-		//if(loginUser != null) {
+		if(loginUser != null) {
 
-		  //Point point = mps.selectPoint(loginUser);
+			Point point = mps.selectPoint(loginUser);
 
-		//model.addAttribute("point", point);
+			model.addAttribute("point", point);
 
 			return "myPage/growingChicks";
 

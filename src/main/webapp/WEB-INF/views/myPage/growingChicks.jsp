@@ -24,7 +24,7 @@
 	#itemTitle{text-align:center;}
 	.itemImg{width:150px;height:150px;}
 	.itemImg:hover{border:3px solid skyblue; cursor:pointer;}
-	.itemTable{width:800px; height:auto;margin-left:50px;}
+	.itemTable{width:800px; height:auto;text-align:center;}
 	.lv td{width:150px; height:200px; margin:10px;}
 	.itemTable td>h6{width:170px;text-align:center;}
 	.lvLabel{width:100px;height:20px;}
@@ -55,7 +55,7 @@
 				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
 					<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/chick.png">
 				</c:if>
-				<c:if test="${point.accrue_point >= 600 && point.accrue_point < 1000}">
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
 					<img id="chicks" src="${pageContext.request.contextPath}/resources/images/myPageImages/adultchick.png">
 				</c:if>
 			
@@ -69,7 +69,7 @@
 				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
 					<label>사춘기 닭 등급</label>
 				</c:if>
-				<c:if test="${point.accrue_point >= 600 && point.accrue_point < 1000}">
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
 					<label>성인 닭 등급</label>
 				</c:if>
 				<br>
@@ -82,16 +82,40 @@
 				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
 					<label>경험치양 (${point.accrue_point} / 600)</label>
 				</c:if>
-				<c:if test="${point.accrue_point >= 600 && point.accrue_point < 1000}">
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
 					<label>경험치양 (${point.accrue_point} / 1000)</label>
 				</c:if>
 				
-				
-				<div class="progress">
-				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point}px">
-						<span class="sr-only">70% Complete</span>
+				<c:if test="${point.accrue_point < 100 }">
+					<div class="progress">
+				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point}%">
+						${point.accrue_point} / 100
 					</div>
 				</div>
+				</c:if>
+				<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+					<div class="progress">
+				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point / 3}%">
+						${point.accrue_point} / 300
+					</div>
+				</div>
+				</c:if>
+				<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+					<div class="progress">
+				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point / 6}%">
+						${point.accrue_point} / 600
+					</div>
+				</div>
+				</c:if>
+				<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
+					<div class="progress">
+				 	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${point.accrue_point / 10}%">
+						${point.accrue_point} / 1000
+					</div>
+				</div>
+				</c:if>
+				
+				
 			</div>
 		</div>
 		
@@ -106,69 +130,43 @@
 				
 				<table class="itemTable">
 				
-					<tr><td><h5>1단계 상품</h5></td></tr>
+					<tr><td><h5>병아리 등급 상품</h5></td></tr>
 					<tr class="lv lv-1">
 						<td>
-							<img class="itemImg lv1Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/lv1_1.png">
-							<h6>당신이 키운 병아리</h6>
-						</td>
-						
-						
-						<td>
-							<img class="itemImg lv1Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/lv1_2.png">
-							<h6>먼지</h6>
-						</td>
-						
-						<td>
-							<img class="itemImg lv1Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/lv1_3.png">
-							<h6>자라</h6>
+							<img class="itemImg lv1Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/productegg.jpg">
+							<p>맥반석 계란</p>
 						</td>
 					</tr>
-					
+					<c:if test="${point.accrue_point > 300 }">
+						<tr><td><button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type=1'">교환하기</button></td></tr>
+					</c:if>
 					<tr><td>&nbsp;</td></tr>
-					<tr><td>&nbsp;</td></tr>
 					
-					<tr><td><h5>2단계 상품</h5></td></tr>
+					<tr><td><h5>청소년 닭 등급 상품</h5></td></tr>
 					<tr>
 						<td class="lv lv-2">
-							<img class="itemImg lv2Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/nothing.png">
-							<h6>준비중</h6>
-						</td>
-						
-						<td>
-							<img class="itemImg lv2Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/nothing.png">
-							<h6>준비중</h6>
-						</td>
-						
-						<td>
-							<img class="itemImg lv2Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/nothing.png">
-							<h6>준비중</h6>
+							<img class="itemImg lv3Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/productsweet.jpg">
+							<p>고구마</p>
 						</td>
 						
 					</tr>
 					
+					<c:if test="${point.accrue_point > 600 }">
+						<tr><td><button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type=2'">교환하기</button></td></tr>
+					</c:if>
 					<tr><td>&nbsp;</td></tr>
 					<tr><td>&nbsp;</td></tr>
-					<tr><td>&nbsp;</td></tr>
-					<tr><td><h5>3단계 상품</h5></td></tr>
+					<tr><td><h5>어른 닭 등급 상품</h5></td></tr>
 					<tr>
 						<td class="lv lv-3">
-							<img class="itemImg lv3Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/nothing.png">
-							<h6>준비중</h6>
-						</td>
-						
-						<td>
-							<img class="itemImg lv3Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/nothing.png">
-							<h6>준비중</h6>
-						</td>
-						
-						<td>
-							<img class="itemImg lv3Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/nothing.png">
-							<h6>준비중</h6>
+							<img class="itemImg lv2Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/productchick.jpg">
+							<p>닭가슴살</p>
 						</td>
 					</tr>
 					
-					<tr><td>&nbsp;</td></tr>
+					<c:if test="${point.accrue_point >= 1000 }">
+						<tr><td><button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type=3'">교환하기</button></td></tr>
+					</c:if>
 					<tr><td>&nbsp;</td></tr>
 					<tr><td>&nbsp;</td></tr>
 				</table>

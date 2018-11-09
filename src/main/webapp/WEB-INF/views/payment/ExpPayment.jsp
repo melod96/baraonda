@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BMI</title>
+<title>Exchange</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <jsp:include page="../common/head.jsp" />
 <style>
 .customerinfo p {
@@ -28,6 +30,7 @@
 </style>
 </head>
 <body>
+	<form action="expExchange.ex" method = "post">
 	<jsp:include page="../common/header.jsp" />
 	<div class="clear" style="height: 40px; background: white;"></div>
 	<div class="container">
@@ -47,10 +50,24 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>고구마</td>
-							<td>
-								<span class="fleft">갯수</span><span class="fright">10개</span>
-							</td>
+							<c:if test="${type == 1 }">
+								<td>맥반석 계란</td>
+								<td>
+									<span class="fleft">갯수</span><span class="fright">10개</span>
+								</td>
+							</c:if>
+							<c:if test="${type == 2 }">
+								<td>고구마</td>
+								<td>
+									<span class="fleft">갯수</span><span class="fright">10개</span>
+								</td>
+							</c:if>
+							<c:if test="${type == 3 }">
+								<td>닭가슴살</td>
+								<td>
+									<span class="fleft">갯수</span><span class="fright">10개</span>
+								</td>
+							</c:if>
 						</tr>
 					</tbody>
 				</table>
@@ -71,13 +88,13 @@
                             <tr>
                                 <th>주문자</th>
                                 <td colspan="3">
-                                    <input id="left" name="" class="form-control input-xshort" type="text" placeholder="아이디를 입력하세요">
+                                    <input id="left" name="orderer" class="form-control input-xshort" type="text" placeholder="">
                                 </td>
                             </tr>
                             <tr>
                                 <th>전화번호</th>
                                 <td>
-                                    <input id="left" name="" class="form-control input-short" type="text" placeholder="">
+                                    <input id="left" name="orderer_tel" class="form-control input-short" type="text" placeholder="">
                                 </td>
                             </tr>
                         </tbody>
@@ -98,32 +115,76 @@
                             <tr>
                                 <th>받으실분</th>
                                 <td colspan="3">
-                                    <input id="left" name="" class="form-control input-xshort" type="text" placeholder="아이디를 입력하세요">
+                                    <input id="left" name="accept_name" class="form-control input-xshort" type="text" placeholder="">
                                 </td>
                             </tr>
                             <tr>
                                 <th>주소</th>
                                 <td>
-                                    <input id="left" name="" class="form-control input-xshort" type="text" placeholder="" disabled>
-                                    <button type="button" class="btn btn-secondary">우편번호</button>
-                                    <input id="left" name="" class="form-control input-mid" type="text" placeholder="텍스트를 입력하세요" disabled style="margin-bottom:15px;">
-                                    <input id="left" name="" class="form-control input-mid" type="text" placeholder="텍스트를 입력하세요">
+                                    <input name="accept_address1" id = "sample6_postcode"class="form-control input-xshort" type="text" style="float:left;" disabled>
+                                    <button type="button" class="btn btn-secondary" style = "margin:0; margin-left:15px;" onclick= "sample6_execDaumPostcode()">우편번호</button>
+                                    <input name="accept_address2" id = "sample6_address" class="form-control input-mid" type="text" disabled style="float:left;margin-top:15px;margin-bottom:15px;">
+                                    <input name="accept_address3" id = "sample6_address2" class="form-control input-mid" type="text" placeholder="텍스트를 입력하세요" style="float:left;">
                                 </td>
                             </tr>
-                            <tr>
+							
+							<tr>
                                 <th>전화번호</th>
                                 <td>
-                                    <input id="left" name="" class="form-control input-short" type="text" placeholder="">
+                                    <input id="left" name="accept_tel" class="form-control input-short" type="text" placeholder="">
                                 </td>
                             </tr>
                         </tbody>
             </table><br />
+           <script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+</script>
 			</div>
 		</div><br />
 		<div class="btn-center">
-			<button type="button" class="btn btn-primary btn-lg">결제하기</button>
-			<button type="submit" class="btn btn-secondary btn-lg">취소</button>
+			<button type="submit" class="btn btn-primary btn-lg">결제하기</button>
+			<button type="button" class="btn btn-secondary btn-lg">취소</button>
 		</div>
-	</div>
+		</form>
 </body>
 </html>

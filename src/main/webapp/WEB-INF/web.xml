@@ -88,6 +88,19 @@
 		<url-pattern>*.nt</url-pattern>
 	</servlet-mapping> 
 	
+	<servlet>
+		<servlet-name>exchange</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/exchange-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>exchange</servlet-name>
+		<url-pattern>*.ex</url-pattern>
+	</servlet-mapping> 
+	
 
 	<servlet>
 		<servlet-name>myPage</servlet-name>
