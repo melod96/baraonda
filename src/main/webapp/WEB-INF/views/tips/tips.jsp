@@ -138,7 +138,9 @@ margin-top: -10px;
 		<h2 class="title">다이어트꿀팁</h2>
 		<div class="clear" style="height:40px;background:white;"></div>
 		<div style="margin-bottom:10px; margin-left:10px;">
-			 <a id="tipsBtn">식단</a>&nbsp;|&nbsp;<a id="tipsBtn">운동</a>&nbsp;|&nbsp;<a id="tipsBtn">칼럼</a>
+		 <a id="tipsBtn" href="tips.tp?writing_type=3">식단</a>&nbsp;|&nbsp;
+			 <a id="tipsBtn" href="tips.tp?writing_type=2">운동</a>&nbsp;|&nbsp;
+			 <a id="tipsBtn" href="tips.tp?writing_type=1">칼럼</a>
 		</div>
 		
 		<c:forEach items="${tipslist}" var ="t" end="8">

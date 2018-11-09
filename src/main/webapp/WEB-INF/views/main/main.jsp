@@ -262,7 +262,7 @@ hr{
           <div class="maxheight">
             <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item"><img src="${pageContext.request.contextPath}${t.files_root}" alt="" style="width:370px;height:230px;"></a>
             <div class="gall_bot">
-            <div class="text1"><a href="#">${t.board_title } </a></div>
+            <div class="text1"><a onclick= "location.href='view.do?board_no=' + ${t.board_no}">${t.board_title } </a></div>
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
 	         <br>
 	         	<img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">&nbsp;
@@ -333,7 +333,7 @@ hr{
        	<c:forEach var="f" items="${flist}" end="4">
       	<label>
 	      <img src="${pageContext.request.contextPath}/resources/images/main/star.png" id="profile_img">
-	      <a id="fame_font">${f.board_title}</a>
+	      <a id="fame_font" <%-- onclick= "location.href='tipsDetail.tp?tips_no='+${f.board_no}" --%>>${f.board_title}</a>
 	      </label>
 	      <br>
 	      <hr>

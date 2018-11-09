@@ -1,19 +1,21 @@
 package com.kh.baraonda.tips.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.member.model.vo.Member;
-import com.kh.baraonda.notice.model.vo.Notice;
-import com.kh.baraonda.notice.model.vo.NoticeComment;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.service.TipsService;
 import com.kh.baraonda.tips.model.vo.Tips;
@@ -26,7 +28,39 @@ public class TipsController {
 	@Autowired
 	private TipsService ts;
 	
-	
+	/*//게시글 전체 목록 조회
+		@RequestMapping("tips.tp")
+		public ModelAndView list(ModelAndView mv, int writing_type, PageInfo pi) {
+			int currentPage = 1;
+			System.out.println(writing_type);
+
+			if(pi.getCurrentPage() > 0) {
+				currentPage = pi.getCurrentPage();
+			}
+
+			List<HashMap<String, Object>> list;
+
+			try {
+				int listCount = ts.selectTipsListCount();
+
+				PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+
+				list = ts.selectTipsList(writing_type, pgif);
+
+				mv.setViewName("board/board");
+				mv.addObject("list", list);
+				mv.addObject("pi", pgif);
+				mv.addObject("writing_type", writing_type);
+				return mv;
+
+			} catch (TipsSelectListException e) {
+				mv.setViewName("board/board");
+				mv.addObject("errorMessgae", "리스트 조회 실패");
+
+				return mv;
+			}
+		}*/
+		
 	//꿀팁 리스트 출력
 		@RequestMapping("tips.tp")
 		public String TipsListPage(Model model, PageInfo pi) {
@@ -46,6 +80,7 @@ public class TipsController {
 				
 				model.addAttribute("tipslist", list);
 				model.addAttribute("pi", pgif);
+				//model.addAttribute("writing_type", writing_type);
 				
 				return "tips/tips";
 			} catch (TipsSelectListException e) {
@@ -79,17 +114,17 @@ public class TipsController {
 			
 			ArrayList<TipsComment> tcomment = ts.selectCommentTips(tips_no,pgif);
 			
-			/*//이전글 | 다음글
+			//이전글 | 다음글
 			Tips nextBoard = ts.selectNextNoTips(tips_no);
-			Tips beforeBoard = ts.selectBeforeNoTips(tips_no);*/
+			Tips beforeBoard = ts.selectBeforeNoTips(tips_no);
 			
 			model.addAttribute("tinfo", tinfo);
 			model.addAttribute("pi",pgif);
 			model.addAttribute("tcomment", tcomment);
 			model.addAttribute("cCount", listCount);
 			model.addAttribute("hcount", heartCount);
-	/*		model.addAttribute("before", beforeBoard);
-			model.addAttribute("next", nextBoard);*/
+			model.addAttribute("before", beforeBoard);
+			model.addAttribute("next", nextBoard);
 			
 			return "tips/tipsDetail";
 		}

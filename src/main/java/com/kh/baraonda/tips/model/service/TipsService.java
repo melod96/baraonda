@@ -2,7 +2,6 @@ package com.kh.baraonda.tips.model.service;
 
 import java.util.ArrayList;
 
-import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -18,6 +17,9 @@ public interface TipsService {
 
 	//꿀팁 리스트
 	ArrayList<Tips> selectTipsList(PageInfo pgif) throws TipsSelectListException;
+	
+/*	//게시글 전체 목록 조회
+	public List<HashMap<String, Object>> selectTipsList(int writing_type, PageInfo pgif) throws TipsSelectListException;*/
 	
 	//꿀팁 상세
 	Tips selectTipsOne(String tips_no);

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.tips.model.dao.TipsDao;
@@ -38,6 +39,15 @@ public class TipsServiceImpl implements TipsService{
 			
 			return td.selectTipsList(sqlSession, pgif);
 		}
+		/*
+		//게시글 전체 목록 조회
+		@Override
+		public List<HashMap<String, Object>> selectTipsList(int writing_type, PageInfo pgif) throws TipsSelectListException {
+			List<HashMap<String, Object>> list = td.selectTipsList(sqlSession, writing_type, pgif) ;
+			
+			return list;
+		}*/
+		
 
 		//꿀팁 상세
 		@Override
@@ -165,16 +175,16 @@ public class TipsServiceImpl implements TipsService{
 		//다음글
 		@Override
 		public Tips selectNextNoTips(String tips_no) {
-			int tnextno= td.selectNextNoTips(sqlSession,tips_no);
+			int nextno= td.selectNextNoTips(sqlSession,tips_no);
 			
-			return td.selectTipsOne(sqlSession, String.valueOf(tnextno));
+			return td.selectTipsOne(sqlSession, String.valueOf(nextno));
 		}
 
 		//이전글
 		@Override
 		public Tips selectBeforeNoTips(String tips_no) {
-			int tbeforeno= td.selectBeforeNoTips(sqlSession,tips_no);
-			return td.selectTipsOne(sqlSession, String.valueOf(tbeforeno));
+			int beforeno= td.selectBeforeNoTips(sqlSession,tips_no);
+			return td.selectTipsOne(sqlSession, String.valueOf(beforeno));
 		}
 		
 

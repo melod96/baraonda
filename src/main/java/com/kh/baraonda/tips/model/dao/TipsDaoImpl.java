@@ -2,15 +2,14 @@ package com.kh.baraonda.tips.model.dao;
 
 import java.util.ArrayList;
 
+
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
-import com.kh.baraonda.notice.model.vo.Notice;
-import com.kh.baraonda.notice.model.vo.NoticeComment;
-import com.kh.baraonda.notice.model.vo.NoticeMarking;
 import com.kh.baraonda.tips.model.dao.TipsDao;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
@@ -26,6 +25,30 @@ public class TipsDaoImpl implements TipsDao{
 			
 			return sqlSession.selectOne("Tips.selectTipsListCount");
 		}
+		
+		/*//게시글 전체 목록 조회
+		@Override
+		public List<HashMap<String, Object>> selectTipsList(SqlSessionTemplate sqlSession, int writing_type,  PageInfo pgif) throws TipsSelectListException  {
+			try {
+				List<HashMap<String, Object>> list = null;
+				
+				int offset = (pgif.getCurrentPage() -1) * pgif.getLimit();
+				
+				RowBounds rowBounds = new RowBounds(offset, pgif.getLimit());
+				
+				//HashMap<Key, value>
+				list = (ArrayList)sqlSession.selectList("Tips.selectTipsList", writing_type, rowBounds);
+				
+				if(list == null) {
+					sqlSession.close();
+					throw new TipsSelectListException("리스트 값 널");
+				}
+
+				return list;
+			}catch(Exception e) {
+				throw new TipsSelectListException(e.getMessage());
+			}
+		}*/
 
 		//꿀팁 리스트
 		@Override
@@ -236,18 +259,36 @@ public class TipsDaoImpl implements TipsDao{
 			return i;
 		}
 
+
 		//다음글 번호 
 		@Override
 		public int selectNextNoTips(SqlSessionTemplate sqlSession, String tips_no) {
+			String next = String.valueOf(sqlSession.selectOne("Tips.selectNextNoTips", tips_no));
+			System.out.println("길이" + next.length());
+			System.out.println(next);
 			
-			return sqlSession.selectOne("Tips.selectNextNoTips", tips_no);
+			if(next.equals("null")) {
+				System.out.println("????");
+				return 0;
+			}else{	
+				int n = Integer.parseInt(next);
+				System.out.println(n);
+				return n;
+			}
 		}
 
 		//이전글 번호
 		@Override
 		public int selectBeforeNoTips(SqlSessionTemplate sqlSession, String tips_no) {
-			
-			return sqlSession.selectOne("Tips.selectBeforeNoTips", tips_no);
+			String before = null;
+			before = String.valueOf(sqlSession.selectOne("Tips.selectBeforeNoTips", tips_no));
+			if(before.equals("null")) {
+				return 0;
+			}else{
+				int befo = Integer.parseInt(before);
+				
+				return befo;
+			}
 		}
 
 		
