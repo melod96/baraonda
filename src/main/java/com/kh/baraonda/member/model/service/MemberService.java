@@ -17,4 +17,7 @@ public interface MemberService {
 
 	int insertCompany(Member m);
 
+	int selectIdCheck(Member m);
+
+
 }

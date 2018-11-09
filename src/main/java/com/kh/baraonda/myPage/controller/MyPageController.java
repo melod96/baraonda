@@ -349,9 +349,9 @@ public class MyPageController {
 	
 	//마이페이지 - 병아리 키우기로 이동하는 메소드
 	@RequestMapping("growingChicksView.my")
-	public String showGrowingChicksView(@SessionAttribute("loginUser") Member m, Model model) {
+	public String showGrowingChicksView(@SessionAttribute("loginUser") Member m, Model model, HttpSession session) {
 		
-		Member loginUser = (Member) session.getAttribute("loginUser");
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
     if(loginUser != null) {
     
@@ -381,9 +381,27 @@ public class MyPageController {
 		
 	//마이페이지 - 다른사람이 보는 개인정보 화면으로 이동하는 메소드
 			@RequestMapping("othersView.my")
-		public String showOthersView(HttpSession session) {
+		public String showOthersView(@RequestParam int member_no, Model model) {
+				
+				
+//				System.out.println("othersView.my 실행 : " + member_no);
+				
+				//정보 불러오기
+				Member viewUser = mps.selectMemberView(member_no);
+				
+				model.addAttribute("viewUser", viewUser);
+				
 				
 				return "myPage/othersView";
 		}
+			
+			
+			
+			
+			
+			
+			
 	
+	
+			
 }

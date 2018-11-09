@@ -69,6 +69,13 @@ public class MemberServiceImpl implements MemberService{
 		return md.insertCompany(sqlSession, m);
 	}
 
+	@Override
+	public int selectIdCheck(Member m) {
+		return md.selectIdCheck(sqlSession, m);
+	}
+
+
+
 	
 
 

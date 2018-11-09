@@ -1,5 +1,7 @@
 package com.kh.baraonda.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +41,15 @@ public class MemberDaoImpl implements MemberDao{
 	public int insertCompany(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("Member.insertCompany", m);
 	}
+	
+	@Override
+	public int selectIdCheck(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("dao m : " + m);
+		return ((ArrayList)sqlSession.selectList("Member.selectIdCheck",m)).size();
+	}
+
+	
+
 
 	
 	
