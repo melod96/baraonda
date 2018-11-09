@@ -52,16 +52,16 @@
 	
 	<!-- 꿀팁 목록 조회 -->
 	<select id="selectTipsList" resultMap="tipsResultSet2">
-		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
+		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT", T.WRITING_TYPE
         FROM (     
             select b.board_title, b.board_date, b.board_count, count(m.board_no) board_good, 
-                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type
             from board b
             join member me on (b.member_no = me.member_no)
             join marking m on (b.board_no = m.board_no)
             join files f on (b.board_no = f.f_reference_no)
             where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
-            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type
             order by b.board_no desc
             ) T
         JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
@@ -75,7 +75,7 @@
 		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,MEMBER_NO,BOARD_DATE,MODIFY_DATE,BOARD_STATUS,BOARD_COUNT, FILES_root
 		FROM BOARD B
 		JOIN FILES F ON (F.F_REFERENCE_NO = B.MEMBER_NO)
-		WHERE BOARD_NO = 1 AND FILES_TYPE = 1
+		WHERE BOARD_NO = #{tips_no} AND FILES_TYPE = 1
 	</select>
 	
 	<!-- 좋아요 수 -->
@@ -93,7 +93,7 @@
 		SELECT C.COMMENTS_NO, C.COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,FILES_ROOT FROM COMMENTS C
 		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
         JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)
-		WHERE BOARD_NO = #{tips_no} AND COMMENTS_STATUS = 0 ORDER BY COMMENTS_NO DESC
+		WHERE BOARD_NO = #{tips_no} AND COMMENTS_STATUS = 0 and FILES_TYPE = 1 ORDER BY COMMENTS_NO DESC
 	</select>
 	
 	<!-- 조회수 -->

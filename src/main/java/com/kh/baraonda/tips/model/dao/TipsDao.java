@@ -19,6 +19,9 @@ public interface TipsDao {
 	//꿀팁 리스트
 	ArrayList<Tips> selectTipsList(SqlSessionTemplate sqlSession, PageInfo pgif) throws TipsSelectListException;
 	
+	/*//게시글 전체 목록 조회
+	public List<HashMap<String, Object>> selectTipsList(SqlSessionTemplate sqlSession, int writing_type, PageInfo pgif) throws TipsSelectListException;*/
+	
 	//꿀팁 상세
 	Tips selectTipsOne(SqlSessionTemplate sqlSession, String tips_no);
 	
