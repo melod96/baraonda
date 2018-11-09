@@ -19,5 +19,7 @@ public interface MemberService {
 
 	int selectIdCheck(Member m);
 
+	int selectBizIDCheck(Member m);
+
 
 }

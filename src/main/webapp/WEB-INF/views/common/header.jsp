@@ -29,11 +29,30 @@
 	    
 	    <!--로그인 후-->
 	    <c:if test="${!empty sessionScope.loginUser}">
-			<h4 align="right"><c:out value="${sessionScope.loginUser.nick_name }님 환영합니다."/></h4>
-			<div style="float:right;">
-		     	<button onclick="location.href='changeInfoView.my'" class="btn btn-success">마이페이지</button>
-		     	<button onclick="location.href='logout.me'" class="btn btn-default">로그아웃</button>
-		    </div>
+	    
+		    <c:if test="${loginUser.company_right == 1  }">
+			    <h4 align="right"><c:out value="${sessionScope.loginUser.company_name }님 환영합니다."/></h4>
+				<div style="float:right;">
+			     	<button onclick="location.href='changeInfoView.my'" class="btn btn-success">마이페이지</button>
+			     	<button onclick="location.href='logout.me'" class="btn btn-default">로그아웃</button>
+			    </div>
+		    </c:if>
+		    
+		    <c:if test="${loginUser.company_right == 0  && loginUser.admin_right == 0}">
+				<h4 align="right"><c:out value="${sessionScope.loginUser.nick_name }님 환영합니다."/></h4>
+				<div style="float:right;">
+			     	<button onclick="location.href='changeInfoView.my'" class="btn btn-success">마이페이지</button>
+			     	<button onclick="location.href='logout.me'" class="btn btn-default">로그아웃</button>
+			    </div>
+		    </c:if>
+		    
+		    <c:if test="${loginUser.admin_right == 1}">
+				<h4 align="right"><c:out value="${sessionScope.loginUser.nick_name }님 환영합니다."/></h4>
+				<div style="float:right;">
+			     	<button onclick="location.href='#'" class="btn btn-success">관리자 페이지</button>
+			     	<button onclick="location.href='logout.me'" class="btn btn-default">로그아웃</button>
+			    </div>
+		    </c:if>
 		</c:if>
 	
 	

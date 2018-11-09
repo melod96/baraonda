@@ -52,7 +52,7 @@
 		#btn1{float:left;}
 		
 		.emptyLogin{width:800px; margin-left: auto; margin-right: auto;text-align:center;}
-		
+		#checkBtn4{background:#90C3D4;border-radius:5px;color:white;margin-left:18px;}
 	</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -116,6 +116,18 @@
 					<div class="position2">
 						<div class="textLabel">닉네임</div>
 						<input type="text" class="form-control" name="nick_name" value="${loginUser.nick_name}">
+					</div>
+					
+					<div class="position2">
+						<div class="textLabel">이메일</div>
+						<c:if test="${!empty loginUser.email}">
+							<input type="email" class="form-control" name="nick_name" value="${loginUser.email}">
+						</c:if>
+						<c:if test="${empty loginUser.email}">
+							<input type="email" class="form-control" name="nick_name" value="${loginUser.email}" placeholder="이메일을 등록해주세요.">
+							<br>
+							<button type="button" id="checkBtn4" onclick="checkEmail();">이메일 인증하기</button>
+						</c:if>
 					</div>
 					
 					<br>
