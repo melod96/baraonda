@@ -2,9 +2,11 @@ package com.kh.baraonda.member.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,9 +64,9 @@ public class MemberController {
 	
 	
 	//회원 가입 폼으로 이동시키는 메소드
-	@RequestMapping("memberJoinView.me")
+	@RequestMapping("joinCompany.me")
 	public String showMemberJoinView() {
-		return "member/memberJoin";
+		return "member/joinCompany";
 	}
 		
 	
@@ -76,25 +78,40 @@ public class MemberController {
 	
 	//회원가입
 	@RequestMapping("insert.me")
-	public String insertMember(Model model, Member m) {
+	public String insertMember(Model model, Member m, HttpServletRequest request) {
 		//비밀번호 평문으로 출력됨
 		System.out.println("Controller insert Member m : " + m);
-		
-		String encPassword = passwordEncoder.encode(m.getPassword());
-		
-		m.setPassword(encPassword);
-		
-		System.out.println("암호화 후 : " + m);
+		String encPassword = "";
 		
 		int result = -99;
 		
-		if(m.getCompany_right() == 1 ) {
-			m.setCompany_name(m.getNick_name());
-			m.setName(m.getCeo_name());
-			System.out.println("기업 가입시 : " + m);
-			result = ms.insertCompany(m);
-		}else {
+		if(m.getPassword() != null && m.getPassword() != "") {
+			System.out.println("일반회원가입시" + m.getPassword());
+			
+			encPassword = passwordEncoder.encode(m.getPassword());
+			
+			m.setPassword(encPassword);
+			
+			System.out.println("암호화 후 : " + m);
+			
+			
+		
 			result = ms.insertMember(m);
+		}else if(request.getAttribute("id1") != null || request.getAttribute("id1")!= "") {
+			System.out.println("기업회원가입시");
+			encPassword = passwordEncoder.encode(request.getParameter("password1"));
+			
+			
+			
+			m.setId(request.getParameter("id1"));
+			m.setPassword(encPassword);
+			m.setCompany_name(request.getParameter("nick_name1"));
+			m.setName(m.getCeo_name());
+			m.setNick_name("#기업");
+			
+			System.out.println("기업 가입시 : " + m);
+			
+			result = ms.insertCompany(m);
 		}
 		
 		Member member = ms.selectOne(m);
@@ -116,24 +133,55 @@ public class MemberController {
 	
 	
 	
-/*	@SuppressWarnings("null")
+	@SuppressWarnings("null")
 	@RequestMapping("checkId.me")
-	public @ResponseBody boolean duplicationCheck(@RequestParam String id){
+	public @ResponseBody int duplicationCheck(@RequestParam String id){
 		
 		Member m = new Member();
 		m.setId(id);
 		
 		System.out.println("cont id : " + id);
 		
-		boolean result;
-		
-		if( ms.selectIdCheck(m) != 0) {
-			result = false;
-		}else {
-			result = true;
-		}
+		int result =  ms.selectIdCheck(m);
 		
 		return result;
 	}
-*/	
+	
+	
+	@SuppressWarnings("null")
+	@RequestMapping("checkBizID.me")
+	public @ResponseBody int checkBizID(@RequestParam String bizID){
+		
+		Member m = new Member();
+		m.setCompany_no(bizID);
+		
+		System.out.println("cont bizID : " + bizID);
+		
+		int result =  ms.selectBizIDCheck(m);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

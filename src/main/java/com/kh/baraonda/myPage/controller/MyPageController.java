@@ -407,9 +407,9 @@ public class MyPageController {
 		}
 			
 			
-			
-			
-			
+	
+	//이메일 인증
+		
 			
 			
 	

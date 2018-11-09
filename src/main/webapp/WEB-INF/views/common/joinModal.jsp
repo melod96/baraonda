@@ -20,7 +20,7 @@
 								<form onsubmit="return validate(this);" action="insert.me" method="post">
 									<div class="form-group">
 									   <label for="id">*아이디</label>
-									   <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요">
+									   <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" onchange="changeText(value)">
 									    <button type="button" id="checkBtn1" onclick="checkId();">중복확인</button>
 									</div>
 									<br>
@@ -60,13 +60,21 @@
 	
 	<script>
 	
+	
+	
 	var idCheck = false;	
+
 	
 	   function validate(check) {
 	       if(check.id.value ==""){
 	    	   alert("아이디를 입력해주세요.");
 	    	   return false;
 	       }
+	       
+	       if(idCheck == false){
+				alert("아이디 중복확인을 해주세요!");
+				return false;
+			}
 	       
 	       if(check.password.value ==""){
 	    	   alert("비밀번호를 입력해주세요.");
@@ -93,42 +101,55 @@
 	    	   return false;
 	       }
 	       
-	       if(!idCheck){
-				alert("아이디 중복확인을 해주세요!");
-				return false;
-			}
 	       
 	   }
 	   
-/* 	 //아이디 중복체크
+	
+	 //아이디 중복체크
 		
 		function checkId() {
 			var id = $("#id").val();
 			var idCheck = false;
 			var result = "";
-
-			if (id != "" && id != null) {
-				$.ajax({
-					url : "checkId.me",
-					type : "post",
-					data : {
-						id : id
-					},
-					success : function(data) {
-						
-						
-					},
-					error : function() {
-						console.log("실패");
-					}
-				});
-
+				 
+			var re = /^[a-zA-Z0-9]{3,12}$/;
+			
+			
+			if(!re.test(id)){
+				alert("3~12자의 영문 대소문자와 숫자만 입력 가능합니다.");
+				
+			}else{
+				if (id != "" && id != null) {
+					$.ajax({
+						url : "checkId.me",
+						type : "post",
+						data : {id : id},
+						success : function(data) {
+							if(data != 0){
+								alert("이미 사용중인 아이디 입니다.");
+							}else{
+								alert("사용 가능한 아이디 입니다.");
+								idCk();
+							}
+						},
+						error : function() {
+							console.log("실패");
+						}
+					});
+				}
 			}
 		}
 
 		function idCk() {
 			idCheck = true;
-		} */
+		} 
+		
+		function changeText(text){
+			idCheck = false;
+		}
+		
+		
+		   
 	</script>
 	
 	
