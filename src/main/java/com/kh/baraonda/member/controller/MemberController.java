@@ -57,7 +57,7 @@ public class MemberController {
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		
-		return "redirect:goMain.me";
+		return "redirect:main.m";
 	}
 	
 	
@@ -71,7 +71,7 @@ public class MemberController {
 	@RequestMapping("goMain.me")
 	public String goMain() {
 		
-		return "main/main";
+		return "redirect:main.m";
 	}
 	
 	//회원가입
