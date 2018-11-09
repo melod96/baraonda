@@ -114,8 +114,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 	//좋아요 등록
 	@Override
-	public void insertLike(boardMarking bm) {
-		boardDao.insertLike(sqlSession, bm);
+	public int insertLike(boardMarking bm) {
+		return boardDao.insertLike(sqlSession, bm);
+	}
+	//좋아요 삭제
+	@Override
+	public int deleteLike(boardMarking bm){
+		return boardDao.deleteLike(sqlSession, bm);
 	}
 	
 

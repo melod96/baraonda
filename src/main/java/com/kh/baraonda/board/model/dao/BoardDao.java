@@ -47,7 +47,9 @@ public interface BoardDao {
 	//좋아요 체크 여부
 	int checkLike(SqlSessionTemplate sqlSession, boardMarking bm);
 	//좋아요 등록
-	public void insertLike(SqlSessionTemplate sqlSession, boardMarking bm);
+	int insertLike(SqlSessionTemplate sqlSession, boardMarking bm);
+	//좋아요 삭제
+	int deleteLike(SqlSessionTemplate sqlSession, boardMarking bm);
 	
 
 	
