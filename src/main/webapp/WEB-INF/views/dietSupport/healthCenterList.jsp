@@ -19,6 +19,8 @@
 .title {
 	border-bottom: 2px solid #5d5d5d;
 	font-size: 30px;
+	margin-bottom:20px;
+	line-height:50px;
 }
 
 .p-red {
@@ -121,8 +123,8 @@
 				<br>
 				<br>
 				<br>
-				<h4>
-					<span class="p-red">전체 인바디 측정 가능 보건소</span> ${clistcount}곳이 있습니다.
+				<h4 style="margin: 10px 0 10px 0;">
+					<span class="p-red" >전체 인바디 측정 가능 보건소</span> ${clistcount}곳이 있습니다.
 				</h4>
 				<table class="tbl-type02">
 					<colgroup>
