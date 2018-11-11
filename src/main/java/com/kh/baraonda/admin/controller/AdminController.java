@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
@@ -15,9 +14,11 @@ import com.kh.baraonda.admin.model.service.AdminService;
 import com.kh.baraonda.admin.model.vo.AdminBlackMember;
 import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
 import com.kh.baraonda.admin.model.vo.AdminDeclaration;
+import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
 import com.kh.baraonda.admin.model.vo.AdminNotice;
 import com.kh.baraonda.admin.model.vo.AdminOrder;
+import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
@@ -64,8 +65,18 @@ public class AdminController {
 	
 	@RequestMapping(value="goGeneralMemberAdminDetail.adm")
 	public ModelAndView goGeneralMemberAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
-		
-		mv.setViewName("admin/memberAdmin/generalMemberAdminDetail");
+		try {
+			AdminGeneralMember memberInfo = as.selectGeneralMemberInfo(num);
+			ArrayList<AdminDeclarationForMemberDetail> membersDeclartionList = as.selectMembersDeclarationList(num);
+			ArrayList<AdminOrderForMemberDetail> membersOrderList = as.selectMembersOrderList(num);
+			mv.addObject("memberInfo", memberInfo);
+			mv.addObject("membersDeclartionList", membersDeclartionList);
+			mv.addObject("membersOrderList", membersOrderList);
+			mv.setViewName("admin/memberAdmin/generalMemberAdminDetail");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "MemberDetail 조회 실패!");
+		}
 		
 		return mv;
 	}
@@ -99,8 +110,13 @@ public class AdminController {
 	
 	@RequestMapping(value="goCompanyMemberAdminDetail.adm")
 	public ModelAndView goCompanyMemberAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
-		
-		mv.setViewName("admin/memberAdmin/companyMemberAdminDetail");
+		try {
+			mv.addObject("memberInfo", as.selectCompanyMemberInfo(num));
+			mv.setViewName("admin/memberAdmin/companyMemberAdminDetail");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "CompanyDetail 조회 실패!");
+		}
 		
 		return mv;
 	}
@@ -171,6 +187,14 @@ public class AdminController {
 			mv.setViewName("common/errerPage");
 			mv.addObject("errorMessage", "Notice 조회 실패!");
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value="goNoticeAdminWriteForm.adm")
+	public ModelAndView goNoticeAdminWriteForm(ModelAndView mv) {
+		
+		mv.setViewName("admin/noticeAdmin/noticeAdminWriteForm");
+		
 		return mv;
 	}
 	

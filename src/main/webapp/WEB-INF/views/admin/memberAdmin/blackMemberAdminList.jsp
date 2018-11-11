@@ -97,13 +97,13 @@
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.startPage }">&laquo;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.startPage });">&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage <= 1 }">
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.currentPage - 1 }">&lt;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage - 1 })">&lt;</button>
                             	</c:if>
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
@@ -113,7 +113,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -125,7 +125,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num })">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -137,20 +137,20 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num })">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
                                 </span>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.currentPage + 1 }">&gt;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage + 1 })">&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.endPage }">&raquo;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.endPage })">&raquo;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>
@@ -182,6 +182,12 @@
             info : false,
             filter : false
         });
+        
+        $("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
     });
     
     function search(){
@@ -190,13 +196,13 @@
     	location.href="goBlackMemberAdminList.adm?currentPage=1&searchContent=" + content;
     }
     
-    $(document).ready(function(){
-    	$("#search-option-1").children().each(function(){
-    		if($(this).val() == "${ search.option1 }"){
-    			$(this).attr("selected","selected"); 
-    		}
-    	});
-    }); 
+    function paginate(num){
+    	if(${ search != null }){
+    		location.href="goBlackMemberAdminList.adm?currentPage=" + num + "&searchContent=${ search.content }";
+    	}else{
+    		location.href="goBlackMemberAdminList.adm?currentPage=" + num;
+    	}
+    }
     </script>
     
 </body>

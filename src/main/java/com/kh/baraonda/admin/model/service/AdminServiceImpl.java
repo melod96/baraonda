@@ -11,9 +11,11 @@ import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.vo.AdminBlackMember;
 import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
 import com.kh.baraonda.admin.model.vo.AdminDeclaration;
+import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
 import com.kh.baraonda.admin.model.vo.AdminNotice;
 import com.kh.baraonda.admin.model.vo.AdminOrder;
+import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -84,5 +86,25 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<AdminOrder> selectOrderList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectOrderList(sqlSession, pi, search);
 	}
-	
+
+	@Override
+	public AdminGeneralMember selectGeneralMemberInfo(String num) throws AdminException {
+		return ad.selectGeneralMemberInfo(sqlSession, num);
+	}
+
+	@Override
+	public ArrayList<AdminDeclarationForMemberDetail> selectMembersDeclarationList(String num) throws AdminException {
+		return ad.selectMembersDeclarationList(sqlSession, num);
+	}
+
+	@Override
+	public ArrayList<AdminOrderForMemberDetail> selectMembersOrderList(String num) throws AdminException {
+		return ad.selectMembersOrderList(sqlSession, num);
+	}
+
+	@Override
+	public AdminCompanyMember selectCompanyMemberInfo(String num) throws AdminException {
+		return ad.selectCompanyMemberInfo(sqlSession, num);
+	}
+
 }

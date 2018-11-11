@@ -73,6 +73,20 @@
 		<result property="phone" column="phone"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail" id="adminDeclarationForMemberDetailResultSet">
+		<id property="report_no" column="report_no"/>
+		<result property="report_type" column="report_type"/>
+		<result property="give_nick_name" column="give_nick_name"/>
+		<result property="report_date" column="report_date"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail" id="adminOrderForMemberDetailResultSet">
+		<id property="orders_no" column="orders_no"/>
+		<result property="product_name" column="product_name"/>
+		<result property="product_quantity" column="product_quantity"/>
+		<result property="orders_date" column="orders_date"/>
+	</resultMap>
+	
 	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -256,6 +270,36 @@
 			OR PRODUCT_NAME LIKE '%' || #{content} || '%' 
 			OR PHONE LIKE '%' || #{content} || '%')
 		</if>
+	</select>
+	
+	<select id="selectGeneralMemberInfo" resultMap="adminGeneralMemberResultSet">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
+		FROM MEMBER 
+		WHERE 1 = 1
+		AND MEMBER_NO = #{num}
+	</select>
+	
+	<select id="selectMembersDeclarationList" resultMap="adminDeclarationForMemberDetailResultSet">
+		SELECT R.REPORT_NO, R.REPORT_TYPE, M.NICK_NAME AS GIVE_NICK_NAME, R.REPORT_DATE
+		FROM REPORT R
+		JOIN MEMBER M ON(M.MEMBER_NO = R.REPORT_GIVE_NO)
+		WHERE 1 = 1
+		AND REPORT_GET_NO = #{num}
+	</select>
+	
+	<select id="selectMembersOrderList" resultMap="adminOrderForMemberDetailResultSet">
+		SELECT O.ORDERS_NO, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE
+		FROM ORDERS O 
+		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE 1 = 1
+		AND MEMBER_NO = #{num}
+	</select>
+	
+	<select id="selectCompanyMemberInfo" resultMap="adminCompanyMemberReulstSet">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, CEO_TYPE, ENROLL_DATE, MEMBER_STATUS
+		FROM MEMBER 
+		WHERE 1 = 1
+		AND MEMBER_NO = #{num}
 	</select>
 	
 </mapper> 

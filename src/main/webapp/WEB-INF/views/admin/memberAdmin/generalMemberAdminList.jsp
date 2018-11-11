@@ -61,8 +61,8 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control custom-select-form" id="search-option-1">
-                                        <option>회원상태</option>
-                                        <option>------</option>
+                                        <option value="">회원상태</option>
+                                        <option value="">------</option>
                                         <option value="general">일반</option>
                                         <option value="secession">탈퇴</option>
                                         <option value="black">블랙</option>
@@ -110,13 +110,13 @@
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ pi.startPage }">&laquo;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.startPage });">&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage <= 1 }">
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ pi.currentPage - 1 }">&lt;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage - 1 });">&lt;</button>
                             	</c:if>
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
@@ -126,7 +126,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -138,32 +138,32 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
 									<c:if test="${ pi.currentPage > 1 && (pi.currentPage > (pi.maxPage - 1)) }">
 		                               	<c:forEach begin="${ pi.currentPage - 2 }" end="${ pi.currentPage }" step="1" var="num">
-		                               		<c:if test="${ num <= pi.maxPage }">
+		                               		<c:if test="${ num > 0 && num <= pi.maxPage }">
 			                               		<c:if test="${ num == pi.currentPage }">
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
                                 </span>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ pi.currentPage + 1 }">&gt;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.currentPage + 1 });">&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goGeneralMemberAdminList.adm?currentPage=' + ${ pi.endPage }">&raquo;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.endPage });">&raquo;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>
@@ -215,6 +215,14 @@
     	var option1 = $('#search-option-1 option:selected').val();
     	
     	location.href="goGeneralMemberAdminList.adm?currentPage=1&searchContent=" + content + "&option1=" + option1;
+    }
+    
+    function paginate(num){
+    	if(${ search != null }){
+    		location.href="goGeneralMemberAdminList.adm?currentPage=" + num + "&searchContent=${ search.content }&option1=${ search.option1 }";
+    	}else{
+    		location.href="goGeneralMemberAdminList.adm?currentPage=" + num;
+    	}
     }
     </script>
     

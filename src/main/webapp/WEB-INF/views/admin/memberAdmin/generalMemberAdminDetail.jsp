@@ -52,31 +52,31 @@
 	                                <tbody>
 	                                	<tr>
 	                                		<th width="15%"><h5>NO</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.member_no }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>아이디</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.id }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>이름</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.name }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>닉네임</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.nick_name }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>연락처</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.phone }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>이메일</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.email }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>가입일자</h5></th>
-	                                		<td><h5>1</h5></td>
+	                                		<td><h5>${ memberInfo.enroll_date }</h5></td>
 	                                	</tr>
 	                                </tbody>
 	                            </table>
@@ -102,13 +102,16 @@
 			                                    </tr>
 			                                </thead>
 			                                <tbody>
-				                            	<tr class="odd gradeX">
-				                               		<input type="hidden" value="${ list.member_no }" id="member_no"/>
-					                                <td>1</td>
-					                                <td>상품1</td>
-					                                <td>상품수량</td>
-					                                <td>주문날짜</td>
-					                            </tr>	
+				                            	<c:if test="${ membersOrderList != null }">
+				                                	<c:forEach var="list" items="${ membersOrderList }" varStatus="status" begin="0">
+				                               			<tr class="odd gradeX">
+					                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
+					                                        <td>${ list.product_name }</td>
+					                                        <td>${ list.product_quantity }</td>
+					                                        <td>${ list.orders_date }</td>
+				                                    	</tr>
+				                               		</c:forEach>
+			                               		</c:if>
 			                                </tbody>
 			                            </table>
 	                                </div>
@@ -123,13 +126,16 @@
 			                                    </tr>
 			                                </thead>
 			                                <tbody>
-				                            	<tr class="odd gradeX">
-				                               		<input type="hidden" value="${ list.member_no }" id="member_no"/>
-					                                <td>1</td>
-					                                <td>상품1</td>
-					                                <td>상품수량</td>
-					                                <td>주문날짜</td>
-					                            </tr>	
+				                            	<c:if test="${ membersDeclartionList != null }">
+				                                	<c:forEach var="list" items="${ membersDeclartionList }" varStatus="status" begin="0">
+				                               			<tr class="odd gradeX">
+					                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
+					                                        <td>${ list.report_type }</td>
+					                                        <td>${ list.give_nick_name }</td>
+					                                        <td>${ list.report_date }</td>
+				                                    	</tr>
+				                               		</c:forEach>
+			                               		</c:if>
 			                                </tbody>
 			                            </table>
 	                                </div>

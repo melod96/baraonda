@@ -16,6 +16,9 @@
         margin-top: 10px;
         text-align: center;
     }
+    .write{
+    	align: right;
+    }
 </style>
 </head>
 <body>
@@ -146,7 +149,9 @@
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>
                                 </c:if>
                             </div>
-
+							<div class="write">
+								<button type="button" class="btn btn-primary" onclick="location.href='goNoticeAdminWriteForm.adm'">작성</button>
+							</div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
