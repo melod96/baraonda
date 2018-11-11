@@ -52,6 +52,13 @@ public interface BoardService {
 	//좋아요 삭제
 	int deleteLike(boardMarking bm);
 	
+	//북마크 체크 여부
+	int checkBookMark(boardMarking bm);
+	//북마크 insert
+	int insertBookMark(boardMarking bm);
+	//북마크 delete
+	int deleteBookMark(boardMarking bm);
+	
 	
 	
 }

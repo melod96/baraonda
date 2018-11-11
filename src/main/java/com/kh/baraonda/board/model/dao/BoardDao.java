@@ -51,6 +51,13 @@ public interface BoardDao {
 	//좋아요 삭제
 	int deleteLike(SqlSessionTemplate sqlSession, boardMarking bm);
 	
+	//북마크 체크 여부
+	int checkBookMark(SqlSessionTemplate sqlSession, boardMarking bm);
+	//북마크  insert
+	int insertBookMark(SqlSessionTemplate sqlSession, boardMarking bm);
+	//북마크 delete
+	int deleteBookMark(SqlSessionTemplate sqlSession, boardMarking bm);
+	
 
 	
 }

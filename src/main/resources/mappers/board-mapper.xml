@@ -131,7 +131,18 @@
 		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
 	</delete>
 	
-	
+	<!-- 북마크 체크 여부 -->
+	<select id="checkBookMark" resultType="_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 1
+	</select>
+	<!-- 북마크  insert -->
+	<insert id="insertBookMark">
+		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 1, SYSDATE, #{board_no}, #{member_no})
+	</insert>
+	<!-- 북마크 delete -->
+	<delete id="deleteBookMark">
+		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 1
+	</delete>	
 </mapper> 
 
 

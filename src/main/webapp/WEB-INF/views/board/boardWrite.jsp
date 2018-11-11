@@ -178,12 +178,12 @@ div#editor {
 		});
 	</script>
 	
-	<c:if test="${empty sessionScope.loginUser}">
+	<%-- <c:if test="${empty sessionScope.loginUser}">
 		<script>
 			alert("로그인 후 이용해주세요.");
 			location.href="${path}/baraonda/main.m";
 		</script>
-	</c:if>
+	</c:if> --%>
 </body>
 </html>
 

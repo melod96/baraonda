@@ -109,6 +109,10 @@
 	float: right;
 	margin: auto;
 }
+.btn:not(:disabled):not(.disabled) {
+	float: right;
+	margin: auto;
+}
 
 .boardHr2 {
 	margin-top: -15px;
@@ -172,7 +176,14 @@
 					</table>
 					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
-					<button onclick="btnWrite" id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
+					<c:if test="${! empty sessionScope.loginUser}">
+						<button onclick="btnWrite" id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
+					</c:if>
+					<c:if test="${empty sessionScope.loginUser}">
+						<button id="btnWrite login" type="submit" class="btn btn-primary"
+						 data-toggle="modal" data-target="#login-modal">글쓰기</button>
+					</c:if>
+					
 					
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">

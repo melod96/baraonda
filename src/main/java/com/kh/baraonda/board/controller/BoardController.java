@@ -212,7 +212,27 @@ public class BoardController {
 		return "redirect:view.do?board_no=" + board_no;
 	}
 	
-	
+	//북마크
+	@RequestMapping("bookMark.do")
+	public String bookMark(@SessionAttribute("loginUser") Member m, int board_no) {
+		boardMarking bm = new boardMarking();
+		bm.setBoard_no(board_no);
+		bm.setMember_no(m.getMember_no());
+		
+		int check = -99;
+		
+		check = boardService.checkBookMark(bm);
+		
+		if(check == 0) {
+			int insert = boardService.insertBookMark(bm);
+			System.out.println("인서트");
+		}else {
+			int delete = boardService.deleteBookMark(bm);
+			System.out.println("딜리트");
+		}
+		
+		return "redirect:view.do?board_no=" + board_no;
+	}
 
 }
 

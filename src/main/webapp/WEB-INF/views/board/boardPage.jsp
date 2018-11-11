@@ -317,6 +317,7 @@
 }
 .bSubject{font-size: 17px; font-weight: bold;}
 .pageWriteBtn{margin-right: 12px;}
+.pageWriteBtn:hover{cursor: pointer;}
 .commentPro{width: 50px; height: 50px;}
 .aflistp{display: inline-block;}
 .re{padding-top: 10px;}
@@ -328,7 +329,7 @@
 .modifyB2:hover, .deleteB2:hover{cursor: pointer;}
 .paging-numbers a.on{background:#f13d3d;}
 .container1{margin: auto; width:75%;}
-#writeBtn:hover, #boardList:hover {cursor: pointer;}
+#boardList:hover {cursor: pointer;}
 
 </style>
 <body class="page1" id="top">
@@ -416,7 +417,7 @@
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
 					<div class="allmark">
 					<c:if test="${! empty sessionScope.loginUser}">
-						<a href="#" class="bmark"> <span>북마크</span></a>
+						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
 						<a href="like.do?board_no=${detail.BOARD_NO}" class="heart"><span>${likeCount}</span></a>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
@@ -432,8 +433,8 @@
 					</div>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
-					<div class="btn_ar login">
-						<img id="writeBtn" class="pageWriteBtn login" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif"
+					<div class="btn_ar">
+						<img id="writeBtn login" class="pageWriteBtn login" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif"
 						 data-toggle="modal" data-target="#login-modal">
 						<img id="boardList" class="boardList" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 					</div>

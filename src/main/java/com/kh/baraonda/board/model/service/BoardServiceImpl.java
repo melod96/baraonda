@@ -123,6 +123,22 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.deleteLike(sqlSession, bm);
 	}
 	
+	//북마크 체크 여부
+	@Override
+	public int checkBookMark(boardMarking bm) {
+		return boardDao.checkBookMark(sqlSession, bm);
+	}
+	//북마크 insert
+	@Override
+	public int insertBookMark(boardMarking bm) {
+		return boardDao.insertBookMark(sqlSession, bm);
+	}
+	//북마크 delete
+	@Override
+	public int deleteBookMark(boardMarking bm) {
+		return boardDao.deleteBookMark(sqlSession, bm);
+	}
+	
 
 }
 
