@@ -1,7 +1,5 @@
 package com.kh.baraonda.admin.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,14 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.service.AdminService;
-import com.kh.baraonda.admin.model.vo.AdminBlackMember;
-import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
-import com.kh.baraonda.admin.model.vo.AdminDeclaration;
-import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
-import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
-import com.kh.baraonda.admin.model.vo.AdminNotice;
-import com.kh.baraonda.admin.model.vo.AdminOrder;
-import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
@@ -38,21 +28,17 @@ public class AdminController {
 	public ModelAndView goGeneralMemberAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
 												@RequestParam(value="searchContent", required=false)String content, 
 												@RequestParam(value="option1", required=false)String option1) {
-		
 		Search search = new Search(content, option1);
 		int currentPage = 1;
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
 		}
-		ArrayList<AdminGeneralMember> list;
 		try {
 			int listCount = as.selectGeneralMemberCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
-				list = as.selectGeneralMemberList(info, search);
-				mv.addObject("list", list);
+				mv.addObject("list", as.selectGeneralMemberList(info, search));
 			}
-			
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
 			mv.setViewName("admin/memberAdmin/generalMemberAdminList");
@@ -66,18 +52,14 @@ public class AdminController {
 	@RequestMapping(value="goGeneralMemberAdminDetail.adm")
 	public ModelAndView goGeneralMemberAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
 		try {
-			AdminGeneralMember memberInfo = as.selectGeneralMemberInfo(num);
-			ArrayList<AdminDeclarationForMemberDetail> membersDeclartionList = as.selectMembersDeclarationList(num);
-			ArrayList<AdminOrderForMemberDetail> membersOrderList = as.selectMembersOrderList(num);
-			mv.addObject("memberInfo", memberInfo);
-			mv.addObject("membersDeclartionList", membersDeclartionList);
-			mv.addObject("membersOrderList", membersOrderList);
+			mv.addObject("memberInfo", as.selectGeneralMemberInfo(num));
+			mv.addObject("membersDeclartionList", as.selectMembersDeclarationList(num));
+			mv.addObject("membersOrderList", as.selectMembersOrderList(num));
 			mv.setViewName("admin/memberAdmin/generalMemberAdminDetail");
 		} catch (AdminException e) {
 			mv.setViewName("common/errerPage");
 			mv.addObject("errorMessage", "MemberDetail 조회 실패!");
 		}
-		
 		return mv;
 	}
 	
@@ -89,15 +71,12 @@ public class AdminController {
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
 		}
-		ArrayList<AdminCompanyMember> list;
 		try {
 			int listCount = as.selectCompanyMemberCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
-				list = as.selectCompanyMemberList(info, search);
-				mv.addObject("list", list);
+				mv.addObject("list", as.selectCompanyMemberList(info, search));
 			}
-			
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
 			mv.setViewName("admin/memberAdmin/companyMemberAdminList");
@@ -117,7 +96,6 @@ public class AdminController {
 			mv.setViewName("common/errerPage");
 			mv.addObject("errorMessage", "CompanyDetail 조회 실패!");
 		}
-		
 		return mv;
 	}
 	
@@ -129,15 +107,12 @@ public class AdminController {
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
 		}
-		ArrayList<AdminBlackMember> list;
 		try {
 			int listCount = as.selectBlackMemberCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
-				list = as.selectBlackMemberList(info, search);
-				mv.addObject("list", list);
+				mv.addObject("list", as.selectBlackMemberList(info, search));
 			}
-			
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
 			mv.setViewName("admin/memberAdmin/blackMemberAdminList");
@@ -171,30 +146,37 @@ public class AdminController {
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
 		}
-		ArrayList<AdminNotice> list;
 		try {
 			int listCount = as.selectNoticeCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
-				list = as.selectNoticeList(info, search);
-				mv.addObject("list", list);
+				mv.addObject("list", as.selectNoticeList(info, search));
 			}
-			
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
 			mv.setViewName("admin/noticeAdmin/noticeAdminList");
 		} catch (AdminException e){
 			mv.setViewName("common/errerPage");
-			mv.addObject("errorMessage", "Notice 조회 실패!");
+			mv.addObject("errorMessage", "NoticeList 조회 실패!");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="goNoticeAdminDetail.adm")
+	public ModelAndView goNoticeAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		try {
+			mv.addObject("boardInfo", as.selectNoticeInfo(num));
+			mv.setViewName("admin/noticeAdmin/noticeAdminDetail");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "NoticeDetail 조회 실패!");
 		}
 		return mv;
 	}
 	
 	@RequestMapping(value="goNoticeAdminWriteForm.adm")
 	public ModelAndView goNoticeAdminWriteForm(ModelAndView mv) {
-		
 		mv.setViewName("admin/noticeAdmin/noticeAdminWriteForm");
-		
 		return mv;
 	}
 	
@@ -206,15 +188,12 @@ public class AdminController {
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
 		}
-		ArrayList<AdminDeclaration> list;
 		try {
 			int listCount = as.selectDeclarationCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
-				list = as.selectDeclarationList(info, search);
-				mv.addObject("list", list);
+				mv.addObject("list", as.selectDeclarationList(info, search));
 			}
-			
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
 			mv.setViewName("admin/declarationAdmin/declarationAdminList");
@@ -233,15 +212,12 @@ public class AdminController {
 		if(pi.getCurrentPage() > 0) {
 			currentPage = pi.getCurrentPage();
 		}
-		ArrayList<AdminOrder> list;
 		try {
 			int listCount = as.selectOrderCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
-				list = as.selectOrderList(info, search);
-				mv.addObject("list", list);
+				mv.addObject("list", as.selectOrderList(info, search));
 			}
-			
 			mv.addObject("pi", info);
 			mv.addObject("search", search);
 			mv.setViewName("admin/orderAdmin/orderAdminList");

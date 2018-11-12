@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,9 @@
     .paginate{
         margin-top: 10px;
         text-align: center;
+    }
+    .tab-content{
+    	margin-top: 10px;
     }
 </style>
 </head>
@@ -52,43 +56,43 @@
 	                                <tbody>
 	                                	<tr>
 	                                		<th width="15%"><h5>NO</h5></th>
-	                                		<td><h5>${ memberInfo.member_no }</h5></td>
+	                                		<td><h5>${ memberInfo.MEMBER_NO }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>아이디</h5></th>
-	                                		<td><h5>${ memberInfo.id }</h5></td>
+	                                		<td><h5>${ memberInfo.ID }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>이름</h5></th>
-	                                		<td><h5>${ memberInfo.name }</h5></td>
+	                                		<td><h5>${ memberInfo.NAME }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>닉네임</h5></th>
-	                                		<td><h5>${ memberInfo.nick_name }</h5></td>
+	                                		<td><h5>${ memberInfo.NICK_NAME }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>연락처</h5></th>
-	                                		<td><h5>${ memberInfo.phone }</h5></td>
+	                                		<td><h5>${ memberInfo.PHONE }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>이메일</h5></th>
-	                                		<td><h5>${ memberInfo.email }</h5></td>
+	                                		<td><h5>${ memberInfo.EMAIL }</h5></td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>가입일자</h5></th>
-	                                		<td><h5>${ memberInfo.enroll_date }</h5></td>
+	                                		<td><h5>${ fn:substring(memberInfo.ENROLL_DATE, 0, 10) }</h5></td>
 	                                	</tr>
 	                                </tbody>
 	                            </table>
 	                        </div>
 	                        <div class="col-lg-6">
 	                        	<ul class="nav nav-pills">
-	                                <li class="active"><a href="#order" data-toggle="tab">Order</a>
+	                                <li class="active"><a href="#order" data-toggle="tab">주문</a>
 	                                </li>
-	                                <li><a href="#declaration" data-toggle="tab">Declaration</a>
+	                                <li><a href="#declaration" data-toggle="tab">신고</a>
 	                                </li>
 	                            </ul>
-	                        	<hr />
+	                        	
 	                        	
 	                        	<div class="tab-content">
 	                                <div class="tab-pane fade in active" id="order">
@@ -106,9 +110,9 @@
 				                                	<c:forEach var="list" items="${ membersOrderList }" varStatus="status" begin="0">
 				                               			<tr class="odd gradeX">
 					                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-					                                        <td>${ list.product_name }</td>
-					                                        <td>${ list.product_quantity }</td>
-					                                        <td>${ list.orders_date }</td>
+					                                        <td>${ list.PRODUCT_NAME }</td>
+					                                        <td>${ list.PRODUCT_QUANTITY }</td>
+					                                        <td>${ fn:substring(list.ORDERS_DATE, 0, 10) }</td>
 				                                    	</tr>
 				                               		</c:forEach>
 			                               		</c:if>
@@ -130,9 +134,12 @@
 				                                	<c:forEach var="list" items="${ membersDeclartionList }" varStatus="status" begin="0">
 				                               			<tr class="odd gradeX">
 					                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-					                                        <td>${ list.report_type }</td>
-					                                        <td>${ list.give_nick_name }</td>
-					                                        <td>${ list.report_date }</td>
+					                                        <td>
+					                                        	<c:if test="${ list.REPORT_TYPE == 1 }">댓글</c:if>
+		                                        				<c:if test="${ list.REPORT_TYPE == 2 }">게시글</c:if>
+					                                        </td>
+					                                        <td>${ list.GIVE_NICK_NAME }</td>
+					                                        <td>${ fn:substring(list.REPORT_DATE, 0, 10) }</td>
 				                                    	</tr>
 				                               		</c:forEach>
 			                               		</c:if>

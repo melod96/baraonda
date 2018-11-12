@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,18 +87,18 @@
                                 	<c:if test="${ list != null }">
 	                               		<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
-	                               				<input type="hidden" value="${ list.member_no }" id="member_no"/>
+	                               				<input type="hidden" value="${ list.MEMBER_NO }" id="member_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-		                                        <td>${ list.id }</td>
-		                                        <td>${ list.name }</td>
-		                                        <td>${ list.nick_name }</td>
-		                                        <td>${ list.phone }</td>
-		                                        <td>${ list.email }</td>
-		                                        <td>${ list.enroll_date }</td>
+		                                        <td>${ list.ID }</td>
+		                                        <td>${ list.NAME }</td>
+		                                        <td>${ list.NICK_NAME }</td>
+		                                        <td>${ list.PHONE }</td>
+		                                        <td>${ list.EMAIL }</td>
+		                                        <td>${ fn:substring(list.ENROLL_DATE, 0, 10) }</td>                             
 		                                        <td>
-		                                        	<c:if test="${ list.member_status == 0 }">일반</c:if>
-		                                        	<c:if test="${ list.member_status == 1 }">블랙</c:if>
-		                                        	<c:if test="${ list.member_status == 2 }">탈퇴</c:if>
+		                                        	<c:if test="${ list.MEMBER_STATUS == 0 }">일반</c:if>
+		                                        	<c:if test="${ list.MEMBER_STATUS == 1 }">블랙</c:if>
+		                                        	<c:if test="${ list.MEMBER_STATUS == 2 }">탈퇴</c:if>
 		                                        </td>
 	                                    	</tr>
 	                               		</c:forEach>
@@ -157,13 +158,13 @@
 									</c:if>
                                 </span>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.currentPage + 1 });">&gt;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage + 1 });">&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.endPage });">&raquo;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.endPage });">&raquo;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>

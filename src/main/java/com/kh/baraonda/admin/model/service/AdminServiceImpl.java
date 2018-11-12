@@ -1,6 +1,8 @@
 package com.kh.baraonda.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.admin.model.dao.AdminDao;
 import com.kh.baraonda.admin.model.exception.AdminException;
-import com.kh.baraonda.admin.model.vo.AdminBlackMember;
-import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
-import com.kh.baraonda.admin.model.vo.AdminDeclaration;
-import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
-import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
-import com.kh.baraonda.admin.model.vo.AdminNotice;
-import com.kh.baraonda.admin.model.vo.AdminOrder;
-import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -33,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<AdminGeneralMember> selectGeneralMemberList(PageInfo pi, Search search) throws AdminException {
+	public List<Map<String, Object>> selectGeneralMemberList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectGeneralMemberList(sqlSession, pi, search);
 	}
 
@@ -43,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<AdminCompanyMember> selectCompanyMemberList(PageInfo pi, Search search) throws AdminException {
+	public List<Map<String, Object>> selectCompanyMemberList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectCompanyMemberList(sqlSession, pi, search);
 	}
 
@@ -53,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<AdminBlackMember> selectBlackMemberList(PageInfo pi, Search search) throws AdminException {
+	public List<Map<String, Object>> selectBlackMemberList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectBlackMemberList(sqlSession, pi, search);
 	}
 
@@ -63,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<AdminNotice> selectNoticeList(PageInfo pi, Search search) throws AdminException {
+	public List<Map<String, Object>> selectNoticeList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectNoticeList(sqlSession, pi, search);
 	}
 
@@ -73,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<AdminDeclaration> selectDeclarationList(PageInfo pi, Search search) throws AdminException {
+	public List<Map<String, Object>> selectDeclarationList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectDeclarationList(sqlSession, pi, search);
 	}
 
@@ -83,28 +77,34 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<AdminOrder> selectOrderList(PageInfo pi, Search search) throws AdminException {
+	public List<Map<String, Object>> selectOrderList(PageInfo pi, Search search) throws AdminException {
 		return ad.selectOrderList(sqlSession, pi, search);
 	}
 
 	@Override
-	public AdminGeneralMember selectGeneralMemberInfo(String num) throws AdminException {
+	public Map<String, Object> selectGeneralMemberInfo(String num) throws AdminException {
 		return ad.selectGeneralMemberInfo(sqlSession, num);
 	}
 
 	@Override
-	public ArrayList<AdminDeclarationForMemberDetail> selectMembersDeclarationList(String num) throws AdminException {
+	public List<Map<String, Object>> selectMembersDeclarationList(String num) throws AdminException {
 		return ad.selectMembersDeclarationList(sqlSession, num);
 	}
 
 	@Override
-	public ArrayList<AdminOrderForMemberDetail> selectMembersOrderList(String num) throws AdminException {
+	public List<Map<String, Object>> selectMembersOrderList(String num) throws AdminException {
 		return ad.selectMembersOrderList(sqlSession, num);
 	}
 
 	@Override
-	public AdminCompanyMember selectCompanyMemberInfo(String num) throws AdminException {
+	public Map<String, Object> selectCompanyMemberInfo(String num) throws AdminException {
 		return ad.selectCompanyMemberInfo(sqlSession, num);
+	}
+
+	@Override
+	public Map<String, Object> selectNoticeInfo(String num) throws AdminException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

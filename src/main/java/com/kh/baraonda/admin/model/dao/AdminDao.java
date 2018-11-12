@@ -1,18 +1,11 @@
 package com.kh.baraonda.admin.model.dao;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
-import com.kh.baraonda.admin.model.vo.AdminBlackMember;
-import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
-import com.kh.baraonda.admin.model.vo.AdminDeclaration;
-import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
-import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
-import com.kh.baraonda.admin.model.vo.AdminNotice;
-import com.kh.baraonda.admin.model.vo.AdminOrder;
-import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -20,34 +13,34 @@ public interface AdminDao {
 
 	int selectGeneralMemberCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
 
-	ArrayList<AdminGeneralMember> selectGeneralMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+	List<Map<String, Object>> selectGeneralMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
 
 	int selectCompanyMemberCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
 
-	ArrayList<AdminCompanyMember> selectCompanyMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+	List<Map<String, Object>> selectCompanyMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
 
 	int selectBlackMemberCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
 
-	ArrayList<AdminBlackMember> selectBlackMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+	List<Map<String, Object>> selectBlackMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
 	
 	int selectNoticeCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
 
-	ArrayList<AdminNotice> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+	List<Map<String, Object>> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
 	
 	int selectDeclarationCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
 
-	ArrayList<AdminDeclaration> selectDeclarationList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+	List<Map<String, Object>> selectDeclarationList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
 	
 	int selectOrderCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
 
-	ArrayList<AdminOrder> selectOrderList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+	List<Map<String, Object>> selectOrderList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
 	
-	AdminGeneralMember selectGeneralMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
+	Map<String, Object> selectGeneralMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
 	
-	ArrayList<AdminDeclarationForMemberDetail> selectMembersDeclarationList(SqlSessionTemplate sqlSession, String num) throws AdminException;
+	List<Map<String, Object>> selectMembersDeclarationList(SqlSessionTemplate sqlSession, String num) throws AdminException;
 	
-	ArrayList<AdminOrderForMemberDetail> selectMembersOrderList(SqlSessionTemplate sqlSession, String num) throws AdminException;
+	List<Map<String, Object>> selectMembersOrderList(SqlSessionTemplate sqlSession, String num) throws AdminException;
 	
-	AdminCompanyMember selectCompanyMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
+	Map<String, Object> selectCompanyMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
 	
 }
