@@ -134,6 +134,7 @@ public class NoticeController {
 	public String insertNotice(@SessionAttribute("loginUser") Member m,Notice n, Model model) {
 		n.setMember_no(m.getMember_no());
 		int insert = ns.insertNotice(n);
+		System.out.println("cont n : " + n);
 		
 		if(insert > 0) {
 			return "redirect:noticelist.nt";			

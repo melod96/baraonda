@@ -98,7 +98,7 @@ public class TipsServiceImpl implements TipsService{
 		//공지사항 insert
 		@Override
 		public int insertTips(Tips t) {
-			
+			System.out.println("service t  :" + t);
 			return td.insertTips(sqlSession, t);
 		}
 

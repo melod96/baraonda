@@ -147,6 +147,7 @@ public class TipsDaoImpl implements TipsDao{
 		@Override
 		public int insertTips(SqlSessionTemplate sqlSession, Tips t) {
 			int i = -99;
+			System.out.println("dao tips : " + t);
 			sqlSession.selectOne("Tips.insertTips",t);
 			i = 1;
 			return i;
