@@ -10,6 +10,7 @@ import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
 
@@ -190,6 +191,18 @@ public class BoardDaoImpl implements BoardDao{
 		i = 1;
 		
 		return i;
+	}
+	
+	//게시글 검색 개수
+	@Override
+	public int searchBoardCount(SqlSessionTemplate sqlSession, SearchCondition sc) {
+		return sqlSession.selectOne("Board.searchBoardCount", sc);
+	}
+	@Override
+	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info,
+			int writing_type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
