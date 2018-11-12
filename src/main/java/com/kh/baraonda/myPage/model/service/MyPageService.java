@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -48,6 +49,8 @@ public interface MyPageService {
 	ArrayList<Orders> selectChangeGoodsList(PageInfo gPi, int member_no);
 
 	Member selectMemberView(int member_no);
+
+	ArrayList<Product> selectProductList();
 
 
 

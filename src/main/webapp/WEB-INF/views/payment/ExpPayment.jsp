@@ -30,8 +30,8 @@
 </style>
 </head>
 <body>
-	<form action="expExchange.ex" method = "post">
 	<jsp:include page="../common/header.jsp" />
+	<form action="expExchange.ex" method = "post">
 	<div class="clear" style="height: 40px; background: white;"></div>
 	<div class="container">
 		<div class="row" style="display:block;">
@@ -50,24 +50,11 @@
 					</thead>
 					<tbody>
 						<tr>
-							<c:if test="${type == 1 }">
-								<td>맥반석 계란</td>
-								<td>
-									<span class="fleft">갯수</span><span class="fright">10개</span>
-								</td>
-							</c:if>
-							<c:if test="${type == 2 }">
-								<td>고구마</td>
-								<td>
-									<span class="fleft">갯수</span><span class="fright">10개</span>
-								</td>
-							</c:if>
-							<c:if test="${type == 3 }">
-								<td>닭가슴살</td>
-								<td>
-									<span class="fleft">갯수</span><span class="fright">10개</span>
-								</td>
-							</c:if>
+							<input type="hidden" name = "product_no" value = "${product.product_no }" />
+							<td>${product.product_name }</td>
+							<td>
+								<span class="fleft">갯수</span><span class="fright">10개</span>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -121,9 +108,9 @@
                             <tr>
                                 <th>주소</th>
                                 <td>
-                                    <input name="accept_address1" id = "sample6_postcode"class="form-control input-xshort" type="text" style="float:left;" disabled>
+                                    <input name="accept_address1" id = "sample6_postcode" class="form-control input-xshort" type="text" style="float:left;" readonly>
                                     <button type="button" class="btn btn-secondary" style = "margin:0; margin-left:15px;" onclick= "sample6_execDaumPostcode()">우편번호</button>
-                                    <input name="accept_address2" id = "sample6_address" class="form-control input-mid" type="text" disabled style="float:left;margin-top:15px;margin-bottom:15px;">
+                                    <input name="accept_address2" id = "sample6_address" class="form-control input-mid" type="text" readonly style="float:left;margin-top:15px;margin-bottom:15px;">
                                     <input name="accept_address3" id = "sample6_address2" class="form-control input-mid" type="text" placeholder="텍스트를 입력하세요" style="float:left;">
                                 </td>
                             </tr>
@@ -136,7 +123,14 @@
                             </tr>
                         </tbody>
             </table><br />
-           <script>
+			</div>
+		</div>
+		<div class="btn-center">
+			<button type="submit" class="btn btn-primary btn-lg">결제하기</button>
+			<button type="button" class="btn btn-secondary btn-lg">취소</button>
+		</div>
+		</form>
+		<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -172,19 +166,15 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('sample6_address').value = fullAddr;
+                console.log($("#sample6_postcode").val());
+                console.log($("#sample6_address").val());
 
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById('sample6_address2').focus();
             }
         }).open();
     }
+    
 </script>
-			</div>
-		</div><br />
-		<div class="btn-center">
-			<button type="submit" class="btn btn-primary btn-lg">결제하기</button>
-			<button type="button" class="btn btn-secondary btn-lg">취소</button>
-		</div>
-		</form>
 </body>
 </html>
