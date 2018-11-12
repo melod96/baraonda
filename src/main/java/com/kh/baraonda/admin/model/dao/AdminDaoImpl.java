@@ -10,9 +10,11 @@ import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.vo.AdminBlackMember;
 import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
 import com.kh.baraonda.admin.model.vo.AdminDeclaration;
+import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
 import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
 import com.kh.baraonda.admin.model.vo.AdminNotice;
 import com.kh.baraonda.admin.model.vo.AdminOrder;
+import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -90,5 +92,27 @@ public class AdminDaoImpl implements AdminDao {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
 		return (ArrayList)(sqlSession.selectList("Admin.selectOrderList" , search, rowBounds));
 	}
+
+	@Override
+	public AdminGeneralMember selectGeneralMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectOne("Admin.selectGeneralMemberInfo", num);
+	}
+
+	@Override
+	public ArrayList<AdminDeclarationForMemberDetail> selectMembersDeclarationList(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return (ArrayList)(sqlSession.selectList("Admin.selectMembersDeclarationList", num));
+	}
+
+	@Override
+	public ArrayList<AdminOrderForMemberDetail> selectMembersOrderList(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return (ArrayList)(sqlSession.selectList("Admin.selectMembersOrderList", num));
+	}
+
+	@Override
+	public AdminCompanyMember selectCompanyMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectOne("Admin.selectCompanyMemberInfo", num);
+	}
+	
+	
 
 }

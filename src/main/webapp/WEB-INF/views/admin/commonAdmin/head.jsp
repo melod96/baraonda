@@ -26,6 +26,21 @@
     <!-- Custom Fonts -->
     <link href="${ pageContext.servletContext.contextPath }/resources/admin/font/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+	<!-- Froala CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/froala_editor.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/froala_style.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/code_view.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/colors.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/emoticons.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/image_manager.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/image.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/line_breaker.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/table.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/char_counter.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/admin/css/video.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
