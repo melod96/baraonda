@@ -22,13 +22,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.service.MyPageService;
 import com.kh.baraonda.myPage.model.vo.Comments;
@@ -357,8 +357,10 @@ public class MyPageController {
 		if(loginUser != null) {
 
 			Point point = mps.selectPoint(loginUser);
+			ArrayList<Product> p = mps.selectProductList();
 
 			model.addAttribute("point", point);
+			model.addAttribute("product",p);
 
 			return "myPage/growingChicks";
 

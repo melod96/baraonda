@@ -118,6 +118,14 @@
 		
 	</resultMap>
 	
+	<resultMap type="com.kh.baraonda.exchange.model.vo.Product" id="productResultSet">
+		<id property="product_no" column="PRODUCT_NO"/>
+		<result property="product_name" column="PRODUCT_NAME"/>
+		<result property="product_price" column="PRODUCT_PRICE"/>
+		<result property="product_type" column="PRODUCT_TYPE"/>
+		<result property="point_step" column="POINT_STEP"/>
+	</resultMap>
+	
 	
 	
 	
@@ -265,6 +273,10 @@
 	<!--회원 정보 뷰-->
 	<select id="selectMemberView"  resultMap="memberResultSet">
 		SELECT * FROM MEMBER WHERE MEMBER_NO = #{member_no}
+	</select>
+	
+	<select id="selectProductList" resultMap="productResultSet">
+		SELECT * FROM PRODUCT WHERE PRODUCT_TYPE = 1
 	</select>
 	
 	

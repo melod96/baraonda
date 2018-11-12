@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -50,6 +51,8 @@ public interface MyPageDao {
 	ArrayList<Orders> selectChangeGoodsList(SqlSessionTemplate sqlSession, PageInfo gPi, int member_no);
 
 	Member selectMemberView(SqlSessionTemplate sqlSession, int member_no);
+
+	ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession);
 
 
 

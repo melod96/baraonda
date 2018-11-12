@@ -130,45 +130,60 @@
 				
 				<table class="itemTable">
 				
+					<c:forEach items="${product }" var="p">
+					<c:if test="${p.point_step == 2}">
 					<tr><td><h5>병아리 등급 상품</h5></td></tr>
 					<tr class="lv lv-1">
 						<td>
 							<img class="itemImg lv1Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/productegg.jpg">
-							<p>맥반석 계란</p>
+							<p>${p.product_name }</p>
 						</td>
 					</tr>
 					<c:if test="${point.accrue_point > 300 }">
-						<tr><td><button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type=1'">교환하기</button></td></tr>
+						<tr><td>
+							<button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type='+${p.product_no}">교환하기</button>
+						</td></tr>
+					</c:if>
 					</c:if>
 					<tr><td>&nbsp;</td></tr>
 					
+					<c:if test="${p.point_step == 3}">
 					<tr><td><h5>청소년 닭 등급 상품</h5></td></tr>
 					<tr>
 						<td class="lv lv-2">
 							<img class="itemImg lv3Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/productsweet.jpg">
-							<p>고구마</p>
+							<p>${p.product_name }</p>
 						</td>
 						
 					</tr>
 					
 					<c:if test="${point.accrue_point > 600 }">
-						<tr><td><button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type=2'">교환하기</button></td></tr>
+						<tr><td>
+							<button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type='+${p.product_no}">교환하기</button>
+						</td></tr>
+					</c:if>
 					</c:if>
 					<tr><td>&nbsp;</td></tr>
 					<tr><td>&nbsp;</td></tr>
+					
+					<c:if test="${p.point_step == 4}">
 					<tr><td><h5>어른 닭 등급 상품</h5></td></tr>
 					<tr>
 						<td class="lv lv-3">
 							<img class="itemImg lv2Img" src="${pageContext.request.contextPath}/resources/images/myPageImages/productchick.jpg">
-							<p>닭가슴살</p>
+							<p>${p.product_name }</p>
 						</td>
 					</tr>
 					
 					<c:if test="${point.accrue_point >= 1000 }">
-						<tr><td><button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type=3'">교환하기</button></td></tr>
+						<tr><td>
+							<button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type='+${p.product_no}">교환하기</button>
+						</td></tr>
+					</c:if>
 					</c:if>
 					<tr><td>&nbsp;</td></tr>
 					<tr><td>&nbsp;</td></tr>
+					</c:forEach>
 				</table>
 			</div>
 			

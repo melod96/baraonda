@@ -44,6 +44,8 @@
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.PointRecord" alias="PointRecord"/>
 			
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Orders" alias="Orders"/>
+			
+			<typeAlias type="com.kh.baraonda.exchange.model.vo.Exchange" alias="Exchange"/>
 
   		</typeAliases>
   		
@@ -65,6 +67,8 @@
 			<mapper resource="mappers/notice-mapper.xml"/>
 			
 			<mapper resource="mappers/tips-mapper.xml"/>
+			
+			<mapper resource="mappers/exchange-mapper.xml"/>
 
 		</mappers>
   		

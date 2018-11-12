@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
@@ -131,6 +132,12 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public Member selectMemberView(SqlSessionTemplate sqlSession, int member_no) {
 		return sqlSession.selectOne("MyPage.selectMemberView", member_no);
+	}
+
+	@Override
+	public ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList) sqlSession.selectList("MyPage.selectProductList");
 	}
 
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.dao.MyPageDao;
 import com.kh.baraonda.myPage.model.vo.Comments;
@@ -112,6 +113,12 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public Member selectMemberView(int member_no) {
 		return mpd.selectMemberView(sqlSession, member_no);
+	}
+
+	@Override
+	public ArrayList<Product> selectProductList() {
+		
+		return mpd.selectProductList(sqlSession);
 	}
 
 

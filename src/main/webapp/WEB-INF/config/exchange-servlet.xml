@@ -52,5 +52,17 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	
 	
-	<annotation-driven />
+		<!-- 자바 객체를 자바스크립트 객체로 바꿔주는 역할을 한다. -->
+	<beans:bean id="jacksonMessageConverter" 
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonMessageConverter"/>
+			</beans:list>
+		</beans:property>
+	
+	</beans:bean>
+	
+	 <annotation-driven />
 </beans:beans>
