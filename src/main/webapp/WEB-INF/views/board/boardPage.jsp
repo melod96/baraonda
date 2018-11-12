@@ -485,15 +485,9 @@
 									<!---------------------------------- 댓글 작성 시간---------------------------------->
 									<span>${row.COMMENTS_DATE}</span>
 									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-									<%-- <input type="hidden" name="COMMENTS_NO" value="${row.COMMENTS_NO}"> --%>
-									<%-- <c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}"> --%>
 									<c:if test="${sessionScope.loginUser.member_no == row.MEMBER_NO}">
 									<div class="remd">
-										<%-- <span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span> --%>
-											<!-- <span class="modifyB2" onclick>수정</span>
-											<img src="/baraonda/resources/images/boardImg/bar_9.gif" class="listpic2"> -->
 											<span class="deleteB2" id="deleteB2" onClick="location.href='deleteComment.do?comments_no='+${row.COMMENTS_NO}+'&board_no='+${detail.BOARD_NO}">삭제</span>
-											<%-- <span class="deleteB2" id="deleteB2" onClick="location.href='${path}/baraonda/deleteComment.do?comments_no=${row.COMMENTS_NO}'">삭제</span> --%>
 									</div>
 									</c:if>
 									<!-- 댓글 내용 -->

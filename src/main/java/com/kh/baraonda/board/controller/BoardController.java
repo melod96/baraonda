@@ -23,6 +23,7 @@ import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
 
@@ -73,9 +74,7 @@ public class BoardController {
 		//댓글 조회(작성자, 내용, 날짜)
 		List<HashMap<String, Object>> commentList;
 		
-		
 		try {
-			
 			//조회수 증가처리
 			boardService.increaseViewCnt(board_no, session);
 			
@@ -101,6 +100,44 @@ public class BoardController {
 			return mv;
 		}
 	}
+	//게시판 검색
+	@RequestMapping("searchBoard.do")
+	public ModelAndView searchBoard(String searchType, String search, Model model, PageInfo pi, ModelAndView mv, int writing_type) throws BoardException {
+		SearchCondition sc = new SearchCondition();
+		List<HashMap<String, Object>> list;
+		
+		if(searchType.equals("title")) {
+			sc.setTitle(search);
+		}
+		if(searchType.equals("content")) {
+			sc.setContent(search);
+		}
+		if(searchType.equals("writer")){
+			sc.setWriter(search);
+		}
+		
+		int currentPage = 1;
+		
+		if(pi.getCurrentPage() > 0){
+			currentPage = pi.getCurrentPage();
+		}
+		
+		//게시글 검색 개수 
+		int listCount = boardService.searchBoardCount(sc);
+		
+		PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+
+		list = boardService.searchList(writing_type, info, sc);
+		mv.setViewName("board/board");
+		mv.addObject("list", list);
+		mv.addObject("pi", info);
+		mv.addObject("writing_type", writing_type);
+		mv.addObject("search", search);
+		
+		return mv;
+
+	}
+	
 
 	//게시글 작성 페이지로 이동
 	//@RequestMapping("board/write.do")

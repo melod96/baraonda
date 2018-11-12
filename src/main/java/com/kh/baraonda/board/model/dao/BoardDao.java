@@ -10,6 +10,7 @@ import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
 
@@ -57,6 +58,12 @@ public interface BoardDao {
 	int insertBookMark(SqlSessionTemplate sqlSession, boardMarking bm);
 	//북마크 delete
 	int deleteBookMark(SqlSessionTemplate sqlSession, boardMarking bm);
+	
+	//게시글 검색 개수
+	int searchBoardCount(SqlSessionTemplate sqlSession, SearchCondition sc);
+	//검색
+	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info,
+			int writing_type);
 	
 
 	

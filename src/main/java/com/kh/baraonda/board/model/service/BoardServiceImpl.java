@@ -16,6 +16,7 @@ import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
 
@@ -137,6 +138,18 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int deleteBookMark(boardMarking bm) {
 		return boardDao.deleteBookMark(sqlSession, bm);
+	}
+	
+	//게시글 검색 개수
+	@Override
+	public int searchBoardCount(SearchCondition sc) {
+		return boardDao.searchBoardCount(sqlSession, sc);
+	}
+	
+	//검색
+	@Override
+	public List<HashMap<String, Object>> searchList(int writing_type, PageInfo info, SearchCondition sc) {
+		return boardDao.searchList(sqlSession, sc, info, writing_type);
 	}
 	
 
