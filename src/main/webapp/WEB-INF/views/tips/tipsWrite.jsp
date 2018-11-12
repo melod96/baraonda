@@ -67,7 +67,7 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insertNotice.nt" method="post">
+						<form action="insertTips.tp" method="post" enctype = multipart/form-data">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -78,12 +78,18 @@ div#editor {
 									<tr>
 										<td>제목</td>
 										<td><input type="text" class="form-control"
-											name="title"></td>
+											name="board_title"></td>
+									</tr>
+									<tr>
+										<td>썸네일 추가</td>
+										<td>
+											<input type="file" name="files_root">
+										</td>
 								
 								</table>
 								<!------------------------------ 글작성 공간 에디터 ------------------------------>
 							
-								<textarea id="edit" name="content" style="margin-top: 30px;"></textarea>
+								<textarea id="edit" name="board_content" style="margin-top: 30px;"></textarea>
 
 							</div>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>

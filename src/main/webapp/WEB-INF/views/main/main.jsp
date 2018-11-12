@@ -266,7 +266,7 @@ hr{
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
 	         <br>
 	         	<img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">&nbsp;
-	         <a id="ba_font">${t.nick_name }</a>
+	         <a id="ba_font" onclick="location.href='othersView.my?member_no=' + ${t.member_no}">${t.nick_name }</a>
 	         <br>
             <a onclick= "location.href='view.do?board_no=' + ${t.board_no}" class="btn">more</a></div>
           </div>
@@ -291,7 +291,7 @@ hr{
             <div>
           	 ${b.self_introduction }
             </div>
-            <a id="user"><span class="fa fa-chevron-right"></span>정보 보기</a>
+            <a id="user" onclick="location.href='othersView.my?member_no=' + ${b.member_no}"><span class="fa fa-chevron-right"></span>정보 보기</a>
           </div>
           </c:forEach>
         </blockquote>
@@ -314,7 +314,7 @@ hr{
 	      <label>
 	     	 <div style="float:right; margin-left:100px;"> 
 	      <img src="${pageContext.request.contextPath}${r.files_root}" id="profile_img" style="margin-left:15px; width:30px; height:30px; border-radius:20px;">
-	      <a id="profile_font">${ r.nick_name } </a>
+	      <a id="profile_font" onclick="location.href='othersView.my?member_no=' + ${r.member_no}">${ r.nick_name } </a>
 	  	    </div> 
 	      <a style="float:left; margin-top:4px;">누적경험치 :&nbsp;</a><a style="float:left; margin-top:4px;">${ r.accrue_point}</a>&nbsp;&nbsp;&nbsp;
 	      </label>

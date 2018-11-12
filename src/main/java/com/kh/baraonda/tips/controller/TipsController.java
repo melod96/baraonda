@@ -1,6 +1,7 @@
 package com.kh.baraonda.tips.controller;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -78,6 +82,7 @@ public class TipsController {
 				
 				ArrayList<Tips> list = ts.selectTipsList(pgif);
 				
+				
 				model.addAttribute("tipslist", list);
 				model.addAttribute("pi", pgif);
 				//model.addAttribute("writing_type", writing_type);
@@ -100,6 +105,7 @@ public class TipsController {
 			Tips tinfo = ts.selectTipsOne(tips_no);
 			
 			int heartCount = ts.selectHeartTips(tips_no);
+			
 			
 			//댓글
 			int currentPage =1;
@@ -174,12 +180,20 @@ public class TipsController {
 		
 		//공지사항 insert
 		@RequestMapping("insertTips.tp")
-		public String insertTips(@SessionAttribute("loginUser") Member m,Tips t, Model model) {
+		public String insertTips(@SessionAttribute("loginUser") Member m,Tips t, Model model/*,
+				@RequestParam("sum") MultipartFile file*/) {
+			t.setMember_no(m.getMember_no());
 			
+			System.out.println("cont t : " + t);
 			int insert = ts.insertTips(t);
 			
+	/*		 String url = fileUploadService.restore(file);
+			    model.addAttribute("url", url);
+
+			
+			*/
 			if(insert > 0) {
-				return "redirect:tipslist.tp";			
+				return "redirect:tips.tp";			
 			}else {
 				model.addAttribute("msg","다이어트꿀팁 등록 실패");
 				return "common/errorPage";
