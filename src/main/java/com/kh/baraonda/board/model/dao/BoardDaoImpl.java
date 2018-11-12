@@ -163,6 +163,34 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return i;
 	}
+	
+	//북마크 체크여부
+	@Override
+	public int checkBookMark(SqlSessionTemplate sqlSession, boardMarking bm) {
+		return sqlSession.selectOne("Board.checkBookMark", bm);
+	}
+	//북마크 insert
+	@Override
+	public int insertBookMark(SqlSessionTemplate sqlSession, boardMarking bm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Board.insertBookMark", bm);
+		
+		i = 1;
+		 
+		return i;
+	}
+	//북마크 delete
+	@Override
+	public int deleteBookMark(SqlSessionTemplate sqlSession, boardMarking bm) {
+		int i = -99;
+		
+		sqlSession.selectOne("Board.deleteBookMark", bm);
+		
+		i = 1;
+		
+		return i;
+	}
 
 
 
