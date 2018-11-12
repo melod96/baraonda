@@ -5,87 +5,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Admin">
-
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminGeneralMember" id="adminGeneralMemberResultSet">
-		<id property="member_no" column="member_no"/>
-		<result property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="nick_name" column="nick_name"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
-		<result property="enroll_date" column="enroll_date"/>
-		<result property="member_status" column="member_status"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminCompanyMember" id="adminCompanyMemberReulstSet">
-		<id property="member_no" column="member_no"/>
-		<result property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="nick_name" column="nick_name"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
-		<result property="company_name" column="company_name"/>
-		<result property="company_no" column="company_no"/>
-		<result property="bank" column="bank"/>
-		<result property="account" column="account"/>
-		<result property="ceo_name" column="ceo_name"/>
-		<result property="ceo_type" column="ceo_type"/>
-		<result property="enroll_date" column="enroll_date"/>
-		<result property="member_status" column="member_status"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminBlackMember" id="adminBlackMemberResultSet">
-		<id property="member_no" column="member_no"/>
-		<result property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="nick_name" column="nick_name"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
-		<result property="enroll_date" column="enroll_date"/>
-		<result property="black_date" column="black_date"/>
-		<result property="lift_date" column="lift_date"/>
-		<result property="declarationCount" column="declarationCount"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminNotice" id="adminNoticeResultSet">
-		<id property="board_no" column="board_no"/>
-		<result property="board_title" column="board_title"/>
-		<result property="nick_name" column="nick_name"/>
-		<result property="board_count" column="board_count"/>
-		<result property="board_date" column="board_date"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminDeclaration" id="adminDeclarationResultSet">
-		<id property="report_no" column="report_no"/>
-		<result property="report_type" column="report_type"/>
-		<result property="give_nick_name" column="give_ncik_name"/>
-		<result property="get_nick_name" column="get_nick_name"/>
-		<result property="report_date" column="report_date"/>
-		<result property="report_approval" column="report_approval"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminOrder" id="adminOrderResultSet">
-		<id property="order_no" column="order_no"/>
-		<result property="name" column="name"/>
-		<result property="product_name" column="product_name"/>
-		<result property="product_quantity" column="product_quantity"/>
-		<result property="orders_date" column="orders_date"/>
-		<result property="phone" column="phone"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail" id="adminDeclarationForMemberDetailResultSet">
-		<id property="report_no" column="report_no"/>
-		<result property="report_type" column="report_type"/>
-		<result property="give_nick_name" column="give_nick_name"/>
-		<result property="report_date" column="report_date"/>
-	</resultMap>
-	
-	<resultMap type="com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail" id="adminOrderForMemberDetailResultSet">
-		<id property="orders_no" column="orders_no"/>
-		<result property="product_name" column="product_name"/>
-		<result property="product_quantity" column="product_quantity"/>
-		<result property="orders_date" column="orders_date"/>
-	</resultMap>
 	
 	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
@@ -113,7 +32,7 @@
 		</if>
 	</select>
 	
-	<select id="selectGeneralMemberList" resultMap="adminGeneralMemberResultSet">
+	<select id="selectGeneralMemberList" resultType="map">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
 		FROM MEMBER
 		WHERE 1 = 1
@@ -152,8 +71,8 @@
 		</if>
 	</select>
 	
-	<select id="selectCompanyMemberList" resultMap="adminCompanyMemberReulstSet">
-		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, CEO_TYPE, ENROLL_DATE, MEMBER_STATUS
+	<select id="selectCompanyMemberList" resultType="map">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, ENROLL_DATE, MEMBER_STATUS
 		FROM MEMBER
 		WHERE 1 = 1
 		AND ADMIN_RIGHT = 0 
@@ -181,7 +100,7 @@
 			GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE)
 	</select>
 	
-	<select id="selectBlackMemberList" resultMap="adminBlackMemberResultSet">
+	<select id="selectBlackMemberList" resultType="map">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
 			FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
       			  FROM MEMBER M
@@ -208,7 +127,7 @@
 		</if>
 	</select>
 	
-	<select id="selectNoticeList" resultMap="adminNoticeResultSet">
+	<select id="selectNoticeList" resultType="map">
 		SELECT B.BOARD_NO, B.BOARD_TITLE, M.NICK_NAME, B.BOARD_COUNT, B.BOARD_DATE
 		FROM BOARD B
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
@@ -232,7 +151,7 @@
 		</if>
 	</select>
 	
-	<select id="selectDeclarationList" resultMap="adminDeclarationResultSet">
+	<select id="selectDeclarationList" resultType="map">
 		SELECT R.REPORT_NO, R.REPORT_TYPE, M1.NICK_NAME AS GIVE_NICK_NAME, M2.NICK_NAME AS GET_NICK_NAME, R.REPORT_DATE, R.REPORT_APPROVAL
 		FROM REPORT R 
 		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
@@ -258,7 +177,7 @@
 		</if>
 	</select>
 	
-	<select id="selectOrderList" resultMap="adminOrderResultSet">
+	<select id="selectOrderList" resultType="map">
 		SELECT O.ORDERS_NO, M.NAME, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE, M.PHONE
 		FROM ORDERS O
 		JOIN MEMBER M ON(O.MEMBER_NO = M.MEMBER_NO)
@@ -272,14 +191,14 @@
 		</if>
 	</select>
 	
-	<select id="selectGeneralMemberInfo" resultMap="adminGeneralMemberResultSet">
-		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
+	<select id="selectGeneralMemberInfo" resultType="map">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE
 		FROM MEMBER 
 		WHERE 1 = 1
 		AND MEMBER_NO = #{num}
 	</select>
 	
-	<select id="selectMembersDeclarationList" resultMap="adminDeclarationForMemberDetailResultSet">
+	<select id="selectMembersDeclarationList" resultType="map">
 		SELECT R.REPORT_NO, R.REPORT_TYPE, M.NICK_NAME AS GIVE_NICK_NAME, R.REPORT_DATE
 		FROM REPORT R
 		JOIN MEMBER M ON(M.MEMBER_NO = R.REPORT_GIVE_NO)
@@ -287,7 +206,7 @@
 		AND REPORT_GET_NO = #{num}
 	</select>
 	
-	<select id="selectMembersOrderList" resultMap="adminOrderForMemberDetailResultSet">
+	<select id="selectMembersOrderList" resultType="map">
 		SELECT O.ORDERS_NO, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE
 		FROM ORDERS O 
 		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
@@ -295,8 +214,8 @@
 		AND MEMBER_NO = #{num}
 	</select>
 	
-	<select id="selectCompanyMemberInfo" resultMap="adminCompanyMemberReulstSet">
-		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, CEO_TYPE, ENROLL_DATE, MEMBER_STATUS
+	<select id="selectCompanyMemberInfo" resultType="map">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, CEO_TYPE, ENROLL_DATE
 		FROM MEMBER 
 		WHERE 1 = 1
 		AND MEMBER_NO = #{num}

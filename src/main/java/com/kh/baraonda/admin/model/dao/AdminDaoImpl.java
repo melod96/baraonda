@@ -1,20 +1,13 @@
 package com.kh.baraonda.admin.model.dao;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
-import com.kh.baraonda.admin.model.vo.AdminBlackMember;
-import com.kh.baraonda.admin.model.vo.AdminCompanyMember;
-import com.kh.baraonda.admin.model.vo.AdminDeclaration;
-import com.kh.baraonda.admin.model.vo.AdminDeclarationForMemberDetail;
-import com.kh.baraonda.admin.model.vo.AdminGeneralMember;
-import com.kh.baraonda.admin.model.vo.AdminNotice;
-import com.kh.baraonda.admin.model.vo.AdminOrder;
-import com.kh.baraonda.admin.model.vo.AdminOrderForMemberDetail;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -27,10 +20,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public ArrayList<AdminGeneralMember> selectGeneralMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
-		int offset = (pi.getCurrentPage() -1) * pi.getLimit();
+	public List<Map<String, Object>> selectGeneralMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
-		return (ArrayList)(sqlSession.selectList("Admin.selectGeneralMemberList" , search, rowBounds));
+		return sqlSession.selectList("Admin.selectGeneralMemberList" , search, rowBounds);
 	}
 
 	@Override
@@ -39,10 +31,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public ArrayList<AdminCompanyMember> selectCompanyMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
-		int offset = (pi.getCurrentPage() -1) * pi.getLimit();
+	public List<Map<String, Object>> selectCompanyMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
-		return (ArrayList)(sqlSession.selectList("Admin.selectCompanyMemberList" , search, rowBounds));
+		return sqlSession.selectList("Admin.selectCompanyMemberList" , search, rowBounds);
 	}
 
 	@Override
@@ -51,10 +42,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public ArrayList<AdminBlackMember> selectBlackMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search)	throws AdminException {
-		int offset = (pi.getCurrentPage() -1) * pi.getLimit();
+	public List<Map<String, Object>> selectBlackMemberList(SqlSessionTemplate sqlSession, PageInfo pi, Search search)	throws AdminException {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
-		return (ArrayList)(sqlSession.selectList("Admin.selectBlakcMemberList" , search, rowBounds));
+		return sqlSession.selectList("Admin.selectBlakcMemberList" , search, rowBounds);
 	}
 
 	@Override
@@ -63,10 +53,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public ArrayList<AdminNotice> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
-		int offset = (pi.getCurrentPage() -1) * pi.getLimit();
+	public List<Map<String, Object>> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
-		return (ArrayList)(sqlSession.selectList("Admin.selectNoticeList" , search, rowBounds));
+		return sqlSession.selectList("Admin.selectNoticeList" , search, rowBounds);
 	}
 	
 	@Override
@@ -75,10 +64,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public ArrayList<AdminDeclaration> selectDeclarationList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
-		int offset = (pi.getCurrentPage() -1) * pi.getLimit();
+	public List<Map<String, Object>> selectDeclarationList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
-		return (ArrayList)(sqlSession.selectList("Admin.selectDeclarationList" , search, rowBounds));
+		return sqlSession.selectList("Admin.selectDeclarationList" , search, rowBounds);
 	}
 	
 	@Override
@@ -87,29 +75,28 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public ArrayList<AdminOrder> selectOrderList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
-		int offset = (pi.getCurrentPage() -1) * pi.getLimit();
+	public List<Map<String, Object>> selectOrderList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
 		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
-		return (ArrayList)(sqlSession.selectList("Admin.selectOrderList" , search, rowBounds));
+		return sqlSession.selectList("Admin.selectOrderList" , search, rowBounds);
 	}
 
 	@Override
-	public AdminGeneralMember selectGeneralMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+	public Map<String, Object> selectGeneralMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
 		return sqlSession.selectOne("Admin.selectGeneralMemberInfo", num);
 	}
 
 	@Override
-	public ArrayList<AdminDeclarationForMemberDetail> selectMembersDeclarationList(SqlSessionTemplate sqlSession, String num) throws AdminException {
-		return (ArrayList)(sqlSession.selectList("Admin.selectMembersDeclarationList", num));
+	public List<Map<String, Object>> selectMembersDeclarationList(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectList("Admin.selectMembersDeclarationList", num);
 	}
 
 	@Override
-	public ArrayList<AdminOrderForMemberDetail> selectMembersOrderList(SqlSessionTemplate sqlSession, String num) throws AdminException {
-		return (ArrayList)(sqlSession.selectList("Admin.selectMembersOrderList", num));
+	public List<Map<String, Object>> selectMembersOrderList(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectList("Admin.selectMembersOrderList", num);
 	}
 
 	@Override
-	public AdminCompanyMember selectCompanyMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+	public Map<String, Object> selectCompanyMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
 		return sqlSession.selectOne("Admin.selectCompanyMemberInfo", num);
 	}
 	

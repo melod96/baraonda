@@ -5,7 +5,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="goGeneralMemberAdminList.adm">BARAONDA</a>
+                <a class="navbar-brand" href="goDashboardAdminList.adm">BARAONDA</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -16,7 +16,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="main.m"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="logout.me"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

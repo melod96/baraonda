@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,15 +78,15 @@
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-		                                        <td>${ list.id }</td>
-		                                        <td>${ list.name }</td>
-		                                        <td>${ list.nick_name }</td>
-		                                        <td>${ list.phone }</td>
-		                                        <td>${ list.email }</td>
-		                                        <td>${ list.enroll_date }</td>
-		                                        <td>${ list.black_date }</td>
-		                                        <td>${ list.lift_date }</td>
-		                                        <td>${ list.declarationCount }</td>
+		                                        <td>${ list.ID }</td>
+		                                        <td>${ list.NAME }</td>
+		                                        <td>${ list.NICK_NAME }</td>
+		                                        <td>${ list.PHONE }</td>
+		                                        <td>${ list.EMAIL }</td>
+		                                        <td>${ fn:substring(list.ENROLL_DATE, 0, 10) }</td>
+		                                        <td>${ fn:substring(list.BLACK_DATE, 0, 10) }</td>
+		                                        <td>${ fn:substring(list.LIFT_DATE, 0, 10) }</td>
+		                                        <td>${ list.DECLARATIONCOUNT }</td>
 	                                    	</tr>
 	                               		</c:forEach>
                                		</c:if>

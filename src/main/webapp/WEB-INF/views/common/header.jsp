@@ -49,7 +49,7 @@
 		    <c:if test="${loginUser.admin_right == 1}">
 				<h4 align="right"><c:out value="${sessionScope.loginUser.nick_name }님 환영합니다."/></h4>
 				<div style="float:right;">
-			     	<button onclick="location.href='#'" class="btn btn-success">관리자 페이지</button>
+			     	<button onclick="location.href='goDashboard.adm'" class="btn btn-success">관리자 페이지</button>
 			     	<button onclick="location.href='logout.me'" class="btn btn-default">로그아웃</button>
 			    </div>
 		    </c:if>
