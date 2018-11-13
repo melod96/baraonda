@@ -139,7 +139,7 @@
 							<p>${p.product_name }</p>
 						</td>
 					</tr>
-					<c:if test="${point.accrue_point > 300 }">
+					<c:if test="${point.accrue_point >= 300 }">
 						<tr><td>
 							<button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type='+${p.product_no}">교환하기</button>
 						</td></tr>
@@ -157,7 +157,7 @@
 						
 					</tr>
 					
-					<c:if test="${point.accrue_point > 600 }">
+					<c:if test="${point.accrue_point >= 600 }">
 						<tr><td>
 							<button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type='+${p.product_no}">교환하기</button>
 						</td></tr>
@@ -175,7 +175,7 @@
 						</td>
 					</tr>
 					
-					<c:if test="${point.accrue_point >= 1000 }">
+					<c:if test="${point.accrue_point == 1000 }">
 						<tr><td>
 							<button type="button" class="btn btn-info" onclick = "location.href='exchangePage.ex?change_type='+${p.product_no}">교환하기</button>
 						</td></tr>

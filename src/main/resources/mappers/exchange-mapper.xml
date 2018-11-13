@@ -18,27 +18,30 @@
 		SELECT * FROM PRODUCT WHERE PRODUCT_NO = #{change_type}
 	</select>
 	
-	<insert id="insertOrder">
+	<insert id="insertOrder" parameterType="Exchange">
 		INSERT INTO ORDERS VALUES (SEQ_ORDERS_NO.NEXTVAL, #{member_no},#{product_no}, SYSDATE, 1, 10, NULL, NULL, NULL)
+		<selectKey resultType="int" keyProperty="orders_no" order="AFTER">
+			SELECT SEQ_ORDERS_NO.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
 	
-	<insert id="insertAddress">
+	<insert id="insertAddress" parameterType="Exchange">
 		INSERT INTO ADDRESS VALUES(SEQ_ADDRESS_NO.NEXTVAL, #{member_no}, #{accept_name}, #{accept_address2}, #{accept_tel}, #{accept_address1})
+		<selectKey resultType="int" keyProperty="address_no" order="AFTER">
+			SELECT SEQ_ADDRESS_NO.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
-	
-	<select id="orderCurrval" resultType="_int">
-		select seq_orders_no.CURRVAL from dual
-	</select>
-	
-	<select id="addressCurrval" resultType = "_int">
-		SELECT SEQ_ADDRESS_NO.CURRVAL FROM DUAL
-	</select>
 	
 	<insert id="insertDeliver">
 		INSERT INTO DELIVER_RECORD VALUES(SEQ_DELIVER_NO.NEXTVAL, #{address_no}, #{orders_no}, SYSDATE,'DF12DA1F3')
 	</insert>
 	
-	
+	<update id="updatePoint">
+		UPDATE POINT SET POINT_CHANGE_DATE = SYSDATE, ACCRUE_POINT = 0 WHERE POINT_NO = #{member_no}
+	</update>
+	<insert id="updatePoint_Record">
+		INSERT INTO POINT_RECORD VALUES (SEQ_POINT_RECORD_NO.NEXTVAL, #{member_no}, SYSDATE, #{before_point}, 0, 5)
+	</insert>
 </mapper> 
 
 
