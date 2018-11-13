@@ -4,7 +4,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.exchange.model.vo.Deliver_record;
 import com.kh.baraonda.exchange.model.vo.Exchange;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
 import com.kh.baraonda.exchange.model.vo.Product;
+import com.kh.baraonda.myPage.model.vo.Point;
 
 public interface ExchangeDao {
 
@@ -12,12 +14,14 @@ public interface ExchangeDao {
 
 	void insertOrder(SqlSessionTemplate sqlSession, Exchange ex);
 
-	int orderCurrval(SqlSessionTemplate sqlSession);
 
 	void insertAddress(SqlSessionTemplate sqlSession, Exchange ex);
 
-	int addressCurrval(SqlSessionTemplate sqlSession);
 
 	void insertDeliver(SqlSessionTemplate sqlSession, Deliver_record dr);
+
+	void updatePoint(SqlSessionTemplate sqlSession, Point point);
+
+	void updatePoint_Record(SqlSessionTemplate sqlSession, Point_Record pr);
 
 }

@@ -11,12 +11,17 @@ import com.kh.baraonda.exchange.model.vo.Deliver_record;
 import com.kh.baraonda.exchange.model.vo.Exchange;
 import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.service.MyPageService;
+import com.kh.baraonda.myPage.model.vo.Point;
 
 @Controller
 public class ExchangeController {
 	
 	@Autowired
 	private ExchangeService ecs;
+	
+	@Autowired
+	private MyPageService mps;
 	
 	@RequestMapping("exchangePage.ex")
 	public String exchangePage(String change_type,Model model) {
@@ -34,17 +39,25 @@ public class ExchangeController {
 		String address = ex.getAccept_address2() + ex.getAccept_address3();
 		
 		ex.setAccept_address2(address);
+		System.out.println(ex);
 		//insert
 		ecs.insertOrder(ex);
 		ecs.insertAddress(ex);
-		int currval = ecs.orderCurrval();
-		int currval2 = ecs.addressCurrval();
 		
 		Deliver_record dr = new Deliver_record();
-		dr.setOrders_no(currval);
-		dr.setAddress_no(currval2);
+		dr.setAddress_no(ex.getAddress_no());
+		dr.setOrders_no(ex.getOrders_no());
+		System.out.println(dr);
 		
 		ecs.insertDeliver(dr);
+		
+		//update
+		Point point = new Point();
+		point.setMember_no(m.getMember_no());
+		point = mps.selectPoint(m);
+		point.setAccrue_point(-point.getAccrue_point());
+		System.out.println(point);
+		ecs.updatePoint(point);
 		
 		return "redirect:growingChicksView.my";
 	}

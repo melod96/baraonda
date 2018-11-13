@@ -3,6 +3,7 @@ package com.kh.baraonda.exchange.model.service;
 import com.kh.baraonda.exchange.model.vo.Deliver_record;
 import com.kh.baraonda.exchange.model.vo.Exchange;
 import com.kh.baraonda.exchange.model.vo.Product;
+import com.kh.baraonda.myPage.model.vo.Point;
 
 public interface ExchangeService {
 
@@ -10,12 +11,12 @@ public interface ExchangeService {
 
 	void insertOrder(Exchange ex);
 
-	int orderCurrval();
 
 	void insertAddress(Exchange ex);
 
-	int addressCurrval();
 
 	void insertDeliver(Deliver_record dr);
+
+	void updatePoint(Point point);
 
 }

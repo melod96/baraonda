@@ -12,10 +12,30 @@ public class Exchange implements Serializable{
 	private String accept_address3;
 	private String accept_tel;
 	private int member_no;
+	private int orders_no;
+	private int address_no;
 	
 	
 	public Exchange() {
 		
+	}
+
+
+	public Exchange(String product_no, String orderer, String orderer_tel, String accept_name, String accept_address1,
+			String accept_address2, String accept_address3, String accept_tel, int member_no, int orders_no,
+			int address_no) {
+		super();
+		this.product_no = product_no;
+		this.orderer = orderer;
+		this.orderer_tel = orderer_tel;
+		this.accept_name = accept_name;
+		this.accept_address1 = accept_address1;
+		this.accept_address2 = accept_address2;
+		this.accept_address3 = accept_address3;
+		this.accept_tel = accept_tel;
+		this.member_no = member_no;
+		this.orders_no = orders_no;
+		this.address_no = address_no;
 	}
 
 
@@ -64,6 +84,16 @@ public class Exchange implements Serializable{
 	}
 
 
+	public int getOrders_no() {
+		return orders_no;
+	}
+
+
+	public int getAddress_no() {
+		return address_no;
+	}
+
+
 	public void setProduct_no(String product_no) {
 		this.product_no = product_no;
 	}
@@ -109,14 +139,25 @@ public class Exchange implements Serializable{
 	}
 
 
+	public void setOrders_no(int orders_no) {
+		this.orders_no = orders_no;
+	}
+
+
+	public void setAddress_no(int address_no) {
+		this.address_no = address_no;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Exchange [product_no=" + product_no + ", orderer=" + orderer + ", orderer_tel=" + orderer_tel
 				+ ", accept_name=" + accept_name + ", accept_address1=" + accept_address1 + ", accept_address2="
 				+ accept_address2 + ", accept_address3=" + accept_address3 + ", accept_tel=" + accept_tel
-				+ ", member_no=" + member_no + "]";
+				+ ", member_no=" + member_no + ", orders_no=" + orders_no + ", address_no=" + address_no + "]";
 	}
 
+	
 	
 	
 }

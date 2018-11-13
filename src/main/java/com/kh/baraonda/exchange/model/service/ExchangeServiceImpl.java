@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.kh.baraonda.exchange.model.dao.ExchangeDao;
 import com.kh.baraonda.exchange.model.vo.Deliver_record;
 import com.kh.baraonda.exchange.model.vo.Exchange;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
 import com.kh.baraonda.exchange.model.vo.Product;
+import com.kh.baraonda.myPage.model.vo.Point;
 
 @Service
 public class ExchangeServiceImpl implements ExchangeService{
@@ -31,11 +33,6 @@ public class ExchangeServiceImpl implements ExchangeService{
 		
 	}
 
-	@Override
-	public int orderCurrval() {
-		
-		return ecd.orderCurrval(sqlSession);
-	}
 
 	@Override
 	public void insertAddress(Exchange ex) {
@@ -43,17 +40,23 @@ public class ExchangeServiceImpl implements ExchangeService{
 		
 	}
 
-	@Override
-	public int addressCurrval() {
-		
-		return ecd.addressCurrval(sqlSession);
-	}
 
 	@Override
 	public void insertDeliver(Deliver_record dr) {
 		
 		ecd.insertDeliver(sqlSession, dr);
 		
+	}
+
+	@Override
+	public void updatePoint(Point point) {
+		
+		ecd.updatePoint(sqlSession, point);
+		
+		Point_Record pr = new Point_Record();
+		pr.setMember_no(point.getMember_no());
+		pr.setBefore_point(point.getAccrue_point());
+		ecd.updatePoint_Record(sqlSession, pr);
 	}
 
 }

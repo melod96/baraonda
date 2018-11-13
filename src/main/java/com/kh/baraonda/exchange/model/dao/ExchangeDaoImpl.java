@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.exchange.model.vo.Deliver_record;
 import com.kh.baraonda.exchange.model.vo.Exchange;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
 import com.kh.baraonda.exchange.model.vo.Product;
+import com.kh.baraonda.myPage.model.vo.Point;
 
 @Repository
 public class ExchangeDaoImpl implements ExchangeDao{
@@ -19,32 +21,34 @@ public class ExchangeDaoImpl implements ExchangeDao{
 	@Override
 	public void insertOrder(SqlSessionTemplate sqlSession, Exchange ex) {
 		
-		sqlSession.selectOne("Exchange.insertOrder", ex);
+		sqlSession.insert("Exchange.insertOrder", ex);
 		
 	}
 
-	@Override
-	public int orderCurrval(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("Exchage.orderCurrval");
-	}
 
 	@Override
 	public void insertAddress(SqlSessionTemplate sqlSession, Exchange ex) {
 		
-		sqlSession.selectOne("Exchange.insertAddress",ex);
+		sqlSession.insert("Exchange.insertAddress",ex);
 	}
 
-	@Override
-	public int addressCurrval(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("Exchange.addressCurrval");
-	}
 
 	@Override
 	public void insertDeliver(SqlSessionTemplate sqlSession, Deliver_record dr) {
 		
 		sqlSession.selectOne("Exchange.insertDeliver", dr);
+		
+	}
+
+	@Override
+	public void updatePoint(SqlSessionTemplate sqlSession, Point point) {
+		
+		sqlSession.selectOne("Exchange.updatePoint", point);
+	}
+
+	@Override
+	public void updatePoint_Record(SqlSessionTemplate sqlSession, Point_Record pr) {
+		sqlSession.selectOne("Exchange.updatePoint_Record", pr);
 		
 	}
 
