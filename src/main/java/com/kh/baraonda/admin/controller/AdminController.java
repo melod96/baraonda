@@ -1,5 +1,8 @@
 package com.kh.baraonda.admin.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -112,6 +115,8 @@ public class AdminController {
 			int listCount = as.selectBlackMemberCount(search);
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
+				List<Map<String, Object>> list = as.selectBlackMemberList(info, search);
+				System.out.println("list : " + list);
 				mv.addObject("list", as.selectBlackMemberList(info, search));
 			}
 			mv.addObject("pi", info);
@@ -257,6 +262,18 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="goDeclarationAdminDetail.adm")
+	public ModelAndView goDeclarationAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		try {
+			mv.addObject("reportInfo", as.selectDeclarationInfo(num));
+			mv.setViewName("admin/declarationAdmin/declarationAdminDetail");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "NoticeDetail 조회 실패!");
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value="goOrderAdminList.adm")
 	public ModelAndView goOrderAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
 											@RequestParam(value="searchContent", required=false)String content) {
@@ -281,7 +298,18 @@ public class AdminController {
 		return mv;
 	}
 	
-	
+	@RequestMapping(value="addBlackMEmberAdmin.adm")
+	public ModelAndView addBlackMEmberAdmin(ModelAndView mv,
+											@RequestParam(value="num", required=true)String num) {
+		try {
+			as.insertBlackMemberAdmin(num);
+			mv.setViewName("redirect:goGeneralMemberAdminList.adm");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 조회 실패!");
+		}
+		return mv;
+	}
 	
 	
 	

@@ -121,4 +121,19 @@ public class AdminServiceImpl implements AdminService {
 		ad.deleteNoticeInfo(sqlSession, num);
 	}
 
+	@Override
+	public Map<String, Object> selectDeclarationInfo(String num) throws AdminException {
+		return ad.selectDeclarationInfo(sqlSession, num);
+	}
+
+	@Override
+	public void insertBlackMemberAdmin(String num) throws AdminException {
+		ad.insertBlackMemberAdmin(sqlSession, num);
+		ad.updateMemberStatusAdmin(sqlSession, num);
+	}
+
+
+	
+	
+
 }

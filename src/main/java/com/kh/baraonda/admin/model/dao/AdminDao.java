@@ -51,5 +51,12 @@ public interface AdminDao {
 	void updateNoticeInfo(SqlSessionTemplate sqlSession, AdminBoard adminBoard) throws AdminException;
 
 	void deleteNoticeInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
+	Map<String, Object> selectDeclarationInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
+	void insertBlackMemberAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
+	void updateMemberStatusAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
 	
 }

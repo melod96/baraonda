@@ -1,6 +1,5 @@
 package com.kh.baraonda.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +49,11 @@ public interface AdminService {
 	void updateNoticeInfo(AdminBoard adminBoard) throws AdminException;
 
 	void deleteNoticeInfo(String num) throws AdminException;
+
+	Map<String, Object> selectDeclarationInfo(String num) throws AdminException;
+
+	void insertBlackMemberAdmin(String num) throws AdminException;
+
 	
 	
 }

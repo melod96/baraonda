@@ -120,6 +120,22 @@ public class AdminDaoImpl implements AdminDao {
 	public void deleteNoticeInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
 		sqlSession.update("Admin.deleteNoticeInfo", num);
 	}
+
+	@Override
+	public Map<String, Object> selectDeclarationInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectOne("Admin.selectDeclarationInfo", num);
+	}
+
+	@Override
+	public void insertBlackMemberAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		sqlSession.insert("Admin.insertBlackMemberAdmin", num);	
+	}
+
+	@Override
+	public void updateMemberStatusAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		sqlSession.update("Admin.updateMemberStatusAdmin", num);
+	}
+
 	
 	
 

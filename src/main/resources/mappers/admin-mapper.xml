@@ -89,8 +89,10 @@
 			FROM (SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
 				FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
 	      			  FROM MEMBER M
-	      			  JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
-	      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO))
+	      			  LEFT JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
+	      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO)
+	      			  WHERE 1 = 1 
+          			  AND MEMBER_STATUS = 1)
 			WHERE 1 = 1
 	     	<if test="content != null and content != ''">
 				AND (ID LIKE '%' || #{content} || '%' 
@@ -100,12 +102,14 @@
 			GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE)
 	</select>
 	
-	<select id="selectBlackMemberList" resultType="map">
+	<select id="selectBlakcMemberList" parameterType="Search" resultType="map">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
 			FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
       			  FROM MEMBER M
-      			  JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
-      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO))
+      			  LEFT JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
+      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO)
+      			  WHERE 1 = 1 
+          		  AND MEMBER_STATUS = 1)
 		WHERE 1 = 1
 		<if test="content != null and content != ''">
 			AND (ID LIKE '%' || #{content} || '%' 
@@ -255,6 +259,45 @@
 		UPDATE BOARD
 		SET BOARD_STATUS = 1
 		WHERE BOARD_NO = #{num}
+	</update>
+	
+	<resultMap type="HashMap" id="DeclarationInfo">
+		<result property="REPORT_NO" column="REPORT_NO"/>
+		<result property="GIVE_NICK_NAME" column="GIVE_NICK_NAME"/>
+		<result property="GET_NICK_NAME" column="GET_NICK_NAME"/>
+		<result property="REPORT_GIVE_NO" column="REPORT_GIVE_NO"/>
+		<result property="REPORT_GET_NO" column="REPORT_GET_NO"/>
+		<result property="GIVE_PHONE" column="GIVE_PHONE"/>
+		<result property="GET_PHONE" column="GET_PHONE"/>
+		<result property="REPORT_TYPE" column="REPORT_TYPE"/>
+		<result property="REPORT_DATE" column="REPORT_DATE"/>
+		<result property="REPORT_APPROVAL" column="REPORT_APPROVAL"/>
+		<result property="REPORT_CONTENT" column="REPORT_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="BOARD_CONTENT" column="BOARD_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="selectDeclarationInfo" resultMap="DeclarationInfo">
+		SELECT R.REPORT_NO, M1.NICK_NAME AS GIVE_NICK_NAME, M2.NICK_NAME AS GET_NICK_NAME, R.REPORT_GIVE_NO, R.REPORT_GET_NO,
+		        M1.PHONE AS GIVE_PHONE, M2.PHONE AS GET_PHONE, R.REPORT_TYPE, R.REPORT_DATE, 
+		        R.REPORT_APPROVAL, R.REPORT_CONTENT, B.BOARD_CONTENT
+		FROM REPORT R
+		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
+		JOIN MEMBER M2 ON(R.REPORT_GET_NO = M2.MEMBER_NO)
+		JOIN BOARD B ON(R.BOARD_NO = B.BOARD_NO)
+		WHERE 1 = 1
+		AND REPORT_NO = #{num}
+	</select>
+
+	<insert id="insertBlackMemberAdmin">
+		INSERT INTO BLACKLIST(BLACK_NO, MEMBER_NO, BLACK_DATE, LIFT_DATE)
+		VALUES(SEQ_BLACK_NO.NEXTVAL, #{num}, SYSDATE, SYSDATE + 7);
+	</insert>
+	
+	<update id="updateMemberStatusAdmin">
+		UPDATE MEMBER 
+		SET MEMBER_STATUS = 1
+		WHERE 1 = 1
+		AND MEMBER_NO = #{num}
 	</update>
 	
 </mapper> 
