@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
+import com.kh.baraonda.admin.model.vo.AdminBoard;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -98,6 +99,26 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public Map<String, Object> selectCompanyMemberInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
 		return sqlSession.selectOne("Admin.selectCompanyMemberInfo", num);
+	}
+
+	@Override
+	public Map<String, Object> selectNoticeInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectOne("Admin.selectNoticeInfo", num);
+	}
+
+	@Override
+	public void insertNoticeInfo(SqlSessionTemplate sqlSession, AdminBoard adminBoard) throws AdminException {
+		sqlSession.insert("Admin.insertNoticeInfo", adminBoard);	
+	}
+
+	@Override
+	public void updateNoticeInfo(SqlSessionTemplate sqlSession, AdminBoard adminBoard) throws AdminException {
+		sqlSession.update("Admin.updateNoticeInfo", adminBoard);	
+	}
+
+	@Override
+	public void deleteNoticeInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		sqlSession.update("Admin.deleteNoticeInfo", num);
 	}
 	
 	

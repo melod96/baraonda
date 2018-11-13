@@ -121,6 +121,7 @@
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
 		WHERE 1 = 1
 		AND BOARD_TYPE = 6
+		AND BOARD_STATUS = 0
 	    <if test="content != null and content != ''">
 			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
 			OR NICK_NAME LIKE '%' || #{content} || '%')
@@ -133,6 +134,7 @@
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
 		WHERE 1 = 1
 		AND BOARD_TYPE = 6
+		AND BOARD_STATUS = 0
 	    <if test="content != null and content != ''">
 			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
 			OR NICK_NAME LIKE '%' || #{content} || '%')
@@ -220,6 +222,40 @@
 		WHERE 1 = 1
 		AND MEMBER_NO = #{num}
 	</select>
+	
+	<resultMap type="HashMap" id="NoticeInfo">
+		<result property="BOARD_NO" column="BOARD_NO"/>
+		<result property="BOARD_TITLE" column="BOARD_TITLE"/>
+		<result property="BOARD_CONTENT" column="BOARD_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="BOARD_DATE" column="BOARD_DATE"/>
+		<result property="NICK_NAME" column="NICK_NAME"/>
+	</resultMap>
+	
+	<select id="selectNoticeInfo" resultMap="NoticeInfo">
+		SELECT B.BOARD_NO, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, M.NICK_NAME
+		FROM BOARD B 
+		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
+		WHERE 1 = 1
+		AND BOARD_TYPE = 6
+		AND BOARD_NO = #{num}
+	</select>
+
+	<insert id="insertNoticeInfo">
+		INSERT INTO BOARD(BOARD_NO, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO, BOARD_DATE, MODIFY_DATE, BOARD_STATUS, BOARD_COUNT)
+		VALUES(SEQ_BOARD_NO.NEXTVAL, 6, #{title}, #{content}, 1, SYSDATE, SYSDATE, 0, 0)
+	</insert>
+
+	<update id="updateNoticeInfo">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{title}, BOARD_CONTENT = #{content}, MODIFY_DATE = SYSDATE, BOARD_COUNT = 0
+		WHERE BOARD_NO = #{board_no}
+	</update>
+	
+	<update id="deleteNoticeInfo">
+		UPDATE BOARD
+		SET BOARD_STATUS = 1
+		WHERE BOARD_NO = #{num}
+	</update>
 	
 </mapper> 
   

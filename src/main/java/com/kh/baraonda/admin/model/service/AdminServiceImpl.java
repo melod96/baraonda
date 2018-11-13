@@ -1,6 +1,5 @@
 package com.kh.baraonda.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.admin.model.dao.AdminDao;
 import com.kh.baraonda.admin.model.exception.AdminException;
+import com.kh.baraonda.admin.model.vo.AdminBoard;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -103,8 +103,22 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Map<String, Object> selectNoticeInfo(String num) throws AdminException {
-		// TODO Auto-generated method stub
-		return null;
+		return ad.selectNoticeInfo(sqlSession, num);
+	}
+
+	@Override
+	public void insertNoticeInfo(AdminBoard adminBoard) throws AdminException {
+		ad.insertNoticeInfo(sqlSession, adminBoard);
+	}
+
+	@Override
+	public void updateNoticeInfo(AdminBoard adminBoard) throws AdminException {
+		ad.updateNoticeInfo(sqlSession, adminBoard);	
+	}
+
+	@Override
+	public void deleteNoticeInfo(String num) throws AdminException {
+		ad.deleteNoticeInfo(sqlSession, num);
 	}
 
 }

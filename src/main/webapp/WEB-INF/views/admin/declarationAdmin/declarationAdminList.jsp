@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,15 +75,15 @@
 	                               			<tr class="odd gradeX">
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
 		                                        <td>
-		                                        	<c:if test="${ list.report_type == 1 }">댓글</c:if>
-		                                        	<c:if test="${ list.report_type == 2 }">게시글</c:if>
+		                                        	<c:if test="${ list.REPORT_TYPE == 1 }">댓글</c:if>
+		                                        	<c:if test="${ list.REPORT_TYPE == 2 }">게시글</c:if>
 		                                        </td>
-		                                        <td>${ list.give_nick_name }</td>
-		                                        <td>${ list.get_nick_name }</td>
-		                                        <td>${ list.report_date }</td>
+		                                        <td>${ list.GIVE_NICK_NAME }</td>
+		                                        <td>${ list.GET_NICK_NAME }</td>
+		                                        <td>${ fn:substring(list.REPORT_DATE, 0, 10) }</td>
 		                                        <td>
-													<c:if test="${ list.report_approval == 0 }">미처리</c:if>
-													<c:if test="${ list.report_approval == 1 }">처리</c:if>
+													<c:if test="${ list.REPORT_APPROVAL == 0 }">미처리</c:if>
+													<c:if test="${ list.REPORT_APPROVAL == 1 }">처리</c:if>
 												</td>
 	                                    	</tr>
 	                               		</c:forEach>

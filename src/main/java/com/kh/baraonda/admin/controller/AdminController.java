@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
 import com.kh.baraonda.admin.model.service.AdminService;
+import com.kh.baraonda.admin.model.vo.AdminBoard;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
@@ -175,8 +176,60 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="goNoticeAdminWriteForm.adm")
-	public ModelAndView goNoticeAdminWriteForm(ModelAndView mv) {
+	public ModelAndView goNoticeAdminWriteForm(ModelAndView mv, @RequestParam(value="num", required=false)String num) {
+		if(num != null) {
+			try {
+				mv.addObject("boardInfo", as.selectNoticeInfo(num));
+			} catch (AdminException e) {
+				mv.setViewName("common/errerPage");
+				mv.addObject("errorMessage", "NoticeDetail 조회 실패!");
+			}
+		}
 		mv.setViewName("admin/noticeAdmin/noticeAdminWriteForm");
+		return mv;
+	}
+	
+	@RequestMapping(value="goNoticeAdminInsert.adm")
+	public ModelAndView goNoticeAdminInsert(ModelAndView mv, 
+											@RequestParam(value="title", required=true)String title, 
+											@RequestParam(value="content", required=true)String content) {
+		AdminBoard adminBoard = new AdminBoard(title, content);
+		try {
+			as.insertNoticeInfo(adminBoard);
+			mv.setViewName("redirect:goNoticeAdminList.adm");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 추가 실패!");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="goNoticeAdminUpdate.adm")
+	public ModelAndView goNoticeAdminUpdate(ModelAndView mv, 
+											@RequestParam(value="title", required=true)String title, 
+											@RequestParam(value="content", required=true)String content,
+											@RequestParam(value="num", required=true)String num) {
+		AdminBoard adminBoard = new AdminBoard(num, title, content);
+		try {
+			as.updateNoticeInfo(adminBoard);
+			mv.setViewName("redirect:goNoticeAdminList.adm");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 수정 실패!");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="goNoticeAdminDelete.adm")
+	public ModelAndView goNoticeAdminDelete(ModelAndView mv, 
+											@RequestParam(value="num", required=true)String num) {
+		try {
+			as.deleteNoticeInfo(num);
+			mv.setViewName("redirect:goNoticeAdminList.adm");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Notice 수정 실패!");
+		}
 		return mv;
 	}
 	

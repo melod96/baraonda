@@ -46,6 +46,8 @@
 			<typeAlias type="com.kh.baraonda.myPage.model.vo.Orders" alias="Orders"/>
 			
 			<typeAlias type="com.kh.baraonda.exchange.model.vo.Exchange" alias="Exchange"/>
+			
+			<typeAlias type="com.kh.baraonda.admin.model.vo.AdminBoard" alias="AdminBoard"/>
 
   		</typeAliases>
   		
@@ -71,6 +73,5 @@
 			<mapper resource="mappers/exchange-mapper.xml"/>
 
 		</mappers>
-  		
   </configuration>
   

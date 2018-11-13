@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,12 +78,12 @@
                                 	<c:if test="${ list != null }">
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
-	                               				<input type="hidden" value="${ list.board_no }" id="board_no"/>
+	                               				<input type="hidden" value="${ list.BOARD_NO }" id="board_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-		                                        <td>${ list.board_title }</td>
-		                                        <td>${ list.nick_name }</td>
-		                                        <td>${ list.board_count }</td>
-		                                        <td>${ list.board_date }</td>
+		                                        <td>${ list.BOARD_TITLE }</td>
+		                                        <td>${ list.NICK_NAME }</td>
+		                                        <td>${ list.BOARD_COUNT }</td>
+		                                        <td>${ fn:substring(list.BOARD_DATE, 0, 10) }</td>
 	                                    	</tr>
 	                               		</c:forEach>
                                		</c:if>
