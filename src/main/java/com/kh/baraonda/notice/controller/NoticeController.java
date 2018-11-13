@@ -8,10 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.common.PaginationComment;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
+import com.kh.baraonda.main.model.exception.MainSelectListException;
+import com.kh.baraonda.main.model.service.MainService;
+import com.kh.baraonda.main.model.vo.Fame;
+import com.kh.baraonda.main.model.vo.Ranking;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.service.MyPageService;
+import com.kh.baraonda.myPage.model.vo.Point;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.service.NoticeService;
 import com.kh.baraonda.notice.model.vo.Notice;
@@ -23,9 +32,34 @@ public class NoticeController {
 	@Autowired
 	private NoticeService ns;
 	
+	@Autowired
+	private MainService ms;
+	
+	@Autowired
+	private MyPageService mps;
+	
 	//공지사항 리스트 출력
 	@RequestMapping("noticelist.nt")
 	public String noticeListPage(Model model, PageInfo pi) {
+				//명예의전당
+				ArrayList<Fame> flist;
+				//공지사항
+				ArrayList<Notice> nlist;
+				//다이어터랭킹
+				ArrayList<Ranking> rlist;
+				try {
+					flist = ms.selectFame();
+					model.addAttribute("flist", flist);
+					nlist = ms.selectNotice();
+					model.addAttribute("nlist", nlist);
+					rlist = ms.selectRanking();
+					model.addAttribute("rlist", rlist);
+				} catch (MainSelectListException e1) {
+					model.addAttribute("msg", e1.getMessage());
+				}
+		
+		
+		
 		int currentPage =1;
 		
 		if(pi.getCurrentPage() > 0){
@@ -69,7 +103,7 @@ public class NoticeController {
 		
 		int listCount = ns.selectCommentListCount(notice_no);
 		
-		PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pgif = PaginationComment.getPageInfo(currentPage, listCount);
 		
 		ArrayList<NoticeComment> comment = ns.selectComment(notice_no,pgif);
 		System.out.println(comment);
@@ -180,6 +214,14 @@ public class NoticeController {
 		c.setMember_no(m.getMember_no());
 		
 		int insert = ns.insertComment(c);
+		
+		Point point = mps.selectPoint(m);
+		
+		Point_Record pr = new Point_Record();
+		pr.setMember_no(m.getMember_no());
+		pr.setBefore_point(point.getAccrue_point());
+		pr.setAfter_point(point.getAccrue_point() + 5);
+		ns.updatePoint(pr);
 		return "redirect:noticeDetail.nt?notice_no="+c.getBoard_no();
 	}
 	

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
+import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
@@ -73,6 +75,10 @@ public interface NoticeService {
 
 	//이전글
 	Notice selectBeforeBoard(String notice_no);
+
+	//댓글 작성 시 포인트 획득
+	void updatePoint(Point_Record pr);
+
 
 
 

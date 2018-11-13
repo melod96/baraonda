@@ -47,8 +47,8 @@ public class ExchangeDaoImpl implements ExchangeDao{
 	}
 
 	@Override
-	public void updatePoint_Record(SqlSessionTemplate sqlSession, Point_Record pr) {
-		sqlSession.selectOne("Exchange.updatePoint_Record", pr);
+	public void updatePoint_Record(SqlSessionTemplate sqlSession, Point point) {
+		sqlSession.selectOne("Exchange.updatePoint_Record", point);
 		
 	}
 

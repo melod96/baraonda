@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
+import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.dao.NoticeDao;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
@@ -170,6 +172,15 @@ public class NoticeServiceImpl implements NoticeService{
 		int beforeno= nd.selectBeforeNo(sqlSession,notice_no);
 		return nd.selectNoticeOne(sqlSession, String.valueOf(beforeno));
 	}
+
+	//댓글 작성시 포인트
+	@Override
+	public void updatePoint(Point_Record pr) {
+		nd.insertPointRecord(sqlSession, pr);
+		nd.updatePoint(sqlSession, pr);
+		
+	}
+
 
 
 }

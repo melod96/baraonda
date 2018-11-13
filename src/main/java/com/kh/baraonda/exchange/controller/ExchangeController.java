@@ -39,7 +39,6 @@ public class ExchangeController {
 		String address = ex.getAccept_address2() + ex.getAccept_address3();
 		
 		ex.setAccept_address2(address);
-		System.out.println(ex);
 		//insert
 		ecs.insertOrder(ex);
 		ecs.insertAddress(ex);
@@ -47,16 +46,12 @@ public class ExchangeController {
 		Deliver_record dr = new Deliver_record();
 		dr.setAddress_no(ex.getAddress_no());
 		dr.setOrders_no(ex.getOrders_no());
-		System.out.println(dr);
 		
 		ecs.insertDeliver(dr);
 		
 		//update
-		Point point = new Point();
+		Point point = mps.selectPoint(m);
 		point.setMember_no(m.getMember_no());
-		point = mps.selectPoint(m);
-		point.setAccrue_point(-point.getAccrue_point());
-		System.out.println(point);
 		ecs.updatePoint(point);
 		
 		return "redirect:growingChicksView.my";

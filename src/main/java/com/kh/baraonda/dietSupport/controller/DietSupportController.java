@@ -15,6 +15,11 @@ import com.kh.baraonda.dietSupport.model.service.DietSupportService;
 import com.kh.baraonda.dietSupport.model.vo.BMI;
 import com.kh.baraonda.dietSupport.model.vo.CaloriePresciption;
 import com.kh.baraonda.dietSupport.model.vo.HealthCenter;
+import com.kh.baraonda.main.model.exception.MainSelectListException;
+import com.kh.baraonda.main.model.service.MainService;
+import com.kh.baraonda.main.model.vo.Fame;
+import com.kh.baraonda.main.model.vo.Ranking;
+import com.kh.baraonda.notice.model.vo.Notice;
 
 @Controller
 public class DietSupportController {
@@ -22,13 +27,51 @@ public class DietSupportController {
 	@Autowired
 	private DietSupportService dss;
 	
+	@Autowired
+	private MainService ms;
+	
 	@RequestMapping("BMI.ds")
-	public String bmiPage() {
+	public String bmiPage(Model model) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		return "dietSupport/BMI";
 	}
 	
 	@RequestMapping("BMICal.ds")
 	public String bmiCal(Model model,BMI b) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
 		
 		model.addAttribute("b", b);
 		double bmibmi = b.getWeight()/((b.getHeight()/100.0)*(b.getHeight()/100.0));
@@ -40,12 +83,48 @@ public class DietSupportController {
 	}
 	
 	@RequestMapping("caloriePresciption.ds")
-	public String caloriePresciptionPage() {
+	public String caloriePresciptionPage(Model model) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		return "dietSupport/caloriePresciption";
 	}
 	
 	@RequestMapping("calpre.ds")
 	public String calpreCal(Model model, CaloriePresciption cp) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		model.addAttribute("cp",cp);
 		
 		double avgweight = 0;
@@ -115,6 +194,24 @@ public class DietSupportController {
 	
 	@RequestMapping("healthCenterList.ds")
 	public String healthCenterListPage(Model model, PageInfo pi){
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		int currentPage =1;
 		
 		if(pi.getCurrentPage() > 0){
@@ -141,6 +238,24 @@ public class DietSupportController {
 	
 	@RequestMapping("searchHealthCenter.ds")
 	public String searchHealthCenter(String state,Model model, PageInfo pi) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		
 		int currentPage =1;
 		

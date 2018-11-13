@@ -52,11 +52,7 @@ public class ExchangeServiceImpl implements ExchangeService{
 	public void updatePoint(Point point) {
 		
 		ecd.updatePoint(sqlSession, point);
-		
-		Point_Record pr = new Point_Record();
-		pr.setMember_no(point.getMember_no());
-		pr.setBefore_point(point.getAccrue_point());
-		ecd.updatePoint_Record(sqlSession, pr);
+		ecd.updatePoint_Record(sqlSession, point);
 	}
 
 }
