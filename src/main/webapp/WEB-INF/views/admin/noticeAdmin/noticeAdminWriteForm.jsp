@@ -45,26 +45,21 @@
                             공지 등록
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label>제목</label>
-                                <input class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <div id="editor">
-                                    <div id='edit' style="margin-top: 30px">       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-                            <div class="form-group" align="center">
-                                <button type="button" class="btn btn-default">취소</button>
-                                <button type="button" class="btn btn-primary">저장</button>
-                            </div>
-                        </div>
+                        <form name="frmSubmit">
+	                        <div class="panel-body">
+	                            <div class="form-group">
+	                                <label>제목</label>
+	                                <input class="form-control" name="title" value="${ boardInfo.BOARD_TITLE }">
+	                            </div>
+	                            <div class="form-group">
+	                                <textarea id="editor" name="content">${ boardInfo.BOARD_CONTENT }</textarea>
+	                            </div>
+	                            <div class="form-group" align="center">
+	                                <button type="button" class="btn btn-default" onclick="location.href='goNoticeAdminList.adm'">취소</button>
+	                                <button type="button" class="btn btn-primary" onclick="getPost(${ boardInfo.BOARD_NO })">저장</button>
+	                            </div>
+	                        </div>
+                        </form>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
@@ -81,11 +76,20 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-    $(function(){
-        $('#edit').froalaEditor({
-          fullPage: true
-    	})
-    });
+   	$(function() { 
+    	$('#editor').froalaEditor();
+    }); 
+   	
+   	function getPost(num){
+   		var theForm = document.frmSubmit;
+   		theForm.method="post";
+   		if(num != null){
+   			theForm.action="goNoticeAdminUpdate.adm?num=${ boardInfo.BOARD_NO }";
+   		}else{
+   			theForm.action="goNoticeAdminInsert.adm";
+   		}
+   		theForm.submit();
+   	}
     </script>
     
 </body>

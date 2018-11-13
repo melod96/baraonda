@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,11 +74,11 @@
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-		                                        <td>${ list.name }</td>
-		                                        <td>${ list.product_name }</td>
-		                                        <td>${ list.product_quantity }</td>
-		                                        <td>${ list.orders_date }</td>
-		                                        <td>${ list.phone }</td>
+		                                        <td>${ list.NAME }</td>
+		                                        <td>${ list.PRODUCT_NAME }</td>
+		                                        <td>${ list.PRODUCT_QUANTITY }</td>
+		                                        <td>${ fn:substring(list.ORDERS_DATE, 0, 10) }</td>
+		                                        <td>${ list.PHONE }</td>
 	                                    	</tr>
 	                               		</c:forEach>
                                		</c:if>
@@ -174,21 +175,19 @@
             info : false,
             filter : false
         });
+        
+        $("#search-option-1").children().each(function(){
+    		if($(this).val() == "${ search.option1 }"){
+    			$(this).attr("selected","selected"); 
+    		}
+    	});
     });
     
     function search(){
     	var content = $('#search-content').val();
     	
     	location.href="goOrderAdminList.adm?currentPage=1&searchContent=" + content;
-    }
-    
-    $(document).ready(function(){
-    	$("#search-option-1").children().each(function(){
-    		if($(this).val() == "${ search.option1 }"){
-    			$(this).attr("selected","selected"); 
-    		}
-    	});
-    }); 
+    } 
     </script>
     
 </body>

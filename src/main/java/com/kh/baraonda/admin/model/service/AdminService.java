@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.baraonda.admin.model.exception.AdminException;
+import com.kh.baraonda.admin.model.vo.AdminBoard;
 import com.kh.baraonda.admin.model.vo.Search;
 import com.kh.baraonda.common.PageInfo;
 
@@ -43,5 +44,12 @@ public interface AdminService {
 	Map<String, Object> selectCompanyMemberInfo(String num) throws AdminException;
 
 	Map<String, Object> selectNoticeInfo(String num) throws AdminException;
+
+	void insertNoticeInfo(AdminBoard adminBoard) throws AdminException;
+
+	void updateNoticeInfo(AdminBoard adminBoard) throws AdminException;
+
+	void deleteNoticeInfo(String num) throws AdminException;
+	
 	
 }
