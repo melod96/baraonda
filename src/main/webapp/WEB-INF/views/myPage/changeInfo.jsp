@@ -37,7 +37,7 @@
 		 #introText{margin-top:10px;height:170px;}
 		 
 		 /*내 정보 수정 구역*/
-		 input[name=id], input[name=nick_name],input[name=password],input[name=password2],input[name=password3]{width:300px; height:31px;margin-top:-26px;margin-bottom:15px;margin-right:280px;}
+		 input[name=id], input[name=nick_name],input[name=password],input[name=password2],input[name=password3],input[name=emailCheck],input[name=email]{width:300px; height:31px;margin-top:-26px;margin-bottom:15px;margin-right:280px;}
 		.textLabel{border:1px solid darkgray; border-radius:3px;width:150px;text-align:center;
 					background:#ddd ;color:white;}
 		.position2{margin-top:15px;margin-bottom:15px;margin-left:30px;}
@@ -52,7 +52,12 @@
 		#btn1{float:left;}
 		
 		.emptyLogin{width:800px; margin-left: auto; margin-right: auto;text-align:center;}
-		#checkBtn4{background:#90C3D4;border-radius:5px;color:white;margin-left:18px;}
+		#checkBtn4, #checkBtn5{background:#90C3D4;border-radius:5px;color:white;margin-left:0px;width:150px;height:30px;}
+		
+		input[name=emailCheck], #checkBtn5{visibility:hidden;}
+		#emailCheck{margin-top:-2px;}
+		#checkBtn5{margin-top:10px;margin-left:185px;}
+		
 	</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -121,12 +126,14 @@
 					<div class="position2">
 						<div class="textLabel">이메일</div>
 						<c:if test="${!empty loginUser.email}">
-							<input type="email" class="form-control" name="nick_name" value="${loginUser.email}">
+							<input type="email" class="form-control" name="email" value="${loginUser.email}" readonly>
 						</c:if>
 						<c:if test="${empty loginUser.email}">
-							<input type="email" class="form-control" name="nick_name" value="${loginUser.email}" placeholder="이메일을 등록해주세요.">
+							<input type="email" id="email" class="form-control" name="email" value="${loginUser.email}" placeholder="이메일을 등록해주세요.">
 							<br>
-							<button type="button" id="checkBtn4" onclick="checkEmail();">이메일 인증하기</button>
+							<button type="button" id="checkBtn4" onclick="emailCheck2();">이메일 인증하기</button>
+							<input type="text" id="emailCheck" class="form-control" name="emailCheck" placeholder="인증번호를 입력해주세요.">
+							<button type="button" id="checkBtn5" onclick="insertEmail();">인증완료하기</button> 
 						</c:if>
 					</div>
 					
@@ -174,11 +181,45 @@
 	</c:if>
 	
 	<script>
+	
+		var key = "";
+		
+		
 		function uploadPhoto(){
 			$("#uploadInput").trigger("click");
 		}
 	
-	
+		function emailCheck2(){
+			var email = $("#email").val();
+			console.log(email);
+			
+			 $.ajax({
+					url:"emailCheck.my",
+					type:"post",
+					data:{email:email},
+					success:function(data){
+						key = data;
+					},
+					error:function(){
+						console.log("에러 발생!");
+					}
+				});
+			
+			$("#emailCheck").css("visibility","visible");
+			$("#checkBtn5").css("visibility","visible");
+		}
+		
+		function insertEmail(){
+			
+			var emailCheck = $("#emailCheck").val();
+			var email = $("#email").val();
+			if(key == emailCheck){
+				alert("인증이 완료되었습니다.");
+				location.href="updateEmail.my?email="+email+"&member_no="+${loginUser.member_no};
+			}else{
+				alert("인증번호가 틀립니다. 다시입력해주세요.")
+			}
+		}
 	</script>
 </body>
 </html>

@@ -26,8 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.CommonUtils;
+import com.kh.baraonda.common.GmailSend;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.common.TempKey;
 import com.kh.baraonda.exchange.model.vo.Product;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.service.MyPageService;
@@ -400,11 +402,33 @@ public class MyPageController {
 			
 			
 	
-	//이메일 인증
+	//이메일 인증 ajax
+	@SuppressWarnings("null")
+	@RequestMapping(value="emailCheck.my")
+	public @ResponseBody String emailCheck(@RequestParam String email){	
 		
-			
-			
-	
-	
-			
+		System.out.println(email);
+		
+		GmailSend mail = new GmailSend();
+		String key = new TempKey().getKey(10, false); // 인증키 생성
+		System.out.println(key);
+		mail.GmailSet(email, "[Baraonda 이메일 인증입니다]","다음 인증 번호를 인증번호 기입란에 입력해주세요. [ "+key+" ]" );
+		
+		System.out.println("이메일 전송 완료");
+		
+		return key;
+	}
+	//마이페이지 - 이메일 insert
+		@RequestMapping("updateEmail.my")
+		public String insertEmail(@RequestParam int member_no,@RequestParam String email) {
+				System.out.println("cont insertEmail : " + email);
+				
+				Member m = new Member();
+				m.setMember_no(member_no);
+				m.setEmail(email);
+				
+				mps.updateEmail(m);
+				System.out.println("이메일 등록 완료");
+				return "redirect:changeInfoView.my";
+		}
 }

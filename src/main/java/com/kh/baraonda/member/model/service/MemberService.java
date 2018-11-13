@@ -21,5 +21,7 @@ public interface MemberService {
 
 	int selectBizIDCheck(Member m);
 
+	int selectNickCheck(Member m);
+
 
 }

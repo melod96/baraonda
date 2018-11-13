@@ -140,7 +140,19 @@ public class MyPageDaoImpl implements MyPageDao{
 		return (ArrayList) sqlSession.selectList("MyPage.selectProductList");
 	}
 
+	@Override
+	public void updateEmail(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("dao : " + m.getEmail());
+		System.out.println("dao : " + m.getMember_no());
+		sqlSession.update("MyPage.updateEmail", m);
+		
+	}
 
+	/*@Override
+	public void updateEmail(SqlSessionTemplate sqlSession, Member m) {
+		sqlSession.update("MyPage.updateEmail", m);
+	}*/
 
+	
 
 }
