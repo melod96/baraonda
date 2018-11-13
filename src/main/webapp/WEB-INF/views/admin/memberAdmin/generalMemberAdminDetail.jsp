@@ -149,6 +149,10 @@
 	                            </div>
 	                        </div>
                         </div>
+                        <div class="form-group" align="center">
+                           <button type="button" class="btn btn-default" onclick="location.href='goGeneralMemberAdminList.adm'">목록으로</button>
+                           <button type="button" class="btn btn-danger" onclick="location.href='addBlackMEmberAdmin.adm?num=${ memberInfo.MEMBER_NO }'">블랙목록 추가</button>
+                        </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->

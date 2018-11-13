@@ -183,12 +183,6 @@
             info : false,
             filter : false
         });
-        
-        $("#search-option-1").children().each(function(){
-    		if($(this).val() == "${ search.option1 }"){
-    			$(this).attr("selected","selected"); 
-    		}
-    	});
     });
     
     function search(){

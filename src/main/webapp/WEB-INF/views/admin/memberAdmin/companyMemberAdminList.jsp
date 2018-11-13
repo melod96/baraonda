@@ -112,7 +112,7 @@
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.currentPage - 1 })">&lt;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage - 1 })">&lt;</button>
                             	</c:if>
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
@@ -153,13 +153,13 @@
 									</c:if>
                                 </span>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.currentPage + 1 })">&gt;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage + 1 })">&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='paginate(${ pi.endPage });">&raquo;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.endPage });">&raquo;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>
