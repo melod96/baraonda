@@ -121,6 +121,13 @@ public class MyPageServiceImpl implements MyPageService{
 		return mpd.selectProductList(sqlSession);
 	}
 
+	@Override
+	public void updateEmail(Member m) {
+		mpd.updateEmail(sqlSession, m);
+		
+	}
+
+
 
 
 

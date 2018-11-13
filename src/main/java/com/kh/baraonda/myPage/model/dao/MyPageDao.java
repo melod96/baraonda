@@ -54,6 +54,9 @@ public interface MyPageDao {
 
 	ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession);
 
+	void updateEmail(SqlSessionTemplate sqlSession, Member m);
+
+
 
 
 

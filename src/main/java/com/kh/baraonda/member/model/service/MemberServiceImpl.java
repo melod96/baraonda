@@ -79,6 +79,11 @@ public class MemberServiceImpl implements MemberService{
 		return md.selectBizIDCheck(sqlSession, m);
 	}
 
+	@Override
+	public int selectNickCheck(Member m) {
+		return md.selectNickCheck(sqlSession, m);
+	}
+
 
 
 	

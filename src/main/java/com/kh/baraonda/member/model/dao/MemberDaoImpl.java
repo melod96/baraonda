@@ -54,6 +54,12 @@ public class MemberDaoImpl implements MemberDao{
 		return ((ArrayList)sqlSession.selectList("Member.selectBizIDCheck",m)).size();
 	}
 
+	@Override
+	public int selectNickCheck(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("dao m : " + m);
+		return ((ArrayList)sqlSession.selectList("Member.selectNickCheck",m)).size();
+	}
+
 	
 
 

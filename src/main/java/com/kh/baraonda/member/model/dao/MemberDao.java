@@ -22,6 +22,8 @@ public interface MemberDao {
 
 	int selectBizIDCheck(SqlSessionTemplate sqlSession, Member m);
 
+	int selectNickCheck(SqlSessionTemplate sqlSession, Member m);
+
 
 
 }

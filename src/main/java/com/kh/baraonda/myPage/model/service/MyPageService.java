@@ -52,6 +52,9 @@ public interface MyPageService {
 
 	ArrayList<Product> selectProductList();
 
+	void updateEmail(Member m);
+
+
 
 
 

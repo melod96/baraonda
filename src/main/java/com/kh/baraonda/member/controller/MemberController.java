@@ -162,6 +162,20 @@ public class MemberController {
 		return result;
 	}
 	
+	@SuppressWarnings("null")
+	@RequestMapping("checkNick.me")
+	public @ResponseBody int checkNick(@RequestParam String nick_name){
+		
+		Member m = new Member();
+		m.setNick_name(nick_name);
+		
+		System.out.println("cont nick_name : " + nick_name);
+		
+		int result =  ms.selectNickCheck(m);
+		
+		return result;
+	}
+	
 	
 	
 	
