@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.tips.model.vo.TipsFiles;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
@@ -45,6 +46,9 @@ public interface TipsDao {
 	
 		//공지사항 insert
 		int insertTips(SqlSessionTemplate sqlSession, Tips t);
+		
+		//파일 업로드
+		void insertPhoto(SqlSessionTemplate sqlSession, TipsFiles file);
 
 		//공지사항 delete
 		int deleteTips(SqlSessionTemplate sqlSession, String tips_no);

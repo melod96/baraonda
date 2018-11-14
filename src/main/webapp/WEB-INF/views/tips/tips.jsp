@@ -12,13 +12,14 @@
 <style>
 .left {
 	float: left;
-	width: 75%;
+	width: 72%;
 	display: inline-block;
 }
 
 .title {
 	border-bottom: 2px solid #5d5d5d;
 	font-size: 30px;
+	width:780px;
 }
 
 .tbl-y th {
@@ -141,21 +142,29 @@ margin-top: -10px;
 		 <a id="tipsBtn" href="tips.tp?writing_type=3">식단</a>&nbsp;|&nbsp;
 			 <a id="tipsBtn" href="tips.tp?writing_type=2">운동</a>&nbsp;|&nbsp;
 			 <a id="tipsBtn" href="tips.tp?writing_type=1">칼럼</a>
+			 
+			 <c:if test="${sessionScope.loginUser.admin_right == 1}">
+							<a href="tipsWrite.tp"> 
+								<img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif" style="float:right; margin-right:40px; width:70px; height:28px;">
+							</a> 
+						</c:if>
 		</div>
+	
 		
 		<c:forEach items="${tipslist}" var ="t" end="8">
 	<div class="list">
       <div class="grid_4" id="tips">
+      
         <div class="gall_block">
           <div class="maxheight">
-            <a href="${pageContext.request.contextPath}${t.files_root}" class="gall_item" ><img src="${pageContext.request.contextPath}${t.files_root}" alt="" style="width:300px; height:170px;"></a>
+            <a href="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" class="gall_item" ><img src="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" alt="" style="width:300px; height:170px;"></a>
             <div class="gall_bot">
             <div class="boxbox">
            <div class="text1"><a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}">${t.board_title }</a></div>
            <div id="fonts">
-	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
+	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }<%-- </label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label> --%>
 	         </div>
-	         <img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">
+	         <img src="${pageContext.request.contextPath}/resources/images/main/아이유프사.png" style="width:25px; height:25px; border-radius:20px">
 	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
             <a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}" class="btn">more</a></div>
