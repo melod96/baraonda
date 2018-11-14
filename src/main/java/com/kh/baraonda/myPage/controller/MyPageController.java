@@ -466,57 +466,46 @@ public class MyPageController {
 			String encPassword = passwordEncoder.encode(pwd);
 			System.out.println("encPassword : " + encPassword);
 			if(!passwordEncoder.matches(pwd, loginUser.getPassword())) {
-				String msg = "비밀번호가 일치하지 않습니다.";
-				model.addAttribute("msg" ,msg);
+				
+				model.addAttribute("msg" ,"비밀번호가 일치하지 않습니다.");
 				model.addAttribute("type",type);
 				return "myPage/falsePage";
 			}else {
 				model.addAttribute("type",type);
 				switch(type) {
 				case "changeNick" : 
-					model.addAttribute("changeNick", "changeNick");
-					System.out.println("changeNick대입");
-					break;
+					return "myPage/changeNickPageView";
 				case "changePwd" : 
-					model.addAttribute("changePwd", "changePwd");
-					System.out.println("changePwd대입");
-					break;
+					return "myPage/changePwdPageView";
 				case "changeEmail" : 
-					model.addAttribute("changeEmail", "changeEmail");
-					System.out.println("changeEmail대입");
-					break;
-					
+					return "myPage/changeEmailPageView";
+				default : return "redirect:changeInfoView.my";
 				}
-				return "myPage/changePageView";
 			}
 			
 		}
 				
 		
 		
-		/*@RequestMapping("updateInfo.my")
-		public String updateInfo(HttpSession session, Model model, @RequestParam String type, @RequestParam String pwd) {
-			switch(type) {
-			case "changeNick" : 
-				
-				return "";
-				break;
-			}
+		@RequestMapping("updateNick.my")
+		public String updateNick(HttpSession session, Model model, @RequestParam String nick) {
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			loginUser.setNick_name(nick);
+			System.out.println("updateNick cont실행");
+			mps.updateNick(loginUser);
 			
-		}*/
+			return "redirect:logout.me";
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		@RequestMapping("updatePwd.my")
+		public String updatePwd(HttpSession session, Model model, @RequestParam String pwd) {
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			
+			String encPassword = passwordEncoder.encode(pwd);
+			loginUser.setPassword(encPassword);
+			mps.updatePwd(loginUser);
+			
+			return "redirect:logout.me";
+		}
 		
 }

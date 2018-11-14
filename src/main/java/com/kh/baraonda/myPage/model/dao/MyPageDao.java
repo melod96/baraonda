@@ -56,6 +56,10 @@ public interface MyPageDao {
 
 	void updateEmail(SqlSessionTemplate sqlSession, Member m);
 
+	void updateNick(SqlSessionTemplate sqlSession, Member loginUser);
+
+	void updatePwd(SqlSessionTemplate sqlSession, Member loginUser);
+
 
 
 

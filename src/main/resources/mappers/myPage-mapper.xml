@@ -284,6 +284,17 @@
 		UPDATE MEMBER SET EMAIL = '${email}' WHERE MEMBER_NO = ${member_no}
 	</update>
 	
+	<!--닉네임 변경-->
+	<update id="updateNick" parameterType="_int">
+		UPDATE MEMBER SET NICK_NAME = '${nick_name}' WHERE MEMBER_NO = ${member_no}
+	</update>
+	
+	<!--비밀번호 변경-->
+	<update id="updatePwd" parameterType="_int">
+		UPDATE MEMBER SET PASSWORD = '${password}' WHERE MEMBER_NO = ${member_no}
+	</update>
+	
+	
 </mapper>
 
 
