@@ -130,6 +130,7 @@ public class AdminServiceImpl implements AdminService {
 	public void insertBlackMemberAdmin(String num) throws AdminException {
 		ad.insertBlackMemberAdmin(sqlSession, num);
 		ad.updateMemberStatusAdmin(sqlSession, num);
+		ad.updateReportApprovalAdmin(sqlSession, num);
 	}
 
 

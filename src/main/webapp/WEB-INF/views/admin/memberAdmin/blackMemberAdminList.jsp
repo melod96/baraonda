@@ -17,6 +17,9 @@
         margin-top: 10px;
         text-align: center;
     }
+    .gradeX td:hover{
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -62,27 +65,26 @@
                                 <thead>
                                     <tr>
                                         <th width="8%">NO</th>
-                                        <th width="10%">ID</th>
-                                        <th width="10%">이름</th>
-                                        <th width="10%">닉네임</th>
-                                        <th width="11%">연락처</th>
-                                        <th width="15%">이메일</th>
-                                        <th width="10%">가입일</th>
-                                        <th width="10%">등록날짜</th>
-                                        <th width="10%">해지날짜</th>
-                                        <th width="6%">신고횟수</th>
+                                        <th width="12%">ID</th>
+                                        <th width="12%">이름</th>
+                                        <th width="12%">닉네임</th>
+                                        <th width="12%">연락처</th>
+                                        <th width="12%">가입일</th>
+                                        <th width="12%">등록날짜</th>
+                                        <th width="12%">해지날짜</th>
+                                        <th width="8%">신고횟수</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 	<c:if test="${ list != null }">
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
+	                               				<input type="hidden" value="${ list.MEMBER_NO }" id="member_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
 		                                        <td>${ list.ID }</td>
 		                                        <td>${ list.NAME }</td>
 		                                        <td>${ list.NICK_NAME }</td>
 		                                        <td>${ list.PHONE }</td>
-		                                        <td>${ list.EMAIL }</td>
 		                                        <td>${ fn:substring(list.ENROLL_DATE, 0, 10) }</td>
 		                                        <td>${ fn:substring(list.BLACK_DATE, 0, 10) }</td>
 		                                        <td>${ fn:substring(list.LIFT_DATE, 0, 10) }</td>
@@ -183,6 +185,13 @@
             info : false,
             filter : false
         });
+        
+        $(".gradeX").children().each(function(){
+    		$(this).click(function(){
+    			var member_no = $(this).parent().children("#member_no").val();
+        		location.href="goGeneralMemberAdminDetail.adm?num=" + member_no;
+    		});
+    	});
     });
     
     function search(){

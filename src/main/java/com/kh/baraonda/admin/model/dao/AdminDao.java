@@ -58,5 +58,7 @@ public interface AdminDao {
 
 	void updateMemberStatusAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException;
 
+	void updateReportApprovalAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
 	
 }
