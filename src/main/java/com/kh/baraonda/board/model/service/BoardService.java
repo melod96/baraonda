@@ -1,5 +1,6 @@
 package com.kh.baraonda.board.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,8 +38,9 @@ public interface BoardService {
 	public HashMap<String, Object> detail(int board_no) throws BoardException;
 
 	//댓글 조회
-	public List<HashMap<String, Object>> commentList(int board_no) throws BoardException;
-	
+	public List<HashMap<String, Object>> commentList(int board_no, PageInfo info) throws BoardException;
+	//댓글 수 
+	int commentListCount(int board_no);
 	//댓글 insert
 	int insertComment(Comments c);
 	//댓글 delete
@@ -60,11 +62,13 @@ public interface BoardService {
 	//북마크 delete
 	int deleteBookMark(boardMarking bm);
 	
-	//게시글 검색 개수
-	int searchBoardCount(SearchCondition sc);
-	
 	//검색
-	public List<HashMap<String, Object>> searchList(int writing_type, PageInfo info, SearchCondition sc);
+	public List<HashMap<String, Object>> searchList(PageInfo info, SearchCondition sc);
+	//게시글 검색 개수
+	int searchBoardCount(SearchCondition sc);	
+	
+	//홈트레이닝 게시물 목록 조회
+	ArrayList<Board> selectHomeList(PageInfo info) throws BoardException;
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.kh.baraonda.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,8 +37,9 @@ public interface BoardDao {
 	public HashMap<String, Object> detail(SqlSessionTemplate sqlSession, int board_no) throws BoardException;
 
 	//댓글 조회
-	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no) throws BoardException;
-	
+	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no, PageInfo info) throws BoardException;
+	//댓글 수
+	int commentListCount(SqlSessionTemplate sqlSession, int board_no);
 	//댓글 insert
 	int insertComment(SqlSessionTemplate sqlSession, Comments c);
 	//댓글 delete
@@ -62,8 +64,11 @@ public interface BoardDao {
 	//게시글 검색 개수
 	int searchBoardCount(SqlSessionTemplate sqlSession, SearchCondition sc);
 	//검색
-	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info,
-			int writing_type);
+	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info);
+	
+	//홈트레이닝 게시물 목록 조회
+	ArrayList<Board> selectHomeList(SqlSessionTemplate sqlSession, PageInfo info) throws BoardException;
+
 	
 
 	

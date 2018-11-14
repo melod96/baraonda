@@ -1,5 +1,6 @@
 package com.kh.baraonda.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.vo.Files;
+import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -95,9 +97,14 @@ public class BoardDaoImpl implements BoardDao{
 
 	//댓글 조회
 	@Override
-	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no) throws BoardException {
+	public List<HashMap<String, Object>> commentList(SqlSessionTemplate sqlSession, int board_no, PageInfo info) throws BoardException {
+		//건너 뛸 게시물의 수
+		int offset = (info.getCurrentPage() -1) * info.getLimit();
+						
+		RowBounds rowBounds = new RowBounds(offset, info.getLimit());
+		
 		try {
-			List<HashMap<String, Object>> commentList = sqlSession.selectList("Board.commentList", board_no);
+			List<HashMap<String, Object>> commentList = sqlSession.selectList("Board.commentList", board_no, rowBounds);
 			
 			if(commentList == null) {
 				throw new BoardException("리스트 값 널");
@@ -199,10 +206,44 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectOne("Board.searchBoardCount", sc);
 	}
 	@Override
-	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info,
-			int writing_type) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info) {
+		
+		List<HashMap<String, Object>> list = null;
+		
+		int offset = (info.getCurrentPage() - 1) * info.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, info.getLimit());
+		
+		list = sqlSession.selectList("Board.searchBoardList", sc, rowBounds);
+		
+		return list;
+	}
+	//댓글 수
+	@Override
+	public int commentListCount(SqlSessionTemplate sqlSession, int board_no) {
+		return sqlSession.selectOne("Board.commentListCount", board_no);
+	}
+	
+	//홈트레이닝 게시물 목록 조회
+	@Override
+	public ArrayList<Board> selectHomeList(SqlSessionTemplate sqlSession, PageInfo info) throws BoardException {
+		ArrayList<Board> list = null;
+
+		//건너 뛸 게시물의 수
+		int offset = (info.getCurrentPage() -1) * info.getLimit();
+						
+		RowBounds rowBounds = new RowBounds(offset, info.getLimit());
+						
+		//오브젝트로 받아오기 때문에 arraylist로 다운캐스팅 해준다
+		//제네릭을 설정하면 오류가 나서 넣으면 안된다
+		list = (ArrayList) sqlSession.selectList("Board.selectHomeList", null, rowBounds);
+						
+		if(list == null){
+			sqlSession.close();
+			throw new BoardException("조회 실패");
+		}
+		
+		return list;
 	}
 
 

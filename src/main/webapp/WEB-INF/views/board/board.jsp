@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>BARAON.DA - 커뮤니티</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../common/header.jsp" />
@@ -201,9 +201,11 @@
 						</span>
 						</a> -->
 						
-					<c:if test="${ pi.currentPage <= 1 }">
+					<!----------------------- 페이징 처리 ----------------------->
+					<c:if test="${empty search }">
+						<c:if test="${ pi.currentPage <= 1 }">
 							[이전] &nbsp;
-					</c:if>
+						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
 							<c:url var="blistBack" value="list.do">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
@@ -224,7 +226,6 @@
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
 						</c:forEach>
-						
 						<c:if test="${ pi.currentPage >= pi.maxPage }">
 							&nbsp; [다음]
 						</c:if>
@@ -236,22 +237,59 @@
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
 						</c:if>
+					</c:if>
+					
+					<!----------------------- 검색 페이징 처리 ----------------------->
+					<c:if test="${! empty search }">
+					<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+					</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="list.do">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="list.do">
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="list.do">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+						</c:if>
 					
 					
 					
 					</div>
 
 					<!------------------------------ 검색 폼 ------------------------------>
-					<form name="search" method="post" class="searchForm">
+					<form action="searchBoard.do" name="search" method="get" class="searchForm">
 						<table>
 							<tr>
-								<td><select class="form-control input-xshort">
-										<option>제목</option>
-										<option>내용</option>
-										<option>작성자</option>
+								<td><select class="form-control input-xshort" name="searchType">
+										<option value="title">제목</option>
+										<option value="content">내용</option>
+										<option value="writer">작성자</option>
 								</select></td>
-								<td><input id="boardInput" name=""
-									class="form-control input-short" type="text" placeholder="">
+								<td><input id="boardInput" name="search"
+									class="form-control input-short" type="text" placeholder="Search...">
 								</td>
 								<td><button id="boardBtn" type="submit"
 										class="btn btn-primary">검색</button></td>
