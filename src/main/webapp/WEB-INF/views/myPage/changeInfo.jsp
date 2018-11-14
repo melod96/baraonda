@@ -52,7 +52,7 @@
 		#btn1{float:left;}
 		
 		.emptyLogin{width:800px; margin-left: auto; margin-right: auto;text-align:center;}
-		#checkBtn4, #checkBtn5{background:#90C3D4;border-radius:5px;color:white;margin-left:0px;width:150px;height:30px;}
+		.changeBtn1, #checkBtn4, #checkBtn5{background:#90C3D4;border-radius:5px;color:white;margin-left:0px;width:150px;height:30px;}
 		
 		input[name=emailCheck], #checkBtn5{visibility:hidden;}
 		#emailCheck{margin-top:-2px;}
@@ -137,9 +137,24 @@
 						</c:if>
 					</div>
 					
+					
 					<br>
 					
-					<div class="position2">
+					<div class="position2"	>
+						&nbsp;&nbsp;
+						<button type="button" id="changeNick" class="changeBtn1" onclick="checkPwd(id);">닉네임 변경하기</button> 
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" id="changePwd" class="changeBtn1" onclick="checkPwd(id);">비밀번호 변경하기</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" id="changeStatus" class="changeBtn1" onclick="checkPwd(id);">회원 탈퇴하기</button> 
+						&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:if test="${!empty loginUser.email}">
+						<button type="button" id="changeEmail" class="changeBtn1" onclick="checkPwd(id);">이메일 변경하기</button>
+					</c:if>
+					
+					</div>
+					
+					<!-- <div class="position2">
 						<div class="textLabel">현재 비밀번호</div>
 						<input type="password" class="form-control" name="password2" placeholder="현재 비밀번호 입력">
 						
@@ -154,12 +169,12 @@
 					<div class="position2">
 						<div class="textLabel">비밀번호 확인</div>
 						<input type="password" class="form-control" name="password3" placeholder="비밀번호 확인">
-					</div>
+					</div> -->
 				</div>
 				
 				<input type="hidden" name="member_no" value="${loginUser.member_no }">
 				
-				<div class="osArea">
+			<!-- 	<div class="osArea">
 					<div id="out1">
 						<button id="btn1" class="btn btn-yn">회원탈퇴</button>
 					</div>
@@ -168,7 +183,7 @@
 						<button type="submit" id="btnS" class="btn btn-yn">확인</button>
 						<button type="reset" id="btnR" class="btn btn-yn">취소</button>
 					</div>
-				</div>
+				</div> -->
 			</form>
 		</div>
 	</c:if>
@@ -192,21 +207,24 @@
 		function emailCheck2(){
 			var email = $("#email").val();
 			console.log(email);
-			
-			 $.ajax({
-					url:"emailCheck.my",
-					type:"post",
-					data:{email:email},
-					success:function(data){
-						key = data;
-					},
-					error:function(){
-						console.log("에러 발생!");
-					}
-				});
-			
-			$("#emailCheck").css("visibility","visible");
-			$("#checkBtn5").css("visibility","visible");
+			if(email != null && email != ""){
+				 $.ajax({
+						url:"emailCheck.my",
+						type:"post",
+						data:{email:email},
+						success:function(data){
+							key = data;
+						},
+						error:function(){
+							console.log("에러 발생!");
+						}
+					});
+				alert("인증번호가 전송되었습니다.");
+				$("#emailCheck").css("visibility","visible");
+				$("#checkBtn5").css("visibility","visible");
+			}else{
+				alert("이메일을 입력해주세요.");
+			}
 		}
 		
 		function insertEmail(){
@@ -220,6 +238,12 @@
 				alert("인증번호가 틀립니다. 다시입력해주세요.")
 			}
 		}
+		
+		function checkPwd(type){
+			console.log(type);
+			location.href="checkPwd.my?type=" + type;
+		}
+		
 	</script>
 </body>
 </html>

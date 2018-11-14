@@ -25,7 +25,9 @@ public class Member implements Serializable{
 	private String ceo_type;
 	private String self_introduction;
 	private String email;
+	
 	public Member() {}
+	
 	public Member(int member_no, String id, String password, String name, String nick_name, String phone, String token,
 			Date enroll_date, Date modify_date, int member_status, int admin_right, int company_right,
 			String company_name, String company_no, String bank, String account, String ceo_name, String ceo_type,

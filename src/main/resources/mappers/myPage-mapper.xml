@@ -281,10 +281,8 @@
 	
 	<!--이메일 등록-->
 	<update id="updateEmail" parameterType="_int">
-		UPDATE MEMBER SET EMAIL = #{email} WHERE MEMBER_NO = #{member_no}
-		
+		UPDATE MEMBER SET EMAIL = '${email}' WHERE MEMBER_NO = ${member_no}
 	</update>
-	
 	
 </mapper>
 
