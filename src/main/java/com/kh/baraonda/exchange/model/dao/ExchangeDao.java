@@ -22,6 +22,6 @@ public interface ExchangeDao {
 
 	void updatePoint(SqlSessionTemplate sqlSession, Point point);
 
-	void updatePoint_Record(SqlSessionTemplate sqlSession, Point_Record pr);
+	void updatePoint_Record(SqlSessionTemplate sqlSession, Point point);
 
 }

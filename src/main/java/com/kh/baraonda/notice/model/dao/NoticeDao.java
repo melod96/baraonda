@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
+import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
@@ -78,6 +80,13 @@ public interface NoticeDao {
 
 	//이전글 번호
 	int selectBeforeNo(SqlSessionTemplate sqlSession, String notice_no);
+
+	//포인트 이력 insert
+	void insertPointRecord(SqlSessionTemplate sqlSession, Point_Record pr);
+
+	//포인트 update
+	void updatePoint(SqlSessionTemplate sqlSession, Point_Record pr);
+
 
 
 

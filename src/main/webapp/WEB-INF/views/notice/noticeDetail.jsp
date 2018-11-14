@@ -359,7 +359,7 @@
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="${pageContext.request.contextPath}/resources/images/uploadFiles/${ninfo.profile }" class="proic">
+							<img src="${pageContext.request.contextPath}${ninfo.profile }" class="proic">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
@@ -441,7 +441,7 @@
 								<li class="comment-list-li">
 									<div class="comment-pic">
 										<img class="commentPro" 
-											src="${pageContext.request.contextPath}/resources/images/uploadFiles/${clist.profile }">
+											src="${pageContext.request.contextPath}/${clist.profile }">
 									</div>
 									<div class="comment-txt">
 										<!--------------------------------- 댓글 작성자명 ---------------------------------->
@@ -465,7 +465,7 @@
 						</c:forEach>
 					</table>
 					<div class="paginate">
-                        <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
+                        <!-- <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
                         <a href="#" class="btn-prev" title="이전"><em class="blind">목록에서 이전 페이지 이동</em></a>
                         <span class="paging-numbers">
                             <a href="#">1<span class="blind">페이지로 이동</span></a>
@@ -475,7 +475,45 @@
                             <a href="#">5<span class="blind">페이지로 이동</span></a>
                         </span>
                         <a href="#" class="btn-next" title="다음"><span class="spr"><em class="blind">목록에서 다음 페이지 이동</em></span></a>
-                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a>
+                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a> -->
+                        
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="noticeDetail.nt">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="notice_no" value="${ninfo.board_no }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="noticeDetail.nt">
+									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="notice_no" value="${ninfo.board_no }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="noticeDetail.nt">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="notice_no" value="${ninfo.board_no }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
 					</div>
 
 					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>

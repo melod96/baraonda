@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.exchange.model.vo.Point_Record;
+import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
@@ -261,5 +263,19 @@ public class NoticeDaoImpl implements NoticeDao{
 		}
 	}
 
+	//포인트 이력 insert
+	@Override
+	public void insertPointRecord(SqlSessionTemplate sqlSession, Point_Record pr) {
+		sqlSession.insert("Notice2.insertPointRecord", pr);
+	}
+
+	//포인트 update
+	@Override
+	public void updatePoint(SqlSessionTemplate sqlSession, Point_Record pr) {
+		sqlSession.update("Notice2.updatePoint", pr);
+		
+	}
+
+	
 
 }

@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>BMI</title>
-<jsp:include page="../common/head.jsp" />
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <style>
 .right {
 	float: right;
+	margin-left: 30px;
 }
 
 .t1 {
@@ -20,53 +17,36 @@
 .t1 th {
 	text-align: center;
 	height: 30px;
+	font-size: 20px;
 }
 
 .t1 td {
 	height: 30px;
 }
 </style>
-</head>
-<body>
+
 	<div class="right">
-		<table border="1" style="margin-bottom: 30px;" class="t1">
+		<table style="margin-bottom: 30px;" class="t1 tbl-type01">
 			<tr>
 				<th>명예의 전당</th>
 			</tr>
-			<tr>
-				<td>운동좋아</td>
-			</tr>
-			<tr>
-				<td>운동좋아</td>
-			</tr>
-			<tr>
-				<td>운동좋아</td>
-			</tr>
-			<tr>
-				<td>운동좋아</td>
-			</tr>
+			<c:forEach var="f" items="${flist}" end="4">
+				<tr>
+					<td>${f.board_title}</td>
+				</tr>
+			</c:forEach>
 		</table>
-		<table border="1" style="margin-bottom: 30px;" class="t1">
+		<table border="1" style="margin-bottom: 30px;" class="t1 tbl-type01">
 			<tr>
 				<th>다이어터 랭킹</th>
 			</tr>
-			<tr>
-				<td>1. 혜미</td>
-			</tr>
-			<tr>
-				<td>2. 재엽</td>
-			</tr>
-			<tr>
-				<td>3. 소진</td>
-			</tr>
-			<tr>
-				<td>4. 형우</td>
-			</tr>
-			<tr>
-				<td>5. 현도</td>
-			</tr>
+			<c:forEach var="r" items="${rlist}" end="4">
+				<tr>
+					<td>${ r.nick_name }</td>
+				</tr>
+			</c:forEach>
 		</table>
-		<table border="1" class="t1">
+		<table border="1" class="t1 tbl-type01">
 			<tr>
 				<th>
 					공지사항
@@ -75,22 +55,11 @@
 					</a>	
 				</th>
 			</tr>
-			<tr>
-				<td>베리워터 체험단 모집(10.17 ~ 10.25)</td>
-			</tr>
-			<tr>
-				<td>베리워터 체험단 모집(10.17 ~ 10.25)</td>
-			</tr>
-			<tr>
-				<td>베리워터 체험단 모집(10.17 ~ 10.25)</td>
-			</tr>
-			<tr>
-				<td>베리워터 체험단 모집(10.17 ~ 10.25)</td>
-			</tr>
-			<tr>
-				<td>베리워터 체험단 모집(10.17 ~ 10.25)</td>
-			</tr>
+			<c:forEach var="n" items="${nlist}" end="4">
+				<tr>
+					<td>${ n.board_title }</td>
+				</tr>
+			</c:forEach>
+			
 		</table>
 	</div>
-</body>
-</html>

@@ -40,7 +40,7 @@
 		UPDATE POINT SET POINT_CHANGE_DATE = SYSDATE, ACCRUE_POINT = 0 WHERE POINT_NO = #{member_no}
 	</update>
 	<insert id="updatePoint_Record">
-		INSERT INTO POINT_RECORD VALUES (SEQ_POINT_RECORD_NO.NEXTVAL, #{member_no}, SYSDATE, #{before_point}, 0, 5)
+		INSERT INTO POINT_RECORD VALUES (SEQ_POINT_RECORD_NO.NEXTVAL, #{member_no}, SYSDATE, #{accrue_point}, 0, 5)
 	</insert>
 </mapper> 
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BMI</title>
+<title>caloriePresciption</title>
 <jsp:include page="../common/head.jsp" />
 <style>
 .left {

@@ -12,6 +12,11 @@ import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.dictionary.model.exception.DictionaryException;
 import com.kh.baraonda.dictionary.model.service.DictionaryService;
 import com.kh.baraonda.dictionary.model.vo.FoodDictionary;
+import com.kh.baraonda.main.model.exception.MainSelectListException;
+import com.kh.baraonda.main.model.service.MainService;
+import com.kh.baraonda.main.model.vo.Fame;
+import com.kh.baraonda.main.model.vo.Ranking;
+import com.kh.baraonda.notice.model.vo.Notice;
 
 @Controller
 public class DictionaryController {
@@ -19,8 +24,29 @@ public class DictionaryController {
 	@Autowired
 	private DictionaryService ds;
 	
+	@Autowired
+	private MainService ms;
+	
 	@RequestMapping("foodDictionary.dt")
 	public String foodDictionaryPage(FoodDictionary fd, Model model, PageInfo pi) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		int currentPage =1;
 		
 		if(pi.getCurrentPage() > 0){
@@ -46,6 +72,24 @@ public class DictionaryController {
 	
 	@RequestMapping("searchFoodDictionary.dt")
 	public String searchFoodDictionary(FoodDictionary fd, Model model, PageInfo pi, String search) {
+		
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		int currentPage =1;
 		
 		if(pi.getCurrentPage() > 0){

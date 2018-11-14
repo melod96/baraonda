@@ -10,11 +10,12 @@ public class Point_Record implements Serializable{
 	private int before_point;
 	private int after_point;
 	private int point_type;
+	private int sum_point;
 	
 	public Point_Record() {}
 
 	public Point_Record(int point_record_no, int member_no, Date point_record_date, int before_point, int after_point,
-			int point_type) {
+			int point_type, int sum_point) {
 		super();
 		this.point_record_no = point_record_no;
 		this.member_no = member_no;
@@ -22,6 +23,7 @@ public class Point_Record implements Serializable{
 		this.before_point = before_point;
 		this.after_point = after_point;
 		this.point_type = point_type;
+		this.sum_point = sum_point;
 	}
 
 	public int getPoint_record_no() {
@@ -48,6 +50,10 @@ public class Point_Record implements Serializable{
 		return point_type;
 	}
 
+	public int getSum_point() {
+		return sum_point;
+	}
+
 	public void setPoint_record_no(int point_record_no) {
 		this.point_record_no = point_record_no;
 	}
@@ -72,12 +78,17 @@ public class Point_Record implements Serializable{
 		this.point_type = point_type;
 	}
 
+	public void setSum_point(int sum_point) {
+		this.sum_point = sum_point;
+	}
+
 	@Override
 	public String toString() {
 		return "Point_Record [point_record_no=" + point_record_no + ", member_no=" + member_no + ", point_record_date="
 				+ point_record_date + ", before_point=" + before_point + ", after_point=" + after_point
-				+ ", point_type=" + point_type + "]";
+				+ ", point_type=" + point_type + ", sum_point=" + sum_point + "]";
 	}
+
 	
 	
 }
