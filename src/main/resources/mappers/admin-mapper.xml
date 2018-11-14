@@ -6,7 +6,7 @@
 
 <mapper namespace="Admin">
 	
-	<select id="selectGeneralMemberCount" resultType="java.lang.Integer">
+	<select id="selectGeneralMemberCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE 1 = 1
@@ -32,7 +32,7 @@
 		</if>
 	</select>
 	
-	<select id="selectGeneralMemberList" resultType="map">
+	<select id="selectGeneralMemberList" resultType="map" parameterType="Search">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
 		FROM MEMBER
 		WHERE 1 = 1
@@ -58,7 +58,7 @@
 		</if>
 	</select>
 	
-	<select id="selectCompanyMemberCount" resultType="java.lang.Integer">
+	<select id="selectCompanyMemberCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE 1 = 1
@@ -71,7 +71,7 @@
 		</if>
 	</select>
 	
-	<select id="selectCompanyMemberList" resultType="map">
+	<select id="selectCompanyMemberList" resultType="map" parameterType="Search">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, ENROLL_DATE, MEMBER_STATUS
 		FROM MEMBER
 		WHERE 1 = 1
@@ -84,10 +84,10 @@
 		</if>
 	</select>
 	
-	<select id="selectBlackMemberCount" resultType="java.lang.Integer">
+	<select id="selectBlackMemberCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
-			FROM (SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
-				FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
+			FROM (SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
+				FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
 	      			  FROM MEMBER M
 	      			  LEFT JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
 	      			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO)
@@ -99,12 +99,12 @@
 				OR NAME LIKE '%' || #{content} || '%' 
 				OR NICK_NAME LIKE '%' || #{content} || '%')
 			</if>
-			GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE)
+			GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, ENROLL_DATE, BLACK_DATE, LIFT_DATE)
 	</select>
 	
 	<select id="selectBlakcMemberList" parameterType="Search" resultType="map">
-		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
-			FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, ENROLL_DATE, BLACK_DATE, LIFT_DATE, COUNT(REPORT_GET_NO) AS DECLARATIONCOUNT
+			FROM (SELECT M.MEMBER_NO, M.ID, M.NAME, M.NICK_NAME, M.PHONE, M.ENROLL_DATE, B.BLACK_DATE, B.LIFT_DATE, R.REPORT_GET_NO
       			  FROM MEMBER M
       			  LEFT JOIN REPORT R ON(M.MEMBER_NO = R.REPORT_GET_NO)
       			  JOIN BLACKLIST B ON(M.MEMBER_NO = B.MEMBER_NO)
@@ -116,10 +116,10 @@
 			OR NAME LIKE '%' || #{content} || '%' 
 			OR NICK_NAME LIKE '%' || #{content} || '%')
 		</if>
-		GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, BLACK_DATE, LIFT_DATE
+		GROUP BY MEMBER_NO, ID, NAME, NICK_NAME, PHONE, ENROLL_DATE, BLACK_DATE, LIFT_DATE
 	</select>
 	
-	<select id="selectNoticeCount" resultType="java.lang.Integer">
+	<select id="selectNoticeCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
 		FROM BOARD B
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
@@ -132,7 +132,7 @@
 		</if>
 	</select>
 	
-	<select id="selectNoticeList" resultType="map">
+	<select id="selectNoticeList" resultType="map" parameterType="Search">
 		SELECT B.BOARD_NO, B.BOARD_TITLE, M.NICK_NAME, B.BOARD_COUNT, B.BOARD_DATE
 		FROM BOARD B
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
@@ -145,7 +145,7 @@
 		</if>
 	</select>
 	
-	<select id="selectDeclarationCount" resultType="java.lang.Integer">
+	<select id="selectDeclarationCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
 		FROM REPORT R 
 		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
@@ -157,7 +157,7 @@
 		</if>
 	</select>
 	
-	<select id="selectDeclarationList" resultType="map">
+	<select id="selectDeclarationList" resultType="map" parameterType="Search">
 		SELECT R.REPORT_NO, R.REPORT_TYPE, M1.NICK_NAME AS GIVE_NICK_NAME, M2.NICK_NAME AS GET_NICK_NAME, R.REPORT_DATE, R.REPORT_APPROVAL
 		FROM REPORT R 
 		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
@@ -169,7 +169,7 @@
 		</if>
 	</select>
 	
-	<select id="selectOrderCount" resultType="java.lang.Integer">
+	<select id="selectOrderCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
 		FROM ORDERS O
 		JOIN MEMBER M ON(O.MEMBER_NO = M.MEMBER_NO)
@@ -183,7 +183,7 @@
 		</if>
 	</select>
 	
-	<select id="selectOrderList" resultType="map">
+	<select id="selectOrderList" resultType="map" parameterType="Search">
 		SELECT O.ORDERS_NO, M.NAME, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE, M.PHONE
 		FROM ORDERS O
 		JOIN MEMBER M ON(O.MEMBER_NO = M.MEMBER_NO)
@@ -197,14 +197,14 @@
 		</if>
 	</select>
 	
-	<select id="selectGeneralMemberInfo" resultType="map">
-		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE
+	<select id="selectGeneralMemberInfo" resultType="map" parameterType="java.lang.String">
+		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, ENROLL_DATE, MEMBER_STATUS
 		FROM MEMBER 
 		WHERE 1 = 1
 		AND MEMBER_NO = #{num}
 	</select>
 	
-	<select id="selectMembersDeclarationList" resultType="map">
+	<select id="selectMembersDeclarationList" resultType="map" parameterType="java.lang.String">
 		SELECT R.REPORT_NO, R.REPORT_TYPE, M.NICK_NAME AS GIVE_NICK_NAME, R.REPORT_DATE
 		FROM REPORT R
 		JOIN MEMBER M ON(M.MEMBER_NO = R.REPORT_GIVE_NO)
@@ -212,7 +212,7 @@
 		AND REPORT_GET_NO = #{num}
 	</select>
 	
-	<select id="selectMembersOrderList" resultType="map">
+	<select id="selectMembersOrderList" resultType="map" parameterType="java.lang.String">
 		SELECT O.ORDERS_NO, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE
 		FROM ORDERS O 
 		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
@@ -220,7 +220,7 @@
 		AND MEMBER_NO = #{num}
 	</select>
 	
-	<select id="selectCompanyMemberInfo" resultType="map">
+	<select id="selectCompanyMemberInfo" resultType="map" parameterType="java.lang.String">
 		SELECT MEMBER_NO, ID, NAME, NICK_NAME, PHONE, EMAIL, COMPANY_NAME, COMPANY_NO, BANK, ACCOUNT, CEO_NAME, CEO_TYPE, ENROLL_DATE
 		FROM MEMBER 
 		WHERE 1 = 1
@@ -235,7 +235,7 @@
 		<result property="NICK_NAME" column="NICK_NAME"/>
 	</resultMap>
 	
-	<select id="selectNoticeInfo" resultMap="NoticeInfo">
+	<select id="selectNoticeInfo" resultMap="NoticeInfo" parameterType="java.lang.String">
 		SELECT B.BOARD_NO, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, M.NICK_NAME
 		FROM BOARD B 
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
@@ -244,18 +244,18 @@
 		AND BOARD_NO = #{num}
 	</select>
 
-	<insert id="insertNoticeInfo">
+	<insert id="insertNoticeInfo" parameterType="AdminBoard">
 		INSERT INTO BOARD(BOARD_NO, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO, BOARD_DATE, MODIFY_DATE, BOARD_STATUS, BOARD_COUNT)
 		VALUES(SEQ_BOARD_NO.NEXTVAL, 6, #{title}, #{content}, 1, SYSDATE, SYSDATE, 0, 0)
 	</insert>
 
-	<update id="updateNoticeInfo">
+	<update id="updateNoticeInfo" parameterType="AdminBoard">
 		UPDATE BOARD
 		SET BOARD_TITLE = #{title}, BOARD_CONTENT = #{content}, MODIFY_DATE = SYSDATE, BOARD_COUNT = 0
 		WHERE BOARD_NO = #{board_no}
 	</update>
 	
-	<update id="deleteNoticeInfo">
+	<update id="deleteNoticeInfo" parameterType="java.lang.String">
 		UPDATE BOARD
 		SET BOARD_STATUS = 1
 		WHERE BOARD_NO = #{num}
@@ -276,7 +276,7 @@
 		<result property="BOARD_CONTENT" column="BOARD_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 	
-	<select id="selectDeclarationInfo" resultMap="DeclarationInfo">
+	<select id="selectDeclarationInfo" resultMap="DeclarationInfo" parameterType="java.lang.String">
 		SELECT R.REPORT_NO, M1.NICK_NAME AS GIVE_NICK_NAME, M2.NICK_NAME AS GET_NICK_NAME, R.REPORT_GIVE_NO, R.REPORT_GET_NO,
 		        M1.PHONE AS GIVE_PHONE, M2.PHONE AS GET_PHONE, R.REPORT_TYPE, R.REPORT_DATE, 
 		        R.REPORT_APPROVAL, R.REPORT_CONTENT, B.BOARD_CONTENT
@@ -288,16 +288,23 @@
 		AND REPORT_NO = #{num}
 	</select>
 
-	<insert id="insertBlackMemberAdmin">
+	<insert id="insertBlackMemberAdmin" parameterType="java.lang.String">
 		INSERT INTO BLACKLIST(BLACK_NO, MEMBER_NO, BLACK_DATE, LIFT_DATE)
-		VALUES(SEQ_BLACK_NO.NEXTVAL, #{num}, SYSDATE, SYSDATE + 7);
+		VALUES(SEQ_BLACK_NO.NEXTVAL, #{num}, SYSDATE, SYSDATE + 7)
 	</insert>
 	
-	<update id="updateMemberStatusAdmin">
+	<update id="updateMemberStatusAdmin" parameterType="java.lang.String">
 		UPDATE MEMBER 
 		SET MEMBER_STATUS = 1
 		WHERE 1 = 1
 		AND MEMBER_NO = #{num}
+	</update>
+	
+	<update id="updateReportApprovalAdmin" parameterType="java.lang.String">
+		UPDATE REPORT 
+		SET REPORT_APPROVAL = 1 
+		WHERE 1 = 1
+		AND REPORT_GET_NO = #{num}
 	</update>
 	
 </mapper> 

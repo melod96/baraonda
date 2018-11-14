@@ -136,6 +136,11 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.update("Admin.updateMemberStatusAdmin", num);
 	}
 
+	@Override
+	public void updateReportApprovalAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException {	
+		sqlSession.update("Admin.updateReportApprovalAdmin", num);
+	}
+
 	
 	
 
