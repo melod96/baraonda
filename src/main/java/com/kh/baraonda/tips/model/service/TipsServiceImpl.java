@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.tips.model.vo.TipsFiles;
 import com.kh.baraonda.tips.model.dao.TipsDao;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
@@ -100,6 +101,12 @@ public class TipsServiceImpl implements TipsService{
 		public int insertTips(Tips t) {
 			System.out.println("service t  :" + t);
 			return td.insertTips(sqlSession, t);
+		}
+		
+		//파일 업로드
+		@Override
+		public void insertPhoto(TipsFiles file) {
+			td.insertPhoto(sqlSession, file);
 		}
 
 		//공지사항 delete

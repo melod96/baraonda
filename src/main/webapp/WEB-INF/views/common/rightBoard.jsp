@@ -42,7 +42,7 @@
 			</tr>
 			<c:forEach var="r" items="${rlist}" end="4">
 				<tr>
-					<td>${ r.nick_name }</td>
+					<td><a onclick="location.href='othersView.my?member_no=' + ${r.member_no}">${ r.nick_name }</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -57,7 +57,7 @@
 			</tr>
 			<c:forEach var="n" items="${nlist}" end="4">
 				<tr>
-					<td>${ n.board_title }</td>
+					<td><a onclick= "location.href='noticeDetail.nt?notice_no=' + ${n.board_no}">${ n.board_title }</a></td>
 				</tr>
 			</c:forEach>
 			

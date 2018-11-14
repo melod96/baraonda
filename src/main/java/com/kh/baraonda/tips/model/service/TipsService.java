@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.tips.model.vo.TipsFiles;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
@@ -43,6 +44,9 @@ public interface TipsService {
 	
 		//꿀팁 insert
 		int insertTips(Tips t);
+		
+		//파일 업로드
+		void insertPhoto(TipsFiles file);
 
 		//꿀팁 delete
 		int deleteTips(String tips_no);

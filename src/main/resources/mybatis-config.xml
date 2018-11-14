@@ -49,6 +49,8 @@
 			
 			<typeAlias type="com.kh.baraonda.admin.model.vo.AdminBoard" alias="AdminBoard"/>
 			
+			<typeAlias type="com.kh.baraonda.tips.model.vo.TipsFiles" alias="TipsFiles"/>
+			
   		</typeAliases>
   		
   		<mappers>

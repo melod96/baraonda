@@ -1,9 +1,10 @@
 package com.kh.baraonda.tips.controller;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,18 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-import org.springframework.web.servlet.ModelAndView;
 
-
+import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.main.model.exception.MainSelectListException;
+import com.kh.baraonda.main.model.service.MainService;
+import com.kh.baraonda.main.model.vo.Fame;
+import com.kh.baraonda.main.model.vo.Ranking;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.service.TipsService;
 import com.kh.baraonda.tips.model.vo.Tips;
 import com.kh.baraonda.tips.model.vo.TipsComment;
+import com.kh.baraonda.tips.model.vo.TipsFiles;
 import com.kh.baraonda.tips.model.vo.TipsMarking;
 
 
@@ -31,6 +36,9 @@ import com.kh.baraonda.tips.model.vo.TipsMarking;
 public class TipsController {
 	@Autowired
 	private TipsService ts;
+	
+	@Autowired
+	private MainService ms;
 	
 	/*//게시글 전체 목록 조회
 		@RequestMapping("tips.tp")
@@ -69,6 +77,22 @@ public class TipsController {
 		@RequestMapping("tips.tp")
 		public String TipsListPage(Model model, PageInfo pi) {
 			int currentPage =1;
+			//명예의전당
+			ArrayList<Fame> flist;
+			//공지사항
+			ArrayList<Notice> nlist;
+			//다이어터랭킹
+			ArrayList<Ranking> rlist;
+			try {
+				flist = ms.selectFame();
+				model.addAttribute("flist", flist);
+				nlist = ms.selectNotice();
+				model.addAttribute("nlist", nlist);
+				rlist = ms.selectRanking();
+				model.addAttribute("rlist", rlist);
+			} catch (MainSelectListException e1) {
+				model.addAttribute("msg", e1.getMessage());
+			}
 			
 			if(pi.getCurrentPage() > 0){
 				currentPage = pi.getCurrentPage();
@@ -180,18 +204,58 @@ public class TipsController {
 		
 		//공지사항 insert
 		@RequestMapping("insertTips.tp")
-		public String insertTips(@SessionAttribute("loginUser") Member m,Tips t, Model model/*,
-				@RequestParam("sum") MultipartFile file*/) {
+		public String insertTips(HttpSession session,HttpServletRequest request,
+				@RequestParam("photo") MultipartFile photo,
+				@SessionAttribute("loginUser") Member m,Tips t, Model model) {
 			t.setMember_no(m.getMember_no());
+			System.out.println(photo);
+			System.out.println(t);
 			
 			System.out.println("cont t : " + t);
 			int insert = ts.insertTips(t);
+			System.out.println("EEEE" + insert);
 			
-	/*		 String url = fileUploadService.restore(file);
-			    model.addAttribute("url", url);
+			//사진 저장할 경로 지정
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			
+			//파일의 경로는 root 하위의 uploadFiles이다.
+			String filePath = root +"\\images\\uploadFiles";
+			
+			//파일명 변경
+			String originFileName = photo.getOriginalFilename();
+			String ext = originFileName.substring(originFileName.lastIndexOf("."));
+			
+			
+			//CommonUtils에서 랜덤한 글자를 받아옴
+			String changeName = CommonUtils.getRandomString();
+			
+			//업로드된 파일을 지정한 경로에 저장
+					try {
+						photo.transferTo(new File(filePath + "\\" + changeName + ext));
+						TipsFiles file = new TipsFiles();
+						
+						file.setF_reference_no(insert);
+						file.setFiles_title(originFileName);
+						file.setFiles_change_title(changeName+ext);
+						file.setFiles_type(4);
+						file.setFiles_root(filePath + "\\" + changeName + ext);
+						System.out.println("???"+file);
+						
+						ts.insertPhoto(file);
+						
+						
+					} catch (Exception e) {
+						//실패시 파일  삭제
+						new File(filePath + "\\" + changeName + ext).delete();
+						
+						model.addAttribute("msg", "사진등록 실패");
+						return "common/errorPage";
+						
+					}
+			
+				System.out.println("cont t : " + t);
 
 			
-			*/
 			if(insert > 0) {
 				return "redirect:tips.tp";			
 			}else {

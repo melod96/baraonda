@@ -67,7 +67,7 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insertTips.tp" method="post" enctype = multipart/form-data">
+						<form action="insertTips.tp" method="post" enctype = "multipart/form-data">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -83,7 +83,9 @@ div#editor {
 									<tr>
 										<td>썸네일 추가</td>
 										<td>
-											<input type="file" name="files_root">
+												<button type="button" id="uploadBtn" onclick="uploadPhoto();">사진 불러오기</button>
+												
+												<input type="file" id="uploadInput" name="photo" style="display:none; float:right;">
 										</td>
 								
 								</table>
@@ -93,7 +95,7 @@ div#editor {
 
 							</div>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
-							<input type="submit" value="작성하기" class="btn btn-success">
+							<input type="submit" id="subBtn" value="작성하기" class="btn btn-success">
 							<input type="reset" value="취소" class="btn btn-warning">
 						</form>
 					</div>
@@ -106,6 +108,16 @@ div#editor {
     $(function(){
       $('#edit').froalaEditor()
     });
+    </script>
+    
+    <script>
+    
+	var key = "";
+
+	function uploadPhoto(){
+		$("#uploadInput").trigger("click");
+	}
+
   </script>
 </body>
 </html>

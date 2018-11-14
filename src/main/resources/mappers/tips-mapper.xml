@@ -44,6 +44,16 @@
 		<result property="nick_name" column="NICK_NAME" />
 		<result property="profile" column="FILES_ROOT" />
 	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.tips.model.vo.TipsFiles" id="filesResultSet2">
+		<id property="files_no" column="FILES_NO"/>
+		<result property="f_reference_no" column="F_REFERENCE_NO"/>
+		<result property="files_title" column="FILES_TITLE"/>
+		<result property="files_change_title" column="FILES_CHANGE_TITLE"/>
+		<result property="files_type" column="FILES_TYPE"/>
+		<result property="files_root" column="FILES_ROOT"/>
+		<result property="files_secession" column="FILES_SECESSION"/>
+	</resultMap>
  
 
 	<select id="selectTipsListCount" resultType="_int">
@@ -67,6 +77,8 @@
         JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
         AND FF.FILES_SECESSION = 0
         AND FF.FILES_TYPE = 1 -->
+        
+<!--         
         SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT", T.WRITING_TYPE
         FROM (     
             select b.board_title, b.board_date, b.board_count, 
@@ -81,8 +93,31 @@
             ) T
         JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
         AND FF.FILES_SECESSION = 0
-        AND FF.FILES_TYPE = 1
+        AND FF.FILES_TYPE = 1 -->
         
+         <!--   SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT", T.WRITING_TYPE, ff.files_change_title
+        FROM (     
+            select b.board_title, b.board_date, b.board_count, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
+            order by b.board_no desc
+            ) T
+        JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
+        AND FF.FILES_SECESSION = 0
+        AND FF.FILES_TYPE = 1 -->
+        
+        select b.board_title, b.board_date, b.board_count, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
+            order by b.board_no desc
         
 	</select>
 	
@@ -167,10 +202,22 @@
 	
 	
 	<!-- 꿀팁작성 -->
-	<insert id="insertTips">
+	<insert id="insertTips" parameterType="Tips">
 		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, 1, NULL, #{board_title}, #{board_content}, #{member_no}, SYSDATE,SYSDATE,DEFAULT,DEFAULT)
-		
+		<selectKey keyProperty="f_reference_no" resultType="_int" order="AFTER">select seq_board_no.currval from dual</selectKey>
 	</insert>
+	
+	<!-- 파일 업로드 -->
+	<insert id="insertPhoto" parameterType="TipsFiles">
+		INSERT INTO FILES
+		VALUES(
+			SEQ_FILES_NO.NEXTVAL, #{f_reference_no},
+			 #{files_title}, #{files_change_title}, 
+			 #{files_type}, '/resources/images/uploadFiles/', 0
+		)
+	
+	</insert>
+	
 	<!-- 꿀팁삭제 -->
 	<update id="deleteTips">
 		UPDATE BOARD SET BOARD_STATUS = 1 WHERE BOARD_NO = #{tips_no}
@@ -180,6 +227,7 @@
 	<update id="updateTips">
 		UPDATE BOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
 	</update>
+	
 	
 	<!-- 댓글작성 -->
 	<insert id="insertCommentTips">

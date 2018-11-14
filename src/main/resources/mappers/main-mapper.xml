@@ -87,7 +87,6 @@
 		<result property="files_root" column="FILES_ROOT"/>
 		<result property="files_secession" column="FILES_SECESSION"/>
 		<result property="profile_root" column="PROFILE_ROOT"/>
-		
 	</resultMap>
 	
 	
@@ -150,7 +149,7 @@
             join files f on (b.board_no = f.f_reference_no)
             where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and WRITING_TYPE = 11
             group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
-            order by b.board_date desc
+            order by board_good desc
             ) T
         JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
         AND FF.FILES_SECESSION = 0

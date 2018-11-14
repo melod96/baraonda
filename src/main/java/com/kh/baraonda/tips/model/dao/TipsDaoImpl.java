@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.tips.model.vo.TipsFiles;
 import com.kh.baraonda.tips.model.dao.TipsDao;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;
 import com.kh.baraonda.tips.model.vo.Tips;
@@ -146,13 +147,21 @@ public class TipsDaoImpl implements TipsDao{
 		//공지사항 insert
 		@Override
 		public int insertTips(SqlSessionTemplate sqlSession, Tips t) {
-			int i = -99;
 			System.out.println("dao tips : " + t);
-			sqlSession.selectOne("Tips.insertTips",t);
-			i = 1;
-			return i;
+			sqlSession.insert("Tips.insertTips",t);
+			
+			System.out.println(t.getF_reference_no());
+			return t.getF_reference_no();
+			
 		}
 
+		//파일 업로드
+		@Override
+		public void insertPhoto(SqlSessionTemplate sqlSession, TipsFiles file) {
+			sqlSession.insert("Tips.insertPhoto", file);
+		}
+		
+		
 		//공지사항 delete
 		@Override
 		public int deleteTips(SqlSessionTemplate sqlSession, String tips_no) {
