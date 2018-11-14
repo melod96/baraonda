@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BARAON.DA - 커뮤니티</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../common/header.jsp" />
@@ -501,12 +501,42 @@
 						</ul>
 					</table>
 					</c:forEach>
+					<!---------------------------------- 댓글 페이징 처리 ---------------------------------->
 					<div class="paginate">
-						<span class="paging-numbers">
-							<a href="#" class="on">1
-								<span class="blind">페이지로 이동</span>
-							</a>
-						</span>
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="view.do">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="board_no" value="${detail.BOARD_NO}"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="view.do">
+									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="board_no" value="${detail.BOARD_NO}"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="view.do">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="board_no" value="${detail.BOARD_NO}"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
 					</div>
 
 					<hr class="hrline">

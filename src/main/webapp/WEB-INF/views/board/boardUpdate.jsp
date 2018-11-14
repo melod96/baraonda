@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-<title>Insert title here</title>
+<title>BARAON.DA - 수정하기</title>
 
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="floalaResources.jsp"/>
@@ -82,17 +82,14 @@ div#editor {
 									<tr>
 										<td class="cateTd">카테고리</td>
 										<td>
-											<select name="writing_type" id="form_control" class="form-control input-xshort"
-											 value="${detail.WRITING_TYPE}">
-												<option value="1">다이어트 꿀팁</option>
-												<option value="2">다이어트 식단</option>
-												<option value="3">칼로리 사전</option>
-												<option value="4">홈트레이닝</option>
-												<option value="5">체험단</option>
-												<option value="6">자유게시판</option>
-												<option value="7">고객문의</option>
-												<!-- 공지사항 게시판은 관리자만 사용가능하게 설정  -->
-												<!-- <option>공지사항</option> -->
+											<select name="writing_type" id="form_control" class="form-control input-xshort">
+												<option value="11" <c:if test="${detail.WRITING_TYPE eq '11'}">selected</c:if>>비포&애프터</option>
+												<option value="12" <c:if test="${detail.WRITING_TYPE eq '12'}">selected</c:if>>자극사진</option>
+												<option value="13" <c:if test="${detail.WRITING_TYPE eq '13'}">selected</c:if>>일기</option>
+												<option value="14" <c:if test="${detail.WRITING_TYPE eq '14'}">selected</c:if>>식단</option>
+												<option value="15" <c:if test="${detail.WRITING_TYPE eq '15'}">selected</c:if>>고민/질문</option>
+												<option value="18" <c:if test="${detail.WRITING_TYPE eq '18'}">selected</c:if>>자유게시판</option>
+												<option value="19" <c:if test="${detail.WRITING_TYPE eq '19'}">selected</c:if>>관리자에게</option>
 											</select>
 										</td>
 										<td>

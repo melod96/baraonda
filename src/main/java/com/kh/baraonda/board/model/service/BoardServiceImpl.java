@@ -1,5 +1,6 @@
 package com.kh.baraonda.board.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -87,11 +88,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 	//댓글 조회
 	@Override
-	public List<HashMap<String, Object>> commentList(int board_no) throws BoardException {
-		List<HashMap<String, Object>> commentList = boardDao.commentList(sqlSession, board_no) ;
+	public List<HashMap<String, Object>> commentList(int board_no, PageInfo info) throws BoardException {
+		List<HashMap<String, Object>> commentList = boardDao.commentList(sqlSession, board_no, info) ;
 		return commentList;
 	}
-	
+	//댓글 수 
+	@Override
+	public int commentListCount(int board_no) {
+		return boardDao.commentListCount(sqlSession, board_no);
+	}
 	//댓글 insert
 	@Override
 	public int insertComment(Comments c) {
@@ -148,9 +153,16 @@ public class BoardServiceImpl implements BoardService{
 	
 	//검색
 	@Override
-	public List<HashMap<String, Object>> searchList(int writing_type, PageInfo info, SearchCondition sc) {
-		return boardDao.searchList(sqlSession, sc, info, writing_type);
+	public List<HashMap<String, Object>> searchList(PageInfo info, SearchCondition sc) {
+		return boardDao.searchList(sqlSession, sc, info);
 	}
+	
+	//홈트레이닝 게시물 목록 조회
+	@Override
+	public ArrayList<Board> selectHomeList(PageInfo info) throws BoardException {
+		return boardDao.selectHomeList(sqlSession, info);
+	}
+	
 	
 
 }

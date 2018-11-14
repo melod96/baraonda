@@ -1,5 +1,6 @@
 package com.kh.baraonda.board.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.common.PaginationComment;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
@@ -67,7 +69,7 @@ public class BoardController {
 	
 	//게시글 상세보기(댓글 포함), 조회수 증가 처리
 	@RequestMapping(value="view.do")
-	public ModelAndView view(int board_no, HttpSession session) {
+	public ModelAndView view(int board_no, HttpSession session, PageInfo pi) {
 		ModelAndView mv = new ModelAndView();
 		//게시글 상세보기(제목, 내용, 작성자, 날짜, 댓글수, 조회수) 
 		HashMap<String, Object> detail;
@@ -81,15 +83,28 @@ public class BoardController {
 			//좋아요 수
 			int likeCount = boardService.selectLike(board_no);
 			
+			//댓글 페이징
+			int currentPage = 1;
+			
+			if(pi.getCurrentPage() > 0) {
+				currentPage = pi.getCurrentPage();
+			}
+			
+			int listCount = boardService.commentListCount(board_no);
+			
+			PageInfo info = PaginationComment.getPageInfo(currentPage, listCount);
+			
 			//상세보기 board_no값 넘겨줌
 			detail = boardService.detail(board_no);
-			commentList = boardService.commentList(board_no);
+			commentList = boardService.commentList(board_no, info);
 			//뷰 이름
 			mv.setViewName("board/boardPage");
 			//뷰에 전달할 데이터
 			mv.addObject("detail", detail);
 			mv.addObject("commentList", commentList);
 			mv.addObject("likeCount", likeCount);
+			mv.addObject("listCount", listCount);
+			mv.addObject("pi", info);
 			
 			return mv;
 			
@@ -102,7 +117,7 @@ public class BoardController {
 	}
 	//게시판 검색
 	@RequestMapping("searchBoard.do")
-	public ModelAndView searchBoard(String searchType, String search, Model model, PageInfo pi, ModelAndView mv, int writing_type) throws BoardException {
+	public ModelAndView searchBoard(String searchType, String search, PageInfo pi, ModelAndView mv) throws BoardException {
 		SearchCondition sc = new SearchCondition();
 		List<HashMap<String, Object>> list;
 		
@@ -127,11 +142,11 @@ public class BoardController {
 		
 		PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 
-		list = boardService.searchList(writing_type, info, sc);
+		list = boardService.searchList(info, sc);
+		
 		mv.setViewName("board/board");
 		mv.addObject("list", list);
 		mv.addObject("pi", info);
-		mv.addObject("writing_type", writing_type);
 		mv.addObject("search", search);
 		
 		return mv;
@@ -185,14 +200,14 @@ public class BoardController {
 	
 	//게시물 수정 페이지
 	@RequestMapping(value="updateBoard.do")
-	public String updateBoard(@SessionAttribute("loginUser") Member m, @ModelAttribute Board b) {
+	public String updateBoard(@SessionAttribute("loginUser") Member m, @ModelAttribute Board b, int writing_type) {
 
 		try {
 			b.setMember_no(m.getMember_no());
 
 			boardService.updateBoard(b);
 
-			return "redirect:list.do?writing_type=1";
+			return "redirect:list.do?writing_type=" + writing_type;
 		} catch (Exception e) {
 
 			return "common/errorPage";
@@ -204,7 +219,7 @@ public class BoardController {
 		try {
 			boardService.deleteBoard(board_no);
 			
-			return "redirect:list.do?writing_type=1";
+			return "redirect:list.do?writing_type=11";
 			
 		} catch (BoardException e) {
 			return "common/errorPage";
@@ -270,7 +285,38 @@ public class BoardController {
 		
 		return "redirect:view.do?board_no=" + board_no;
 	}
-
+	
+	//홈트레이닝 게시판 리스트
+	@RequestMapping("home.do")
+	public String homeTrainingList(Model model, PageInfo pi) {
+		int currentPage = 1;
+		
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		
+		try {
+			int listCount = boardService.selectBoardListCount();
+			
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			
+			ArrayList<Board> list = boardService.selectHomeList(info);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", info);
+			
+			return "board/homeTraining";
+			
+		} catch (BoardException e) {
+			model.addAttribute("msg",e.getMessage());
+			return "common/errorPage";
+		}
+		
+		
+			
+		
+	}
+	
 }
 
 
