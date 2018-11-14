@@ -56,7 +56,6 @@ public class GmailSend{
 	             
 	            System.out.println("메일 발송을 완료하였습니다.");
 	        }catch (AddressException addr_e) {  //예외처리 주소를 입력하지 않을 경우
-	            JOptionPane.showMessageDialog(null, "메일을 입력해주세요", "메일주소입력", JOptionPane.ERROR_MESSAGE);
 	            addr_e.printStackTrace();
 	        }catch (MessagingException msg_e) { //메시지에 이상이 있을 경우
 	            JOptionPane.showMessageDialog(null, "메일을 제대로 입력해주세요.", "오류발생", JOptionPane.ERROR_MESSAGE);

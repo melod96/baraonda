@@ -148,11 +148,6 @@ public class MyPageDaoImpl implements MyPageDao{
 		
 	}
 
-	/*@Override
-	public void updateEmail(SqlSessionTemplate sqlSession, Member m) {
-		sqlSession.update("MyPage.updateEmail", m);
-	}*/
-
 	
 
 }

@@ -31,6 +31,7 @@ import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.TempKey;
 import com.kh.baraonda.exchange.model.vo.Product;
+import com.kh.baraonda.member.model.exception.LoginException;
 import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.myPage.model.service.MyPageService;
 import com.kh.baraonda.myPage.model.vo.Comments;
@@ -420,7 +421,7 @@ public class MyPageController {
 	}
 	//마이페이지 - 이메일 insert
 		@RequestMapping("updateEmail.my")
-		public String insertEmail(@RequestParam int member_no,@RequestParam String email) {
+		public String insertEmail(@RequestParam int member_no,@RequestParam String email,HttpSession session) {
 				System.out.println("cont insertEmail : " + email);
 				
 				Member m = new Member();
@@ -429,6 +430,93 @@ public class MyPageController {
 				
 				mps.updateEmail(m);
 				System.out.println("이메일 등록 완료");
+				
+				Member loginUser = (Member) session.getAttribute("loginUser");
+				
+				loginUser.setEmail(email);
+				
 				return "redirect:changeInfoView.my";
 		}
+		
+		
+		//패스워드 확인 페이지로 이동
+		@RequestMapping("checkPwd.my")
+		public String checkPwd(Model model, @RequestParam String type) {
+			
+			
+			System.out.println("type : " + type);
+			model.addAttribute("type",type);
+			
+			return "myPage/checkPwd";
+		}
+		
+		
+		
+		//패스워드 확인
+		@RequestMapping("selectPwd.my")
+		public String selectPwd(HttpSession session, Model model, @RequestParam String type, @RequestParam String pwd) {
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			
+			System.out.println("메소드 실행");
+			System.out.println("member_no : " + loginUser.getMember_no());
+			System.out.println("pwd : " + pwd);
+			System.out.println("type : " + type);
+			
+			
+			String encPassword = passwordEncoder.encode(pwd);
+			System.out.println("encPassword : " + encPassword);
+			if(!passwordEncoder.matches(pwd, loginUser.getPassword())) {
+				String msg = "비밀번호가 일치하지 않습니다.";
+				model.addAttribute("msg" ,msg);
+				model.addAttribute("type",type);
+				return "myPage/falsePage";
+			}else {
+				model.addAttribute("type",type);
+				switch(type) {
+				case "changeNick" : 
+					model.addAttribute("changeNick", "changeNick");
+					System.out.println("changeNick대입");
+					break;
+				case "changePwd" : 
+					model.addAttribute("changePwd", "changePwd");
+					System.out.println("changePwd대입");
+					break;
+				case "changeEmail" : 
+					model.addAttribute("changeEmail", "changeEmail");
+					System.out.println("changeEmail대입");
+					break;
+					
+				}
+				return "myPage/changePageView";
+			}
+			
+		}
+				
+		
+		
+		/*@RequestMapping("updateInfo.my")
+		public String updateInfo(HttpSession session, Model model, @RequestParam String type, @RequestParam String pwd) {
+			switch(type) {
+			case "changeNick" : 
+				
+				return "";
+				break;
+			}
+			
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
