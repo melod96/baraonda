@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.HomeFiles;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -226,7 +227,7 @@ public class BoardDaoImpl implements BoardDao{
 	
 	//홈트레이닝 게시물 목록 조회
 	@Override
-	public ArrayList<Board> selectHomeList(SqlSessionTemplate sqlSession, PageInfo info) throws BoardException {
+	public ArrayList<Board> selectHomeList(SqlSessionTemplate sqlSession, PageInfo info, int writing_type) throws BoardException {
 		ArrayList<Board> list = null;
 
 		//건너 뛸 게시물의 수
@@ -236,7 +237,7 @@ public class BoardDaoImpl implements BoardDao{
 						
 		//오브젝트로 받아오기 때문에 arraylist로 다운캐스팅 해준다
 		//제네릭을 설정하면 오류가 나서 넣으면 안된다
-		list = (ArrayList) sqlSession.selectList("Board.selectHomeList", null, rowBounds);
+		list = (ArrayList) sqlSession.selectList("Board.selectHomeList", writing_type, rowBounds);
 						
 		if(list == null){
 			sqlSession.close();
@@ -244,6 +245,18 @@ public class BoardDaoImpl implements BoardDao{
 		}
 		
 		return list;
+	}
+	//홈트레이닝 게시글 작성
+	@Override
+	public int insertHome(SqlSessionTemplate sqlSession, Board b) {
+		sqlSession.insert("Board.insertHome", b);
+		
+		return b.getF_reference_no();
+	}
+	//파일 업로드
+	@Override
+	public void insertPhoto(SqlSessionTemplate sqlSession, HomeFiles file) {
+		sqlSession.insert("Board.insertPhoto", file);
 	}
 
 

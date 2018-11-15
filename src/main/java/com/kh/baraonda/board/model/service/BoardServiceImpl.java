@@ -15,6 +15,7 @@ import com.kh.baraonda.board.model.dao.BoardDao;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.HomeFiles;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -159,8 +160,19 @@ public class BoardServiceImpl implements BoardService{
 	
 	//홈트레이닝 게시물 목록 조회
 	@Override
-	public ArrayList<Board> selectHomeList(PageInfo info) throws BoardException {
-		return boardDao.selectHomeList(sqlSession, info);
+	public ArrayList<Board> selectHomeList(PageInfo info, int writing_type) throws BoardException {
+		return boardDao.selectHomeList(sqlSession, info, writing_type);
+	}
+	//홈트레이닝 게시글 작성
+	@Override
+	public int insertHome(Board b) {
+		return boardDao.insertHome(sqlSession, b);
+	}
+	//파일 업로드
+	@Override
+	public void insertPhoto(HomeFiles file) {
+		boardDao.insertPhoto(sqlSession, file);
+		
 	}
 	
 	

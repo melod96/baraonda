@@ -215,11 +215,25 @@
             from board b
             join member me on (b.member_no = me.member_no)
             join files f on (b.board_no = f.f_reference_no)
-            where board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=3
+            where board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=3 and writing_type = #{writing_type}
             group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
             order by b.board_no desc
 	</select>
+	<!-- 홈트레이닝 게시글 작성 -->
+	<insert id="insertHome">
+		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, 3, #{writing_type}, #{board_title}, #{board_content}, #{member_no}, SYSDATE,SYSDATE,DEFAULT,DEFAULT)
+		<selectKey keyProperty="f_reference_no" resultType="_int" order="AFTER">select seq_board_no.currval from dual</selectKey>
+	</insert>
+	<!-- 파일 업로드 -->
+	<insert id="insertPhoto" parameterType="TipsFiles">
+		INSERT INTO FILES
+		VALUES(
+			SEQ_FILES_NO.NEXTVAL, #{f_reference_no},
+			 #{files_title}, #{files_change_title}, 
+			 #{files_type}, '/resources/images/uploadFiles/', 0
+		)
 	
+	</insert>
 </mapper> 
 
 

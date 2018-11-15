@@ -89,7 +89,7 @@
 }
 
 .boardHr {
-	border: 1px solid #313131;
+	border: 1.2px solid #313131;
 }
 
 .page1 h2 {
