@@ -120,7 +120,7 @@
 					
 					<div class="position2">
 						<div class="textLabel">닉네임</div>
-						<input type="text" class="form-control" name="nick_name" value="${loginUser.nick_name}">
+						<input type="text" class="form-control" name="nick_name" value="${loginUser.nick_name}" readonly>
 					</div>
 					
 					<div class="position2">
