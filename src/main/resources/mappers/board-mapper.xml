@@ -210,21 +210,14 @@
 	
 	<!-- 홈트레이닝 목록 조회 -->
 	<select id="selectHomeList" resultMap="homeResultSet">
-        SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT", T.WRITING_TYPE
-        FROM (     
-            select b.board_title, b.board_date, b.board_count, 
-                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type
+         select b.board_title, b.board_date, b.board_count, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
             from board b
             join member me on (b.member_no = me.member_no)
-            join marking m on (b.board_no = m.board_no)
             join files f on (b.board_no = f.f_reference_no)
-            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = #{files_type} and board_type=3
-            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type
+            where board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=3
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
             order by b.board_no desc
-            ) T
-        JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
-        AND FF.FILES_SECESSION = 0
-        AND FF.FILES_TYPE = 1
 	</select>
 	
 </mapper> 

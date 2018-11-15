@@ -304,6 +304,8 @@ public class BoardController {
 			
 			model.addAttribute("list", list);
 			model.addAttribute("pi", info);
+			System.out.println("list : " + list);
+			System.out.println("pi : " + pi);
 			
 			return "board/homeTraining";
 			
