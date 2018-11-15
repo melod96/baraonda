@@ -49,6 +49,8 @@ public interface TipsDao {
 		
 		//파일 업로드
 		void insertPhoto(SqlSessionTemplate sqlSession, TipsFiles file);
+		//파일 수정
+				void updatePhoto(SqlSessionTemplate sqlSession, TipsFiles file);
 
 		//공지사항 delete
 		int deleteTips(SqlSessionTemplate sqlSession, String tips_no);

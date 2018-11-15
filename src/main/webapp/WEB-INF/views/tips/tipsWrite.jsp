@@ -78,7 +78,8 @@ div#editor {
 									<tr>
 										<td>제목</td>
 										<td><input type="text" class="form-control"
-											name="board_title"></td>
+											name="board_title">
+											</td>
 									</tr>
 									<tr>
 										<td>썸네일 추가</td>

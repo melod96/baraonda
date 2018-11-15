@@ -67,8 +67,8 @@ div#editor {
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="updateNotice.nt" method="post">
-							<input type="hidden" name = "board_no" value = "${ninfo.board_no }" />
+						<form action="updateTips.tp" method="post" enctype = "multipart/form-data">
+							<input type="hidden" name = "board_no" value = "${tinfo.board_no }" />
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -79,12 +79,22 @@ div#editor {
 									<tr>
 										<td>제목</td>
 										<td><input type="text" class="form-control"
-											name="board_title" value= "${ninfo.board_title }"></td>
+											name="board_title" value= "${tinfo.board_title }">
+											 <input type="hidden" name="ref_no" value = "${tinfo.board_no }">
+											</td>
+											</tr>
+											<tr>
+										<td>썸네일 추가</td>
+										<td>
+												<button type="button" id="uploadBtn" onclick="uploadPhoto();">사진 불러오기</button>
+												
+												<input type="file" id="uploadInput" name="photo" style="display:none; float:right;">
+										</td>
 								
 								</table>
 								<!------------------------------ 글작성 공간 에디터 ------------------------------>
 							
-								<textarea id="edit" name="board_content" style="margin-top: 30px;"> ${ninfo.board_content}</textarea>
+								<textarea id="edit" name="board_content" style="margin-top: 30px;"> ${tinfo.board_content}</textarea>
 
 							</div>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
@@ -101,6 +111,16 @@ div#editor {
     $(function(){
       $('#edit').froalaEditor()
     });
+  </script>
+  
+    <script>
+    
+	var key = "";
+
+	function uploadPhoto(){
+		$("#uploadInput").trigger("click");
+	}
+
   </script>
 </body>
 </html>

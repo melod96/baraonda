@@ -161,6 +161,13 @@ public class TipsDaoImpl implements TipsDao{
 			sqlSession.insert("Tips.insertPhoto", file);
 		}
 		
+		//파일 업로드
+		@Override
+		public void updatePhoto(SqlSessionTemplate sqlSession, TipsFiles file) {
+			System.out.println("dao file : " + file.getFiles_title() + file.getFiles_change_title() + file.getF_reference_no());
+			sqlSession.update("Tips.updatePhoto", file);
+		}
+		
 		
 		//공지사항 delete
 		@Override

@@ -108,6 +108,13 @@ public class TipsServiceImpl implements TipsService{
 		public void insertPhoto(TipsFiles file) {
 			td.insertPhoto(sqlSession, file);
 		}
+		
+		//파일 업로드 수정
+				@Override
+				public void updatePhoto(TipsFiles file) {
+					td.updatePhoto(sqlSession, file);
+				}
+
 
 		//공지사항 delete
 		@Override
