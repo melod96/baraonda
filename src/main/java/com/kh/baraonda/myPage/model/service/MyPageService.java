@@ -54,6 +54,10 @@ public interface MyPageService {
 
 	void updateEmail(Member m);
 
+	void updateNick(Member loginUser);
+
+	void updatePwd(Member loginUser);
+
 
 
 

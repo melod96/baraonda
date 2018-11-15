@@ -127,6 +127,15 @@ public class MyPageServiceImpl implements MyPageService{
 		
 	}
 
+	@Override
+	public void updateNick(Member loginUser) {
+		mpd.updateNick(sqlSession, loginUser);
+	}
+
+	@Override
+	public void updatePwd(Member loginUser) {
+		mpd.updatePwd(sqlSession, loginUser);
+	}
 
 
 
