@@ -17,6 +17,9 @@
         margin-top: 10px;
         text-align: center;
     }
+    .gradeX td:hover{
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -73,6 +76,7 @@
                                     <c:if test="${ list != null }">
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
+	                               				<input type="hidden" value="${ list.ORDERS_NO }" id="member_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
 		                                        <td>${ list.NAME }</td>
 		                                        <td>${ list.PRODUCT_NAME }</td>
@@ -90,14 +94,13 @@
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.startPage }">&laquo;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.startPage });">&laquo;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage <= 1 }">
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.currentPage - 1 }">&lt;</button>
-                            	</c:if>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage - 1 });">&lt;</button>                            	</c:if>
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
 		                               	<c:forEach begin="${ pi.currentPage }" end="${ pi.currentPage + 2 }" step="1" var="num">
@@ -106,7 +109,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num })">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -118,7 +121,7 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
@@ -130,20 +133,20 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ num }">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
                                 </span>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.currentPage + 1 }">&gt;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage + 1 });">&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="location.href='goBlackMemberAdminList.adm?currentPage=' + ${ pi.endPage }">&raquo;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.endPage });">&raquo;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&raquo;</button>
@@ -175,11 +178,12 @@
             info : false,
             filter : false
         });
-        
-        $("#search-option-1").children().each(function(){
-    		if($(this).val() == "${ search.option1 }"){
-    			$(this).attr("selected","selected"); 
-    		}
+	
+        $(".gradeX").children().each(function(){
+    		$(this).click(function(){
+    			var member_no = $(this).parent().children("#member_no").val();
+        		location.href="goOrderAdminDetail.adm?num=" + member_no;
+    		});
     	});
     });
     
@@ -188,6 +192,14 @@
     	
     	location.href="goOrderAdminList.adm?currentPage=1&searchContent=" + content;
     } 
+    
+    function paginate(num){
+    	if(${ search != null }){
+    		location.href="goOrderAdminList.adm?currentPage=" + num + "&searchContent=${ search.content }";
+    	}else{
+    		location.href="goOrderAdminList.adm?currentPage=" + num;
+    	}
+    }
     </script>
     
 </body>

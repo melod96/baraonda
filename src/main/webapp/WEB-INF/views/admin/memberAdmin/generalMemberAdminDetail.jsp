@@ -152,7 +152,7 @@
                         <div class="form-group" align="center">
                            <button type="button" class="btn btn-default" onclick="location.href='goGeneralMemberAdminList.adm'">목록으로</button>
                            <c:if test="${ memberInfo.MEMBER_STATUS != 1 }">
-                           		<button type="button" class="btn btn-danger" onclick="location.href='addBlackMEmberAdmin.adm?num=${ memberInfo.MEMBER_NO }'">블랙목록 추가</button>
+                           		<button type="button" class="btn btn-danger" onclick="location.href='addBlackMemberAdmin.adm?num=${ memberInfo.MEMBER_NO }'">블랙목록 추가</button>
                            </c:if>
                         </div>
                         <!-- /.panel-body -->

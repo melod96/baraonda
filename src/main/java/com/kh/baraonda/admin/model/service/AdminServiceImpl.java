@@ -133,6 +133,16 @@ public class AdminServiceImpl implements AdminService {
 		ad.updateReportApprovalAdmin(sqlSession, num);
 	}
 
+	@Override
+	public Map<String, Object> selectOrderInfo(String num) throws AdminException {
+		return ad.selectOrderInfo(sqlSession, num);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProductInfoForGraph(String num) throws AdminException {
+		return ad.selectProductInfoForGraph(sqlSession, num);
+	}
+
 
 	
 	

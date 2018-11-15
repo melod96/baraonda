@@ -54,6 +54,10 @@ public interface AdminService {
 
 	void insertBlackMemberAdmin(String num) throws AdminException;
 
+	Map<String, Object> selectOrderInfo(String num) throws AdminException;
+
+	List<Map<String, Object>> selectProductInfoForGraph(String num) throws AdminException;
+
 	
 	
 }

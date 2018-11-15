@@ -307,5 +307,24 @@
 		AND REPORT_GET_NO = #{num}
 	</update>
 	
+	<select id="selectOrderInfo" parameterType="java.lang.String" resultType="map">
+		SELECT O.ORDERS_NO, M.NAME, M.PHONE, P.PRODUCT_NAME, O.PRODUCT_QUANTITY, O.ORDERS_DATE, P.PRODUCT_PRICE, P.PRODUCT_NO
+		FROM ORDERS O 
+		JOIN MEMBER M ON(O.MEMBER_NO = M.MEMBER_NO)
+		JOIN PRODUCT P ON(O.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE 1 = 1 
+		AND ORDERS_NO = #{num}
+	</select>
+	
+	<select id="selectProductInfoForGraph" parameterType="java.lang.String" resultType="map">
+		SELECT TO_CHAR(ORDERS_DATE, 'YYYY.MM') MON, COUNT(PRODUCT_NO) CO
+		FROM (SELECT ORDERS_DATE, PRODUCT_NO
+		    FROM ORDERS 
+		    WHERE 1 = 1
+		    AND PRODUCT_NO = #{num})
+		GROUP BY TO_CHAR(ORDERS_DATE, 'YYYY.MM')
+		ORDER BY TO_CHAR(ORDERS_DATE, 'YYYY.MM')
+	</select>
+	
 </mapper> 
   
