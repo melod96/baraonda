@@ -159,7 +159,8 @@
 							}							
 							
 							var board_type = "";
-							
+							var link1 = "location.href=";
+							var link2 = "";
 							switch(data["list"][key].board_type){
 							case 1 : board_type = "다이어트 꿀팁";
 							break;
@@ -181,7 +182,7 @@
 							}
 							
 							$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr class='hTr' onclick='linkedBoard("+data["list"][key].board_type+","+ data["list"][key].board_no +")'>" +
 									"<td>"+board_type + "</td>"+
 									"<td colspan='2'>"+data["list"][key].board_title+"</td>"+
 									"<td>"+likeCount+"</td>"+
@@ -192,7 +193,7 @@
 						}
 					 	break;
 					 //--게시판 조회 끝--
-					 
+				
 					 
 					 //--댓글 조회--	
 					case 'WriteComments' :
@@ -207,7 +208,6 @@
 							); 
 							
 					 	for(var key in data["cList"]){
-							var $tr = $("<tr class='hTr'>");
 							
 							var board_type = "";
 							
@@ -232,7 +232,7 @@
 							}						
 							
 							$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr class='hTr' onclick='linkedBoard("+data["cList"][key].board_type+","+ data["cList"][key].board_no +")'>" +
 									"<td>"+board_type + "</td>"+
 									"<td>"+data["cList"][key].board_title+"</td>"+
 									"<td colspan='2'>"+data["cList"][key].comments_content+"</td>"+
@@ -255,7 +255,6 @@
 							); 
 							
 					 	for(var key in data["bList"]){
-							var $tr = $("<tr class='hTr'>");
 							
 							var board_type = "";
 							
@@ -280,7 +279,7 @@
 							}						
 							
 							$viewBody.append(
-								"<tr class='hTr'>" +
+								"<tr class='hTr' onclick='linkedBoard("+data["bList"][key].board_type+","+ data["bList"][key].board_no +")'>" +
 									"<td>"+board_type + "</td>"+
 									"<td>"+data["bList"][key].board_title+"</td>"+
 									"<td>"+data["bDate"][key]+"</td>"+
@@ -347,8 +346,8 @@
 									"<th>상품 신청 날짜</th>"+
 									"<th>상품 명</th>"+
 									"<th>수취인</th>"+
+									"<th>수취인 주소</th>"+
 									"<th>수취인 번호</th>"+
-									"<th>수취인주소</th>"+
 								"</tr>"
 							); 
 							
@@ -404,6 +403,34 @@
 			
 			return false; 
 		}
+		
+		
+		function linkedBoard(board_type, board_no){
+			 console.log("board_type : " + board_type);
+			 
+			 switch(board_type){
+				case 1 : board_type = "다이어트 꿀팁";
+					location.href="tipsDetail.tp?tips_no=" + board_no;
+				
+				break;
+				case 2 : board_type = "칼로리 사전";
+				break;
+				case 3 : board_type = "홈 트레이닝";
+				break;
+				case 4 :
+					location.href="view.do?board_no=" + board_no;
+				break;
+				case 5 : board_type = "바다 체험단";
+				break;
+				case 6 : board_type = "공지사항";
+				break;
+				case 7 : board_type = "고객센터";
+				break;
+				case 8 : board_type = "바다 서비스";
+				break;
+				default : board_type = "게시판";
+			 }
+		 }
 	</script>
 	
 
