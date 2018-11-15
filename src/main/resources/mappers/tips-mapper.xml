@@ -228,6 +228,11 @@
 		UPDATE BOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
 	</update>
 	
+	<!-- 파일 이름 수정 -->
+	<update id="updatePhoto" parameterType="TipsFiles">
+		UPDATE FILES SET FILES_TITLE = #{files_title}, FILES_CHANGE_TITLE = #{files_change_title} WHERE F_REFERENCE_NO = #{f_reference_no}
+	</update>
+	
 	
 	<!-- 댓글작성 -->
 	<insert id="insertCommentTips">

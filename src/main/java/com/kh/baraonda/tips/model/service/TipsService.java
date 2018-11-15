@@ -47,6 +47,9 @@ public interface TipsService {
 		
 		//파일 업로드
 		void insertPhoto(TipsFiles file);
+		
+		//파일 업로드 수정
+		void updatePhoto(TipsFiles file);
 
 		//꿀팁 delete
 		int deleteTips(String tips_no);

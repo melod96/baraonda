@@ -266,12 +266,80 @@ public class TipsController {
 			
 		}
 		
+		//공지사항 update
+				@RequestMapping("updateTips.tp")
+				public String updateTips(HttpSession session,HttpServletRequest request,
+				@RequestParam("photo") MultipartFile photo,@SessionAttribute("loginUser")
+				Member m,Tips t, Model model, @RequestParam int ref_no) {
+					
+					//사진 저장할 경로 지정
+					String root = request.getSession().getServletContext().getRealPath("resources");
+					
+					//파일의 경로는 root 하위의 uploadFiles이다.
+					String filePath = root +"\\images\\uploadFiles";
+					
+					String originFileName = photo.getOriginalFilename();
+					System.out.println("origin : " + originFileName); 
+					String ext = originFileName.substring(originFileName.lastIndexOf("."));
+					
+					
+					//CommonUtils에서 랜덤한 글자를 받아옴
+					String changeName = CommonUtils.getRandomString();
+					
+					
+					
+					t.setMember_no(m.getMember_no());
+					System.out.println(photo);
+					System.out.println(t);
+					
+					System.out.println("cont t : " + t);
+					int update = ts.updateTips(t);
+					System.out.println("EEEE" + update);
+					
+					
+					
+					//업로드된 파일을 지정한 경로에 저장
+							try {
+								photo.transferTo(new File(filePath + "\\" + changeName + ext));
+								
+								TipsFiles file = new TipsFiles();
+								
+								System.out.println("사진 저장경로 : " + filePath + "\\" + changeName + ext);
+								
+								file.setFiles_title(originFileName);
+								file.setFiles_change_title(changeName+ext);
+								file.setF_reference_no(ref_no);
+								
+								System.out.println("change_title : " + file.getFiles_change_title()); 
+								System.out.println("cont ref_no : " + ref_no);
+								ts.updatePhoto(file);
+								System.out.println("update 끝 cont");
+
+								
+								
+							} catch (Exception e) {
+								
+								e.printStackTrace();
+								model.addAttribute("msg", "사진등록 실패11");
+								return "common/errorPage";
+								
+							}
+					
+					
+					
+				//	t.setMember_no(m.getMember_no());
+					
+				//	int update = ts.updateTips(t);
+					
+					return "redirect:tips.tp";
+				}
+		
 		//공지사항 delete
 		@RequestMapping("deleteTips.tp")
 		public String deleteTips(String tips_no) {
 			int delete = ts.deleteTips(tips_no);
 			
-			return "redirect:tipslist.tp";
+			return "redirect:tips.tp";
 		}
 		
 		//공지사항 수정 페이지
@@ -284,15 +352,6 @@ public class TipsController {
 			return "tips/tipsUpdate";
 		}
 		
-		//공지사항 update
-		@RequestMapping("updateTips.tp")
-		public String updateTips(@SessionAttribute("loginUser") Member m,Tips t, Model model) {
-			t.setMember_no(m.getMember_no());
-			
-			int update = ts.updateTips(t);
-			
-			return "redirect:tipslist.tp";
-		}
 		
 		//댓글 insert
 		@RequestMapping("insertCommentTips.tp")
