@@ -116,7 +116,6 @@ public class AdminController {
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			if(listCount != 0) {
 				List<Map<String, Object>> list = as.selectBlackMemberList(info, search);
-				System.out.println("list : " + list);
 				mv.addObject("list", as.selectBlackMemberList(info, search));
 			}
 			mv.addObject("pi", info);
@@ -128,21 +127,6 @@ public class AdminController {
 		}
 		return mv;
 	}
-	
-	/*@RequestMapping(value="goQnAAdminList.adm")
-	public String goQnAAdminList() {
-		return "admin/QnAAdmin/QnAAdminList";
-	}
-	
-	@RequestMapping(value="goAdvertisingAdminList.adm")
-	public String goAdvertisingAdminList() {
-		return "admin/advertisingAdmin/advertisingAdminList";
-	}
-	
-	@RequestMapping(value="goExperienceAdminList.adm")
-	public String goExperienceAdminList() {
-		return "admin/experienceAdmin/experienceAdminList";
-	}*/
 	
 	@RequestMapping(value="goNoticeAdminList.adm")
 	public ModelAndView goNoticeAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
@@ -298,7 +282,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="addBlackMEmberAdmin.adm")
+	@RequestMapping(value="addBlackMemberAdmin.adm")
 	public ModelAndView addBlackMEmberAdmin(ModelAndView mv,
 											@RequestParam(value="num", required=true)String num) {
 		try {
@@ -311,8 +295,19 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	
+	@RequestMapping(value="goOrderAdminDetail.adm")
+	public ModelAndView goOrderAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		try {
+			Map<String, Object> orderInfo = as.selectOrderInfo(num);
+			mv.addObject("orderInfo", orderInfo);
+			mv.addObject("PIG", as.selectProductInfoForGraph((orderInfo.get("PRODUCT_NO")).toString()));
+			mv.setViewName("admin/orderAdmin/orderAdminDetail");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "OrderDetail 조회 실패!");
+		}
+		return mv;
+	}
 	
 	
 	

@@ -60,5 +60,10 @@ public interface AdminDao {
 
 	void updateReportApprovalAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException;
 
+	Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
+	List<Map<String, Object>> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num);
+
+
 	
 }

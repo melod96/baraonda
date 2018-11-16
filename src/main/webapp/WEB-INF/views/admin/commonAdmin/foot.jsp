@@ -42,3 +42,6 @@
     <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/admin/js/char_counter.min.js"></script>
     <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/admin/js/inline_style.min.js"></script>
     <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/admin/js/save.min.js"></script>
+    
+    <!-- GOOGLE CHART -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -72,7 +72,7 @@ public class AdminDaoImpl implements AdminDao {
 	
 	@Override
 	public int selectOrderCount(SqlSessionTemplate sqlSession, Search search) throws AdminException {
-		return sqlSession.selectOne("Admin.selectDeclarationCount", search);
+		return sqlSession.selectOne("Admin.selectOrderCount", search);
 	}
 
 	@Override
@@ -139,6 +139,16 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public void updateReportApprovalAdmin(SqlSessionTemplate sqlSession, String num) throws AdminException {	
 		sqlSession.update("Admin.updateReportApprovalAdmin", num);
+	}
+
+	@Override
+	public Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectOne("Admin.selectOrderInfo", num);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num) {
+		return sqlSession.selectList("Admin.selectProductInfoForGraph", num);
 	}
 
 	
