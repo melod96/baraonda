@@ -1,5 +1,7 @@
 package com.kh.baraonda.board.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.service.BoardService;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.HomeFiles;
 import com.kh.baraonda.board.model.vo.boardMarking;
+import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.PaginationComment;
@@ -288,7 +293,7 @@ public class BoardController {
 	
 	//홈트레이닝 게시판 리스트
 	@RequestMapping("home.do")
-	public String homeTrainingList(Model model, PageInfo pi) {
+	public String homeTrainingList(Model model, PageInfo pi, int writing_type) {
 		int currentPage = 1;
 		
 		if(pi.getCurrentPage() > 0) {
@@ -300,10 +305,11 @@ public class BoardController {
 			
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			
-			ArrayList<Board> list = boardService.selectHomeList(info);
+			ArrayList<Board> list = boardService.selectHomeList(info, writing_type);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("pi", info);
+			model.addAttribute("writing_type", writing_type);
 			System.out.println("list : " + list);
 			System.out.println("pi : " + pi);
 			
@@ -313,11 +319,66 @@ public class BoardController {
 			model.addAttribute("msg",e.getMessage());
 			return "common/errorPage";
 		}
+	}
+	//홈트레이닝 게시글 작성 페이지
+	@RequestMapping("homeWrite.do")
+	public String homeWrite() {
+		return "board/homeWrite";
+	}
+	
+	//홈트레이닝 게시글 작성
+	@RequestMapping("insertHome.do")
+	public String insertHome(HttpSession session, HttpServletRequest request,
+			@RequestParam("photo") MultipartFile photo,
+			@SessionAttribute("loginUser") Member m, Board b, Model model, int writing_type) {
+		b.setMember_no(m.getMember_no());
 		
+		int insert = boardService.insertHome(b);
 		
+		//사진 저장할 경로 지정
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		//파일의 경로는 root 하위의 uploadFiles이다.
+		String filePath = root +"\\images\\uploadFiles";
+		
+		//파일명 변경
+		String originFileName = photo.getOriginalFilename();
+		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		
+		//CommonUtils에서 랜덤한 글자를 받아옴
+		String changeName = CommonUtils.getRandomString();
+		
+		try {
+			photo.transferTo(new File(filePath + "\\" + changeName + ext));
+			HomeFiles file = new HomeFiles();
 			
+			file.setF_reference_no(insert);
+			file.setFiles_title(originFileName);
+			file.setFiles_change_title(changeName+ext);
+			file.setFiles_type(4);
+			file.setFiles_root(filePath + "\\" + changeName + ext);
+			System.out.println("파일 : " + file);
+			
+			boardService.insertPhoto(file);
+			
+		} catch (Exception e) {
+
+			//실패시 파일  삭제
+			new File(filePath + "\\" + changeName + ext).delete();
+			
+			model.addAttribute("msg", "사진등록 실패");
+			return "common/errorPage";
+		}
+		
+		if(insert > 0) {
+			return "redirect:home.do?writing_type=" + writing_type;
+		}else{
+			model.addAttribute("msg", "작성 실패");
+			return "common/errorPage";
+		}
 		
 	}
+	
 	
 }
 

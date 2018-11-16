@@ -36,11 +36,27 @@
 	font-size: 11px;
 }
 .list{width:110%}
-.pagi{width: 109%; text-align: center;}
+.pagi{
+	width: 70%;
+    text-align: center;
+    margin-top: 10px;
+}
 #homeBtn:hover{
 	cursor:pointer;
 	color : #aaccaa;
 }
+.text1{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+    white-space: nowrap;
+}
+.pageWriteBtn{
+	float:right; margin-right: -47px; width:70px; height:28px;
+}
+.title{font-weight: bold; margin-left: 8px;}
+.boardHr{margin-left: 8px; 	width: 105%; border-top: 1.2px solid black;}
 </style>
 
 </head>
@@ -55,20 +71,25 @@
 					src="${pageContext.request.contextPath}/resources/images/berrywater.PNG"
 					style="width: 732px; height: 180px;">
 				<h2 class="title">홈트레이닝</h2>
-				<div class="clear" style="height: 40px; background: white;"></div>
+				<hr class="boardHr">
+				<div class="clear" style="height: 20px; background: white;"></div>
 				<div style="margin-bottom: 10px; margin-left: 10px;">
 					<a id="homeBtn" href="home.do?writing_type=6">전신</a>&nbsp;|&nbsp;
 					<a id="homeBtn" href="home.do?writing_type=7">복부</a>&nbsp;|&nbsp;
 					<a id="homeBtn" href="home.do?writing_type=8">상체</a>&nbsp;|&nbsp;
 					<a id="homeBtn" href="home.do?writing_type=9">하체</a>
+					<c:if test="${sessionScope.loginUser.admin_right == 1}">
+						<a href="homeWrite.do">
+							<img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
+						</a> 
+					</c:if>
 				</div> 
 				<c:forEach items="${list}" var="list" end="8">
 				<div class="list">
 					<div class="grid_4" id="tips">
 						<div class="gall_block">
 							<div class="maxheight">
-								<a href="${pageContext.request.contextPath}${list.files_root}" class="gall_item">
-								<img src="${pageContext.request.contextPath}${list.files_root}" alt="" style="width: 300px; height: 170px;"></a>
+								<a href="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" class="gall_item" ><img src="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" alt="" style="width:300px; height:170px;"></a>
 								<div class="gall_bot">
 									<div class="boxbox">
 										<div class="text1">
@@ -79,7 +100,7 @@
 											조회수&nbsp;<label style="color: red">${list.board_count }</label>&nbsp;|&nbsp;
 											좋아요&nbsp;<label style="color: red">${list.board_good }</label>
 										</div>
-										<img src="${pageContext.request.contextPath}${list.profile_root}" style="width: 25px; height: 25px; border-radius: 20px">
+										<img src="<%=request.getContextPath()%>/resources/images/boardImg/woman.png" style="width: 25px; height: 25px; border-radius: 20px">
 										<a id="ba_font">홈트레이닝</a> <br> <a onclick="location.href='view.do?board_no=' + ${list.board_no}" class="btn">more</a>
 									</div>
 								</div>
@@ -88,7 +109,10 @@
 					</div>
 				</div>
 				</c:forEach>
-				<div class="pagi">
+			</div>
+			<jsp:include page="../common/rightBoard.jsp" />
+		</div>
+		<div class="pagi">
 						<c:if test="${ pi.currentPage <= 1 }">
 							[이전] &nbsp;
 						</c:if>
@@ -123,9 +147,7 @@
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
 						</c:if>
-						</div>
-			</div>
-		</div>
+					</div>
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 </body>

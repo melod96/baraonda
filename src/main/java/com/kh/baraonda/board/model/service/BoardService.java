@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.HomeFiles;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -68,7 +69,11 @@ public interface BoardService {
 	int searchBoardCount(SearchCondition sc);	
 	
 	//홈트레이닝 게시물 목록 조회
-	ArrayList<Board> selectHomeList(PageInfo info) throws BoardException;
+	ArrayList<Board> selectHomeList(PageInfo info, int writing_type) throws BoardException;
+	//홈트레이닝 게시글 작성
+	int insertHome(Board b);
+	//파일 업로드
+	void insertPhoto(HomeFiles file);
 	
 	
 	

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BARAON.DA - 커뮤니티</title>
+<title>BARAON.DA</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../common/header.jsp" />
@@ -346,6 +346,18 @@
 					</c:if> --%>
 					
 					<c:choose>
+						<c:when test="${detail.WRITING_TYPE eq 6}">
+                     		<h2 class="boardName">홈트레이닝 - 전신
+						</c:when>               
+						<c:when test="${detail.WRITING_TYPE eq 7}">
+                     		<h2 class="boardName">홈트레이닝 - 복부
+                  		</c:when>               
+                  		<c:when test="${detail.WRITING_TYPE eq 8}">
+                     		<h2 class="boardName">홈트레이닝 - 상체
+                  		</c:when>
+                  		<c:when test="${detail.WRITING_TYPE eq 9}">
+                     		<h2 class="boardName">홈트레이닝 - 하체
+                  		</c:when>
 						<c:when test="${detail.WRITING_TYPE eq 11}">
 							<h2 class="boardName">비포&애프터
 						</c:when>

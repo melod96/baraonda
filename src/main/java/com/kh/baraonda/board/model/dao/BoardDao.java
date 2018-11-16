@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
+import com.kh.baraonda.board.model.vo.HomeFiles;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -67,7 +68,11 @@ public interface BoardDao {
 	public List<HashMap<String, Object>> searchList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo info);
 	
 	//홈트레이닝 게시물 목록 조회
-	ArrayList<Board> selectHomeList(SqlSessionTemplate sqlSession, PageInfo info) throws BoardException;
+	ArrayList<Board> selectHomeList(SqlSessionTemplate sqlSession, PageInfo info, int writing_type) throws BoardException;
+	//홈트레이닝 게시글 작성
+	int insertHome(SqlSessionTemplate sqlSession, Board b);
+	//파일 업로드
+	void insertPhoto(SqlSessionTemplate sqlSession, HomeFiles file);
 
 	
 
