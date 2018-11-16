@@ -113,11 +113,11 @@
     	var thisMonth = new Date().getMonth() + 1;
 		var data = google.visualization.arrayToDataTable([
 	        ['Year', '판매량'],
-	        [thisYear + '.' + (thisMonth - 4),  1],
-	        [thisYear + '.' + (thisMonth - 3),  2],
-	        [thisYear + '.' + (thisMonth - 2),  3],
-	        [thisYear + '.' + (thisMonth - 1),  4],
-	        [thisYear + '.' + thisMonth,  5]
+	        [thisYear + '.' + (thisMonth - 4),  ${ PIG.N1 }],
+	        [thisYear + '.' + (thisMonth - 3),  ${ PIG.N2 }],
+	        [thisYear + '.' + (thisMonth - 2),  ${ PIG.N3 }],
+	        [thisYear + '.' + (thisMonth - 1),  ${ PIG.N4 }],
+	        [thisYear + '.' + (thisMonth - 0),  ${ PIG. N5 }]
 	    ]);
     	
 

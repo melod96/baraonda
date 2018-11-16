@@ -139,8 +139,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectProductInfoForGraph(String num) throws AdminException {
+	public Map<String, Object> selectProductInfoForGraph(String num) throws AdminException {
 		return ad.selectProductInfoForGraph(sqlSession, num);
+	}
+
+	@Override
+	public Map<String, Object> selectMemberInfoForDashboard() throws AdminException {
+		return ad.selectMemberInfoForDashboard(sqlSession);
+	}
+
+	@Override
+	public Map<String, Object> selectDashboardInfo() throws AdminException {
+		return ad.selectDashboardInfo(sqlSession);
 	}
 
 

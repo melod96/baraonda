@@ -24,8 +24,16 @@ public class AdminController {
 	private AdminService as;
 
 	@RequestMapping(value="goDashboard.adm")
-	public String goDashboard() {		
-		return "admin/dashboard/dashboard";
+	public ModelAndView goDashboard(ModelAndView mv) {		
+		try {
+			mv.addObject("dashboardInfo", as.selectDashboardInfo());
+			mv.addObject("memberInfo", as.selectMemberInfoForDashboard());
+			mv.setViewName("admin/dashboard/dashboard");
+		} catch (AdminException e){
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Deshboard 조회 실패!");
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="goGeneralMemberAdminList.adm")

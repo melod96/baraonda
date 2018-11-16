@@ -147,8 +147,18 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num) {
-		return sqlSession.selectList("Admin.selectProductInfoForGraph", num);
+	public Map<String, Object> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num) {
+		return sqlSession.selectOne("Admin.selectProductInfoForGraph", num);
+	}
+
+	@Override
+	public Map<String, Object> selectMemberInfoForDashboard(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Admin.selectMemberInfoForDashboard");
+	}
+
+	@Override
+	public Map<String, Object> selectDashboardInfo(SqlSessionTemplate sqlSession) throws AdminException {
+		return sqlSession.selectOne("Admin.selectDashboardInfo");
 	}
 
 	
