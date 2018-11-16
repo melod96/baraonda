@@ -51,6 +51,8 @@
 			
 			<typeAlias type="com.kh.baraonda.tips.model.vo.TipsFiles" alias="TipsFiles"/>
 			
+			<typeAlias type="com.kh.baraonda.tips.model.vo.Tips" alias="Experience"/>
+			
   		</typeAliases>
   		
   		<mappers>
@@ -73,6 +75,8 @@
 			<mapper resource="mappers/tips-mapper.xml"/>
 			
 			<mapper resource="mappers/exchange-mapper.xml"/>
+			
+			<mapper resource="mappers/experience-mapper.xml"/>
 
 		</mappers>
   </configuration>

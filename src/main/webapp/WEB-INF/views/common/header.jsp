@@ -74,7 +74,7 @@
                <li><a href="foodDictionary.dt"><img src="${pageContext.request.contextPath}/resources/images/main/칼로리사전.png" alt="Logo alt"></a></li>
                <li><a href="home.do?writing_type=6"><img src="${pageContext.request.contextPath}/resources/images/main/홈트레이닝.png" alt="Logo alt"></a></li>
                <li><a href="list.do?writing_type=11"><img src="${pageContext.request.contextPath}/resources/images/main/커뮤니티.png" alt="Logo alt"></a></li>
-               <li><a href="index-4.html"><img src="${pageContext.request.contextPath}/resources/images/main/바다체험단.png" alt="Logo alt"></a></li>
+               <li><a href="experiencePage.ep"><img src="${pageContext.request.contextPath}/resources/images/main/바다체험단.png" alt="Logo alt"></a></li>
              </ul>
             </nav>        
             <div class="clear"></div>
