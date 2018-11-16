@@ -1,8 +1,9 @@
 package com.kh.baraonda.tips.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Tips {
+public class Tips implements Serializable{
 	
 		private int board_no;
 		private int board_type;

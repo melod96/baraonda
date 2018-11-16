@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.exchange.model.vo.Point_Record;
-import com.kh.baraonda.member.model.vo.Member;
 import com.kh.baraonda.notice.model.exception.NoticeException;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;

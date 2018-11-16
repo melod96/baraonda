@@ -183,6 +183,7 @@
 							<c:url var="blistBack" value="searchNotice.nt">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
 								<c:param name="search" value="${search}"/>
+								<c:param name="searchtype" value="${searchtype}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -195,6 +196,7 @@
 								<c:url var="blistCheck" value="searchNotice.nt">
 									<c:param name="currentPage" value="${ p }"/>
 									<c:param name="search" value="${search}"/>
+									<c:param name="searchtype" value="${searchtype}"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
@@ -209,6 +211,7 @@
 							<c:url var="blistEnd" value="searchNotice.nt">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 								<c:param name="search" value="${search}"/>
+								<c:param name="searchtype" value="${searchtype}"/>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>

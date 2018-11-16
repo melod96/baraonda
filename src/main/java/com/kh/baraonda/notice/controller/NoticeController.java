@@ -126,6 +126,24 @@ public class NoticeController {
 	//공지사항 검색
 	@RequestMapping("searchNotice.nt")
 	public String searchNotice(String searchtype, String search, Model model, PageInfo pi) {
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+
+		
 		SearchCondition sc = new SearchCondition();
 		
 		if(searchtype.equals("title")) {
@@ -153,6 +171,7 @@ public class NoticeController {
 		model.addAttribute("noticelist", list);
 		model.addAttribute("pi", pgif);
 		model.addAttribute("search", search);
+		model.addAttribute("searchtype", searchtype);
 		
 		return "notice/notice";
 	}
