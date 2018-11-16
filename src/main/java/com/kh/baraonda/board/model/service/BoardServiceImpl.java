@@ -175,6 +175,13 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 	
+	//관리자 게시글 삭제
+	@Override
+	public void adminDelete(List<String> valueArr) {
+		boardDao.adminDelete(sqlSession, valueArr);
+		
+	}
+	
 	
 
 }

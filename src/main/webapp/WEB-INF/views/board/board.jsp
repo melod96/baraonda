@@ -26,6 +26,43 @@
 			location.href="${path}/baraonda/write.do";
 		});
 	});
+	
+	/*  $(document).ready( function() {
+	    var jbExcerpt = $('.boardDay').text().substring( 0, 9 );
+	      $('.boardDay').after('<th>' + jbExcerpt + '</th>' );
+	 }); */
+	
+	/*  function checkAll(){
+		 if($("#noInput1").is(':checked')){
+			 $("input[name=board_no]").prop("checked", true);
+		 }else{
+			 $("input[name=board_no]").prop("checked", false);
+		 }
+	 } */
+	
+	 var arrayParam = new Array();
+	 
+	 $("input:checkbox[name=board_no]:checked").each(function(){
+		 arrayParam.push($(this).val());
+	 });
+	 
+	 function deleteBoard(){
+		 $.ajax({
+			 method:'POST',
+			 url:'adminDelete.do',
+			 traditional:true,
+			 data:{
+				 'main':arr
+			 },
+			 success:function(data){
+				 alert(data);
+			 },
+			 error:function(request,status,error){
+				 alert(error);
+			 }
+		 });
+	 }
+	 
 </script>
 
 
@@ -70,9 +107,10 @@
 }
 
 .container1 {
-	margin: auto;
+	/* margin: auto; */
+	/* margin-left: 30px; */
 	width: 65%;
-	margin-top: -35px;
+	margin-top: -10px;
 }
 
 #boardInput {
@@ -93,7 +131,7 @@
 }
 
 .page1 h2 {
-	margin-bottom: 25px;
+	margin-bottom: 0px !important;
 }
 
 #boardB {
@@ -117,9 +155,14 @@
 .boardHr2 {
 	margin-top: -15px;
 }
+#noInput1, #noInput2{-webkit-appearance: checkbox !important;}
 
 #boardCategory:hover{cursor:pointer; color : #aaccaa;}
 .boardName{font-weight: bold;}
+.right{margin-top: -180px; margin-left: 70px !important;}
+#deleteBtn{background:red; border-color: white;}
+
+
 
 </style>
 
@@ -131,8 +174,10 @@
 	<!-------------------------------------Content------------------------------------------->
 	<section class="content">
 		<br>
+		<div class="clear" style="height: 17px; background: white;"></div>
 		<div class="container">
 			<div class="row">
+			<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width: 732px; height: 180px;">
 				<!------------------------------ 작업 공간 ------------------------------>
 				<div class="container1">
 					<h2 class="boardName">커뮤니티</h2>
@@ -152,6 +197,7 @@
 					
 					
 					<table class="table table-hover">
+					<c:if test="${sessionScope.loginUser.admin_right != 1}">
 						<thead>
 							<tr>
 								<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
@@ -173,35 +219,51 @@
 								</tr>
 							</c:forEach>
 						</tbody>
+					</c:if>
+					<c:if test="${sessionScope.loginUser.admin_right == 1}">
+						<thead>
+							<tr>
+								<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
+								<th><input id="noInput1" type="checkbox" name="board_no" value="${row.BOARD_NO}" onclick="checkAll();"></th>
+								<th class="boardNo">번호</th>
+								<th class="boardSubject1">제목</th>
+								<th class="boardWriter">작성자</th>
+								<th class="boardDay">작성일</th>
+								<th class="boardCount">조회수</th>
+							</tr>
+						</thead>
+							<tbody>
+							<c:forEach items="${list}" var="row">
+								<tr class="boardTr"> 
+									<th><input id="noInput2" type="checkbox" name="board_no" value="${row.BOARD_NO}"></th>
+									<th class="boardNo" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_NO}</th>
+									<th class="boardSubject2" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_TITLE}</th>
+									<th class="boardWriter" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.NICK_NAME}</th>
+									<th class="boardDay" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_DATE}</th>
+									<th class="boardCount" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_COUNT}</th>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</c:if>
 					</table>
 					<hr class="boardHr2">
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
-					<c:if test="${! empty sessionScope.loginUser}">
-						<button onclick="btnWrite" id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
+					<c:if test="${sessionScope.loginUser.admin_right != 1}">
+						<c:if test="${! empty sessionScope.loginUser}">
+							<button onclick="btnWrite" id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
+						</c:if>
+						<c:if test="${empty sessionScope.loginUser}">
+							<button id="btnWrite login" type="submit" class="btn btn-primary"
+							 data-toggle="modal" data-target="#login-modal">글쓰기</button>
+						</c:if>
 					</c:if>
-					<c:if test="${empty sessionScope.loginUser}">
-						<button id="btnWrite login" type="submit" class="btn btn-primary"
-						 data-toggle="modal" data-target="#login-modal">글쓰기</button>
+					<c:if test="${sessionScope.loginUser.admin_right == 1}">
+						<button onclick="deleteBoard();" id="deleteBtn" type="submit" class="btn btn-primary">삭제</button>
 					</c:if>
-					
 					
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">
-						<!-- <a href="#" class="btn-prev" title="이전" id="boardB">이전 <em
-							class="blind">목록에서 이전 페이지 이동</em>
-						</a> <span class="paging-numbers"> <a href="#">1 <span
-								class="blind">페이지로 이동</span>
-						</a> <a href="#" class="on">2 <span class="blind">페이지로 이동</span>
-						</a> <a href="#">3 <span class="blind">페이지로 이동</span>
-						</a> <a href="#">4 <span class="blind">페이지로 이동</span>
-						</a> <a href="#">5 <span class="blind">페이지로 이동</span>
-						</a>
-						</span> <a href="#" class="btn-next" title="다음" id="boardB">다음 <span
-							class="spr"> <em class="blind">목록에서 다음 페이지 이동</em>
-						</span>
-						</a> -->
-						
-					<!----------------------- 페이징 처리 ----------------------->
+					
 					<c:if test="${empty search }">
 						<c:if test="${ pi.currentPage <= 1 }">
 							[이전] &nbsp;
@@ -274,9 +336,6 @@
 							<a href="${ blistEnd }">[다음]</a>
 						</c:if>
 						</c:if>
-					
-					
-					
 					</div>
 
 					<!------------------------------ 검색 폼 ------------------------------>
@@ -298,6 +357,7 @@
 					</form>
 				</div>
 				<!--------------------------------------------------------------------------------------------------->
+				<jsp:include page="../common/rightBoard.jsp" />
 			</div>
 		</div>
 	</section>

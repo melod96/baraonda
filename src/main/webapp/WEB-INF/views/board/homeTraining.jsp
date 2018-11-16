@@ -56,7 +56,13 @@
 	float:right; margin-right: -47px; width:70px; height:28px;
 }
 .title{font-weight: bold; margin-left: 8px;}
-.boardHr{margin-left: 8px; 	width: 105%; border-top: 1.2px solid black;}
+.boardHr{margin-left: 8px; 	width: 105%; border-top: 1.5px solid black;}
+.right{margin-left: 100px !important; }
+.gall_block:hover{
+	box-shadow:2px 2px 4px #888;
+	cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -74,7 +80,7 @@
 				<hr class="boardHr">
 				<div class="clear" style="height: 20px; background: white;"></div>
 				<div style="margin-bottom: 10px; margin-left: 10px;">
-					<a id="homeBtn" href="home.do?writing_type=6">전신</a>&nbsp;|&nbsp;
+					<a id="homeBtn" href="home.do?writing_type=6" class="home1">전신</a>&nbsp;|&nbsp;
 					<a id="homeBtn" href="home.do?writing_type=7">복부</a>&nbsp;|&nbsp;
 					<a id="homeBtn" href="home.do?writing_type=8">상체</a>&nbsp;|&nbsp;
 					<a id="homeBtn" href="home.do?writing_type=9">하체</a>
@@ -86,7 +92,7 @@
 				</div> 
 				<c:forEach items="${list}" var="list" end="8">
 				<div class="list">
-					<div class="grid_4" id="tips">
+					<div class="grid_4" id="tips" onclick="location.href='view.do?board_no=' + ${list.board_no}">
 						<div class="gall_block">
 							<div class="maxheight">
 								<a href="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" class="gall_item" ><img src="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" alt="" style="width:300px; height:170px;"></a>

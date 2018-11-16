@@ -232,8 +232,10 @@
 			 #{files_title}, #{files_change_title}, 
 			 #{files_type}, '/resources/images/uploadFiles/', 0
 		)
-	
 	</insert>
+	<update id="adminDelete">
+		UPDATE BOARD SET BOARD_STATUS = 1 WHERE BOARD_NO = #{board_no}
+	</update>
 </mapper> 
 
 

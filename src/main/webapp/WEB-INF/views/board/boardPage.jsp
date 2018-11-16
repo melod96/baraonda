@@ -25,11 +25,11 @@
 		});
 	});
 	//목록 버튼
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 		$("#boardList").click(function(){
 			location.href="${path}/baraonda/list.do?writing_type=${detail.WRITING_TYPE}";
 		});
-	});	
+	});	 */
 	
 	//게시물 삭제 버튼
 	$(document).ready(function(){
@@ -75,7 +75,10 @@
 	color: #2e2e2e;
 	font-weight: 600;
 }
-
+.page1 h2 {
+    padding-top: 31px;
+    margin-bottom: 20px;
+}
 .boardSubject {
 	font-size: 17px;
 	font-weight: bold;
@@ -441,14 +444,14 @@
 					<c:if test="${! empty sessionScope.loginUser}">
 					<div class="btn_ar">
 						<img id="writeBtn" class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
-						<img id="boardList" class="boardList" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
+						<img id="boardList" class="boardList" onclick="history.back();" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">	
 					</div>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
 					<div class="btn_ar">
 						<img id="writeBtn login" class="pageWriteBtn login" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif"
 						 data-toggle="modal" data-target="#login-modal">
-						<img id="boardList" class="boardList" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
+						<img id="boardList" class="boardList" onclick="history.back();" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 					</div>
 					</c:if>
 					<div id="commList">
