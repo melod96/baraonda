@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Experience">
+
+	<resultMap type="com.kh.baraonda.tips.model.vo.Tips" id="tipsResultSet3">
+	
+		<id property="board_no" column="BOARD_NO"/>
+		<result property="board_type" column="BOARD_TYPE" />
+		<result property="writing_type" column="WRITING_TYPE" />
+		<result property="board_title" column="BOARD_TITLE" />
+		<result property="board_content" column="BOARD_CONTENT"/>
+		<result property="member_no" column="MEMBER_NO" />
+		<result property="board_date" column="BOARD_DATE" />
+		<result property="modify_date" column="MODIFY_DATE" />
+		<result property="board_status" column="BOARD_STATUS" />
+		<result property="board_count" column="BOARD_COUNT" />
+		<result property="board_good" column="BOARD_GOOD" />
+		
+		<result property="nick_name" column="NICK_NAME" />
+		<result property="marking_type" column="MARKING_TYPE" />
+		
+		<result property="files_no" column="FILES_NO" />
+		<result property="f_reference_no" column="F_REFERENCE_NO" />
+		<result property="files_title" column="FILES_TITLE" />
+		<result property="files_change_title" column="FILES_CHANGE_TITLE" />
+		<result property="files_type" column="FILES_TYPE" />
+		<result property="files_root" column="FILES_ROOT" />
+		<result property="files_secession" column="FILES_SECESSION" />
+		<result property="profile_root" column="PROFILE_ROOT" />
+		<result property="profile" column="FILES_ROOT" />
+	</resultMap>
+	
+	<!-- <resultMap type="com.kh.baraonda.tips.model.vo.TipsComment" id="tipsCommentResultSet">
+		<id property="comments_no" column="COMMENTS_NO"/>
+		<result property="comments_content" column="COMMENTS_CONTENT"/>
+		<result property="board_no" column="BOARD_NO"/>
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="comments_date" column="COMMENTS_DATE" />
+		<result property="comments_status" column="COMMENTS_STATUS"/>
+		<result property="nick_name" column="NICK_NAME" />
+		<result property="profile" column="FILES_ROOT" />
+	</resultMap>
+	
+	<resultMap type="com.kh.baraonda.tips.model.vo.TipsFiles" id="filesResultSet2">
+		<id property="files_no" column="FILES_NO"/>
+		<result property="f_reference_no" column="F_REFERENCE_NO"/>
+		<result property="files_title" column="FILES_TITLE"/>
+		<result property="files_change_title" column="FILES_CHANGE_TITLE"/>
+		<result property="files_type" column="FILES_TYPE"/>
+		<result property="files_root" column="FILES_ROOT"/>
+		<result property="files_secession" column="FILES_SECESSION"/>
+	</resultMap> -->
+ 
+
+	<select id="experienceListCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_TYPE = 5 AND BOARD_STATUS = 0 and writing_type = 16
+	</select>
+	
+	<select id="selectExperienceList" resultMap="tipsResultSet3">
+      select b.board_title, b.board_date, b.board_count, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,ff.files_root as profile_root
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join files f on (b.board_no = f.f_reference_no)
+            join files ff on (b.member_no = ff.f_reference_no)
+            where board_status = 0 and f.FILES_SECESSION = 0 and f.FILES_TYPE = 4 and board_type=5 and b.writing_type = 16 and ff.files_type = 1
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,ff.files_root
+            order by b.board_no desc
+        
+	</select>
+	
+	<!-- 꿀팁 상세 -->
+	<!-- <select id="selectTipsOne" resultMap="tipsResultSet2">
+		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,MEMBER_NO,BOARD_DATE,MODIFY_DATE,BOARD_STATUS,BOARD_COUNT, FILES_root
+		FROM BOARD B
+		JOIN FILES F ON (F.F_REFERENCE_NO = B.MEMBER_NO)
+		WHERE BOARD_NO = #{tips_no} AND FILES_TYPE = 1
+	</select>
+	
+	좋아요 수
+	<select id="selectHeartTips" resultType = "_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{tips_no} AND MARKING_TYPE = 2
+	</select>
+	
+	꿀팁 코멘트 수
+	<select id="selectCommentListCountTips" resultType="_int">
+		SELECT COUNT(*) FROM COMMENTS WHERE BOARD_NO = #{tips_no} AND COMMENTS_STATUS = 0
+	</select>
+	
+	꿀팁 코멘트
+	<select id="selectCommentTips" resultMap="tipsCommentResultSet">
+		SELECT C.COMMENTS_NO, C.COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,FILES_ROOT FROM COMMENTS C
+		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
+        JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)
+		WHERE BOARD_NO = #{tips_no} AND COMMENTS_STATUS = 0 and FILES_TYPE = 1 ORDER BY COMMENTS_NO DESC
+	</select>
+	
+	조회수
+	<update id="updateTipsCount">
+		UPDATE BOARD SET BOARD_COUNT = BOARD_COUNT + 1 WHERE BOARD_NO = #{tips_no}
+	</update>
+	
+	검색수
+	<select id="searchTipsCount" resultType = "_int">
+		SELECT COUNT(*) FROM BOARD B
+		JOIN MEMBER M ON (B.MEMBER_NO = M.MEMBER_NO)
+		WHERE B.BOARD_STATUS = 0
+		<choose>
+			<when test="writer != null">
+				AND M.NICK_NAME LIKE '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				AND BOARD_TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<otherwise>
+				AND BOARD_CONTENT LIKE '%' || #{content} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	
+	검색목록
+	<select id="searchTipsList" resultMap="tipsResultSet2">
+		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
+        FROM (     
+            select b.board_title, b.board_date, b.board_count, count(m.board_no) board_good, 
+                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join marking m on (b.board_no = m.board_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
+            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            ) T
+        JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
+        AND FF.FILES_SECESSION = 0
+        AND FF.FILES_TYPE = 1
+		<choose>
+			<when test="writer != null">
+				AND M.NICK_NAME LIKE '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				AND BOARD_TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<otherwise>
+				AND BOARD_CONTENT LIKE '%' || #{content} || '%'
+			</otherwise>
+		</choose>
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+	꿀팁작성
+	<insert id="insertTips" parameterType="Tips">
+		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, 1, NULL, #{board_title}, #{board_content}, #{member_no}, SYSDATE,SYSDATE,DEFAULT,DEFAULT)
+		<selectKey keyProperty="f_reference_no" resultType="_int" order="AFTER">select seq_board_no.currval from dual</selectKey>
+	</insert>
+	
+	파일 업로드
+	<insert id="insertPhoto" parameterType="TipsFiles">
+		INSERT INTO FILES
+		VALUES(
+			SEQ_FILES_NO.NEXTVAL, #{f_reference_no},
+			 #{files_title}, #{files_change_title}, 
+			 #{files_type}, '/resources/images/uploadFiles/', 0
+		)
+	
+	</insert>
+	
+	꿀팁삭제
+	<update id="deleteTips">
+		UPDATE BOARD SET BOARD_STATUS = 1 WHERE BOARD_NO = #{tips_no}
+	</update>
+	
+	꿀팁수정
+	<update id="updateTips">
+		UPDATE BOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
+	</update>
+	
+	파일 이름 수정
+	<update id="updatePhoto" parameterType="TipsFiles">
+		UPDATE FILES SET FILES_TITLE = #{files_title}, FILES_CHANGE_TITLE = #{files_change_title} WHERE F_REFERENCE_NO = #{f_reference_no}
+	</update>
+	
+	
+	댓글작성
+	<insert id="insertCommentTips">
+		INSERT INTO COMMENTS VALUES(SEQ_COMMENTS_NO.NEXTVAL, #{comments_content}, #{board_no}, #{member_no}, SYSDATE, 0)
+	</insert>
+	
+	댓글삭제
+	<update id="deleteCommentTips">
+		UPDATE COMMENTS SET COMMENTS_STATUS = 1 WHERE COMMENTS_NO = #{comment_no}
+	</update>
+	
+	북마크숫자
+	<select id="checkBookmarkTips" resultType = "_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 1
+	</select>
+	
+	북마크등록
+	<insert id="insertBookmarkTips">
+		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 1, SYSDATE, #{board_no}, #{member_no})
+	</insert>
+	
+	북마크삭제
+	<delete id="deleteBookmarkTips">
+		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 1
+	</delete>
+	
+	좋아요숫자
+	<select id="checkHeartTips" resultType = "_int">
+		SELECT COUNT(*) FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
+	</select>
+	
+	좋아요등록
+	<insert id="insertHeartTips">
+		INSERT INTO MARKING VALUES (SEQ_MARKING_NO.NEXTVAL, 2, SYSDATE, #{board_no}, #{member_no})
+	</insert>
+	
+	좋아요삭제
+	<delete id="deleteHeartTips">
+		DELETE FROM MARKING WHERE BOARD_NO = #{board_no} AND MEMBER_NO = #{member_no} AND MARKING_TYPE = 2
+	</delete>
+	
+	다음글
+	<select id="selectNextNoTips" resultType="_int">
+		select MIN(board_no) from board where <![CDATA[board_no > #{tips_no}]]> and board_type = 1 and board_status = 0
+	</select>
+	
+	이전글
+	<select id="selectBeforeNoTips" resultType="_int">
+		select MAX(board_no) from board where <![CDATA[board_no < #{tips_no}]]> and board_type = 1 and board_status = 0
+	</select>
+	 -->
+	
+	
+</mapper> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
