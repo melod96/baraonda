@@ -62,7 +62,11 @@ public interface AdminDao {
 
 	Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession, String num) throws AdminException;
 
-	List<Map<String, Object>> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num);
+	Map<String, Object> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num) throws AdminException;
+
+	Map<String, Object> selectMemberInfoForDashboard(SqlSessionTemplate sqlSession) throws AdminException;
+
+	Map<String, Object> selectDashboardInfo(SqlSessionTemplate sqlSession) throws AdminException;
 
 
 	

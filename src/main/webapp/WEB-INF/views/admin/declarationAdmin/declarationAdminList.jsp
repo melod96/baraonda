@@ -106,7 +106,7 @@
                             		<button type="button" class="btn btn-outline btn-primary" disabled>&lt;</button>
                             	</c:if>
                             	<c:if test="${ pi.currentPage > 1}">
-                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage - 1 })">&lt;</button>
+                            		<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage - 1 });">&lt;</button>
                             	</c:if>
                                 <span class="paging-numbers">
                                 	<c:if test="${ pi.currentPage <= 1 }">
@@ -128,26 +128,26 @@
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num })">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
 									<c:if test="${ pi.currentPage > 1 && (pi.currentPage > (pi.maxPage - 1)) }">
 		                               	<c:forEach begin="${ pi.currentPage - 2 }" end="${ pi.currentPage }" step="1" var="num">
-		                               		<c:if test="${ num <= pi.maxPage }">
+		                               		<c:if test="${ num > 0 && num <= pi.maxPage }">
 			                               		<c:if test="${ num == pi.currentPage }">
 			                               			<button type="button" class="btn btn-outline btn-primary" disabled>${ num }</button>
 			                               		</c:if>
 			                               		<c:if test="${ num != pi.currentPage }">
-			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num })">${ num }</button>
+			                               			<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ num });">${ num }</button>
 			                               		</c:if>
 		                               		</c:if>
 										</c:forEach>
 									</c:if>
                                 </span>
                                 <c:if test="${ pi.currentPage < pi.endPage }">
-                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage + 1 })">&gt;</button>
+                                	<button type="button" class="btn btn-outline btn-primary" onclick="paginate(${ pi.currentPage + 1 });">&gt;</button>
                                 </c:if>
                                 <c:if test="${ pi.currentPage >= pi.endPage }">
                                 	<button type="button" class="btn btn-outline btn-primary" disabled>&gt;</button>
