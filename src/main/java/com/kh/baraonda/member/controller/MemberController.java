@@ -1,5 +1,6 @@
 package com.kh.baraonda.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -179,6 +180,25 @@ public class MemberController {
 	
 	
 	
+	@RequestMapping("findId.me")
+	public String findId() {
+	
+		return "common/findId";
+	}
+	
+	@RequestMapping("selectIds.me")
+	public String selectIds(@RequestParam String email, @RequestParam String name, Model model) {
+	
+		Member m = new Member();
+		m.setName(name);
+		m.setEmail(email);
+		
+		ArrayList<Member> findIdList = ms.selectIds(m);
+	
+		model.addAttribute("findIdList", findIdList );
+	
+		return "common/findIdResult";
+	}
 	
 	
 	

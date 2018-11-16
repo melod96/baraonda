@@ -53,7 +53,7 @@
 										</div>
 										
 											<div class="idPwdSearch">
-												<button type="button" class="btn btn-default">아이디  찾기</button>
+												<button type="button" class="btn btn-default" onclick="location.href='findId.me'">아이디  찾기</button>
 												<button type="button" class="btn btn-default">비밀번호 찾기</button>
 											</div>
 									</form>

@@ -1,5 +1,7 @@
 package com.kh.baraonda.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -84,7 +86,10 @@ public class MemberServiceImpl implements MemberService{
 		return md.selectNickCheck(sqlSession, m);
 	}
 
-
+	@Override
+	public ArrayList<Member> selectIds(Member m){
+		return md.selectIds(sqlSession, m);
+	}
 
 	
 

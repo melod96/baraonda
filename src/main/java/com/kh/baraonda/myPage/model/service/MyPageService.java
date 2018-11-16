@@ -58,6 +58,8 @@ public interface MyPageService {
 
 	void updatePwd(Member loginUser);
 
+	int selectId(Member m);
+
 
 
 

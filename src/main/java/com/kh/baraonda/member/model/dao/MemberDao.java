@@ -1,5 +1,7 @@
 package com.kh.baraonda.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.baraonda.member.model.vo.Member;
@@ -24,6 +26,6 @@ public interface MemberDao {
 
 	int selectNickCheck(SqlSessionTemplate sqlSession, Member m);
 
-
+	ArrayList<Member> selectIds(SqlSessionTemplate sqlSession, Member m);
 
 }

@@ -508,4 +508,36 @@ public class MyPageController {
 			return "redirect:logout.me";
 		}
 		
+		
+		//이메일 인증 ajax
+		@SuppressWarnings("null")
+		@RequestMapping(value="findId.my")
+		public @ResponseBody String findId(@RequestParam String email,@RequestParam String namee){	
+			
+			System.out.println(namee);
+			System.out.println(email);
+			
+			Member m = new Member();
+			
+			m.setName(namee);
+			m.setEmail(email);
+			
+			int result = mps.selectId(m);
+			
+			System.out.println(result);
+			if(result > 0){
+			
+				GmailSend mail = new GmailSend();
+				String key = new TempKey().getKey(10, false); // 인증키 생성
+				System.out.println(key);
+				mail.GmailSet(email, "[Baraonda 이메일 인증입니다]","다음 인증 번호를 인증번호 기입란에 입력해주세요. [ "+key+" ]" );
+			
+				System.out.println("이메일 전송 완료");
+			
+				return key;
+			}else{
+				return "";
+			}
+		}
+		
 }

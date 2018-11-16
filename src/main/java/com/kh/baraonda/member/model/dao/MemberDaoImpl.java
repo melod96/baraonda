@@ -60,7 +60,10 @@ public class MemberDaoImpl implements MemberDao{
 		return ((ArrayList)sqlSession.selectList("Member.selectNickCheck",m)).size();
 	}
 
-	
+	@Override
+	public ArrayList<Member> selectIds(SqlSessionTemplate sqlSession, Member m){
+		return (ArrayList)sqlSession.selectList("member.selectIds",m);
+	}
 
 
 	
