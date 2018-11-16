@@ -157,4 +157,10 @@ public class MyPageDaoImpl implements MyPageDao {
 		sqlSession.update("MyPage.updatePwd", loginUser);
 	}
 
+	@Override
+	public int selectId(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("name, email : " + m.getName() + m.getEmail());
+		return ((ArrayList)sqlSession.selectList("MyPage.selectId", m)).size();
+	}
+
 }

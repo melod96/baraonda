@@ -122,6 +122,11 @@
 		AND MEMBER_STATUS = 0
 	</select>
 	
+	<select id="selectIds" resultMap="memberResultSet">
+		SELECT ID 
+		FROM MEMBER
+		WHERE NAME = #{name} AND EMAIL = #{email}
+	</select>
 	
 </mapper>
 

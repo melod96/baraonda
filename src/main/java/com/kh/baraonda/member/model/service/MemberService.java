@@ -1,5 +1,7 @@
 package com.kh.baraonda.member.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.baraonda.member.model.exception.LoginException;
 import com.kh.baraonda.member.model.vo.Member;
 
@@ -23,5 +25,5 @@ public interface MemberService {
 
 	int selectNickCheck(Member m);
 
-
+	ArrayList<Member> selectIds(Member m);
 }

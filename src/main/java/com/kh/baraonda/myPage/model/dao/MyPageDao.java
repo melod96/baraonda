@@ -60,6 +60,8 @@ public interface MyPageDao {
 
 	void updatePwd(SqlSessionTemplate sqlSession, Member loginUser);
 
+	int selectId(SqlSessionTemplate sqlSession, Member m);
+
 
 
 

@@ -294,6 +294,14 @@
 		UPDATE MEMBER SET PASSWORD = '${password}' WHERE MEMBER_NO = ${member_no}
 	</update>
 	
+	<!--아이디 찾기 이메일 전송 전 일치값이 있는지 확인-->
+	<select id="selectId" resultMap="memberResultSet">
+		SELECT * 
+		FROM MEMBER
+		WHERE NAME = #{name}
+		AND EMAIL = #{email}
+		AND MEMBER_STATUS = 0
+	</select>
 	
 </mapper>
 
