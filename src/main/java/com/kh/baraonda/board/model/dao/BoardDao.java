@@ -73,6 +73,9 @@ public interface BoardDao {
 	int insertHome(SqlSessionTemplate sqlSession, Board b);
 	//파일 업로드
 	void insertPhoto(SqlSessionTemplate sqlSession, HomeFiles file);
+	
+	//관리자 게시글 삭제
+	void adminDelete(SqlSessionTemplate sqlSession, List<String> valueArr);
 
 	
 

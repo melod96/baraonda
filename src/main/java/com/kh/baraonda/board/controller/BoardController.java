@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +32,12 @@ import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.PaginationComment;
 import com.kh.baraonda.common.SearchCondition;
+import com.kh.baraonda.main.model.exception.MainSelectListException;
+import com.kh.baraonda.main.model.service.MainService;
+import com.kh.baraonda.main.model.vo.Fame;
+import com.kh.baraonda.main.model.vo.Ranking;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
 
 @Controller
@@ -39,10 +45,30 @@ public class BoardController {
 	@Inject
 	BoardService boardService;
 
-
+	@Autowired
+	private MainService ms;
+	
 	//게시글 전체 목록 조회
 	@RequestMapping("list.do")
 	public ModelAndView list(ModelAndView mv, int writing_type, PageInfo pi) {
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			mv.addObject("flist", flist);
+			nlist = ms.selectNotice();
+			mv.addObject("nlist", nlist);
+			rlist = ms.selectRanking();
+			mv.addObject("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			mv.addObject("msg", e1.getMessage());
+		}
+		
+		
 		int currentPage = 1;
 
 		if(pi.getCurrentPage() > 0) {
@@ -294,6 +320,23 @@ public class BoardController {
 	//홈트레이닝 게시판 리스트
 	@RequestMapping("home.do")
 	public String homeTrainingList(Model model, PageInfo pi, int writing_type) {
+		//명예의전당
+		ArrayList<Fame> flist;
+		//공지사항
+		ArrayList<Notice> nlist;
+		//다이어터랭킹
+		ArrayList<Ranking> rlist;
+		try {
+			flist = ms.selectFame();
+			model.addAttribute("flist", flist);
+			nlist = ms.selectNotice();
+			model.addAttribute("nlist", nlist);
+			rlist = ms.selectRanking();
+			model.addAttribute("rlist", rlist);
+		} catch (MainSelectListException e1) {
+			model.addAttribute("msg", e1.getMessage());
+		}
+		
 		int currentPage = 1;
 		
 		if(pi.getCurrentPage() > 0) {
@@ -310,8 +353,6 @@ public class BoardController {
 			model.addAttribute("list", list);
 			model.addAttribute("pi", info);
 			model.addAttribute("writing_type", writing_type);
-			System.out.println("list : " + list);
-			System.out.println("pi : " + pi);
 			
 			return "board/homeTraining";
 			
@@ -375,8 +416,15 @@ public class BoardController {
 		}else{
 			model.addAttribute("msg", "작성 실패");
 			return "common/errorPage";
-		}
+		}	
+	}
+	@RequestMapping("adminDelete.do")
+	public void adminDelete(@RequestParam(value = "valueArrTest[]") List<String> valueArr) {
+		System.out.println("value : " + valueArr);
 		
+		boardService.adminDelete(valueArr);
+
+		return;
 	}
 	
 	

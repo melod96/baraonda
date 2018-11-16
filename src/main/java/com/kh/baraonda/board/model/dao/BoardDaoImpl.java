@@ -258,6 +258,11 @@ public class BoardDaoImpl implements BoardDao{
 	public void insertPhoto(SqlSessionTemplate sqlSession, HomeFiles file) {
 		sqlSession.insert("Board.insertPhoto", file);
 	}
+	@Override
+	public void adminDelete(SqlSessionTemplate sqlSession, List<String> valueArr) {
+		SqlSession.selectList("Board.adminDelete", valueArr);
+		
+	}
 
 
 

@@ -75,6 +75,9 @@ public interface BoardService {
 	//파일 업로드
 	void insertPhoto(HomeFiles file);
 	
+	//관리자 게시글 삭제
+	void adminDelete(List<String> valueArr);
+	
 	
 	
 }

@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-<title>BARAON.DA - 홈트레이닝 글쓰기</title>
+<meta name="viewport"
+	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+<title>BARAON.DA - 글쓰기</title>
+
+<jsp:include page="../common/header.jsp" />
+<jsp:include page="floalaResources.jsp"/>
+
 <style>
 body {
-	text-align: center;
+	text-align: left;
 }
 
 div#editor {
@@ -43,27 +49,30 @@ div#editor {
 }
 .cateTd{width: 150px;}
 .hrline {
-	border-top: 1px solid #313131;
+	border-top: 1.5px solid #313131;
 	margin-bottom: 4px;
 }
 #form_control {width: 150px; float:left;}
-
+#board_content{height: 470px; width: 700px; margin-top: 20px;}
+#froala-editor{{height: 470px; width: 700px; margin-top: 20px;}}
+.fr-box{border: 1px solid #dee2e6; margin-top: -16px;}
+.boardC{height: 500px; width: 730px; margin-top: -18px; border: 1px solid #dee2e6;}
+.boardWriteBtn{text-align: center;}
+.text-left{font-weight: bold;}
+#uploadBtn:hover{color:#28a745;}
 </style>
 
 </head>
 
 <body>
-<jsp:include page="../common/header.jsp" />
+
 	<!---------------------------------- 게시글 작성 페이지(글쓰기) ---------------------------------->
-	<section class="content">
 		<div class="container">
 				<!------------------------------------------------------------------------------------------>
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<h2 class="text-left">
-
-						홈트레이닝 작성하기</h2>
+						<h2 class="text-left">홈트레이닝 - 글쓰기</h2>
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
@@ -83,48 +92,96 @@ div#editor {
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
-										<td>제목</td>
-										<td><input type="text" class="form-control" name="board_title">
-											</td>
+										<td id="title">제목</td>
+										<td>
+											<input type="text" class="form-control"name="board_title">
+										</td>
 									</tr>
 									<tr>
-										<td>썸네일 추가</td>
+									<td>썸네일 추가</td>
 										<td>
-												<button type="button" id="uploadBtn" onclick="uploadPhoto();">사진 불러오기</button>
+											<button type="button" id="uploadBtn" onclick="uploadPhoto();">사진 불러오기</button>
 												
-												<input type="file" id="uploadInput" name="photo" style="display:none; float:right;">
+											<input type="file" id="uploadInput" name="photo" style="display:none; float:right;">
 										</td>
-								
-								</table>
-								<!------------------------------ 글작성 공간 에디터 ------------------------------>
-							
-								<textarea id="edit" name="board_content" style="margin-top: 30px;"></textarea>
+									</tr>
 
+								</table>
+								<!------------------------------ 글작성 공간 (froala editor) ------------------------------>
+								<textarea id="edit" name="board_content"></textarea>
+								
 							</div>
-						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
-							<input type="submit" id="subBtn" value="작성하기" class="btn btn-success">
+						<div class="boardWriteBtn">
+							<input id="subBtn" type="submit" value="작성하기" class="btn btn-success">
 							<input type="reset" value="취소" class="btn btn-warning">
+						</div>
 						</form>
+						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
 					</div>
 				</div>
 				<!------------------------------------------------------------------------------------------>
 			</div>
-	</section>
+			<br><br><br><br><br><br><br><br><br>
 
 	<script>
-    $(function(){
-      $('#edit').froalaEditor()
-    });
-    </script>
-    
-    <script>
-    
-	var key = "";
+		/* froala editor를 textarea에 적용 */
+	  	$(function(){
+    		  $('#edit').froalaEditor()
+   		 });
+		/* 전송 버튼 클릭시 해당 컨트롤러로 전송 */
+		$(document).ready(function(){
+			$("#subBtn").click(function(){
+				var title = $("#board_title").val();
+				var content = $("#edit").val();
+				if(title == ""){
+					alert("제목을 입력하세요.");
+					document.getElementById('title').focus();
+					return;
+				}
+				if(content == ""){
+					alert("내용을 입력하세요.");
+					document.getElementById('edit').focus();
+					return;
+				}
+				document.form1.submit();
+			});
+		});
+		
+		var key = "";
 
-	function uploadPhoto(){
-		$("#uploadInput").trigger("click");
-	}
+		function uploadPhoto(){
+			$("#uploadInput").trigger("click");
+		}
 
-  </script>
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
