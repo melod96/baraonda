@@ -168,6 +168,16 @@ public class AdminServiceImpl implements AdminService {
 		return ad.selectOrderInfo(sqlSession);
 	}
 
+	@Override
+	public int selectExperienceCount(Search search) throws AdminException {
+		return ad.selectExperienceCount(sqlSession, search);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectExperienceList(PageInfo pi, Search search) throws AdminException {
+		return ad.selectExperienceList(sqlSession, pi, search);
+	}
+
 
 	
 	

@@ -385,8 +385,9 @@
 		ORDER BY CO DESC
 	</select>
 	
-	<!-- <select id="selectOrderInfo" resultType="map">
+	<select id="selectOrderInfoP" resultType="map">
 		SELECT  
+            YYYY,
 		    SUM("N1") AS N1, SUM("N2") AS N2, SUM("N3") AS N3, SUM("N4") AS N4, SUM("N5") AS N5,
             SUM("N6") AS N6, SUM("N7") AS N7, SUM("N8") AS N8, SUM("N9") AS N9, SUM("N10") AS N10
 		FROM(
@@ -402,8 +403,36 @@
 		        , DECODE(TO_CHAR(ORDERS_DATE,'YYYYMM'), TO_CHAR(SYSDATE, 'YYYYMM') - 1, 1, 0) AS "N9"
 		        , DECODE(TO_CHAR(ORDERS_DATE,'YYYYMM'), TO_CHAR(SYSDATE, 'YYYYMM') - 0, 1, 0) AS "N10"
 		        FROM ORDERS
-		)
-	</select> -->
+		)GROUP BY YYYY
+	</select>
+	
+	<select id="selectExperienceCount" resultType="java.lang.Integer" parameterType="Search">
+		SELECT COUNT(*)
+		FROM EXPERIENCE E
+		JOIN BOARD B ON(E.BOARD_NO = B.BOARD_NO)
+		JOIN MEMBER M ON(E.COMPANY_NO = M.MEMBER_NO)
+		WHERE 1 = 1
+		AND B.BOARD_TYPE = 5
+		AND WRITING_TYPE = 16
+		<if test="content != null and content != ''">
+			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
+			OR COMPANY_NAME LIKE '%' || #{content} || '%' )
+		</if>
+	</select>
+	
+	<select id="selectExperienceList" parameterType="Search" resultType="map">
+		SELECT E.EXPERIENCE_NO, B.BOARD_TITLE, M.COMPANY_NAME, E.EXPERIENCE_DATE, E.EXPERIENCE_APPROVAL, E.APPROVAL_DATE
+		FROM EXPERIENCE E
+		JOIN BOARD B ON(E.BOARD_NO = B.BOARD_NO)
+		JOIN MEMBER M ON(E.COMPANY_NO = M.MEMBER_NO)
+		WHERE 1 = 1
+		AND B.BOARD_TYPE = 5
+		AND WRITING_TYPE = 16
+		<if test="content != null and content != ''">
+			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
+			OR COMPANY_NAME LIKE '%' || #{content} || '%' )
+		</if>
+	</select>
 	
 </mapper> 
   

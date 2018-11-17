@@ -38,7 +38,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">주문</h1>
+                    <h1 class="page-header">체험단7</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -47,7 +47,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	주문 목록
+                            	체험단 목록
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -65,24 +65,26 @@
                                 <thead>
                                     <tr>
                                         <th width="10%">NO</th>
-                                        <th width="17%">주문자</th>
-                                        <th width="17%">상품</th>
-                                        <th width="17%">수량</th>
-                                        <th width="17%">주문날짜</th>
-                                        <th width="22%">연락처</th>
+                                        <th width="30%">제목</th>
+                                        <th width="20%">회사명</th>
+                                        <th width="15%">등록날짜</th>
+                                        <th width="15%">승인날짜</th>
+                                        <th width="10%">승인여부</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:if test="${ list != null }">
 	                                	<c:forEach var="list" items="${ list }" varStatus="status" begin="0">
 	                               			<tr class="odd gradeX">
-	                               				<input type="hidden" value="${ list.ORDERS_NO }" id="member_no"/>
+	                               				<input type="hidden" value="${ list.EXPERIENCE_NO }" id="experience_no"/>
 		                                        <td>${ status.count + ((pi.currentPage - 1) * pi.limit) }</td>
-		                                        <td>${ list.NAME }</td>
-		                                        <td>${ list.PRODUCT_NAME }</td>
-		                                        <td>${ list.PRODUCT_QUANTITY }</td>
-		                                        <td>${ fn:substring(list.ORDERS_DATE, 0, 10) }</td>
-		                                        <td>${ list.PHONE }</td>
+		                                        <td>${ list.BOARD_TITLE }</td>
+		                                        <td>${ list.COMPANY_NAME }</td>
+		                                        <td>${ fn:substring(list.EXPERIENCE_DATE, 0, 10) }</td>
+		                                        <td>${ fn:substring(list.APPROVAL_DATE, 0, 10) }</td>
+		                                        <td>
+		                                        	${ list.EXPERIENCE_APPROVAL }
+		                                        </td>
 	                                    	</tr>
 	                               		</c:forEach>
                                		</c:if>
@@ -182,8 +184,8 @@
 	
         $(".gradeX").children().each(function(){
     		$(this).click(function(){
-    			var member_no = $(this).parent().children("#member_no").val();
-        		location.href="goOrderAdminDetail.adm?num=" + member_no;
+    			var experience_no = $(this).parent().children("#experience_no").val();
+        		location.href="goExperienceAdminDetail.adm?num=" + experience_no;
     		});
     	});
     });
@@ -191,14 +193,14 @@
     function search(){
     	var content = $('#search-content').val();
     	
-    	location.href="goOrderAdminList.adm?currentPage=1&searchContent=" + content;
+    	location.href="goExperienceAdminList.adm?currentPage=1&searchContent=" + content;
     } 
     
     function paginate(num){
     	if(${ search != null }){
-    		location.href="goOrderAdminList.adm?currentPage=" + num + "&searchContent=${ search.content }";
+    		location.href="goExperienceAdminList.adm?currentPage=" + num + "&searchContent=${ search.content }";
     	}else{
-    		location.href="goOrderAdminList.adm?currentPage=" + num;
+    		location.href="goExperienceAdminList.adm?currentPage=" + num;
     	}
     }
     </script>

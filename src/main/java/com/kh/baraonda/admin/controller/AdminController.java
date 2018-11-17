@@ -320,9 +320,43 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="goExperienceAdminList.adm")
+	public ModelAndView goExperienceAdminList(ModelAndView mv, @ModelAttribute PageInfo pi, 
+											@RequestParam(value="searchContent", required=false)String content) {
+		Search search = new Search(content);
+		int currentPage = 1;
+		if(pi.getCurrentPage() > 0) {
+			currentPage = pi.getCurrentPage();
+		}
+		try {
+			int listCount = as.selectExperienceCount(search);
+			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
+			if(listCount != 0) {
+				mv.addObject("list", as.selectExperienceList(info, search));
+			}
+			mv.addObject("pi", info);
+			mv.addObject("search", search);
+			mv.setViewName("admin/experienceAdmin/experienceAdminList");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "ExperienceDetail 조회 실패!");
+		}
+		return mv;
+	}
 	
-	
-	
+	@RequestMapping(value="goExperienceAdminDetail.adm")
+	public ModelAndView goExperienceAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		try {
+			mv.addObject("memberInfo", as.selectGeneralMemberInfo(num));
+			mv.addObject("membersDeclartionList", as.selectMembersDeclarationList(num));
+			mv.addObject("membersOrderList", as.selectMembersOrderList(num));
+			mv.setViewName("admin/experienceAdmin/experienceAdminDetail");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "MemberDetail 조회 실패!");
+		}
+		return mv;
+	}
 	
 	
 	
