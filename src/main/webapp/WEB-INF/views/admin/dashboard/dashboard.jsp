@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +111,7 @@
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> 일 매출 현황
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 일 게시글 현황
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -120,7 +122,7 @@
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> 월 매출 현황
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 월 주문 현황
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -197,56 +199,20 @@
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> 검색어 순위
+                            <i class="fa fa-bell fa-fw"></i> 판매 상품 순위
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
-                                <a class="list-group-item">
-                                    New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a class="list-group-item">
-                                    Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
+                            	<c:if test="${ productInfo != null }">
+	                              	<c:forEach var="list" items="${ productInfo }" varStatus="status" begin="0">
+	                            		<a class="list-group-item">
+		                                    ${ productInfo.PRODUCT_NAME }
+		                                    <span class="pull-right text-muted small"><em>${ productInfo.CO }</em>
+		                                    </span>
+		                                </a>
+	                            	</c:forEach>
+                               	</c:if>
                             </div>
                             <!-- /.list-group --> 
                         </div>
@@ -284,7 +250,7 @@
         Morris.Area({
             element: 'morris-area-chart',
             data: [{
-                period: '2010 Q1',
+                period: '2018-17',
                 iphone: 2666,
                 ipad: null,
                 itouch: 2647
