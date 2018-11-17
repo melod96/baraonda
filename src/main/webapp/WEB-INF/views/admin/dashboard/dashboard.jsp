@@ -207,8 +207,8 @@
                             	<c:if test="${ productInfo != null }">
 	                              	<c:forEach var="list" items="${ productInfo }" varStatus="status" begin="0">
 	                            		<a class="list-group-item">
-		                                    ${ productInfo.PRODUCT_NAME }
-		                                    <span class="pull-right text-muted small"><em>${ productInfo.CO }</em>
+		                                    ${ list.PRODUCT_NAME }
+		                                    <span class="pull-right text-muted small"><em>${ list.CO }</em>
 		                                    </span>
 		                                </a>
 	                            	</c:forEach>
@@ -250,7 +250,7 @@
         Morris.Area({
             element: 'morris-area-chart',
             data: [{
-                period: '2018-17',
+                period: '2018 Q1',
                 iphone: 2666,
                 ipad: null,
                 itouch: 2647

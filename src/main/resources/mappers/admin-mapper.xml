@@ -385,7 +385,7 @@
 		ORDER BY CO DESC
 	</select>
 	
-	<select id="selectOrderInfo" resultType="map">
+	<!-- <select id="selectOrderInfo" resultType="map">
 		SELECT  
 		    SUM("N1") AS N1, SUM("N2") AS N2, SUM("N3") AS N3, SUM("N4") AS N4, SUM("N5") AS N5,
             SUM("N6") AS N6, SUM("N7") AS N7, SUM("N8") AS N8, SUM("N9") AS N9, SUM("N10") AS N10
@@ -403,7 +403,7 @@
 		        , DECODE(TO_CHAR(ORDERS_DATE,'YYYYMM'), TO_CHAR(SYSDATE, 'YYYYMM') - 0, 1, 0) AS "N10"
 		        FROM ORDERS
 		)
-	</select>
+	</select> -->
 	
 </mapper> 
   

@@ -173,7 +173,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession) throws AdminException {
-		return sqlSession.selectOne("Admin.selectOrderInfo");
+		return null;
 	}
 
 	
