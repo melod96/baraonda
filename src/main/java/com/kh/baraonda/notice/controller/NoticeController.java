@@ -291,4 +291,5 @@ public class NoticeController {
 		
 		return "redirect:noticeDetail.nt?notice_no="+notice_no;
 	}
+
 }
