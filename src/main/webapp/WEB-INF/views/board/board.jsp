@@ -160,7 +160,7 @@
 #boardCategory:hover{cursor:pointer; color : #aaccaa;}
 .boardName{font-weight: bold;}
 .right{margin-top: -180px; margin-left: 70px !important;}
-#deleteBtn{background:red; border-color: white;}
+#deleteBtn{background:red; border-color: white; margin-bottom: 10px;}
 
 
 
@@ -232,6 +232,7 @@
 								<th class="boardCount">조회수</th>
 							</tr>
 						</thead>
+						<form action="deleteBoard.do" method="post">
 							<tbody>
 							<c:forEach items="${list}" var="row">
 								<tr class="boardTr"> 
@@ -244,6 +245,10 @@
 								</tr>
 							</c:forEach>
 						</tbody>
+						<c:if test="${sessionScope.loginUser.admin_right == 1}">
+							<button id="deleteBtn" type="submit" class="btn btn-primary">삭제</button>
+						</c:if>
+					</form>
 					</c:if>
 					</table>
 					<hr class="boardHr2">
@@ -257,10 +262,6 @@
 							 data-toggle="modal" data-target="#login-modal">글쓰기</button>
 						</c:if>
 					</c:if>
-					<c:if test="${sessionScope.loginUser.admin_right == 1}">
-						<button onclick="deleteBoard();" id="deleteBtn" type="submit" class="btn btn-primary">삭제</button>
-					</c:if>
-					
 					<!------------------------------ 페이징 처리------------------------------>
 					<div class="paginate">
 					
