@@ -188,12 +188,16 @@ public class MemberController {
 	
 	@RequestMapping("selectIds.me")
 	public String selectIds(@RequestParam String email, @RequestParam String name, Model model) {
-	
+		
+		System.out.println("cont email : " + email);
+		System.out.println("cont name : " + name);
+		
 		Member m = new Member();
 		m.setName(name);
 		m.setEmail(email);
 		
 		ArrayList<Member> findIdList = ms.selectIds(m);
+		System.out.println("findIdList : " + findIdList);
 	
 		model.addAttribute("findIdList", findIdList );
 	
@@ -201,8 +205,18 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping("changePwd.me")
+	public String changePwd() {
 	
+		return "common/changePwd";
+	}
 	
+	@RequestMapping("changePwdResult.me")
+	public String changePwdResult(@RequestParam String idd, Model model) {
+	
+		model.addAttribute("idd",idd);
+		return "common/changePwdResult";
+	}
 	
 	
 	

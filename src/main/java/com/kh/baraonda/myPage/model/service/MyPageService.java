@@ -60,7 +60,9 @@ public interface MyPageService {
 
 	int selectId(Member m);
 
+	int selectPwd(Member m);
 
+	void updatePwd2(Member m);
 
 
 

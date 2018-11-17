@@ -303,6 +303,21 @@
 		AND MEMBER_STATUS = 0
 	</select>
 	
+	<!--비번변경 시 이메일 전송 전 일치값이 있는지 확인-->
+	<select id="selectPwd" resultMap="memberResultSet">
+		SELECT * 
+		FROM MEMBER
+		WHERE ID = #{id}
+		AND NAME = #{name}
+		AND EMAIL = #{email}
+		AND MEMBER_STATUS = 0
+	</select>
+	
+	<!--비밀번호 변경2-->
+	<update id="updatePwd2" parameterType="_int">
+		UPDATE MEMBER SET PASSWORD = '${password}' WHERE ID = '${id}'
+	</update>	
+	
 </mapper>
 
 

@@ -509,7 +509,7 @@ public class MyPageController {
 		}
 		
 		
-		//이메일 인증 ajax
+		//이메일 인증 ajax - id 찾기
 		@SuppressWarnings("null")
 		@RequestMapping(value="findId.my")
 		public @ResponseBody String findId(@RequestParam String email,@RequestParam String namee){	
@@ -539,5 +539,53 @@ public class MyPageController {
 				return "";
 			}
 		}
+		
+		//이메일 인증 ajax- password
+				@SuppressWarnings("null")
+				@RequestMapping(value="findPwd.my")
+				public @ResponseBody String findPwd(@RequestParam String email,@RequestParam String namee, @RequestParam String idd){	
+					
+					System.out.println(namee);
+					System.out.println(email);
+					System.out.println(idd);
+					
+					Member m = new Member();
+					
+					m.setId(idd);
+					m.setName(namee);
+					m.setEmail(email);
+					
+					int result = mps.selectPwd(m);
+					
+					System.out.println(result);
+					if(result > 0){
+					
+						GmailSend mail = new GmailSend();
+						String key = new TempKey().getKey(10, false); // 인증키 생성
+						System.out.println(key);
+						mail.GmailSet(email, "[Baraonda 이메일 인증입니다]","다음 인증 번호를 인증번호 기입란에 입력해주세요. [ "+key+" ]" );
+					
+						System.out.println("이메일 전송 완료");
+					
+						return key;
+					}else{
+						return "";
+					}
+				}
+		
+			@RequestMapping("updatePwd2.my")
+			public String updatePwd(@RequestParam String pwd, @RequestParam String idd) {
+				Member m = new Member();
+			
+				m.setId(idd);
+				
+				String encPassword = passwordEncoder.encode(pwd);
+				m.setPassword(encPassword);
+				mps.updatePwd2(m);
+			
+				return "redirect:logout.me";
+			}
+		
+		
 		
 }

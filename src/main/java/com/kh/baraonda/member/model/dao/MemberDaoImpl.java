@@ -62,7 +62,7 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public ArrayList<Member> selectIds(SqlSessionTemplate sqlSession, Member m){
-		return (ArrayList)sqlSession.selectList("member.selectIds",m);
+		return (ArrayList)sqlSession.selectList("Member.selectIds",m);
 	}
 
 
