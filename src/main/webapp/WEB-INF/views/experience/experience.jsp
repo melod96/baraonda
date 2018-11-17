@@ -210,9 +210,10 @@ margin-top: -10px;
 							[이전] &nbsp;
 						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="blistBack" value="searchTips.tp">
+							<c:url var="blistBack" value="searchExperience.ep">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
 								<c:param name="search" value="${search}"/>
+								<c:param name="searchtype" value="${searchtype}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -222,9 +223,10 @@ margin-top: -10px;
 								<font color="red" size="4"><b>[${ p }]</b></font>
 							</c:if>
 							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="blistCheck" value="searchTips.tp">
+								<c:url var="blistCheck" value="searchExperience.ep">
 									<c:param name="currentPage" value="${ p }"/>
 									<c:param name="search" value="${search}"/>
+									<c:param name="searchtype" value="${searchtype}"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
@@ -236,9 +238,10 @@ margin-top: -10px;
 							&nbsp; [다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="searchTips.tp">
+							<c:url var="blistEnd" value="searchExperience.ep">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 								<c:param name="search" value="${search}"/>
+								<c:param name="searchtype" value="${searchtype}"/>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
@@ -249,8 +252,8 @@ margin-top: -10px;
 				<br>
 
 
-	<form action="searchTips.tp" method="get">
-			<div class="search">
+	<form action="searchExperience.ep" method="get">
+			<div class="search" >
 				<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;" name = "searchtype">
 					<option value = "title">제목</option>
 					<option value = "content">내용</option>
@@ -262,29 +265,14 @@ margin-top: -10px;
 						<img src="${pageContext.request.contextPath}/resources/images/dictionaryImg/Search.png" style="width:20px; height:20px;"/>
 					</button>
 				</div>
+		<c:if test="${sessionScope.loginUser.company_right == 1}">
+							<a href="experienceWrite.ep" style = "float:right;"> 
+								<button type="button" class="btn btn-danger" style = "width:112px; height:44px; margin:0;">신청하기</button>
+							</a> 
+		</c:if>
 	<!-- 			<button type="button" class="btn btn-primary" style="float:right; margin:0;" onclick = "location.href='noticeWrite.nt'">작성하기</button> -->
 			</div>
-		</form>
-			<!-- 	<form action="searchTips.tp" method="get">
-				<div id="searchForm">
-						<table>
-							<tr>
-								<td><select class="form-control input-xshort" id="select" name = "searchtype">
-										<option value = "title">제목</option>
-										<option value = "content">내용</option>
-										<option value = "writer">작성자</option>
-								</select></td>
-								<td>
-								
-								<input id="boardInput" name=""
-									class="form-control input-short" type="text" placeholder="">
-									
-								</td>
-								<td><button id="boardBtn" type="submit" class="btn btn-primary">검색</button></td>
-							</tr>
-						</table>
-						</div>
-					</form> -->
+		</form> 
 					<br>
 					<br>
 					
