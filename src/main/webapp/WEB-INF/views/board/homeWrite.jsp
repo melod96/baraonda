@@ -125,10 +125,10 @@ div#editor {
 
 	<script>
 		/* froala editor를 textarea에 적용 */
-	  	$(function(){
-    		  $('#edit').froalaEditor()
-   		 });
-		/* 전송 버튼 클릭시 해당 컨트롤러로 전송 */
+	  	$('#edit').froalaEditor({   
+			imageUploadURL:'http://i.froala.com/upload'});
+		
+		/* 제목, 내용 입력 체크 */
 		$(document).ready(function(){
 			$("#subBtn").click(function(){
 				var title = $("#board_title").val();
@@ -147,8 +147,9 @@ div#editor {
 			});
 		});
 		
+		/* 썸네일 이미지 DB업로드 */
 		var key = "";
-
+	
 		function uploadPhoto(){
 			$("#uploadInput").trigger("click");
 		}

@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARAON.DA - 커뮤니티</title>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="../common/header.jsp" />
 
@@ -214,7 +215,7 @@
 									<th class="boardNo">${row.BOARD_NO}</th>
 									<th class="boardSubject2">${row.BOARD_TITLE}</th>
 									<th class="boardWriter">${row.NICK_NAME}</th>
-									<th class="boardDay">${row.BOARD_DATE}</th>
+									<th class="boardDay">${ fn:substring(row.BOARD_DATE, 0, 10) }</th>
 									<th class="boardCount">${row.BOARD_COUNT}</th>
 								</tr>
 							</c:forEach>
@@ -240,7 +241,7 @@
 									<th class="boardNo" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_NO}</th>
 									<th class="boardSubject2" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_TITLE}</th>
 									<th class="boardWriter" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.NICK_NAME}</th>
-									<th class="boardDay" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_DATE}</th>
+									<th class="boardDay" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${ fn:substring(row.BOARD_DATE, 0, 10) }</th>
 									<th class="boardCount" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">${row.BOARD_COUNT}</th>
 								</tr>
 							</c:forEach>
