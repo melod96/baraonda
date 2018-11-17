@@ -105,19 +105,6 @@ div#editor {
 								</table>
 								<!------------------------------ 글작성 공간 (froala editor) ------------------------------>
 								<textarea id="edit" name="board_content"></textarea>
-								<!-- <div id="editor" >
-									<div id='edit' style="margin-top: 30px;">
-									</div>
-								</div> -->
-								<!-- <div class="boardC">
-									<textarea id="board_content" name="board_content" rows="2" cols="40"></textarea>
-								</div> -->
-								
-								<!-- <div id="editor">
-									<div id='edit' style="margin-top: 30px;">
-										
-									</div>
-								</div> -->
 								
 							</div>
 						<div class="boardWriteBtn">
@@ -133,30 +120,9 @@ div#editor {
 			<br><br><br><br><br><br><br><br><br>
 
 	<script>
-		/* froala editor를 textarea에 적용 */
-	  	$(function(){
-    		  $('#edit').froalaEditor()
-   		 });
-		/* 
-		$(function() {
-			$('#edit').froalaEditor().on(
-					'froalaEditor.image.beforeUpload',
-					function(e, editor, files) {
-						if (files.length) {
-							var reader = new FileReader();
-							reader.onload = function(e) {
-								var result = e.target.result;
-
-								editor.image.insert(result, null, null,
-										editor.image.get());
-							};
-
-							reader.readAsDataURL(files[0]);
-						}
-
-						return false;
-					})
-		}); */
+		/* froala editor를 textarea에 적용 */	
+	  	$('#edit').froalaEditor({   
+	  		imageUploadURL:'http://i.froala.com/upload'});
 		
 		/* 전송 버튼 클릭시 해당 컨트롤러로 전송 */
 		$(document).ready(function(){
@@ -178,12 +144,6 @@ div#editor {
 		});
 	</script>
 	
-	<%-- <c:if test="${empty sessionScope.loginUser}">
-		<script>
-			alert("로그인 후 이용해주세요.");
-			location.href="${path}/baraonda/main.m";
-		</script>
-	</c:if> --%>
 </body>
 </html>
 

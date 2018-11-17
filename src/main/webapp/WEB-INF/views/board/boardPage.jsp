@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>BARAON.DA</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="../common/header.jsp" />
 
@@ -415,7 +416,7 @@
 						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
 							<div class="group_inner">
 								<ul class="date_menu">
-									<li class="da01"><span>${detail.BOARD_DATE}</span></li>
+									<li class="da01"><span>${ fn:substring(detail.BOARD_DATE, 0, 10) }</span></li>
 									<li class="da02"><span>${detail.BOARD_COUNT}</span></li>
 									<li class="da03"><span>${detail.COMMENTS_COUNT}</span></li>
 								</ul>
