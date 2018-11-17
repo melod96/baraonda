@@ -77,7 +77,9 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
    	$(function() { 
-    	$('#editor').froalaEditor();
+    	$('#editor').froalaEditor({
+            imageUploadURL:'http://i.froala.com/upload'
+    	});
     }); 
    	
    	function getPost(num){

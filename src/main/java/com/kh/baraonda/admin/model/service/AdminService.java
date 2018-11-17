@@ -62,6 +62,12 @@ public interface AdminService {
 
 	Map<String, Object> selectDashboardInfo() throws AdminException;
 
+	List<Map<String, Object>> selectBoardInfo() throws AdminException;
+
+	List<Map<String, Object>> selectProductInfo() throws AdminException;
+
+	Map<String, Object> selectOrderInfo() throws AdminException;
+
 	
 	
 }

@@ -68,6 +68,12 @@ public interface AdminDao {
 
 	Map<String, Object> selectDashboardInfo(SqlSessionTemplate sqlSession) throws AdminException;
 
+	List<Map<String, Object>> selectBoardInfo(SqlSessionTemplate sqlSession) throws AdminException;
+
+	List<Map<String, Object>> selectProductInfo(SqlSessionTemplate sqlSession) throws AdminException;
+
+	Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession) throws AdminException;
+
 
 	
 }

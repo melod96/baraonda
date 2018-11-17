@@ -27,6 +27,9 @@ public class AdminController {
 	public ModelAndView goDashboard(ModelAndView mv) {		
 		try {
 			mv.addObject("dashboardInfo", as.selectDashboardInfo());
+			mv.addObject("boardInfo", as.selectBoardInfo());
+			mv.addObject("productInfo", as.selectProductInfo());
+			mv.addObject("orderInfo", as.selectOrderInfo());
 			mv.addObject("memberInfo", as.selectMemberInfoForDashboard());
 			mv.setViewName("admin/dashboard/dashboard");
 		} catch (AdminException e){

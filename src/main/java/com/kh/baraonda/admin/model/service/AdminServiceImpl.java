@@ -153,6 +153,21 @@ public class AdminServiceImpl implements AdminService {
 		return ad.selectDashboardInfo(sqlSession);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectBoardInfo() throws AdminException {
+		return ad.selectBoardInfo(sqlSession);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProductInfo() throws AdminException {
+		return ad.selectProductInfo(sqlSession);
+	}
+
+	@Override
+	public Map<String, Object> selectOrderInfo() throws AdminException {
+		return ad.selectOrderInfo(sqlSession);
+	}
+
 
 	
 	
