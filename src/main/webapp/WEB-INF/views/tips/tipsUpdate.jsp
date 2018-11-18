@@ -109,7 +109,8 @@ div#editor {
 
 	<script>
     $(function(){
-      $('#edit').froalaEditor()
+    	$('#edit').froalaEditor({   
+    		imageUploadURL:'http://i.froala.com/upload'});
     });
   </script>
   

@@ -51,6 +51,7 @@ public interface TipsDao {
 	//꿀팁 검색 리스트
 	ArrayList<Tips> searchTipsList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo pgif);
 	
+	
 		//공지사항 insert
 		int insertTips(SqlSessionTemplate sqlSession, Tips t);
 		
@@ -94,5 +95,7 @@ public interface TipsDao {
 
 		//이전글 번호
 		int selectBeforeNoTips(SqlSessionTemplate sqlSession, String tips_no);
+
+		
 
 }

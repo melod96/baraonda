@@ -330,6 +330,20 @@
 	cursor:pointer;
 }
 </style>
+<script>
+//댓글 내용 입력 체크
+$(document).ready(function(){
+	$("#btncmm1").click(function(){
+		var comment = $("#comment").val();
+		if(comment == ""){
+			alert("내용을 입력하세요.");
+			document.getElementById('comment').focus();
+			return;
+		}
+		document.form1.submit();
+	});
+});
+</script>
 <body class="page1" id="top">
 	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
 	<jsp:include page="../common/header.jsp" />
@@ -403,7 +417,7 @@
 								<img class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
 							</a> 
 						</c:if>
-						<a href="tips.tp"> 
+						<a href="tips.tp?writing_type=0"> 
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">
 						</a>
 					</div>
@@ -421,7 +435,7 @@
 									placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~
 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다." name = "comments_content"></textarea>
 								<c:if test="${! empty sessionScope.loginUser}">
-									<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
+									<button type="submit" id="btncmm1" class="btn btn-primary">입력</button>
 								</c:if>
 								<c:if test="${empty sessionScope.loginUser}">
 									<button type="button" id="btncmm" class="btn btn-primary login"  data-toggle="modal" data-target="#login-modal">입력</button>
@@ -465,17 +479,44 @@
 						</c:forEach>
 					</table>
 					<div class="paginate">
-                        <a href="#" class="btn-first" title="처음"><em class="blind">목록에서 처음 페이지 이동</em></a>
-                        <a href="#" class="btn-prev" title="이전"><em class="blind">목록에서 이전 페이지 이동</em></a>
-                        <span class="paging-numbers">
-                            <a href="#">1<span class="blind">페이지로 이동</span></a>
-                            <a href="#" class="on">2<span class="blind">페이지로 이동</span></a>
-                            <a href="#">3<span class="blind">페이지로 이동</span></a>
-                            <a href="#">4<span class="blind">페이지로 이동</span></a>
-                            <a href="#">5<span class="blind">페이지로 이동</span></a>
-                        </span>
-                        <a href="#" class="btn-next" title="다음"><span class="spr"><em class="blind">목록에서 다음 페이지 이동</em></span></a>
-                        <a href="#" class="btn-last" title="끝"><span class="spr"><em class="blind">목록에서 끝 페이지 이동</em></span></a>
+                       <c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="tipsDetail.tp">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="tips_no" value="${tinfo.board_no }"/>
+							</c:url>
+							<a href="${ blistBack }">[이전]</a>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="tipsDetail.tp">
+									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="tips_no" value="${tinfo.board_no }"/>
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						
+						
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							&nbsp; [다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage}">
+							<c:url var="blistEnd" value="tipsDetail.tp">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="tips_no" value="${tinfo.board_no }"/>
+							</c:url>
+							&nbsp; 
+							<a href="${ blistEnd }">[다음]</a>
+						</c:if>
+		
 					</div>
 
 					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
