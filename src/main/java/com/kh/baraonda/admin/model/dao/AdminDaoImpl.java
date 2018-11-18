@@ -187,6 +187,16 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("Admin.selectExperienceList" , search, rowBounds);
 	}
 
+	@Override
+	public Map<String, Object> selectExperienceInfo(SqlSessionTemplate sqlSession, String num) throws AdminException {
+		return sqlSession.selectOne("Admin.selectExperienceInfo", num);
+	}
+
+	@Override
+	public void updateExperienceInfo(SqlSessionTemplate sqlSession, AdminBoard adminBoard) throws AdminException {
+		sqlSession.update("Admin.updateExperienceInfo", adminBoard);
+	}
+
 	
 	
 

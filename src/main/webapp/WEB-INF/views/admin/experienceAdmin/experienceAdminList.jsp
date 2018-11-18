@@ -83,7 +83,8 @@
 		                                        <td>${ fn:substring(list.EXPERIENCE_DATE, 0, 10) }</td>
 		                                        <td>${ fn:substring(list.APPROVAL_DATE, 0, 10) }</td>
 		                                        <td>
-		                                        	${ list.EXPERIENCE_APPROVAL }
+		                                        	<c:if test="${ list.EXPERIENCE_APPROVAL == 1 }">승인</c:if>
+		                                        	<c:if test="${ list.EXPERIENCE_APPROVAL == 0 }">미승인</c:if>
 		                                        </td>
 	                                    	</tr>
 	                               		</c:forEach>

@@ -178,6 +178,16 @@ public class AdminServiceImpl implements AdminService {
 		return ad.selectExperienceList(sqlSession, pi, search);
 	}
 
+	@Override
+	public Map<String, Object> selectExperienceInfo(String num) throws AdminException {
+		return ad.selectExperienceInfo(sqlSession, num);
+	}
+
+	@Override
+	public void updateExperienceInfo(AdminBoard adminBoard) throws AdminException {
+		ad.updateExperienceInfo(sqlSession, adminBoard);
+	}
+
 
 	
 	

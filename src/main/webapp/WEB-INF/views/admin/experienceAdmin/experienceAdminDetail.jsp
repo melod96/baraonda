@@ -8,7 +8,7 @@
 <jsp:include page="../commonAdmin/head.jsp" />
 <style>
 	.content{
-		height: 500px;
+		height: 300px;
 	}
 	.fr-view {
         height: 300px !important;
@@ -47,25 +47,26 @@
                             <div class="col-lg-12">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
-                                        	제목 : ${ boardInfo.BOARD_TITLE }
+                                        	제목 : ${ experienceInfo.BOARD_TITLE }
                                     </div>
                                     <div class="panel-body content">
-                                        <p>${ boardInfo.BOARD_CONTENT }</p>
+                                        <p>${ experienceInfo.BOARD_CONTENT }</p>
                                     </div>
                                     <div class="panel-footer">
-                                        	${ fn:substring(boardInfo.BOARD_DATE, 0, 10) }  작성자 : ${ boardInfo.NICK_NAME }
+                                        	${ fn:substring(experienceInfo.BOARD_DATE, 0, 10) }  작성자 : ${ experienceInfo.CEO_NAME }
                                     </div>
                                 </div>
 	                            <form name="frmSubmit">
 			                        <div class="panel-body">
 			                            <div class="form-group">
 			                            	<label>처리 사유</label>
-			                                <textarea id="editor" name="content"></textarea>
+			                                <textarea id="editor" name="content">${ experienceInfo.APPROVAL_CONTENT }</textarea>
 			                            </div>
 			                            <div class="form-group" align="center">
 			                                <button type="button" class="btn btn-default" onclick="location.href='goExperienceAdminList.adm'">목록</button>
-	                                <button type="button" class="btn btn-primary" onclick="location.href=''">승인</button>
-	                                <button type="button" class="btn btn-danger" onclick="location.href=''">거절</button>
+			                                <c:if test="${ experienceInfo.EXPERIENCE_APPROVAL == 0 }">
+			                                	<button type="button" class="btn btn-primary" onclick="getPost(${ experienceInfo.EXPERIENCE_NO });">승인</button>
+			                                </c:if>
 			                            </div>
 			                        </div>
 		                        </form>
@@ -92,6 +93,13 @@
             imageUploadURL:'http://i.froala.com/upload'
     	});
     });
+    
+    function getPost(num){
+   		var theForm = document.frmSubmit;
+   		theForm.method="post";
+   		theForm.action="goExperienceUpdate.adm?num=" + num;
+   		theForm.submit();
+   	}
     </script>
     
 </body>
