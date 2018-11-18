@@ -7,11 +7,8 @@
 	*{font-family:'Chungchunsidae'}
 </style>
 
-<jsp:include page="loginModal.jsp"/>
-<jsp:include page="joinModal.jsp"/>
-<jsp:include page="joinCompanyModal.jsp"/>
-<jsp:include page="head.jsp"/>
-<jsp:include page="chatModal.jsp"/>
+
+<jsp:include page="../common/head.jsp"/>
 
 
     <header>
