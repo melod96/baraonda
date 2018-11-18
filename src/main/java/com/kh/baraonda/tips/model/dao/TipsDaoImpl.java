@@ -27,6 +27,14 @@ public class TipsDaoImpl implements TipsDao{
 			return sqlSession.selectOne("Tips.selectTipsListCount");
 		}
 		
+	//꿀팁 개수
+		@Override
+		public int selectTypeTipsListCount(SqlSessionTemplate sqlSession,int writing_type) {
+			
+			return sqlSession.selectOne("Tips.selectTypeTipsListCount", writing_type);
+		}
+		
+		
 		/*//게시글 전체 목록 조회
 		@Override
 		public List<HashMap<String, Object>> selectTipsList(SqlSessionTemplate sqlSession, int writing_type,  PageInfo pgif) throws TipsSelectListException  {
@@ -72,6 +80,28 @@ public class TipsDaoImpl implements TipsDao{
 			
 			return list;
 		}
+
+		@Override
+		public ArrayList<Tips> selectTypeTipsList(SqlSessionTemplate sqlSession, PageInfo pgif,int writing_type) throws TipsSelectListException {
+			ArrayList<Tips> list = null;
+			
+			//건너 뛸 게시물의 수
+			int offset = (pgif.getCurrentPage() -1) * pgif.getLimit();
+							
+			RowBounds rowBounds = new RowBounds(offset, pgif.getLimit());
+							
+			//오브젝트로 받아오기 때문에 arraylist로 다운캐스팅 해준다
+			//제네릭을 설정하면 오류가 나서 넣으면 안된다
+			list = (ArrayList) sqlSession.selectList("Tips.selectTypeTipsList", writing_type, rowBounds);
+							
+			if(list == null){
+				sqlSession.close();
+				throw new TipsSelectListException("꿀팁 조회 실패");
+			}
+			
+			return list;
+		}
+
 
 		
 		//꿀팁 상세

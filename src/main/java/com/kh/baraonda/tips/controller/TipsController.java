@@ -75,7 +75,7 @@ public class TipsController {
 		
 	//꿀팁 리스트 출력
 		@RequestMapping("tips.tp")
-		public String TipsListPage(Model model, PageInfo pi) {
+		public String TipsListPage(Model model, PageInfo pi, @RequestParam int writing_type) {
 			int currentPage =1;
 			//명예의전당
 			ArrayList<Fame> flist;
@@ -100,15 +100,30 @@ public class TipsController {
 			
 			
 			try {
-				int listCount = ts.selectTipsListCount();
 				
-				PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+				if(writing_type == 0){
+					int listCount = ts.selectTipsListCount();
+					
+					PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+					
+					ArrayList<Tips> list = ts.selectTipsList(pgif);
+					System.out.println("list : " + list.get(0).getWriting_type());
+					
+					model.addAttribute("tipslist", list);
+					model.addAttribute("pi", pgif);
+				}else{
+					int listCount = ts.selectTypeTipsListCount(writing_type);
 				
-				ArrayList<Tips> list = ts.selectTipsList(pgif);
+					PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+					
+					ArrayList<Tips> list = ts.selectTypeTipsList(writing_type,pgif);
+					System.out.println("list : " + list.get(0).getWriting_type());
+					
+					model.addAttribute("tipslist", list);
+					model.addAttribute("pi", pgif);
+				}
 				
-				
-				model.addAttribute("tipslist", list);
-				model.addAttribute("pi", pgif);
+				model.addAttribute("writing_type", writing_type);
 				//model.addAttribute("writing_type", writing_type);
 				
 				return "tips/tips";
@@ -215,6 +230,8 @@ public class TipsController {
 			int insert = ts.insertTips(t);
 			System.out.println("EEEE" + insert);
 			
+			System.out.println("cont writing type : " + t.getWriting_type());
+			
 			//사진 저장할 경로 지정
 			String root = request.getSession().getServletContext().getRealPath("resources");
 			
@@ -257,6 +274,7 @@ public class TipsController {
 
 			
 			if(insert > 0) {
+				model.addAttribute("writing_type",0);
 				return "redirect:tips.tp";			
 			}else {
 				model.addAttribute("msg","다이어트꿀팁 등록 실패");
@@ -330,7 +348,7 @@ public class TipsController {
 				//	t.setMember_no(m.getMember_no());
 					
 				//	int update = ts.updateTips(t);
-					
+					model.addAttribute("writing_type", 0);
 					return "redirect:tips.tp";
 				}
 		
@@ -339,7 +357,7 @@ public class TipsController {
 		public String deleteTips(String tips_no) {
 			int delete = ts.deleteTips(tips_no);
 			
-			return "redirect:tips.tp";
+			return "redirect:tips.tp?writing_type=0";
 		}
 		
 		//공지사항 수정 페이지

@@ -89,6 +89,7 @@ div#editor {
 												<option value="14">식단</option>
 												<option value="15">고민/질문</option>
 												<option value="18">자유게시판</option>
+												<option value="20">체험단리뷰</option>
 												<option value="19">관리자에게</option>
 											</select>
 										</td>

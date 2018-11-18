@@ -185,7 +185,7 @@
 					
 					<hr class="boardHr">
 					
-			 		<!-- writing_type: 11.비포&애프터 12.자극사진 13.일기 14.식단 15.고민/질문 18.자유게시판 19관리자에게 -->
+			 		<!-- writing_type: 11.비포&애프터 12.자극사진 13.일기 14.식단 15.고민/질문 18.자유게시판 19관리자에게 20.파워리뷰 -->
 					<div style="margin-bottom:10px; margin-left:10px;">
 			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=11">비포&애프터</a>&nbsp;|
 			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=12">자극사진</a>&nbsp;|
@@ -193,6 +193,7 @@
 			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=14">식단</a>&nbsp;|
 			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=15">고민/질문</a>&nbsp;|
 			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=18">자유게시판</a>&nbsp;|
+			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=20">체험단리뷰</a>&nbsp;|
 			 			<a id="boardCategory" href="${path}/baraonda/list.do?writing_type=19">관리자에게</a>
 					</div>
 					

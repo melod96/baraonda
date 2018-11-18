@@ -89,6 +89,7 @@ div#editor {
 												<option value="14" <c:if test="${detail.WRITING_TYPE eq '14'}">selected</c:if>>식단</option>
 												<option value="15" <c:if test="${detail.WRITING_TYPE eq '15'}">selected</c:if>>고민/질문</option>
 												<option value="18" <c:if test="${detail.WRITING_TYPE eq '18'}">selected</c:if>>자유게시판</option>
+												<option value="20" <c:if test="${detail.WRITING_TYPE eq '20'}">selected</c:if>>체험단리뷰</option>
 												<option value="19" <c:if test="${detail.WRITING_TYPE eq '19'}">selected</c:if>>관리자에게</option>
 											</select>
 										</td>

@@ -15,9 +15,15 @@ public interface TipsService {
 	
 	//꿀팁 개수
 	int selectTipsListCount();
+	
+	//꿀팁 개수
+	int selectTypeTipsListCount(int writing_type);
 
 	//꿀팁 리스트
 	ArrayList<Tips> selectTipsList(PageInfo pgif) throws TipsSelectListException;
+	
+	//꿀팁 리스트
+	ArrayList<Tips> selectTypeTipsList(int writing_type,PageInfo pgif) throws TipsSelectListException;
 	
 /*	//게시글 전체 목록 조회
 	public List<HashMap<String, Object>> selectTipsList(int writing_type, PageInfo pgif) throws TipsSelectListException;*/

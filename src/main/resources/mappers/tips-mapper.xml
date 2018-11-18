@@ -59,6 +59,10 @@
 	<select id="selectTipsListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD WHERE BOARD_TYPE = 1 AND BOARD_STATUS = 0
 	</select>
+
+	<select id="selectTypeTipsListCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_TYPE = 1 AND BOARD_STATUS = 0 AND WRITING_TYPE = #{writing_type}
+	</select>	
 	
 	<!-- 꿀팁 목록 조회 -->
 	<select id="selectTipsList" resultMap="tipsResultSet2">
@@ -111,15 +115,45 @@
         AND FF.FILES_TYPE = 1 -->
         
         select b.board_title, b.board_date, b.board_count, 
-                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
+               me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,
+               b.writing_type
+				
             from board b
             join member me on (b.member_no = me.member_no)
             join files f on (b.board_no = f.f_reference_no)
             where board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and board_type=1
-            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
+            
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name,
+             f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,
+             b.writing_type
+             
             order by b.board_no desc
         
 	</select>
+	
+	<select id="selectTypeTipsList" resultMap="tipsResultSet2">
+	
+	 select b.board_title, b.board_date, b.board_count, 
+               me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,
+               b.writing_type
+				
+            from board b
+            join member me on (b.member_no = me.member_no)
+            join files f on (b.board_no = f.f_reference_no)
+            where board_status = 0 
+	    and FILES_SECESSION = 0 
+	    and FILES_TYPE = 4 
+	    and board_type=1
+	    and writing_type = #{writing_type}
+            
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.nick_name,
+             f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,
+             b.writing_type
+             
+            order by b.board_no desc
+        
+	</select>
+	
 	
 	<!-- 꿀팁 상세 -->
 	<select id="selectTipsOne" resultMap="tipsResultSet2">
@@ -203,7 +237,7 @@
 	
 	<!-- 꿀팁작성 -->
 	<insert id="insertTips" parameterType="Tips">
-		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, 1, NULL, #{board_title}, #{board_content}, #{member_no}, SYSDATE,SYSDATE,DEFAULT,DEFAULT)
+		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, 1, #{writing_type}, #{board_title}, #{board_content}, #{member_no}, SYSDATE,SYSDATE,DEFAULT,DEFAULT)
 		<selectKey keyProperty="f_reference_no" resultType="_int" order="AFTER">select seq_board_no.currval from dual</selectKey>
 	</insert>
 	

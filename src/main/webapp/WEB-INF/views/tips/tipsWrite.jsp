@@ -73,6 +73,14 @@ div#editor {
 									<tr>
 										<td class="cateTd">카테고리</td>
 										<td>다이어트꿀팁</td>
+										<td>
+											<select name="writing_type" id="form_control" class="form-control input-xshort">
+												<option value="3">식단</option>
+												<option value="2">운동</option>
+												<option value="1">칼럼</option>	
+											</select>
+										
+										</td>
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
