@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Exchange</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <jsp:include page="../common/head.jsp" />
 <style>
 .customerinfo p {
@@ -126,7 +127,7 @@
 			</div>
 		</div>
 		<div class="btn-center">
-			<button type="submit" class="btn btn-primary btn-lg">결제하기</button>
+			<button type="submit" class="btn btn-primary btn-lg">교환하기</button>
 			<button type="button" class="btn btn-secondary btn-lg">취소</button>
 		</div>
 		</form>
