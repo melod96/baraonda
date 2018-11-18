@@ -142,7 +142,15 @@ public class MyPageServiceImpl implements MyPageService{
 		return mpd.selectId(sqlSession,m);
 	}
 
+	@Override
+	public int selectPwd(Member m) {
+		return mpd.selectPwd(sqlSession,m);
+	}
 
+	@Override
+	public void updatePwd2(Member m) {
+		mpd.updatePwd2(sqlSession, m);
+	}
 
 
 

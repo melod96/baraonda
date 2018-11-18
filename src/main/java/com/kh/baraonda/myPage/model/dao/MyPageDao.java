@@ -62,7 +62,9 @@ public interface MyPageDao {
 
 	int selectId(SqlSessionTemplate sqlSession, Member m);
 
+	int selectPwd(SqlSessionTemplate sqlSession, Member m);
 
+	void updatePwd2(SqlSessionTemplate sqlSession, Member m);
 
 
 

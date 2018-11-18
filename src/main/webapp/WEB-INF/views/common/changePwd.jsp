@@ -30,9 +30,10 @@
 				<br>
 					<h2>아이디 찾기</h2>
 					<Br>
-					<h6>이름과 등록해둔 이메일을 입력해주세요.</h6>
+					<h6>가입시 입력한 이름과 등록해둔 이메일을 입력해주세요.</h6>
 					<Br>
-					<input type="text" class="form-control" id="namee" name="namee" placeholder="이름을 입력해주세요">
+					<input type="text" class="form-control" id="idd" name="idd" placeholder="아이디를 입력해주세요">
+					<input type="text" class="form-control" id="namee" name="namee" placeholder="이름를 입력해주세요">
 					<input type="email" id="email" class="form-control" name="email" placeholder="이메일을 입력해주세요.">
 					<button type="button"  id="checkBtn4" class="changeBtn1" onclick="emailCheck2();">이메일 인증하기</button>
 					
@@ -54,11 +55,13 @@
 	function emailCheck2(){
 		var email = $("#email").val();
 		var namee = $("#namee").val();
-		if(email != null && email != "" && namee != null && namee != ""){
+		var idd = $("#idd").val();
+		
+		if(email != null && email != "" && namee != null && namee != ""  && idd != null && idd != ""){
 			 $.ajax({
-					url:"findId.my",
+					url:"findPwd.my",
 					type:"post",
-					data:{email:email, namee:namee},
+					data:{email:email, namee:namee, idd:idd},
 					success:function(data){
 						key = data;
 						
@@ -67,7 +70,7 @@
 							$("#emailCheck").css("visibility","visible");
 							$("#checkBtn5").css("visibility","visible");
 						}else{
-							alert("이름과 이메일을 확인해주세요.");
+							alert("아이디, 이름과 이메일이 정확하게 입력되었는지 확인해주세요.");
 						}
 						
 					},
@@ -77,15 +80,10 @@
 				});
 			 
 		}
-				
-			
 		
-		if(email == null || email == "" && namee != null && namee != ""){
-			alert("이메일을 입력해주세요.");
-		}
 		
-		if(email != null && email != "" && namee == null || namee == ""){
-			alert("이름을 입력해주세요.");
+		if(email == null || email == "" || namee == null || namee == "" || idd == null || idd == ""){
+			alert("입력되지 않은 항목이 있습니다..");
 		}
 		
 	}
@@ -95,9 +93,11 @@
 		var emailCheck = $("#emailCheck").val();
 		var email = $("#email").val();
 		var name = $("#namee").val();
+		var idd = $("#idd").val();
+		
 		if(key == emailCheck){
 			alert("인증이 완료되었습니다.");
-			location.href="selectIds.me?email="+email+"&name="+name;
+			location.href="changePwdResult.me?idd="+idd;
 		}else{
 			alert("인증번호가 틀립니다. 다시입력해주세요.")
 		}
