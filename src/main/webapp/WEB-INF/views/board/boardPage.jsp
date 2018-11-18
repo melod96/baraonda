@@ -65,6 +65,17 @@
 			document.form1.submit();
 		});
 	});
+	
+	//신고하기 팝업
+	function reportPopup(type){
+		
+		if(type == 'open'){
+			$("#reportContent").attr('style', 'display:inline');
+		}else if(type == 'close'){
+			$("#reportContent").attr('style', 'display:none');
+		}
+	}
+	
 </script>
 
 <!--[if lt IE 9]>
@@ -356,7 +367,17 @@
 .reportBoard{
 width:85px;height: 30px; float:right; margin-top: -25px; text-align: center;
 cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-radius: 4px; font-size: 15px;}
-
+#reportContent{display:none;}
+#rPopup{width: 250px; margin-left: 880px; margin-top: -170px; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);}
+#report{-webkit-appearance: radio !important;}
+#closePopup{float:right; color:blue;}
+#report{border-bottom: 1px solid #eee;}
+.pop_check{float: left;
+    position: absolute;
+    left: 1408px;
+    margin-top: 5px;
+    vertical-align: middle;}
+#rli{cursor:pointer; margin-left: 22px;}
 
 </style>
 <body class="page1" id="top">
@@ -485,7 +506,23 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<p class="tit_comment">
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/tit_cmt_write.png">
 						</p>
-						<a><sapn class="reportBoard">신고하기</sapn></a>
+						<a href="javascript:" onClick="reportPopup('open')"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
+						<div id="reportContent">
+							<div id="rPopup">
+							<a href="javascript:" onClick="reportPopup('close')">
+				            	<span id="closePopup">닫기</span>
+        					</a>
+								<ul class="reportWrap">
+									<li onclick="" id="rli">광고/상업성 게시글 <input id="report" type="radio" name="reason" value="1" class="pop_check"></li>
+									<li onclick="" id="rli">비방/욕설 게시글 <input id="report" type="radio" name="reason" value="2" class="pop_check"></li>
+									<li onclick="" id="rli">개인정보 유출 게시글 <input id="report" type="radio" name="reason" value="3" class="pop_check"></li>
+									<li onclick="" id="rli">청소년 유해(음란) 게시글 <input id="report" type="radio" name="reason" value="4" class="pop_check"></li>
+									<li onclick="" id="rli">명예훼손/저작권 침해 게시글 <input id="report" type="radio" name="reason" value="5" class="pop_check"></li>	
+									<li onclick="" id="rli">도배성 게시글 <input type="radio"id="report" name="reason" value="6" class="pop_check"></li>		
+									<li onclick="" id="rli">불명확/추측성 게시글 <input id="report" type="radio" name="reason" value="7" class="pop_check"></li>		
+								</ul>
+							</div>
+						</div>
 						<!------------------------------------ 댓글 작성 폼 ------------------------------------>
 						<div id="comment-write" class="comment-write">
 							<form action="insertComment.do" name="form1" method="post">
@@ -582,7 +619,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 
 					<hr class="hrline">
 					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
-					<div class="balist1">
+					<%-- <div class="balist1">
 						<a href="#" class="aflist1">다음글 ▲
 							<p class="aflist2">저녁추천좀요</p>
 						</a>
@@ -602,7 +639,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
 							<p class="aflistp">조회수 32</p>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 				<!-------------------------------------------------------------------------->
 			</div>
