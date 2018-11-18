@@ -78,7 +78,7 @@ public class BoardController {
 		List<HashMap<String, Object>> list;
 
 		try {
-			int listCount = boardService.selectBoardListCount();
+			int listCount = boardService.selectBoardListCount(writing_type);
 
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 
@@ -344,7 +344,7 @@ public class BoardController {
 		}
 		
 		try {
-			int listCount = boardService.selectBoardListCount();
+			int listCount = boardService.selectBoardListCount(writing_type);
 			
 			PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 			
@@ -427,6 +427,13 @@ public class BoardController {
 		return;
 	}
 	
+	//게시글 신고
+	@RequestMapping("report.do")
+	public String report(@SessionAttribute("loginUser") Member m, Model model) {
+		
+		
+		return null;
+	}
 	
 }
 

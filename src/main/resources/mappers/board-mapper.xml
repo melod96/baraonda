@@ -81,7 +81,7 @@
 	</select>
 	<!-- 게시글 페이징 처리 -->
 	<select id="selectBoardListCount" resultType="_int">
-		SELECT COUNT(*) FROM BOARD
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_STATUS = 0 AND WRITING_TYPE = #{writing_type}
 	</select>
 	
 	
