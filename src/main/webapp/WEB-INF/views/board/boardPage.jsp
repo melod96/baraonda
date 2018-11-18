@@ -406,6 +406,9 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<c:when test="${detail.WRITING_TYPE eq 19}">
 							<h2 class="boardName">관리자에게
 						</c:when>
+						<c:when test="${detail.WRITING_TYPE eq 20}">
+							<h2 class="boardName">체험단리뷰
+						</c:when>
  					</c:choose>
 
 

@@ -74,7 +74,7 @@
               <ul class="sf-menu">
                <li class="current">
               
-               <li><a href="tips.tp"><img src="${pageContext.request.contextPath}/resources/images/main/다이어트꿀팁.png" alt="Logo alt"></a></li>
+               <li><a href="tips.tp?writing_type=0"><img src="${pageContext.request.contextPath}/resources/images/main/다이어트꿀팁.png" alt="Logo alt"></a></li>
                <li><a href="foodDictionary.dt"><img src="${pageContext.request.contextPath}/resources/images/main/칼로리사전.png" alt="Logo alt"></a></li>
                <li><a href="home.do?writing_type=6"><img src="${pageContext.request.contextPath}/resources/images/main/홈트레이닝.png" alt="Logo alt"></a></li>
                <li><a href="list.do?writing_type=11"><img src="${pageContext.request.contextPath}/resources/images/main/커뮤니티.png" alt="Logo alt"></a></li>

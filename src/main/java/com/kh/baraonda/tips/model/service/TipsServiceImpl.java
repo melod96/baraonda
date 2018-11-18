@@ -33,6 +33,21 @@ public class TipsServiceImpl implements TipsService{
 			
 			return td.selectTipsListCount(sqlSession);
 		}
+		
+	//꿀팁 개수
+		@Override
+		public int selectTypeTipsListCount(int writing_type) {
+			
+			return td.selectTypeTipsListCount(sqlSession, writing_type);
+		}	
+		
+
+
+		@Override
+		public ArrayList<Tips> selectTypeTipsList(int writing_type, PageInfo pgif) throws TipsSelectListException {
+			
+			return td.selectTypeTipsList(sqlSession, pgif, writing_type);
+		}
 
 		//꿀팁 리스트
 		@Override
@@ -40,6 +55,7 @@ public class TipsServiceImpl implements TipsService{
 			
 			return td.selectTipsList(sqlSession, pgif);
 		}
+		
 		/*
 		//게시글 전체 목록 조회
 		@Override
@@ -200,6 +216,8 @@ public class TipsServiceImpl implements TipsService{
 			int beforeno= td.selectBeforeNoTips(sqlSession,tips_no);
 			return td.selectTipsOne(sqlSession, String.valueOf(beforeno));
 		}
+
+		
 		
 
 }

@@ -48,6 +48,8 @@
 	font-weight:bold;
 }
 
+#ba_font:hover{cursor:pointer;}
+	
 #nq_box{
 	background-color: #f1f0f1;
 	
@@ -81,6 +83,8 @@
 	font-size: 17px;
 	padding: 10px;
 }
+
+#profile_font:hover{cursor:pointer;}
 
 #profile_img{
  	margin-top: -3px; 

@@ -127,6 +127,8 @@ margin-top: -10px;
 .paginate{
  	margin-right:70px;
 }
+
+#titleText1:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -139,9 +141,10 @@ margin-top: -10px;
 		<h2 class="title">다이어트꿀팁</h2>
 		<div class="clear" style="height:40px;background:white;"></div>
 		<div style="margin-bottom:10px; margin-left:10px;">
-		 <a id="tipsBtn" href="tips.tp?writing_type=3">식단</a>&nbsp;|&nbsp;
-			 <a id="tipsBtn" href="tips.tp?writing_type=2">운동</a>&nbsp;|&nbsp;
-			 <a id="tipsBtn" href="tips.tp?writing_type=1">칼럼</a>
+			<a id="tipsBtn" href="tips.tp?writing_type=0">전체</a>&nbsp;|&nbsp;
+			<a id="tipsBtn" href="tips.tp?writing_type=3">식단</a>&nbsp;|&nbsp;
+			<a id="tipsBtn" href="tips.tp?writing_type=2">운동</a>&nbsp;|&nbsp;
+			<a id="tipsBtn" href="tips.tp?writing_type=1">칼럼</a>
 			 
 			 <c:if test="${sessionScope.loginUser.admin_right == 1}">
 							<a href="tipsWrite.tp"> 
@@ -160,7 +163,7 @@ margin-top: -10px;
             <a href="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" class="gall_item" ><img src="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" alt="" style="width:300px; height:170px;"></a>
             <div class="gall_bot">
             <div class="boxbox">
-           <div class="text1"><a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}">${t.board_title }</a></div>
+           <div id="titleText1" class="text1"><a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}">${t.board_title }</a></div>
            <div id="fonts">
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }<%-- </label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label> --%>
 	         </div>
@@ -187,6 +190,7 @@ margin-top: -10px;
 						<c:if test="${ pi.currentPage > 1 }">
 							<c:url var="blistBack" value="tips.tp">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="writing_type" value="${writing_type}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -198,6 +202,7 @@ margin-top: -10px;
 							<c:if test="${ p ne pi.currentPage }">
 								<c:url var="blistCheck" value="tips.tp">
 									<c:param name="currentPage" value="${ p }"/>
+									<c:param name="writing_type" value="${writing_type}"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
@@ -211,6 +216,7 @@ margin-top: -10px;
 						<c:if test="${ pi.currentPage < pi.maxPage}">
 							<c:url var="blistEnd" value="tips.tp">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:param name="writing_type" value="${writing_type}"/>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>
