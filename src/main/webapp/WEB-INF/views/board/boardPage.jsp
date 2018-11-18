@@ -52,7 +52,19 @@
 			}
 		});
 	});
-
+	
+	//댓글 내용 입력 체크
+	$(document).ready(function(){
+		$("#btncmm1").click(function(){
+			var comment = $("#comment").val();
+			if(comment == ""){
+				alert("내용을 입력하세요.");
+				document.getElementById('comment').focus();
+				return;
+			}
+			document.form1.submit();
+		});
+	});
 </script>
 
 <!--[if lt IE 9]>
@@ -230,7 +242,14 @@
 	height: 120px;
 }
 
-#btncmm {
+#btncmm1 {
+	position: absolute;
+	right: 21px;
+	top: -9px;
+	width: 90px;
+	height: 120px;
+}
+#btncmm2 {
 	position: absolute;
 	right: 21px;
 	top: -9px;
@@ -334,6 +353,10 @@
 .paging-numbers a.on{background:#f13d3d;}
 .container1{margin: auto; width:75%;}
 #boardList:hover {cursor: pointer;}
+.reportBoard{
+width:85px;height: 30px; float:right; margin-top: -25px; text-align: center;
+cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-radius: 4px; font-size: 15px;}
+
 
 </style>
 <body class="page1" id="top">
@@ -457,13 +480,12 @@
 					</c:if>
 					<div id="commList">
 						<p class="tit_comment">
-							<img
-								src="<%=request.getContextPath()%>/resources/images/boardImg/tit_cmt_write.png">
+							<img src="<%=request.getContextPath()%>/resources/images/boardImg/tit_cmt_write.png">
 						</p>
-
+						<a><sapn class="reportBoard">신고하기</sapn></a>
 						<!------------------------------------ 댓글 작성 폼 ------------------------------------>
 						<div id="comment-write" class="comment-write">
-							<form action="insertComment.do" method="post">
+							<form action="insertComment.do" name="form1" method="post">
 								<textarea name="COMMENTS_CONTENT" id="comment" class="txtarea r5 placeholder"
 									placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~
 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
@@ -471,10 +493,10 @@
 			 					<input name="BOARD_NO" type="hidden" value="${detail.BOARD_NO}">
 			 					
 								<c:if test="${! empty sessionScope.loginUser}">
-									<button type="submit" id="btncmm" class="btn btn-primary">입력</button>
+									<button type="submit" id="btncmm1" class="btn btn-primary">입력</button>
 								</c:if>
 								<c:if test="${empty sessionScope.loginUser}">
-									<button type="button" id="btncmm" class="btn btn-primary login"  data-toggle="modal" data-target="#login-modal">입력</button>
+									<button type="button" id="btncmm2" class="btn btn-primary login"  data-toggle="modal" data-target="#login-modal">입력</button>
 								</c:if>
 							</form>
 						</div>
