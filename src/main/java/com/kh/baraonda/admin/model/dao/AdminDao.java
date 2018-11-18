@@ -74,6 +74,10 @@ public interface AdminDao {
 
 	Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession) throws AdminException;
 
+	int selectExperienceCount(SqlSessionTemplate sqlSession, Search search) throws AdminException;
+
+	List<Map<String, Object>> selectExperienceList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException;
+
 
 	
 }

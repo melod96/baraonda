@@ -68,6 +68,10 @@ public interface AdminService {
 
 	Map<String, Object> selectOrderInfo() throws AdminException;
 
+	int selectExperienceCount(Search search) throws AdminException;
+
+	List<Map<String, Object>> selectExperienceList(PageInfo info, Search search) throws AdminException;
+
 	
 	
 }

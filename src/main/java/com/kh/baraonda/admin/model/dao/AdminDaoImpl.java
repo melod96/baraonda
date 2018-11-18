@@ -147,12 +147,12 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public Map<String, Object> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num) {
+	public Map<String, Object> selectProductInfoForGraph(SqlSessionTemplate sqlSession, String num) throws AdminException{
 		return sqlSession.selectOne("Admin.selectProductInfoForGraph", num);
 	}
 
 	@Override
-	public Map<String, Object> selectMemberInfoForDashboard(SqlSessionTemplate sqlSession) {
+	public Map<String, Object> selectMemberInfoForDashboard(SqlSessionTemplate sqlSession) throws AdminException{
 		return sqlSession.selectOne("Admin.selectMemberInfoForDashboard");
 	}
 
@@ -173,7 +173,18 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public Map<String, Object> selectOrderInfo(SqlSessionTemplate sqlSession) throws AdminException {
-		return null;
+		return sqlSession.selectOne("Admin.selectOrderInfoP");
+	}
+
+	@Override
+	public int selectExperienceCount(SqlSessionTemplate sqlSession, Search search) throws AdminException {
+		return sqlSession.selectOne("Admin.selectExperienceCount", search);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectExperienceList(SqlSessionTemplate sqlSession, PageInfo pi, Search search) throws AdminException {
+		RowBounds rowBounds = new RowBounds((pi.getCurrentPage() -1) * pi.getLimit(), pi.getLimit());
+		return sqlSession.selectList("Admin.selectExperienceList" , search, rowBounds);
 	}
 
 	
