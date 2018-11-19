@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
+import com.kh.baraonda.common.PaginationComment;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.main.model.exception.MainSelectListException;
 import com.kh.baraonda.main.model.service.MainService;
@@ -137,7 +138,7 @@ public class TipsController {
 		
 		
 		
-		//공지사항 상세보기
+		//꿀팁 상세보기
 		@RequestMapping("tipsDetail.tp")
 		public String tipsDetail(String tips_no, Model model, PageInfo pi) {
 			
@@ -155,7 +156,7 @@ public class TipsController {
 			
 			int listCount = ts.selectCommentListCountTips(tips_no);
 			
-			PageInfo pgif = Pagination.getPageInfo(currentPage, listCount);
+			PageInfo pgif = PaginationComment.getPageInfo(currentPage, listCount);
 			
 			ArrayList<TipsComment> tcomment = ts.selectCommentTips(tips_no,pgif);
 			
@@ -211,13 +212,13 @@ public class TipsController {
 		
 		
 		
-		//공지사항 작성 페이지
+		//꿀팁 작성 페이지
 		@RequestMapping("tipsWrite.tp")
 		public String tipsWrite() {
 			return "tips/tipsWrite";
 		}
 		
-		//공지사항 insert
+		//꿀팁 insert
 		@RequestMapping("insertTips.tp")
 		public String insertTips(HttpSession session,HttpServletRequest request,
 				@RequestParam("photo") MultipartFile photo,
