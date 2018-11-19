@@ -318,6 +318,11 @@
 		UPDATE MEMBER SET PASSWORD = '${password}' WHERE ID = '${id}'
 	</update>	
 	
+	<!--사진 삭제 -->
+	<update id="updateDelPhoto" parameterType="_int">
+		UPDATE FILES SET FILES_SECESSION = 1  WHERE FILES_NO = #{files_no}
+	</update>	
+	
 </mapper>
 
 

@@ -69,7 +69,7 @@
 		<div class="mainFrame">
 			<div class="profileFrame">
 				<div class="profileImg">
-					<img id="photo" src="${pageContext.request.contextPath}/resources/images/uploadFiles/${file.files_change_title}"
+					<img id="photo" src="${pageContext.request.contextPath}${file.files_root}${file.files_change_title}"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/myPageImages/level.png'">
 					<form action="uploadPhoto.my" method="post"  enctype="multipart/form-data">
 						<div class="Position1">
@@ -78,7 +78,7 @@
 							<input type="file" id="uploadInput" name="photo" style="display:none;">
 						</div>
 					</form>
-					<div class="Position1"><button type="button" id="removeBtn" class="btn btn-default">사진 삭제</button></div>
+					<div class="Position1"><button type="button" id="removeBtn" class="btn btn-default" onclick="deletePhoto();">사진 삭제</button></div>
 				</div>
 				
 				<div class="profileInfo">
@@ -242,6 +242,11 @@
 		function checkPwd(type){
 			console.log(type);
 			location.href="checkPwd.my?type=" + type;
+		}
+		
+		function deletePhoto(){
+			var files_no = ${file.files_no}
+			location.href="updateDelPhoto.my?files_no=" + files_no;
 		}
 		
 	</script>

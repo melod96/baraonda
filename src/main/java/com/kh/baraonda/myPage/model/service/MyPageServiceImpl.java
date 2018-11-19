@@ -152,7 +152,10 @@ public class MyPageServiceImpl implements MyPageService{
 		mpd.updatePwd2(sqlSession, m);
 	}
 
-
+	@Override
+	public void updateDelPhoto(int files_no) {
+		mpd.updateDelPhoto(sqlSession, files_no);
+	}	
 
 
 

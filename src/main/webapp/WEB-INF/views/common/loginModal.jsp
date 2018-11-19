@@ -41,10 +41,6 @@
 										<br>
 										<br>
 										<div>
-											<a href="#" class="btn-login-with bg1 m-b-10">
-												<i class="fa fa-facebook-official"></i>
-												페이스북 로그인
-											</a>
 					
 											<a data-toggle="modal" data-target="#join-modal" class="btn-login-with bg2 join"
 												data-dismiss="modal"aria-hidden="true">
