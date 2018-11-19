@@ -64,6 +64,8 @@ public interface MyPageService {
 
 	void updatePwd2(Member m);
 
+	void updateDelPhoto(int files_no);
+
 
 
 

@@ -67,8 +67,8 @@ public class MyPageController {
 			
 			//프로필사진 불러오기
 			Files file = mps.selectPhoto(loginUser);
-			//request.setAttribute("file", file);
 			model.addAttribute("file", file);
+			//request.setAttribute("file", file);
 			
 			return "myPage/changeInfo";
 		}else {
@@ -118,21 +118,21 @@ public class MyPageController {
 		
 		//업로드된 파일을 지정한 경로에 저장
 				try {
-					photo.transferTo(new File(filePath + "\\" + changeName + ext));
+					photo.transferTo(new File(filePath + "/" + changeName + ext));
 					Files file = new Files();
 					
 					file.setF_reference_no(loginUser.getMember_no());
 					file.setFiles_title(originFileName);
 					file.setFiles_change_title(changeName+ext);
 					file.setFiles_type(1);
-					file.setFiles_root(filePath + "\\" + changeName + ext);
+					file.setFiles_root("/resources/images/uploadFiles/");
 					
 					mps.insertPhoto(file);
 					
 					
 				} catch (Exception e) {
 					//실패시 파일  삭제
-					new File(filePath + "\\" + changeName + ext).delete();
+					new File(filePath + "/" + changeName + ext).delete();
 					
 					model.addAttribute("msg", "사진등록 실패");
 					return "common/errorPage";
@@ -395,7 +395,10 @@ public class MyPageController {
 				//정보 불러오기
 				Member viewUser = mps.selectMemberView(member_no);
 				
+				Files file = mps.selectPhoto(viewUser);
+				
 				model.addAttribute("viewUser", viewUser);
+				model.addAttribute("file", file);
 				
 				
 				return "myPage/othersView";
@@ -586,6 +589,14 @@ public class MyPageController {
 				return "redirect:logout.me";
 			}
 		
+			
+			@RequestMapping("updateDelPhoto.my")
+			public String updateDelPhoto(@RequestParam int files_no) {
+				
+				mps.updateDelPhoto(files_no);
+				
+				return "redirect:changeInfoView.my";
+			}
 		
 		
 }

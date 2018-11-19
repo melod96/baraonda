@@ -172,5 +172,10 @@ public class MyPageDaoImpl implements MyPageDao {
 	public void updatePwd2(SqlSessionTemplate sqlSession, Member m) {
 		sqlSession.update("MyPage.updatePwd2", m);
 	}
+	
+	@Override
+	public void updateDelPhoto(SqlSessionTemplate sqlSession, int files_no) {
+		sqlSession.update("MyPage.updateDelPhoto", files_no);
+	}
 
 }
