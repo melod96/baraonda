@@ -8,8 +8,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<jsp:include page="../common/header.jsp" />
-
 <script>
 	$(document).ready(function() {
 
@@ -19,13 +17,6 @@
 		$('#stuck_container').tmStickUp({});
 		$('.gallery .gall_item').touchTouch();
 
-	});
-	
-	//게시글 작성 버튼
-	$(document).ready(function(){
-		$("#btnWrite").click(function(){
-			location.href="${path}/baraonda/write.do";
-		});
 	});
 	
 	/*  $(document).ready( function() {
@@ -170,15 +161,13 @@
 </head>
 
 <body class="page1" id="top">
-
-
+	<jsp:include page="../common/header.jsp" />
 	<!-------------------------------------Content------------------------------------------->
 	<section class="content">
 		<br>
 		<div class="clear" style="height: 17px; background: white;"></div>
 		<div class="container">
 			<div class="row">
-			<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width: 732px; height: 180px;">
 				<!------------------------------ 작업 공간 ------------------------------>
 				<div class="container1">
 					<h2 class="boardName">커뮤니티</h2>
@@ -273,11 +262,10 @@
 					<!------------------------------ 글쓰기 버튼 ------------------------------>
 					<c:if test="${sessionScope.loginUser.admin_right != 1}">
 						<c:if test="${! empty sessionScope.loginUser}">
-							<button onclick="btnWrite" id="btnWrite" type="submit" class="btn btn-primary">글쓰기</button>
+							<button id="btnWrite" type="button" class="btn btn-primary" onclick="location.href='write.do'">글쓰기</button>
 						</c:if>
 						<c:if test="${empty sessionScope.loginUser}">
-							<button id="btnWrite login" type="submit" class="btn btn-primary"
-							 data-toggle="modal" data-target="#login-modal">글쓰기</button>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#login-modal">글쓰기</button>
 						</c:if>
 					</c:if>
 					<!------------------------------ 페이징 처리------------------------------>

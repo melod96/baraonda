@@ -10,6 +10,7 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.HomeFiles;
+import com.kh.baraonda.board.model.vo.Report;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -76,6 +77,9 @@ public interface BoardDao {
 	
 	//관리자 게시글 삭제
 	void adminDelete(SqlSessionTemplate sqlSession, List<String> valueArr);
+	
+	//게시글 신고
+	void report(SqlSessionTemplate sqlSession, Report r);
 
 	
 

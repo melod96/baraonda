@@ -10,6 +10,7 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.HomeFiles;
+import com.kh.baraonda.board.model.vo.Report;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -77,6 +78,9 @@ public interface BoardService {
 	
 	//관리자 게시글 삭제
 	void adminDelete(List<String> valueArr);
+	
+	//게시글 신고
+	void report(Report r);
 	
 	
 	

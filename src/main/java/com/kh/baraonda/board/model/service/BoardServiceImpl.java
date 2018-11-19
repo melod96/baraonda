@@ -16,6 +16,7 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.HomeFiles;
+import com.kh.baraonda.board.model.vo.Report;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -180,6 +181,12 @@ public class BoardServiceImpl implements BoardService{
 	public void adminDelete(List<String> valueArr) {
 		boardDao.adminDelete(sqlSession, valueArr);
 		
+	}
+	
+	//게시글 신고
+	@Override
+	public void report(Report r) {
+		boardDao.report(sqlSession, r);
 	}
 	
 	
