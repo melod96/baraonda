@@ -149,19 +149,11 @@ margin-top: -10px;
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-		  <div class="carousel-inner">
-		    <div class="carousel-item active">
-		      <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/images/배너2.png" style="width:732px; height:180px;" alt="첫번째 슬라이드">
-		    </div>
-		    <div class="carousel-item">
-		      <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/images/berrywater2.png" style="width:732px; height:180px;" alt="두번째 슬라이드">
-		    </div>
-		    <div class="carousel-item">
-		      <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/images/배너3.png" style="width:732px; height:180px;" alt="세번째 슬라이드">
-		    </div>
-		  </div>
-		</div>
+
+	
+		
+		<jsp:include page="../common/banner.jsp" />
+
 		<h2 class="title">다이어트꿀팁</h2>
 		<div class="clear" style="height:40px;background:white;"></div>
 		<div style="margin-bottom:10px; margin-left:10px;">
@@ -290,7 +282,7 @@ margin-top: -10px;
 				<br>
 
 
-	<form action="searchTips.tp" method="get">
+	<form action="searchTips.tp" method="get" style="margin-left:162px;">
 			<div class="search">
 				<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;" name = "searchtype">
 					<option value = "title">제목</option>
