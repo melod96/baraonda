@@ -128,7 +128,19 @@ margin-top: -10px;
  	margin-right:70px;
 }
 
-#titleText1:hover{cursor:pointer;}
+#titleText1:hover{cursor:pointer; color:green;}
+
+#tips_title:hover{cursor:pointer;}
+
+
+.text1{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+    white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -160,7 +172,7 @@ margin-top: -10px;
       
         <div class="gall_block">
           <div class="maxheight">
-            <a href="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" class="gall_item" ><img src="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" alt="" style="width:300px; height:170px;"></a>
+            <a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}" id="tips_title"><img src="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" alt="" style="width:300px; height:170px;"></a>
             <div class="gall_bot">
             <div class="boxbox">
            <div id="titleText1" class="text1"><a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}">${t.board_title }</a></div>

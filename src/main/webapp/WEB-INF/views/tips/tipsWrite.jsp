@@ -73,6 +73,9 @@ div#editor {
 									<tr>
 										<td class="cateTd">카테고리</td>
 										<td>다이어트꿀팁</td>
+										</tr>
+										<tr>
+										<td class="cateTd">종류</td>
 										<td>
 											<select name="writing_type" id="form_control" class="form-control input-xshort">
 												<option value="3">식단</option>
@@ -115,8 +118,10 @@ div#editor {
 
 	<script>
     $(function(){
-      $('#edit').froalaEditor()
+    	$('#edit').froalaEditor({   
+    		imageUploadURL:'http://i.froala.com/upload'});
     });
+    
     </script>
     
     <script>

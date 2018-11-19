@@ -433,6 +433,34 @@
 			OR COMPANY_NAME LIKE '%' || #{content} || '%' )
 		</if>
 	</select>
+
+	<resultMap type="HashMap" id="ExperienceInfo">
+		<result property="EXPERIENCE_NO" column="EXPERIENCE_NO"/>
+		<result property="BOARD_TITLE" column="BOARD_TITLE"/>
+		<result property="BOARD_CONTENT" column="BOARD_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="CEO_NAME" column="CEO_NAME"/>
+		<result property="EXPERIENCE_APPROVAL" column="EXPERIENCE_APPROVAL"/>
+		<result property="APPROVAL_CONTENT" column="APPROVAL_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="APPROVAL_DATE" column="APPROVAL_DATE"/>
+		<result property="BOARD_DATE" column="BOARD_DATE"/>
+	</resultMap>
+
+	<select id="selectExperienceInfo" parameterType="java.lang.String" resultMap="ExperienceInfo">
+		SELECT E.EXPERIENCE_NO, B.BOARD_TITLE, B.BOARD_CONTENT, M.CEO_NAME, E.EXPERIENCE_APPROVAL, E.APPROVAL_CONTENT, E.APPROVAL_DATE, B.BOARD_DATE
+		FROM EXPERIENCE E 
+		JOIN MEMBER M ON(E.COMPANY_NO = M.MEMBER_NO)
+		JOIN BOARD B ON(E.BOARD_NO = B.BOARD_NO)
+		WHERE 1 = 1
+		AND EXPERIENCE_NO = #{num}
+	</select>
+	
+	<update id="updateExperienceInfo" parameterType="AdminBoard">
+		UPDATE EXPERIENCE
+		SET EXPERIENCE_APPROVAL = 1, APPROVAL_CONTENT = #{content}, APPROVAL_DATE = SYSDATE
+		WHERE 1 = 1
+		AND EXPERIENCE_NO = #{board_no}
+	</update>
+	
 	
 </mapper> 
   

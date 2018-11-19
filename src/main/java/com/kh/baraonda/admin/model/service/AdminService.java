@@ -72,6 +72,10 @@ public interface AdminService {
 
 	List<Map<String, Object>> selectExperienceList(PageInfo info, Search search) throws AdminException;
 
+	Map<String, Object> selectExperienceInfo(String num) throws AdminException;
+
+	void updateExperienceInfo(AdminBoard adminBoard) throws AdminException;
+
 	
 	
 }

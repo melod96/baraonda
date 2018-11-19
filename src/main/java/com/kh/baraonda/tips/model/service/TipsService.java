@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import com.kh.baraonda.common.PageInfo;
+import com.kh.baraonda.common.PaginationComment;
 import com.kh.baraonda.common.SearchCondition;
 import com.kh.baraonda.tips.model.vo.TipsFiles;
 import com.kh.baraonda.tips.model.exception.TipsSelectListException;

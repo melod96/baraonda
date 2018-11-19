@@ -347,17 +347,28 @@ public class AdminController {
 	@RequestMapping(value="goExperienceAdminDetail.adm")
 	public ModelAndView goExperienceAdminDetail(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
 		try {
-			mv.addObject("memberInfo", as.selectGeneralMemberInfo(num));
-			mv.addObject("membersDeclartionList", as.selectMembersDeclarationList(num));
-			mv.addObject("membersOrderList", as.selectMembersOrderList(num));
+			mv.addObject("experienceInfo", as.selectExperienceInfo(num));
 			mv.setViewName("admin/experienceAdmin/experienceAdminDetail");
 		} catch (AdminException e) {
 			mv.setViewName("common/errerPage");
-			mv.addObject("errorMessage", "MemberDetail 조회 실패!");
+			mv.addObject("errorMessage", "ExperienceInfo 조회 실패!");
 		}
 		return mv;
 	}
 	
-	
+	@RequestMapping(value="goExperienceUpdate.adm")
+	public ModelAndView goExperienceUpdate(ModelAndView mv,  
+											@RequestParam(value="content", required=true, defaultValue="승인")String content,
+											@RequestParam(value="num", required=true)String num) {
+		AdminBoard adminBoard = new AdminBoard(num, null, content);
+		try {
+			as.updateExperienceInfo(adminBoard);
+			mv.setViewName("redirect:goExperienceAdminList.adm");
+		} catch (AdminException e) {
+			mv.setViewName("common/errerPage");
+			mv.addObject("errorMessage", "Experience 수정 실패!");
+		}
+		return mv;
+	}
 	
 }

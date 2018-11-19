@@ -28,13 +28,24 @@
 	<div class="right">
 		<table style="margin-bottom: 30px;" class="t1 tbl-type01">
 			<tr>
-				<th>명예의 전당</th>
+				<th>자주하는 질문</th>
 			</tr>
-			<c:forEach var="f" items="${flist}" end="4">
+			<tr>
+				<td>
+					  <iframe
+    allow="microphone;"
+    width="200"
+    height="400"
+    font-size="5px";
+    src="https://console.dialogflow.com/api-client/demo/embedded/f57b8705-afdb-466c-aba0-92f44c769437">
+</iframe>
+				</td>
+			</tr>
+			<%-- <c:forEach var="f" items="${flist}" end="4">
 				<tr>
 					<td>${f.board_title}</td>
 				</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 		<table border="1" style="margin-bottom: 30px;" class="t1 tbl-type01">
 			<tr>

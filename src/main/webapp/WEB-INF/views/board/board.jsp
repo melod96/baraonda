@@ -211,6 +211,14 @@
 							</tr>
 						</thead>
 						<tbody>
+						<tr class="boardTr" style="font-weight: bold;">
+									<th class="boardNo" onclick="location.href='question.do'">.</th>
+									<th class="boardSubject2" onclick="location.href='question.do'">자주하는 질문</th>
+									<th class="boardWriter" onclick="location.href='question.do'">관리자</th>
+									<th class="boardDay" onclick="location.href='question.do'">2018-11-19</th>
+									<th class="boardCount" onclick="location.href='question.do'">123</th>
+							</tr>
+						
 							<c:forEach items="${list}" var="row">
 								<tr class="boardTr" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'"> 
 									<th class="boardNo">${row.BOARD_NO}</th>
@@ -236,6 +244,14 @@
 						</thead>
 						<form action="deleteBoard.do" method="post">
 							<tbody>
+							<tr class="boardTr" style="font-weight: bold;">
+								<th></th>
+									<th class="boardNo" onclick="location.href='question.do'">.</th>
+									<th class="boardSubject2" onclick="location.href='question.do'">자주하는 질문</th>
+									<th class="boardWriter" onclick="location.href='question.do'">관리자</th>
+									<th class="boardDay" onclick="location.href='question.do'">2018-11-19</th>
+									<th class="boardCount" onclick="location.href='question.do'">123</th>
+							</tr>
 							<c:forEach items="${list}" var="row">
 								<tr class="boardTr"> 
 									<th><input id="noInput2" type="checkbox" name="board_no" value="${row.BOARD_NO}"></th>

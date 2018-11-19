@@ -434,6 +434,13 @@ public class BoardController {
 		
 		return null;
 	}
+
+	//자주하는 질문 페이지
+	@RequestMapping("question.do")
+	public String question() {
+		return "board/Question";
+	}
+	
 	
 }
 
