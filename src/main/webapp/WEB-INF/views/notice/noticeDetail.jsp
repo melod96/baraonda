@@ -111,11 +111,34 @@
 	line-height: 50px;
 }
 
+.allmark .bmark1 {
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
+		no-repeat;
+	width: 150px;
+	height: 50px;
+	display: inline-block;
+	line-height: 50px;
+}
+
 .allmark .bmark span {
 	display: inline-block;
 	padding-left: 32px;
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_bmark_off.png")
+		no-repeat left center;
+	font-weight: bold;
+	font-size: 15px;
+	color: #323232;
+	font-weight: bold;
+	vertical-align: top;
+}
+
+.allmark .bmark1 span {
+	display: inline-block;
+	padding-left: 32px;
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_bmark_on.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -135,11 +158,35 @@
 	margin-left: 20px;
 }
 
+.allmark .heart1 {
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
+		no-repeat;
+	width: 150px;
+	height: 50px;
+	display: inline-block;
+	line-height: 50px;
+	margin-left: 20px;
+}
+
 .allmark .heart span {
 	display: inline-block;
 	padding-left: 35px;
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_heart.png")
+		no-repeat left center;
+	font-weight: bold;
+	font-size: 15px;
+	color: #323232;
+	font-weight: bold;
+	vertical-align: top;
+}
+
+.allmark .heart1 span {
+	display: inline-block;
+	padding-left: 35px;
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_heartch.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -387,8 +434,18 @@
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
 					<div class="allmark">
 					<c:if test="${! empty sessionScope.loginUser}">
-						<a href="bookmark.nt?notice_no=${ninfo.board_no }" class="bmark"> <span>북마크</span></a> 
-						<a href="heart.nt?notice_no=${ninfo.board_no }" class="heart"> <span>${hcount }</span></a>
+						<c:if test="${checking == 0}">	
+							<a href="bookmark.nt?notice_no=${ninfo.board_no }" class="bmark"> <span>북마크</span></a>
+						</c:if> 
+						<c:if test="${checking2 == 0}">
+							<a href="heart.nt?notice_no=${ninfo.board_no }" class="heart"> <span>${hcount }</span></a>
+						</c:if>
+						<c:if test="${checking != 0}">	
+							<a href="bookmark.nt?notice_no=${ninfo.board_no }" class="bmark1"> <span>북마크</span></a>
+						</c:if> 
+						<c:if test="${checking2 != 0}">
+							<a href="heart.nt?notice_no=${ninfo.board_no }" class="heart1"> <span>${hcount }</span></a>
+						</c:if>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
 						<a class="bmark login"  data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a> 
