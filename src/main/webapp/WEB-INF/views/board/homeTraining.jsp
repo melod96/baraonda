@@ -73,9 +73,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="left">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/berrywater.PNG"
-					style="width: 732px; height: 180px;">
+				<jsp:include page="../common/banner.jsp" />
 				<h2 class="title">홈트레이닝</h2>
 				<hr class="boardHr">
 				<div class="clear" style="height: 20px; background: white;"></div>
