@@ -259,10 +259,10 @@ hr{
               <br>
               <c:forEach var="q" items="${qlist}" end="4">
               <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img" style="margin-top:5px;">
-              <a id="nq_title"> ${ q.board_title }</a></label>
+              <a onclick= "location.href='view.do?board_no=' + ${q.board_no}" style="font-size:16px;" id="nq_title"> ${ q.board_title }</a></label>
               <br>
               </c:forEach> 
-              <a href="#" class="btn" id="nq_btn">more</a>
+              <a href="list.do?writing_type=19" class="btn" id="nq_btn">more</a>
             </div>
             <!-- 고객문의 -->
           </div>

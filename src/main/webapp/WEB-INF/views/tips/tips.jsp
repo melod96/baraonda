@@ -149,7 +149,11 @@ margin-top: -10px;
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+	
+		
+		<jsp:include page="../common/banner.jsp" />
+		
+		
 		<h2 class="title">다이어트꿀팁</h2>
 		<div class="clear" style="height:40px;background:white;"></div>
 		<div style="margin-bottom:10px; margin-left:10px;">
@@ -278,7 +282,7 @@ margin-top: -10px;
 				<br>
 
 
-	<form action="searchTips.tp" method="get">
+	<form action="searchTips.tp" method="get" style="margin-left:162px;">
 			<div class="search">
 				<select class="form-control input-xshort" style="float:left; margin-right:10px; height:45px;" name = "searchtype">
 					<option value = "title">제목</option>

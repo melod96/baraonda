@@ -12,6 +12,7 @@
 <jsp:include page="joinCompanyModal.jsp"/>
 <jsp:include page="head.jsp"/>
 <jsp:include page="chatModal.jsp"/>
+<jsp:include page="inquiry.jsp"/>
 
 
     <header>
@@ -23,6 +24,7 @@
 	    <!--로그인 전-->
 	    <c:if test="${empty sessionScope.loginUser}">
 		    <div style="float:right;">
+		    	<div class="menu1"><a data-toggle="modal" data-target="#inquiry-modal" class="inquiry">제휴·광고문의</a></div>&nbsp;&nbsp;&nbsp;
 		     	<div class="menu1"><a data-toggle="modal" data-target="#login-modal" class="login">로그인</a></div>&nbsp;&nbsp;&nbsp;
 		     	<div class="menu1"><a data-toggle="modal" data-target="#join-modal" class="join">회원가입</a></div>
 		    </div>
