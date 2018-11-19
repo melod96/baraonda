@@ -33,13 +33,13 @@
 	      $('.boardDay').after('<th>' + jbExcerpt + '</th>' );
 	 }); */
 	
-	/*  function checkAll(){
+	function checkAll(){
 		 if($("#noInput1").is(':checked')){
 			 $("input[name=board_no]").prop("checked", true);
 		 }else{
 			 $("input[name=board_no]").prop("checked", false);
 		 }
-	 } */
+	 } 
 	
 	 var arrayParam = new Array();
 	 

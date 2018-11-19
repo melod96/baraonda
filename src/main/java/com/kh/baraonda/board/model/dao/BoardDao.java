@@ -21,7 +21,7 @@ public interface BoardDao {
 	//게시글 전체 목록 조회
 	public List<HashMap<String, Object>> listAll(SqlSessionTemplate sqlSession, int writing_type, PageInfo info) throws BoardException;
 	//게시글 페이징 처리
-	public int selectBoardListCount(SqlSessionTemplate sqlSession);
+	public int selectBoardListCount(SqlSessionTemplate sqlSession, int writing_type);
 	
 	//게시글 insert
 	public void create(Board b) throws BoardException;

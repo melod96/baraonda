@@ -12,11 +12,9 @@
 
 <script>
  $(document).ready(function(){
-
   $().UItoTop({ easingType: 'easeOutQuart' });
   $('#stuck_container').tmStickUp({});
   $('.gallery .gall_item').touchTouch();
-
   }); 
  
 	//게시글 작성 버튼
@@ -86,7 +84,6 @@
 </div>
 <script src="js/html5shiv.js"></script>
 <link rel="stylesheet" media="screen" href="css/ie.css">
-
 <![endif]-->
 <style>
 .boardName {
@@ -107,44 +104,36 @@
 	font-size: 17px;
 	font-weight: bold;
 }
-
 .view_text {
 	width: 80%;
 }
-
 .proic {
 	width: 35px;
 	height: 35px;
 }
-
 .nick_em {
 	display: inline-block;
 }
-
 .inner_nick_box {
 	margin-top: 8px;
 }
-
 .date_menu li.da01 span {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_time.gif")
 		no-repeat left 1px;
 }
-
 .date_menu li.da02 span {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_eye.gif")
 		no-repeat left 1px;
 	color: #ff2626;
 }
-
 .date_menu li.da03 span {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_balloon.gif")
 		no-repeat left 1px;
 	color: #ff2626;
 }
-
 .date_menu li {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif")
@@ -152,19 +141,16 @@
 	padding-left: 9px;
 	margin-left: 0px;
 }
-
 .date_menu li span {
 	display: inline-block;
 	padding-left: 18px;
 	margin-right: 12px;
 }
-
 .date_menu li:first-child {
 	margin-left: 0;
 	padding-left: 0;
 	background: none;
 }
-
 .date_menu li {
 	display: inline-block;
 	color: #a1a0a0;
@@ -172,18 +158,15 @@
 	line-height: 14px;
 	font-weight: normal;
 }
-
 .group_inner {
 	display: inline-block;
 	margin-top: 10px;
 	float: right;
 }
-
 .allmark {
 	text-align: center;
 	margin-top: 50px;
 }
-
 .allmark .bmark {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
@@ -193,7 +176,6 @@
 	display: inline-block;
 	line-height: 50px;
 }
-
 .allmark .bmark span {
 	display: inline-block;
 	padding-left: 32px;
@@ -206,7 +188,6 @@
 	font-weight: bold;
 	vertical-align: top;
 }
-
 .allmark .heart {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
@@ -217,7 +198,6 @@
 	line-height: 50px;
 	margin-left: 20px;
 }
-
 .allmark .heart span {
 	display: inline-block;
 	padding-left: 35px;
@@ -230,16 +210,13 @@
 	font-weight: bold;
 	vertical-align: top;
 }
-
 .btn_ar {
 	float: right;
 	margin-top: 50px;
 }
-
 .tit_comment {
 	margin-top: 130px;
 }
-
 .comment-write {
 	background: #f9f9f9;
 	border: 1px solid #ececec;
@@ -247,15 +224,13 @@
 	position: relative;
 	margin-top: 12px;
 }
-
 .comment-write textarea {
-	width: 90%;
+	width: 88%;
 	height: 120px;
 }
-
 #btncmm1 {
 	position: absolute;
-	right: 21px;
+	right: 10px;
 	top: -9px;
 	width: 90px;
 	height: 120px;
@@ -267,68 +242,54 @@
 	width: 90px;
 	height: 120px;
 }
-
 .hrline {
 	border-top: 1px solid #cecece;
 }
-
 .comment-count {
 	border-bottom: 1px solid #cecece;
 	margin-top: 35px;
 }
-
 .comment-count-1 {
 	display: inline-block;
 	color: #383838;
 	font-size: 13px;
 }
-
 .comment-count-2 {
 	display: inline-block;
 	font-size: 13px;
 	color: #fa111a;
 }
-
 .comment-txt {
 	display: inline-block;
 	padding-left: 15px;
 	width: 93%;
 }
-
 .comment-pic {
 	display: inline-block;
 }
-
 .comment-list-li {
 	padding-top: 15px;
 }
-
 #ptxt {
 	padding-top: 7px;
 }
-
 .comment-txt span {
 	padding-left: 10px;
 }
-
 .btn-re {
 	padding-left: 70px;
 	color: #545050;
 }
-
 .balist1 {
 	margin-top: 30px;
 }
-
 .belist1, .aflist1 {
 	color: #423f3f;
 }
-
 .belist2, .aflist2 {
 	display: inline-block;
 	padding-left: 18px;
 }
-
 .belist3, .aflist3 {
 	display: inline-block;
 	float: right;
@@ -337,7 +298,6 @@
 	font-size: 15px;
 }
 .belist3{margin-right: -2px;}
-
 .listpic {
 	padding-left: 10px;
 	padding-right: 10px;
@@ -378,7 +338,6 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
     margin-top: 5px;
     vertical-align: middle;}
 #rli{cursor:pointer; margin-left: 22px;}
-
 </style>
 <body class="page1" id="top">
 	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
@@ -506,7 +465,12 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<p class="tit_comment">
 							<img src="<%=request.getContextPath()%>/resources/images/boardImg/tit_cmt_write.png">
 						</p>
-						<a href="javascript:" onClick="reportPopup('open')"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
+						<c:if test="${!empty sessionScope.loginUser}">
+							<a href="javascript:" onClick="reportPopup('open')"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
+						</c:if>
+						<c:if test="${empty sessionScope.loginUser}">
+							<a data-toggle="modal" data-target="#login-modal"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
+						</c:if>
 						<div id="reportContent">
 							<div id="rPopup">
 							<a href="javascript:" onClick="reportPopup('close')">

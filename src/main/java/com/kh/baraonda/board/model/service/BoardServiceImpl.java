@@ -39,8 +39,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	//게시글 페이징 처리
 	@Override
-	public int selectBoardListCount() {
-		return boardDao.selectBoardListCount(sqlSession);
+	public int selectBoardListCount(int writing_type) {
+		return boardDao.selectBoardListCount(sqlSession, writing_type);
 	}
 	
 	//게시글 insert

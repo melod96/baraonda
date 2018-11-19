@@ -52,8 +52,8 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	//게시글 페이징 처리
 	@Override
-	public int selectBoardListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("Board.selectBoardListCount");
+	public int selectBoardListCount(SqlSessionTemplate sqlSession, int writing_type) {
+		return sqlSession.selectOne("Board.selectBoardListCount", writing_type);
 	}
 
 	//게시글 insert
