@@ -66,6 +66,6 @@ public interface MyPageDao {
 
 	void updatePwd2(SqlSessionTemplate sqlSession, Member m);
 
-
+	void updateDelPhoto(SqlSessionTemplate sqlSession, int files_no);
 
 }

@@ -8,74 +8,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<jsp:include page="../common/header.jsp" />
-
-<script>
- $(document).ready(function(){
-  $().UItoTop({ easingType: 'easeOutQuart' });
-  $('#stuck_container').tmStickUp({});
-  $('.gallery .gall_item').touchTouch();
-  }); 
- 
-	//게시글 작성 버튼
-	$(document).ready(function(){
-		$("#writeBtn").click(function(){
-			location.href="${path}/baraonda/write.do";
-		});
-	});
-	//목록 버튼
-	/* $(document).ready(function(){
-		$("#boardList").click(function(){
-			location.href="${path}/baraonda/list.do?writing_type=${detail.WRITING_TYPE}";
-		});
-	});	 */
-	
-	//게시물 삭제 버튼
-	$(document).ready(function(){
-		$("#deleteB").click(function(){
-			if(confirm("삭제하시겠습니까?") == true){
-				document.form.submit();
-			}else{ //취소
-				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
-			}
-		});
-	});
-	//댓글 삭제 버튼
-	$(document).ready(function(){
-		$(".deleteB2").click(function(){
-			if(confirm("삭제하시겠습니까?") == true){
-				document.form.submit();
-			}else{ //취소
-				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
-			}
-		});
-	});
-	
-	//댓글 내용 입력 체크
-	$(document).ready(function(){
-		$("#btncmm1").click(function(){
-			var comment = $("#comment").val();
-			if(comment == ""){
-				alert("내용을 입력하세요.");
-				document.getElementById('comment').focus();
-				return;
-			}
-			document.form1.submit();
-		});
-	});
-	
-	//신고하기 팝업
-	function reportPopup(type){
-		
-		if(type == 'open'){
-			$("#reportContent").attr('style', 'display:inline');
-		}else if(type == 'close'){
-			$("#reportContent").attr('style', 'display:none');
-		}
-	}
-	
-</script>
-
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -331,7 +263,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 #rPopup{width: 250px; margin-left: 880px; margin-top: -170px; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);}
 #report{-webkit-appearance: radio !important;}
 #closePopup{float:right; color:blue;}
-#report{border-bottom: 1px solid #eee;}
+#report{border-bottom: 1px solid #eee; margin-left: -159px;}
 .pop_check{float: left;
     position: absolute;
     left: 1408px;
@@ -340,8 +272,9 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 #rli{cursor:pointer; margin-left: 22px;}
 </style>
 <body class="page1" id="top">
+<jsp:include page="../common/header.jsp" />
 	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
-
+	
 	<!--===================== Content======================-->
 		<div class="container">
 			<div class="row">
@@ -450,7 +383,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<c:if test="${! empty sessionScope.loginUser}">
 					<div class="btn_ar">
-						<img id="writeBtn" class="pageWriteBtn" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
+						<img id="writeBtn" class="pageWriteBtn" onclick="location.href='write.do'" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_write2.gif">
 						<img id="boardList" class="boardList" onclick="history.back();" src="<%=request.getContextPath()%>/resources/images/boardImg/btn_list.gif">	
 					</div>
 					</c:if>
@@ -477,13 +410,13 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 				            	<span id="closePopup">닫기</span>
         					</a>
 								<ul class="reportWrap">
-									<li onclick="" id="rli">광고/상업성 게시글 <input id="report" type="radio" name="reason" value="1" class="pop_check"></li>
-									<li onclick="" id="rli">비방/욕설 게시글 <input id="report" type="radio" name="reason" value="2" class="pop_check"></li>
-									<li onclick="" id="rli">개인정보 유출 게시글 <input id="report" type="radio" name="reason" value="3" class="pop_check"></li>
-									<li onclick="" id="rli">청소년 유해(음란) 게시글 <input id="report" type="radio" name="reason" value="4" class="pop_check"></li>
-									<li onclick="" id="rli">명예훼손/저작권 침해 게시글 <input id="report" type="radio" name="reason" value="5" class="pop_check"></li>	
-									<li onclick="" id="rli">도배성 게시글 <input type="radio"id="report" name="reason" value="6" class="pop_check"></li>		
-									<li onclick="" id="rli">불명확/추측성 게시글 <input id="report" type="radio" name="reason" value="7" class="pop_check"></li>		
+									<li onclick="choiceReport('${detail.BOARD_NO}', '광고/상업성 게시글 ', '${detail.MEMBER_NO }');" id="rli">광고/상업성 게시글 <input id="report" type="radio" value="1" class="pop_check"></li>
+									<li onclick="choiceReport('${detail.BOARD_NO}', '비방/욕설 게시글', '${detail.MEMBER_NO }');" id="rli">비방/욕설 게시글 <input id="report" type="radio" value="2" class="pop_check"></li>
+									<li onclick="choiceReport('${detail.BOARD_NO}', '개인정보 유출 게시글 ', '${detail.MEMBER_NO }');" id="rli">개인정보 유출 게시글 <input id="report" type="radio" value="3" class="pop_check"></li>
+									<li onclick="choiceReport('${detail.BOARD_NO}', '청소년 유해(음란) 게시글 ', '${detail.MEMBER_NO }');" id="rli">청소년 유해(음란) 게시글 <input id="report" type="radio" value="4" class="pop_check"></li>
+									<li onclick="choiceReport('${detail.BOARD_NO}', '명예훼손/저작권 침해 게시글 ', '${detail.MEMBER_NO }');" id="rli">명예훼손/저작권 침해 게시글 <input id="report" type="radio" value="5" class="pop_check"></li>	
+									<li onclick="choiceReport('${detail.BOARD_NO}', '도배성 게시글 ', '${detail.MEMBER_NO }');" id="rli">도배성 게시글 <input type="radio"id="report" value="6" class="pop_check"></li>		
+									<li onclick="choiceReport('${detail.BOARD_NO}', '불명확/추측성 게시글 ', '${detail.MEMBER_NO }');" id="rli">불명확/추측성 게시글 <input id="report" type="radio" value="7" class="pop_check"></li>		
 								</ul>
 							</div>
 						</div>
@@ -630,5 +563,83 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 			</div>
 		</div>
 	</footer>
+	
+	
+	
+<script>
+	$(document).ready(function(){
+		$().UItoTop({ easingType: 'easeOutQuart' });
+		$('#stuck_container').tmStickUp({});
+		$('.gallery .gall_item').touchTouch();
+	}); 
+
+	//목록 버튼
+	/* $(document).ready(function(){
+		$("#boardList").click(function(){
+			location.href="${path}/baraonda/list.do?writing_type=${detail.WRITING_TYPE}";
+		});
+	});	 */
+	
+	//게시물 삭제 버튼
+	$(document).ready(function(){
+		$("#deleteB").click(function(){
+			if(confirm("삭제하시겠습니까?") == true){
+				document.form.submit();
+			}else{ //취소
+				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+			}
+		});
+	});
+	//댓글 삭제 버튼
+	$(document).ready(function(){
+		$(".deleteB2").click(function(){
+			if(confirm("삭제하시겠습니까?") == true){
+				document.form.submit();
+			}else{ //취소
+				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+			}
+		});
+	});
+	
+	//댓글 내용 입력 체크
+	$(document).ready(function(){
+		$("#btncmm1").click(function(){
+			var comment = $("#comment").val();
+			if(comment == ""){
+				alert("내용을 입력하세요.");
+				document.getElementById('comment').focus();
+				return;
+			}
+			document.form1.submit();
+		});
+	});
+	
+	//신고하기 팝업
+	function reportPopup(type){
+		if(type == 'open'){
+			$("#reportContent").attr('style', 'display:inline');
+		}else if(type == 'close'){
+			$("#reportContent").attr('style', 'display:none');
+		}
+	}
+	
+	//신고하기 버튼 이벤트
+	function choiceReport(board_no, report_comment, report_get_no){
+		$.ajax({
+			url:"report.do",
+			rype:"post",
+			data:{board_no:board_no, report_comment:report_comment, report_get_no:report_get_no},
+			success:function(data){
+				if(confirm("해당 게시글을 신고하시겠습니까?") == true){
+					document.form.submit();
+				}else{ //취소
+					location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+				}
+			}
+		});
+	}
+	
+</script>
+	
 </body>
 </html>

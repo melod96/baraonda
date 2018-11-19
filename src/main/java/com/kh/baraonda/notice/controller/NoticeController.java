@@ -2,13 +2,14 @@ package com.kh.baraonda.notice.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.Pagination;
 import com.kh.baraonda.common.PaginationComment;
@@ -88,7 +89,7 @@ public class NoticeController {
 	
 	//공지사항 상세보기
 	@RequestMapping("noticeDetail.nt")
-	public String noticeDetail(String notice_no, Model model, PageInfo pi) {
+	public String noticeDetail(String notice_no, Model model, PageInfo pi,HttpSession session) {
 		
 		Notice ninfo = ns.selectNoticeOne(notice_no);
 		
@@ -111,6 +112,26 @@ public class NoticeController {
 		//이전글 | 다음글
 		Notice nextBoard = ns.selectNextBoard(notice_no);
 		Notice beforeBoard = ns.selectBeforeBoard(notice_no);
+		
+		Member m = (Member) session.getAttribute("loginUser");
+		
+		if(m != null) {
+			NoticeMarking nm = new NoticeMarking();
+			nm.setBoard_no(Integer.parseInt(notice_no));
+			nm.setMember_no(m.getMember_no());
+			
+			int check = -99;
+			
+			check = ns.checkBookmark(nm);
+			
+			model.addAttribute("checking", check);
+			
+			int check2 = -99;
+			
+			check2 = ns.checkHeart(nm);
+			
+			model.addAttribute("checking2", check2);
+		}
 		
 		model.addAttribute("ninfo", ninfo);
 		model.addAttribute("pi",pgif);

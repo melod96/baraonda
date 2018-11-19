@@ -92,7 +92,7 @@ public class ExperienceController {
 	}
 
 	@RequestMapping("experienceDetail.ep")
-	public String experienceDetail(String experience_no, Model model, PageInfo pi) {
+	public String experienceDetail(String experience_no, Model model, PageInfo pi,HttpSession session) {
 
 		Tips tinfo = es.selectExperienceOne(experience_no);
 
@@ -115,6 +115,26 @@ public class ExperienceController {
 		//이전글 | 다음글
 		Tips nextBoard = es.selectNextNo(experience_no);
 		Tips beforeBoard = es.selectBeforeNo(experience_no);
+		
+		Member m = (Member) session.getAttribute("loginUser");
+		
+		if(m != null) {
+			NoticeMarking nm = new NoticeMarking();
+			nm.setBoard_no(Integer.parseInt(experience_no));
+			nm.setMember_no(m.getMember_no());
+			
+			int check = -99;
+			
+			check = es.checkBookmark(nm);
+			
+			model.addAttribute("checking", check);
+			
+			int check2 = -99;
+			
+			check2 = es.checkHeart(nm);
+			
+			model.addAttribute("checking2", check2);
+		}
 
 		model.addAttribute("tinfo", tinfo);
 		model.addAttribute("pi",pgif);

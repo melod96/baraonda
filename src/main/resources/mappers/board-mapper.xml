@@ -68,7 +68,7 @@
 		<result property="profile_root" column="PROFILE_ROOT" />
 		<result property="profile" column="FILES_ROOT" />
 	</resultMap>
- 
+ 	
  	<!-- 게시글 목록 조회 -->
  	<!-- WRITING_TYPE값만 사용해서 출력 -->
 	<select id="listAll" resultType="java.util.HashMap" parameterType="java.util.List">
@@ -236,6 +236,9 @@
 	<update id="adminDelete">
 		UPDATE BOARD SET BOARD_STATUS = 1 WHERE BOARD_NO = #{board_no}
 	</update>
+	<insert id="report" parameterType="Report">
+		insert into report values(seq_report_no.nextval, #{report_comment}, #{board_no}, sysdate, #{report_give_no}, #{report_get_no}, 2, default)
+	</insert>
 </mapper> 
 
 

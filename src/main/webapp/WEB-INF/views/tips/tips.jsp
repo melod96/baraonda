@@ -149,11 +149,11 @@ margin-top: -10px;
 	<div class="container">
     <div class="row">
 	<div class="left">
+
 	
 		
 		<jsp:include page="../common/banner.jsp" />
-		
-		
+
 		<h2 class="title">다이어트꿀팁</h2>
 		<div class="clear" style="height:40px;background:white;"></div>
 		<div style="margin-bottom:10px; margin-left:10px;">

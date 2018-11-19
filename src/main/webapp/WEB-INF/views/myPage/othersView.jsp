@@ -60,7 +60,8 @@
 			<hr style="border:0.05em solid #307ABA;width:784px;">
 				<div class="imgCover">
 					<div class="imgArea">
-						<img id="photo" src="${pageContext.request.contextPath}/resources/images/myPageImages/level.png">
+						<img id="photo" src="${pageContext.request.contextPath}${file.files_root}"
+						onerror="this.src='${pageContext.request.contextPath}/resources/images/myPageImages/level.png'">
 					</div>
 				</div>
 				
