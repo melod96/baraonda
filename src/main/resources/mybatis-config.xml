@@ -53,6 +53,8 @@
 			
 			<typeAlias type="com.kh.baraonda.tips.model.vo.Tips" alias="Experience"/>
 			
+			<typeAlias type="com.kh.baraonda.board.model.vo.Report" alias="Report"/>
+			
   		</typeAliases>
   		
   		<mappers>

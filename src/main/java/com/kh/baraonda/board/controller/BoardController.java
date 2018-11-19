@@ -26,6 +26,7 @@ import com.kh.baraonda.board.model.service.BoardService;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.HomeFiles;
+import com.kh.baraonda.board.model.vo.Report;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.CommonUtils;
 import com.kh.baraonda.common.PageInfo;
@@ -429,10 +430,12 @@ public class BoardController {
 	
 	//게시글 신고
 	@RequestMapping("report.do")
-	public String report(@SessionAttribute("loginUser") Member m, Model model) {
+	public String report(@SessionAttribute("loginUser") Member m, Report r, Model model) {
+		r.setReport_give_no(m.getMember_no());
 		
+		boardService.report(r);
 		
-		return null;
+		return "redirect:view.do?board_no=" + r.getBoard_no();
 	}
 
 	//자주하는 질문 페이지

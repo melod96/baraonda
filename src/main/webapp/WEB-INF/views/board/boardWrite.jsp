@@ -58,7 +58,7 @@ div#editor {
 .fr-box{border: 1px solid #dee2e6; margin-top: -16px;}
 .boardC{height: 500px; width: 730px; margin-top: -18px; border: 1px solid #dee2e6;}
 .boardWriteBtn{text-align: center;}
-
+.text-left{font-weight: bold;}
 
 </style>
 

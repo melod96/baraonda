@@ -10,6 +10,7 @@ import com.kh.baraonda.board.model.exception.BoardException;
 import com.kh.baraonda.board.model.vo.Board;
 import com.kh.baraonda.board.model.vo.Comments;
 import com.kh.baraonda.board.model.vo.HomeFiles;
+import com.kh.baraonda.board.model.vo.Report;
 import com.kh.baraonda.board.model.vo.boardMarking;
 import com.kh.baraonda.common.PageInfo;
 import com.kh.baraonda.common.SearchCondition;
@@ -262,6 +263,12 @@ public class BoardDaoImpl implements BoardDao{
 	public void adminDelete(SqlSessionTemplate sqlSession, List<String> valueArr) {
 		SqlSession.selectList("Board.adminDelete", valueArr);
 		
+	}
+	
+	//게시글 신고
+	@Override
+	public void report(SqlSessionTemplate sqlSession, Report r) {
+		sqlSession.selectOne("Board.report", r);
 	}
 
 
