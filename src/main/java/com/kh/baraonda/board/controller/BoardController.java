@@ -38,6 +38,7 @@ import com.kh.baraonda.main.model.service.MainService;
 import com.kh.baraonda.main.model.vo.Fame;
 import com.kh.baraonda.main.model.vo.Ranking;
 import com.kh.baraonda.member.model.vo.Member;
+import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.notice.model.vo.Notice;
 import com.kh.baraonda.notice.model.vo.NoticeComment;
 
@@ -101,7 +102,7 @@ public class BoardController {
 	
 	//게시글 상세보기(댓글 포함), 조회수 증가 처리
 	@RequestMapping(value="view.do")
-	public ModelAndView view(int board_no, HttpSession session, PageInfo pi) {
+	public ModelAndView view(int board_no, HttpSession session, PageInfo pi, Member member) {
 		ModelAndView mv = new ModelAndView();
 		//게시글 상세보기(제목, 내용, 작성자, 날짜, 댓글수, 조회수) 
 		HashMap<String, Object> detail;
@@ -147,6 +148,8 @@ public class BoardController {
 			//상세보기 board_no값 넘겨줌
 			detail = boardService.detail(board_no);
 			commentList = boardService.commentList(board_no, info);
+			
+			System.out.println("리스트 : " + commentList);
 			//뷰 이름
 			mv.setViewName("board/boardPage");
 			//뷰에 전달할 데이터
@@ -155,6 +158,7 @@ public class BoardController {
 			mv.addObject("likeCount", likeCount);
 			mv.addObject("listCount", listCount);
 			mv.addObject("pi", info);
+			//mv.addObject("file", file);
 			
 			return mv;
 			

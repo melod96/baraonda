@@ -506,8 +506,13 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<ul>
 							<li class="comment-list-li">
 								<div class="comment-pic">
-									<img class="commentPro" 
-										src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
+								<%-- <c:if test="${file.files_change_title != null}"> --%>
+									<img class="commentPro" src="${pageContext.request.contextPath}${commentList.FILES_ROOT}${commentList.FILES_CHANGE_TITLE}">
+								<%-- </c:if>
+								<c:if test="${file.files_change_title == null} ">
+									<img class="commentPro" src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
+								</c:if> --%>
+								<%-- <img class="commentPro" src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif"> --%>
 								</div>
 								<div class="comment-txt">
 									<!--------------------------------- 댓글 작성자명 ---------------------------------->
@@ -681,19 +686,17 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 	
 	//신고하기 버튼 이벤트
 	function choiceReport(board_no, report_comment, report_get_no){
-		$.ajax({
-			url:"report.do",
-			rype:"post",
-			data:{board_no:board_no, report_comment:report_comment, report_get_no:report_get_no},
-			success:function(data){
-				if(confirm("해당 게시글을 신고하시겠습니까?") == true){
-					location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
-				}else{ //취소
-					location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
-					return false;
-				}
-			}
-		});
+		if(confirm("해당 게시글을 신고하시겠습니까?") == true){
+			$.ajax({
+				url:"report.do",
+				rype:"post",
+				data:{board_no:board_no, report_comment:report_comment, report_get_no:report_get_no}
+			});
+			alert("신고가 완료되었습니다.");
+			$("#reportContent").attr('style', 'display:none');
+		}else{
+			$("#reportContent").attr('style', 'display:none');
+		}
 	}
 	
 </script>

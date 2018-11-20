@@ -80,7 +80,6 @@ public interface BoardDao {
 	
 	//게시글 신고
 	void report(SqlSessionTemplate sqlSession, Report r);
-
 	
 
 	

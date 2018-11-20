@@ -189,7 +189,6 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.report(sqlSession, r);
 	}
 	
-	
 
 }
 
