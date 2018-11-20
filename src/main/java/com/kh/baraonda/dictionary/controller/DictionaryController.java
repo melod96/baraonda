@@ -121,6 +121,23 @@ public class DictionaryController {
 	
 	@RequestMapping("foodDetail.dt")
 	public String foodInfo(String food_no, Model model) {
+		//명예의전당
+				ArrayList<Fame> flist;
+				//공지사항
+				ArrayList<Notice> nlist;
+				//다이어터랭킹
+				ArrayList<Ranking> rlist;
+				try {
+					flist = ms.selectFame();
+					model.addAttribute("flist", flist);
+					nlist = ms.selectNotice();
+					model.addAttribute("nlist", nlist);
+					rlist = ms.selectRanking();
+					model.addAttribute("rlist", rlist);
+				} catch (MainSelectListException e1) {
+					model.addAttribute("msg", e1.getMessage());
+				}
+				
 		FoodDictionary fd = ds.selectFoodInfo(food_no);
 		
 		model.addAttribute("foodinfo", fd);

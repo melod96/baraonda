@@ -83,5 +83,6 @@
 			<button type="submit" class="btn btn-secondary btn-lg">취소</button>
 		</div>
 	</div>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

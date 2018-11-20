@@ -135,7 +135,7 @@ margin-top: -10px;
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<jsp:include page="../common/banner.jsp" />
 		<h2 class="title">체험단</h2>
 		<div class="clear" style="height:40px;background:white;"></div>
 	
@@ -153,7 +153,7 @@ margin-top: -10px;
            <div id="fonts">
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }<%-- </label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label> --%>
 	         </div>
-	         <img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">
+	         <img src="${pageContext.request.contextPath}${t.files_root}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">
 	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
             <a onclick= "location.href='experienceDetail.ep?experience_no='+${t.board_no}" class="btn">more</a></div>
@@ -280,5 +280,6 @@ margin-top: -10px;
 	<jsp:include page="../common/rightBoard.jsp" />
   </div>
   </div>
+  <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

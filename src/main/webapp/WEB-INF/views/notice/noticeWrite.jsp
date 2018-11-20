@@ -102,5 +102,6 @@ div#editor {
     	  imageUploadURL:'http://i.froala.com/upload'});
     });
   </script>
+  <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
