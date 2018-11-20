@@ -126,6 +126,24 @@ public class BoardController {
 			
 			PageInfo info = PaginationComment.getPageInfo(currentPage, listCount);
 			
+			Member m = (Member) session.getAttribute("loginUser");
+			
+			if(m != null) {
+				boardMarking bm = new boardMarking();
+				bm.setBoard_no(board_no);
+				bm.setMember_no(m.getMember_no());
+				
+				int check1 = - 99;
+				int check2 = - 99;
+				
+				check1 = boardService.checkBookMark(bm);
+				check2 = boardService.checkLike(bm);
+				
+				mv.addObject("check1", check1);
+				mv.addObject("check2", check2);
+				
+			}
+			
 			//상세보기 board_no값 넘겨줌
 			detail = boardService.detail(board_no);
 			commentList = boardService.commentList(board_no, info);
@@ -309,10 +327,8 @@ public class BoardController {
 		
 		if(check == 0) {
 			int insert = boardService.insertBookMark(bm);
-			System.out.println("인서트");
 		}else {
 			int delete = boardService.deleteBookMark(bm);
-			System.out.println("딜리트");
 		}
 		
 		return "redirect:view.do?board_no=" + board_no;

@@ -7,7 +7,6 @@
 <title>BARAON.DA</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -120,6 +119,27 @@
 	font-weight: bold;
 	vertical-align: top;
 }
+.allmark .bmark1 {
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
+		no-repeat;
+	width: 150px;
+	height: 50px;
+	display: inline-block;
+	line-height: 50px;
+}
+.allmark .bmark1 span {
+	display: inline-block;
+	padding-left: 32px;
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_bmark_on.png")
+		no-repeat left center;
+	font-weight: bold;
+	font-size: 15px;
+	color: #323232;
+	font-weight: bold;
+	vertical-align: top;
+}
 .allmark .heart {
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
@@ -135,6 +155,28 @@
 	padding-left: 35px;
 	background:
 		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_heart.png")
+		no-repeat left center;
+	font-weight: bold;
+	font-size: 15px;
+	color: #323232;
+	font-weight: bold;
+	vertical-align: top;
+}
+.allmark .heart1 {
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/bg_heart.gif")
+		no-repeat;
+	width: 150px;
+	height: 50px;
+	display: inline-block;
+	line-height: 50px;
+	margin-left: 20px;
+}
+.allmark .heart1 span {
+	display: inline-block;
+	padding-left: 35px;
+	background:
+		url("<%=request.getContextPath()%>/resources/images/boardImg/ico_heartch.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -260,22 +302,26 @@
 width:85px;height: 30px; float:right; margin-top: -25px; text-align: center;
 cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-radius: 4px; font-size: 15px;}
 #reportContent{display:none;}
-#rPopup{width: 250px; margin-left: 880px; margin-top: -170px; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);}
+#rPopup{width: 260px; margin-left: 880px; margin-top: -170px; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);}
 #report{-webkit-appearance: radio !important;}
 #closePopup{float:right; color:blue;}
-#report{border-bottom: 1px solid #eee; margin-left: -159px;}
+#report{border-bottom: 1px solid #eee;}
 .pop_check{float: left;
     position: absolute;
     left: 1408px;
     margin-top: 5px;
     vertical-align: middle;}
-#rli{cursor:pointer; margin-left: 22px;}
+#rli{cursor:pointer; margin-left: 34px;}
+#rli:hover{background-color:#e4e4e4;}
+#report:hover{cursor:pointer;}
+
 </style>
-<body class="page1" id="top">
+<body>
 <jsp:include page="../common/header.jsp" />
 	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
 	
 	<!--===================== Content======================-->
+	
 		<div class="container">
 			<div class="row">
 				<!---------------------------------------------------------------------------------------------------------------------------------------------->
@@ -372,8 +418,18 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
 					<div class="allmark">
 					<c:if test="${! empty sessionScope.loginUser}">
+						<c:if test="${check1 == 0}">
 						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
+						</c:if>
+						<c:if test="${check1 != 0}">
+						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark1"> <span>북마크</span></a>
+						</c:if>
+						<c:if test="${check2 == 0}">
 						<a href="like.do?board_no=${detail.BOARD_NO}" class="heart"><span>${likeCount}</span></a>
+						</c:if>
+						<c:if test="${check2 != 0}">
+						<a href="like.do?board_no=${detail.BOARD_NO}" class="heart1"><span>${likeCount}</span></a>
+						</c:if>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
 						<a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
@@ -608,7 +664,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 			if(comment == ""){
 				alert("내용을 입력하세요.");
 				document.getElementById('comment').focus();
-				return;
+				return false;
 			}
 			document.form1.submit();
 		});
@@ -631,9 +687,10 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 			data:{board_no:board_no, report_comment:report_comment, report_get_no:report_get_no},
 			success:function(data){
 				if(confirm("해당 게시글을 신고하시겠습니까?") == true){
-					document.form.submit();
+					location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
 				}else{ //취소
 					location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+					return false;
 				}
 			}
 		});

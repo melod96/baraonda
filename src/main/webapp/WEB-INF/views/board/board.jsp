@@ -168,6 +168,7 @@
 		<div class="clear" style="height: 17px; background: white;"></div>
 		<div class="container">
 			<div class="row">
+			<jsp:include page="../common/banner.jsp" />
 				<!------------------------------ 작업 공간 ------------------------------>
 				<div class="container1">
 					<h2 class="boardName">커뮤니티</h2>
