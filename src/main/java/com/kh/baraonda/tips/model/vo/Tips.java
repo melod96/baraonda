@@ -31,6 +31,7 @@ public class Tips implements Serializable{
 		private int files_secession; //파일 삭제여부
 		private String profile_root;
 		private String profile;
+		private String profile_title;
 		
 		public Tips() {}
 
@@ -38,7 +39,7 @@ public class Tips implements Serializable{
 				int member_no, Date board_date, Date modify_date, int board_status, int board_count, int board_good,
 				String nick_name, int marking_type, int files_no, int f_reference_no, String files_title,
 				String files_change_title, int files_type, String files_root, int files_secession, String profile_root,
-				String profile) {
+				String profile, String profile_title) {
 			super();
 			this.board_no = board_no;
 			this.board_type = board_type;
@@ -62,6 +63,7 @@ public class Tips implements Serializable{
 			this.files_secession = files_secession;
 			this.profile_root = profile_root;
 			this.profile = profile;
+			this.profile_title = profile_title;
 		}
 
 		public int getBoard_no() {
@@ -240,6 +242,14 @@ public class Tips implements Serializable{
 			this.profile = profile;
 		}
 
+		public String getProfile_title() {
+			return profile_title;
+		}
+
+		public void setProfile_title(String profile_title) {
+			this.profile_title = profile_title;
+		}
+
 		@Override
 		public String toString() {
 			return "Tips [board_no=" + board_no + ", board_type=" + board_type + ", writing_type=" + writing_type
@@ -249,9 +259,12 @@ public class Tips implements Serializable{
 					+ ", marking_type=" + marking_type + ", files_no=" + files_no + ", f_reference_no=" + f_reference_no
 					+ ", files_title=" + files_title + ", files_change_title=" + files_change_title + ", files_type="
 					+ files_type + ", files_root=" + files_root + ", files_secession=" + files_secession
-					+ ", profile_root=" + profile_root + ", profile=" + profile + "]";
+					+ ", profile_root=" + profile_root + ", profile=" + profile + ", profile_title=" + profile_title
+					+ "]";
 		}
 
+		
+		
 	
 		
 

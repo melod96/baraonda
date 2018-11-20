@@ -53,7 +53,7 @@
 	<result property="files_type" column="FILES_TYPE"/>
 	<result property="files_root" column="FILES_ROOT"/>
 	<result property="files_ssecession" column="FILES_SSECESSION"/>
-	<result property="profile_root" column="PROFILE_ROOT"/>
+	<result property="profile_title" column="PROFILE_TITLE"/>
 	
 	</resultMap>
 	
@@ -105,11 +105,11 @@
 	
 		<!-- 고객문의 목록 조회용 쿼리문 -->
 	<select id="selectQuestion" resultMap="questionResultSet" parameterType="Board">
-		SELECT RANK, BOARD_TITLE
+		SELECT RANK, BOARD_TITLE, board_no
 		
 		FROM(
 				SELECT RANK() OVER (ORDER BY BOARD_DATE DESC) AS RANK, 
-				BOARD_TITLE FROM BOARD WHERE BOARD_TYPE = 7 AND BOARD_STATUS = 0
+				BOARD_TITLE, board_no FROM BOARD WHERE BOARD_TYPE = 4 and BOARD_STATUS = 0
 			)
 			
 		WHERE RANK BETWEEN 1 AND 5
@@ -118,14 +118,13 @@
 	
 			<!-- 다이어터랭킹 목록 조회용 쿼리문(프로필사진 미추가) -->
 	<select id="selectRanking" resultMap="rankingResultSet" parameterType="Ranking">
-		  SELECT RANK, NICK_NAME, files_root, accrue_point, member_no
-		FROM(
-				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK,
-				NICK_NAME, files_root, accrue_point, member_no FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
-                join files f on (m.member_no = f.f_reference_no)
-                WHERE MEMBER_STATUS = 0 and files_type = 1
-			) 
-		WHERE RANK BETWEEN 1 AND 5
+		select m.NICK_NAME, min(files_root) as FILES_ROOT, p.accrue_point, m.member_no, min(files_change_title) as FILES_CHANGE_TITLE
+        from member m
+        join files f on (m.member_no = f.f_reference_no)
+        join POINT P ON(M.MEMBER_NO = P.POINT_NO)
+        where MEMBER_STATUS = 0 and files_type = 1 and files_secession = 0
+        group by m.NICK_NAME, p.accrue_point, m.member_no
+        order by accrue_point desc
 	</select>
 	
 	<!-- 명예의전당 목록 조회용 쿼리문 -->
@@ -139,32 +138,35 @@
 		
 	<!-- 비포에프터 목록 조회용 쿼리문 -->
 	<select id="selectTips" resultMap="tipsResultSet" parameterType="Tips">
-		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO ,FF.FILES_ROOT as "PROFILE_ROOT"
+		SELECT T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO, max(t.FILES_CHANGE_TITLE) as profile_title, min(ff.FILES_CHANGE_TITLE) as files_change_title
         FROM (     
             select b.board_title, b.board_date, b.board_count, count(m.board_no) board_good, 
-                   me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+                   me.nick_name, f.files_root, b.board_no, ME.MEMBER_NO, F.FILES_CHANGE_TITLE
             from board b
             join member me on (b.member_no = me.member_no)
             join marking m on (b.board_no = m.board_no)
             join files f on (b.board_no = f.f_reference_no)
             where marking_type = 2 and board_status = 0 and FILES_SECESSION = 0 and FILES_TYPE = 4 and WRITING_TYPE = 11
-            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO
+            group by b.board_title, m.board_no, b.board_title, b.board_date, b.board_count, me.nick_name, f.files_root, b.board_no,ME.MEMBER_NO, F.FILES_CHANGE_TITLE
             order by board_good desc
             ) T
         JOIN FILES FF ON ( FF.F_REFERENCE_NO = T.MEMBER_NO ) 
         AND FF.FILES_SECESSION = 0
         AND FF.FILES_TYPE = 1
+        where files_secession = 0
+        group by T.BOARD_TITLE, T.BOARD_DATE, T.BOARD_COUNT,T.board_good,T.NICK_NAME, T.FILES_ROOT, T.BOARD_NO,MEMBER_NO
+        order by board_good desc
 	
 		</select>
 		
 		<!-- 베스트 다이어터 조회용 쿼리문 -->
 	<select id="selectBest" resultMap="rankingResultSet" parameterType="Ranking">
-		SELECT RANK, NICK_NAME, files_root, SELF_INTRODUCTION, member_no
+		SELECT RANK, NICK_NAME, files_root, SELF_INTRODUCTION, member_no, FILES_CHANGE_TITLE
 		FROM(
 				SELECT RANK() OVER (ORDER BY ACCRUE_POINT DESC) AS RANK,
-				NICK_NAME, files_root, self_introduction, member_no FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
+				NICK_NAME, files_root, self_introduction, member_no, FILES_CHANGE_TITLE FROM MEMBER M JOIN POINT P ON(M.MEMBER_NO = P.POINT_NO)
                 join files f on (m.member_no = f.f_reference_no)
-                WHERE MEMBER_STATUS = 0 and files_type = 1
+                WHERE MEMBER_STATUS = 0 and files_type = 1 and files_secession = 0
 			) 
 		WHERE RANK BETWEEN 1 AND 1
 	</select>

@@ -12,13 +12,14 @@ public class TipsComment implements Serializable{
 	private int comments_status;
 	private String nick_name;
 	private String profile;
+	private String files_change_title;
 	
 	public TipsComment() {
 		
 	}
 
 	public TipsComment(int comments_no, String comments_content, int board_no, int member_no, Date comments_date,
-			int comments_status, String nick_name, String profile) {
+			int comments_status, String nick_name, String profile, String files_change_title) {
 		super();
 		this.comments_no = comments_no;
 		this.comments_content = comments_content;
@@ -28,6 +29,7 @@ public class TipsComment implements Serializable{
 		this.comments_status = comments_status;
 		this.nick_name = nick_name;
 		this.profile = profile;
+		this.files_change_title = files_change_title;
 	}
 
 	public int getComments_no() {
@@ -94,13 +96,23 @@ public class TipsComment implements Serializable{
 		this.profile = profile;
 	}
 
+	public String getFiles_change_title() {
+		return files_change_title;
+	}
+
+	public void setFiles_change_title(String files_change_title) {
+		this.files_change_title = files_change_title;
+	}
+
 	@Override
 	public String toString() {
 		return "TipsComment [comments_no=" + comments_no + ", comments_content=" + comments_content + ", board_no="
 				+ board_no + ", member_no=" + member_no + ", comments_date=" + comments_date + ", comments_status="
-				+ comments_status + ", nick_name=" + nick_name + ", profile=" + profile + "]";
+				+ comments_status + ", nick_name=" + nick_name + ", profile=" + profile + ", files_change_title="
+				+ files_change_title + "]";
 	}
 
+	
 	
 	
 	
