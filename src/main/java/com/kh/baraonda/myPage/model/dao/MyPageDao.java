@@ -14,6 +14,7 @@ import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
 import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
+import com.kh.baraonda.myPage.model.vo.Message;
 import com.kh.baraonda.myPage.model.vo.PointRecord;
 
 public interface MyPageDao {
@@ -66,6 +67,11 @@ public interface MyPageDao {
 
 	void updatePwd2(SqlSessionTemplate sqlSession, Member m);
 
-	void updateDelPhoto(SqlSessionTemplate sqlSession, int files_no);
+	void updateDelPhoto(SqlSessionTemplate sqlSession, int member_no);
 
+	void updateStatus(SqlSessionTemplate sqlSession, int member_no);
+
+	int selectMessageListCount(SqlSessionTemplate sqlSession, int member_no);
+	
+	ArrayList<Message> selectMessageList(SqlSessionTemplate sqlSession, PageInfo pi, int member_no);
 }

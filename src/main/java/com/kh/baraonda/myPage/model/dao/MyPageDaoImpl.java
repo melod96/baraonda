@@ -17,6 +17,7 @@ import com.kh.baraonda.myPage.model.vo.Marking;
 import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
 import com.kh.baraonda.myPage.model.vo.PointRecord;
+import com.kh.baraonda.myPage.model.vo.Message;
 
 @Repository
 public class MyPageDaoImpl implements MyPageDao {
@@ -174,8 +175,28 @@ public class MyPageDaoImpl implements MyPageDao {
 	}
 	
 	@Override
-	public void updateDelPhoto(SqlSessionTemplate sqlSession, int files_no) {
-		sqlSession.update("MyPage.updateDelPhoto", files_no);
+	public void updateDelPhoto(SqlSessionTemplate sqlSession, int member_no) {
+		sqlSession.update("MyPage.updateDelPhoto", member_no);
+	}
+
+	@Override
+	public void updateStatus(SqlSessionTemplate sqlSession, int member_no) {
+		sqlSession.update("MyPage.updateStatus", member_no);
+	}
+	
+	@Override
+	public int selectMessageListCount(SqlSessionTemplate sqlSession, int member_no) {
+		return sqlSession.selectOne("MyPage.selectMessageListCount", member_no);
+	}	
+
+	@Override
+	public ArrayList<Message> selectMessageList(SqlSessionTemplate sqlSession, PageInfo pi, int member_no) {
+
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+
+		return (ArrayList) sqlSession.selectList("MyPage.selectMessageList", member_no, rowBounds);
 	}
 
 }

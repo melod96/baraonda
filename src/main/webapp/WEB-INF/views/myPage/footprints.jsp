@@ -111,8 +111,8 @@
 					<tbody class="viewBody">
 					
 					</tbody>
-					<!--페이징 버튼 구역-->
 				</table>
+					<!--페이징 버튼 구역-->
 				<div class="paginate"></div>
 			</div>
 		</div>
