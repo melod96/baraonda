@@ -15,6 +15,7 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Message;
 import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
 import com.kh.baraonda.myPage.model.vo.PointRecord;
@@ -153,10 +154,22 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public void updateDelPhoto(int files_no) {
-		mpd.updateDelPhoto(sqlSession, files_no);
+	public void updateDelPhoto(int member_no) {
+		mpd.updateDelPhoto(sqlSession, member_no);
 	}	
 
+	@Override
+	public void updateStatus(int member_no) {
+		mpd.updateStatus(sqlSession, member_no);
+	}	
 
+	@Override
+	public int selectMessageListCount(int member_no) {
+		return mpd.selectMessageListCount(sqlSession, member_no);
+	}
 
+	@Override
+	public ArrayList<Message> selectMessageList(PageInfo pi, int member_no) {
+		return mpd.selectMessageList(sqlSession, pi, member_no);
+	}
 }

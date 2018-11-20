@@ -10,6 +10,7 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Message;
 import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
 import com.kh.baraonda.myPage.model.vo.PointRecord;
@@ -64,10 +65,13 @@ public interface MyPageService {
 
 	void updatePwd2(Member m);
 
-	void updateDelPhoto(int files_no);
+	void updateDelPhoto(int member_no);
 
+	void updateStatus(int member_no);
 
+	int selectMessageListCount(int member_no);
 
-
+	ArrayList<Message> selectMessageList(PageInfo pi, int member_no);
+	
 
 }

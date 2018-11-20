@@ -55,6 +55,8 @@
 			
 			<typeAlias type="com.kh.baraonda.board.model.vo.Report" alias="Report"/>
 			
+			<typeAlias type="com.kh.baraonda.myPage.model.vo.Message" alias="Message"/>
+			
   		</typeAliases>
   		
   		<mappers>

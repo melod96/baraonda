@@ -38,6 +38,7 @@ import com.kh.baraonda.myPage.model.vo.Comments;
 import com.kh.baraonda.myPage.model.vo.Files;
 import com.kh.baraonda.myPage.model.vo.Footprints;
 import com.kh.baraonda.myPage.model.vo.Marking;
+import com.kh.baraonda.myPage.model.vo.Message;
 import com.kh.baraonda.myPage.model.vo.Orders;
 import com.kh.baraonda.myPage.model.vo.Point;
 import com.kh.baraonda.myPage.model.vo.PointRecord;
@@ -102,6 +103,8 @@ public class MyPageController {
 								@RequestParam(name="photo", required=false) MultipartFile photo
 								,Model model) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
+		
+		mps.updateDelPhoto(loginUser.getMember_no());
 		
 		//사진 저장할 경로 지정
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -475,6 +478,7 @@ public class MyPageController {
 				return "myPage/falsePage";
 			}else {
 				model.addAttribute("type",type);
+				System.out.println(type + "실행1");
 				switch(type) {
 				case "changeNick" : 
 					return "myPage/changeNickPageView";
@@ -482,6 +486,11 @@ public class MyPageController {
 					return "myPage/changePwdPageView";
 				case "changeEmail" : 
 					return "myPage/changeEmailPageView";
+				case "changeStatus" : 
+					System.out.println(type + "실행2");
+					mps.updateStatus(loginUser.getMember_no());
+					return "redirect:logout.me";
+					
 				default : return "redirect:changeInfoView.my";
 				}
 			}
@@ -591,12 +600,41 @@ public class MyPageController {
 		
 			
 			@RequestMapping("updateDelPhoto.my")
-			public String updateDelPhoto(@RequestParam int files_no) {
+			public String updateDelPhoto(@RequestParam int member_no) {
 				
-				mps.updateDelPhoto(files_no);
+				mps.updateDelPhoto(member_no);
 				
 				return "redirect:changeInfoView.my";
 			}
 		
 		
+		
+		
+		
+		//message list ajax
+	@SuppressWarnings("null")
+	@RequestMapping(value="messageList.my")
+	public @ResponseBody HashMap<String, Object> duplicationCheck(@RequestParam int member_no,
+			 @RequestParam int currentPage, HttpServletResponse response){
+		
+			HashMap<String, Object> hmap = new HashMap<String, Object>();
+	
+			int messageCount = mps.selectMessageListCount(member_no);
+			
+			System.out.println("messageCount : " + messageCount);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, messageCount);
+			
+			ArrayList<Message> msgList = mps.selectMessageList(pi,member_no);
+			
+			System.out.println("msgList : " + msgList);
+			
+			hmap.put("msgList", msgList);
+			hmap.put("pi",pi);
+			
+	
+		
+		return hmap;
+		
+	}
 }

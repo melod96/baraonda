@@ -140,7 +140,7 @@
 								); 
 								
 						 	for(var key in data["list"]){
-								var $tr = $("<tr class='hTr'>");
+								var $tr = $("<tr class='msgTr'>");
 								var likeCount = 0;
 								
 								for(var mKey in data["mList"]){

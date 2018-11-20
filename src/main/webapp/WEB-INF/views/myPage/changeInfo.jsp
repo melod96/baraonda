@@ -85,15 +85,55 @@
 					<div class="profileArea1">
 							<h5 id="myExe">[내 경험치]</h5>
 						<div class="exeInfo">
-							<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/chicks.png">
+						
+							<c:if test="${point.accrue_point < 100 }">
+								<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/egg.png">
+							</c:if>
+							<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+								<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/chicks.png">
+							</c:if>
+							<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+								<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/chick.png">
+							</c:if>
+							<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
+								<img id="level" src="${pageContext.request.contextPath}/resources/images/myPageImages/adultchick.png">
+							</c:if>
+							
 							<div class="exe1">
 								<br>
 								<h6>현재 경험치 량 : <c:out value="${point.accrue_point}"/></h6>
 								<br>
-								<h6>다음 단계까지 :900</h6>
+								<h6>다음 단계까지 :
+									<c:if test="${point.accrue_point < 100 }">
+										<label>${100-point.accrue_point}</label>
+									</c:if>
+									<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+										<label>${300-point.accrue_point}</label>
+									</c:if>
+									<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+										<label>${600-point.accrue_point}</label>
+									</c:if>
+									<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
+										<label>${1000-point.accrue_point}</label>
+									</c:if>
+								</h6>
 							</div>
-							<h5 id="exe3">현재 등급 : 병아리</h5>
+							<h5 id="exe3">현재 등급 : 
+								<c:if test="${point.accrue_point < 100 }">
+									<label>알</label>
+								</c:if>
+								<c:if test="${point.accrue_point >= 100 && point.accrue_point < 300 }">
+									<label>병아리</label>
+								</c:if>
+								<c:if test="${point.accrue_point >= 300 && point.accrue_point < 600}">
+									<label>사춘기 닭</label>
+								</c:if>
+								<c:if test="${point.accrue_point >= 600 && point.accrue_point <= 1000}">
+									<label>성인 닭</label>
+								</c:if>
+							</h5>
 						</div>
+						<br>
 					</div>
 					<div class="profileArea2">
 						<div class="introInfo">
@@ -245,8 +285,8 @@
 		}
 		
 		function deletePhoto(){
-			var files_no = ${file.files_no}
-			location.href="updateDelPhoto.my?files_no=" + files_no;
+			var member_no = ${loginUser.member_no}
+			location.href="updateDelPhoto.my?member_no=" + member_no;
 		}
 		
 	</script>

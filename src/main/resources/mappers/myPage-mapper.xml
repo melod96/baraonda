@@ -126,29 +126,39 @@
 		<result property="point_step" column="POINT_STEP"/>
 	</resultMap>
 	
-	
+	<resultMap type="com.kh.baraonda.myPage.model.vo.Message" id="messageResultSet">
+		<id property="message_no" column="MESSAGE_NO"/>
+		<result property="message_title" column="MESSAGE_TITLE"/>
+		<result property="message_content" column="MESSAGE_CONTENT"/>
+		<result property="message_date" column="MESSAGE_DATE"/>
+		<result property="dispatch_member_no" column="DISPATCH_MEMBER_NO"/>
+		<result property="dispatch_nickname" column="DISPATCH_NICKNAME"/>
+		<result property="receive_member_no" column="RECEIVE_MEMBER_NO"/>
+		<result property="receive_nickname" column="DISPATCH_NICKNAME"/>
+		<result property="check_date" column="CHECK_DATE"/>
+	</resultMap>
 	
 	
 	
 	<select id="selectFootprints" resultMap="footprintsResultSet" parameterType="Footprints">
 	
-	SELECT BOARD_COUNT, COMMENTS_COUNT, MARKING_COUNT, ACCRUE_POINT, ENROLL_DATE
+		SELECT BOARD_COUNT, COMMENTS_COUNT, MARKING_COUNT, ACCRUE_POINT, ENROLL_DATE
 	
-	FROM 
-    	(SELECT  COUNT(BOARD_NO) BOARD_COUNT FROM BOARD 
-	    WHERE MEMBER_NO = #{member_no} AND BOARD_STATUS = 0),
+		FROM 
+	    	(SELECT  COUNT(BOARD_NO) BOARD_COUNT FROM BOARD 
+		    WHERE MEMBER_NO = #{member_no} AND BOARD_STATUS = 0),
 	    
-  		(SELECT COUNT(COMMENTS_NO) COMMENTS_COUNT FROM COMMENTS
-  		WHERE MEMBER_NO = #{member_no} AND COMMENTS_STATUS = 0),
+	  		(SELECT COUNT(COMMENTS_NO) COMMENTS_COUNT FROM COMMENTS
+	  		WHERE MEMBER_NO = #{member_no} AND COMMENTS_STATUS = 0),
   		
-	    (SELECT COUNT(M.MARKING_NO) MARKING_COUNT FROM MARKING M
-	  	JOIN BOARD B ON(M.BOARD_NO = B.BOARD_NO)
-	    WHERE B.MEMBER_NO = #{member_no} AND M.MARKING_TYPE = 2),
+		    (SELECT COUNT(M.MARKING_NO) MARKING_COUNT FROM MARKING M
+		  	JOIN BOARD B ON(M.BOARD_NO = B.BOARD_NO)
+		    WHERE B.MEMBER_NO = #{member_no} AND M.MARKING_TYPE = 2),
 	    
-	    (SELECT ENROLL_DATE FROM MEMBER
-	    WHERE MEMBER_NO = #{member_no}),
+		    (SELECT ENROLL_DATE FROM MEMBER
+		    WHERE MEMBER_NO = #{member_no}),
 	    
-	    (SELECT ACCRUE_POINT FROM POINT WHERE POINT_NO = ${member_no})
+		    (SELECT ACCRUE_POINT FROM POINT WHERE POINT_NO = ${member_no})
 	</select>
 	
 	
@@ -320,31 +330,42 @@
 	
 	<!--사진 삭제 -->
 	<update id="updateDelPhoto" parameterType="_int">
-		UPDATE FILES SET FILES_SECESSION = 1  WHERE FILES_NO = #{files_no}
+		UPDATE FILES SET FILES_SECESSION = 1  WHERE F_REFERENCE_NO = #{member_no}
 	</update>	
 	
+	<!--회원탈퇴 -->
+	<update id="updateStatus" parameterType="_int">
+		UPDATE MEMBER SET MEMBER_STATUS = 1  WHERE MEMBER_NO = #{member_no}
+	</update>
+	
+	<!--메세지 개수 조회 -->	
+	<select id="selectMessageListCount" resultType="_int">
+		SELECT COUNT(*)
+  		FROM MESSAGE
+   		WHERE DISPATCH_MEMBER_NO = #{member_no} OR RECEIVE_MEMBER_NO = #{member_no}
+	</select>	
+	
+	<!--메세지 리스트 조회 -->	
+	<select id="selectMessageList" resultMap="messageResultSet">
+		SELECT MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, MESSAGE_DATE, DISPATCH_MEMBER_NO, RECEIVE_MEMBER_NO, CHECK_DATE, DISPATCH_NICKNAME, RECEIVE_NICKNAME
+  		FROM
+			 (SELECT MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, MESSAGE_DATE, DISPATCH_MEMBER_NO, RECEIVE_MEMBER_NO, CHECK_DATE
+		       	FROM  MESSAGE 
+		        WHERE DISPATCH_MEMBER_NO = 4 OR RECEIVE_MEMBER_NO = 4
+		        ORDER BY MESSAGE_DATE DESC),
+        
+		        (SELECT NICK_NAME DISPATCH_NICKNAME
+		         FROM MEMBER M 
+		         JOIN MESSAGE G ON(M.MEMBER_NO = G.DISPATCH_MEMBER_NO)
+		         WHERE M.MEMBER_NO= G.DISPATCH_MEMBER_NO),
+         
+		        (SELECT NICK_NAME RECEIVE_NICKNAME
+		         FROM MEMBER M 
+		         JOIN MESSAGE G ON(M.MEMBER_NO = G.RECEIVE_MEMBER_NO)
+		         WHERE M.MEMBER_NO= G.RECEIVE_MEMBER_NO)
+	</select>
+	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
