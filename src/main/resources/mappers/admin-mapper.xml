@@ -147,14 +147,16 @@
 	
 	<select id="selectDeclarationCount" resultType="java.lang.Integer" parameterType="Search">
 		SELECT COUNT(*)
-		FROM REPORT R 
-		JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
-		JOIN MEMBER M2 ON(R.REPORT_GET_NO = M2.MEMBER_NO)
-		WHERE 1 = 1
-	    <if test="content != null and content != ''">
-			AND (GIVE_NICK_NAME LIKE '%' || #{content} || '%' 
-			OR GET_NICK_NAME LIKE '%' || #{content} || '%')
-		</if>
+		FROM (SELECT R.REPORT_NO, R.REPORT_TYPE, M1.NICK_NAME AS GIVE_NICK_NAME, M2.NICK_NAME AS GET_NICK_NAME, R.REPORT_DATE, R.REPORT_APPROVAL
+			FROM REPORT R 
+			JOIN MEMBER M1 ON(R.REPORT_GIVE_NO = M1.MEMBER_NO)
+			JOIN MEMBER M2 ON(R.REPORT_GET_NO = M2.MEMBER_NO)
+			WHERE 1 = 1
+		    <if test="content != null and content != ''">
+				AND (M1.NICK_NAME LIKE '%' || #{content} || '%' 
+				OR M2.NICK_NAME LIKE '%' || #{content} || '%')
+			</if>
+		)
 	</select>
 	
 	<select id="selectDeclarationList" resultType="map" parameterType="Search">
@@ -164,8 +166,8 @@
 		JOIN MEMBER M2 ON(R.REPORT_GET_NO = M2.MEMBER_NO)
 		WHERE 1 = 1
 	    <if test="content != null and content != ''">
-			AND (GIVE_NICK_NAME LIKE '%' || #{content} || '%' 
-			OR GET_NICK_NAME LIKE '%' || #{content} || '%')
+			AND (M1.NICK_NAME LIKE '%' || #{content} || '%' 
+			OR M2.NICK_NAME LIKE '%' || #{content} || '%')
 		</if>
 	</select>
 	
