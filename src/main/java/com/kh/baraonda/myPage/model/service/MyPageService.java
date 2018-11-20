@@ -73,5 +73,10 @@ public interface MyPageService {
 
 	ArrayList<Message> selectMessageList(PageInfo pi, int member_no);
 	
-
+	int selectNicksNo(String receive_nickname);
+	
+	void insertMsg(Message msg);
+	
+	Message selectMsgOne(int message_no);
+	
 }

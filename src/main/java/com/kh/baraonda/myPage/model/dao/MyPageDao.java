@@ -74,4 +74,10 @@ public interface MyPageDao {
 	int selectMessageListCount(SqlSessionTemplate sqlSession, int member_no);
 	
 	ArrayList<Message> selectMessageList(SqlSessionTemplate sqlSession, PageInfo pi, int member_no);
+	
+	int selectNicksNo(SqlSessionTemplate sqlSession, String receive_nickname);
+	
+	void insertMsg(SqlSessionTemplate sqlSession, Message msg);
+	
+	Message selectMsgOne(SqlSessionTemplate sqlSession, int message_no);
 }

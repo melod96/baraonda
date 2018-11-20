@@ -611,7 +611,7 @@ public class MyPageController {
 		
 		
 		
-		//message list ajax
+	//message list ajax
 	@SuppressWarnings("null")
 	@RequestMapping(value="messageList.my")
 	public @ResponseBody HashMap<String, Object> duplicationCheck(@RequestParam int member_no,
@@ -629,12 +629,71 @@ public class MyPageController {
 			
 			System.out.println("msgList : " + msgList);
 			
+			String msgDate[] = new String[10];
+			
+			for(int i = 0 ; i < msgList.size(); i++) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+		 		msgDate[i] = transFormat.format(msgList.get(i).getMessage_date());
+			}
+			
+			hmap.put("msgDate",msgDate);
 			hmap.put("msgList", msgList);
-			hmap.put("pi",pi);
+			hmap.put("msgPi",pi);
 			
 	
 		
 		return hmap;
 		
 	}
+	
+	
+	
+		//message send ajax
+		@SuppressWarnings("null")
+		@RequestMapping(value="sendMsg.my")
+		public @ResponseBody int sendMsg(@RequestParam int dispatch_member_no,
+										 @RequestParam String receive_nickname,
+										 @RequestParam String message_title,
+										 @RequestParam String message_content,
+										 HttpServletResponse response){
+										 
+			Message msg = new Message();
+			
+			msg.setMessage_title(message_title);
+			msg.setMessage_content(message_content);
+			
+			msg.setDispatch_member_no(dispatch_member_no);
+			
+			int receive_member_no = mps.selectNicksNo(receive_nickname);
+			msg.setReceive_member_no(receive_member_no);
+		
+			
+			mps.insertMsg(msg);
+			
+			return 1;
+		}
+		
+		//message Detail ajax
+				@SuppressWarnings("null")
+				@RequestMapping(value="msgDetail.my")
+				public @ResponseBody HashMap<String, Object> sendMsg(@RequestParam int message_no, HttpServletResponse response){
+										System.out.println("디테일 실행됨.");
+					HashMap<String, Object> hmap = new HashMap<String, Object>();
+				
+					Message msgDetail = mps.selectMsgOne(message_no);
+			
+					String msgDate = "";
+					
+					SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+					msgDate = transFormat.format(msgDetail.getMessage_date());
+					
+					hmap.put("msgDate",msgDate);
+					hmap.put("msgDetail", msgDetail);
+					
+					System.out.println(msgDetail + msgDate);
+					return hmap;
+				}
+		
 }

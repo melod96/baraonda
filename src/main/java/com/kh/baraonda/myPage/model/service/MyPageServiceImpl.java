@@ -172,4 +172,19 @@ public class MyPageServiceImpl implements MyPageService{
 	public ArrayList<Message> selectMessageList(PageInfo pi, int member_no) {
 		return mpd.selectMessageList(sqlSession, pi, member_no);
 	}
+	
+	@Override	
+	public int selectNicksNo(String receive_nickname){
+		return mpd.selectNicksNo(sqlSession, receive_nickname);
+	}
+	
+	@Override
+	public void insertMsg(Message msg){
+		mpd.insertMsg(sqlSession, msg);
+	}
+	
+	@Override
+	public Message selectMsgOne(int message_no){
+		return mpd.selectMsgOne(sqlSession, message_no);
+	}
 }
