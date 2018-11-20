@@ -83,5 +83,4 @@ public interface BoardService {
 	void report(Report r);
 	
 	
-	
 }
