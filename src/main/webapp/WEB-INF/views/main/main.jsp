@@ -259,7 +259,7 @@ hr{
               <br>
               <c:forEach var="q" items="${qlist}" end="4">
               <label><img src="${pageContext.request.contextPath}/resources/images/main/고객센터아이콘.png" id="question_img" style="margin-top:5px;">
-              <a onclick= "location.href='view.do?board_no=' + ${q.board_no}" style="font-size:16px;" id="nq_title"> ${ q.board_title }</a></label>
+              <a onclick= "location.href='view.do?board_no='+${q.board_no}" style="font-size:16px;" id="nq_title"> ${ q.board_title }</a></label>
               <br>
               </c:forEach> 
               <a href="list.do?writing_type=19" class="btn" id="nq_btn">more</a>
@@ -280,12 +280,12 @@ hr{
        <div class="grid_4">
         <div class="gall_block">
           <div class="maxheight">
-            <a id="gall_item" onclick= "location.href='view.do?board_no=' + ${t.board_no}"><img src="${pageContext.request.contextPath}${t.files_root}" alt="" style="width:370px;height:230px;"></a>
+            <a id="gall_item" onclick= "location.href='view.do?board_no=' + ${t.board_no}"><img src="${pageContext.request.contextPath}${t.files_root}${t.profile_title}" alt="" style="width:370px;height:230px;"></a>
             <div class="gall_bot">
             <div class="text1"><a onclick= "location.href='view.do?board_no=' + ${t.board_no}" id="ba_title">${t.board_title } </a></div>
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }</label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label>
 	         <br>
-	         	<img src="${pageContext.request.contextPath}${t.profile_root}" style="width:25px; height:25px; border-radius:20px">&nbsp;
+	         	<img src="${pageContext.request.contextPath}${t.files_root}${t.files_change_title}" style="width:25px; height:25px; border-radius:20px">&nbsp;
 	         <a id="ba_font" onclick="location.href='othersView.my?member_no=' + ${t.member_no}">${t.nick_name }</a>
 	         <br>
             <a onclick= "location.href='view.do?board_no=' + ${t.board_no}" class="btn">more</a></div>
@@ -305,7 +305,7 @@ hr{
         <br>
         <blockquote class="bq1">
         <c:forEach var="b" items="${blist}" end="1">
-          <img src="${pageContext.request.contextPath}${b.files_root}" alt="" class="${pageContext.request.contextPath}/resources/img_inner fleft noresize" style="height:100px; width:250px;">
+          <img src="${pageContext.request.contextPath}${b.files_root}${b.files_change_title}" alt="" class="${pageContext.request.contextPath}/resources/img_inner fleft noresize" style="height:100px; width:250px;">
           <div class="extra_wrapper">
             <div class="bq_title color1">${b.nick_name }</div>
             <div>
@@ -333,7 +333,7 @@ hr{
       <c:forEach var="r" items="${rlist}" end="4">
 	      <label>
 	     	 <div style="float:right; margin-left:100px;"> 
-	      <img src="${pageContext.request.contextPath}${r.files_root}" id="profile_img" style="margin-left:15px; width:30px; height:30px; border-radius:20px;">
+	      <img src="${pageContext.request.contextPath}${r.files_root}${r.files_change_title}" id="profile_img" style="margin-left:15px; width:30px; height:30px; border-radius:20px;">
 	      <a id="profile_font" onclick="location.href='othersView.my?member_no=' + ${r.member_no}">${ r.nick_name } </a>
 	  	    </div> 
 	      <a style="float:left; margin-top:4px;">누적경험치 :&nbsp;</a><a style="float:left; margin-top:4px;">${ r.accrue_point}</a>&nbsp;&nbsp;&nbsp;

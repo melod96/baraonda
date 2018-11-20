@@ -183,7 +183,7 @@ margin-top: -10px;
            <div id="fonts">
 	         <label>${t.board_date}</label>&nbsp;|&nbsp;조회수&nbsp;<label style="color:red">${t.board_count }<%-- </label>&nbsp;|&nbsp;좋아요&nbsp;<label style="color:red">${t.board_good }</label> --%>
 	         </div>
-	         <img src="${pageContext.request.contextPath}/resources/images/main/아이유프사.png" style="width:25px; height:25px; border-radius:20px">
+	         <img src="${pageContext.request.contextPath}/resources/images/uploadFiles/아이유프사.png" style="width:25px; height:25px; border-radius:20px">
 	         <a id="ba_font">${t.nick_name }</a>
 	         <br>
             <a onclick= "location.href='tipsDetail.tp?tips_no='+${t.board_no}" class="btn">more</a></div>

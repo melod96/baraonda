@@ -18,13 +18,13 @@ public class Ranking {
 	private int files_type; //파일유형. 썸네일 4번
 	private String files_root; //파일 경로
 	private int files_secession; //파일 삭제여부
-	private String profile_root;
+	private String profile_title;
 	
 	public Ranking(){}
 
 	public Ranking(int member_no, String nick_name, int member_status, int point_no, int accrue_point,
 			String self_introduction, int files_no, int f_reference_no, String files_title, String files_change_title,
-			int files_type, String files_root, int files_secession, String profile_root) {
+			int files_type, String files_root, int files_secession, String profile_title) {
 		super();
 		this.member_no = member_no;
 		this.nick_name = nick_name;
@@ -39,7 +39,7 @@ public class Ranking {
 		this.files_type = files_type;
 		this.files_root = files_root;
 		this.files_secession = files_secession;
-		this.profile_root = profile_root;
+		this.profile_title = profile_title;
 	}
 
 	public int getMember_no() {
@@ -146,12 +146,12 @@ public class Ranking {
 		this.files_secession = files_secession;
 	}
 
-	public String getProfile_root() {
-		return profile_root;
+	public String getProfile_title() {
+		return profile_title;
 	}
 
-	public void setProfile_root(String profile_root) {
-		this.profile_root = profile_root;
+	public void setProfile_title(String profile_title) {
+		this.profile_title = profile_title;
 	}
 
 	@Override
@@ -160,11 +160,10 @@ public class Ranking {
 				+ ", point_no=" + point_no + ", accrue_point=" + accrue_point + ", self_introduction="
 				+ self_introduction + ", files_no=" + files_no + ", f_reference_no=" + f_reference_no + ", files_title="
 				+ files_title + ", files_change_title=" + files_change_title + ", files_type=" + files_type
-				+ ", files_root=" + files_root + ", files_secession=" + files_secession + ", profile_root="
-				+ profile_root + "]";
+				+ ", files_root=" + files_root + ", files_secession=" + files_secession + ", profile_title="
+				+ profile_title + "]";
 	}
 
-	
 	
 	
 	
