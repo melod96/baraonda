@@ -402,7 +402,7 @@
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="${pageContext.request.contextPath}${tinfo.files_root }" class="proic" style="border-radius:20px">
+							<img src="${pageContext.request.contextPath}${tinfo.files_root}${tinfo.files_change_title }" class="proic" style="border-radius:20px">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
@@ -495,7 +495,7 @@
 								<li class="comment-list-li">
 									<div class="comment-pic">
 										<img class="commentPro" 
-											src="${pageContext.request.contextPath}${clist.profile }">
+											src="${pageContext.request.contextPath}${clist.profile }${clist.files_change_title}">
 									</div>
 									<div class="comment-txt">
 										<!--------------------------------- 댓글 작성자명 ---------------------------------->
@@ -602,6 +602,6 @@
 		</div>
 	</section>
 	<!----------------- footer----------------->
-	
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

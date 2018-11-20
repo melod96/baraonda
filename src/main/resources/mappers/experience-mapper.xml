@@ -43,6 +43,7 @@
 		<result property="comments_status" column="COMMENTS_STATUS"/>
 		<result property="nick_name" column="NICK_NAME" />
 		<result property="profile" column="FILES_ROOT" />
+		<result property="files_change_title" column="FILES_CHANGE_TITLE" />
 	</resultMap>
 
 	<select id="experienceListCount" resultType="_int">
@@ -52,15 +53,15 @@
 	</select>
 	
 	<select id="selectExperienceList" resultMap="tipsResultSet3">
-      select b.board_title, b.board_date, b.board_count, 
-                   me.COMPANY_NAME as nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,ff.files_root as profile_root
+       select b.board_title, b.board_date, b.board_count, 
+                   me.COMPANY_NAME as nick_name, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,min(ff.files_change_title) as profile_root
             from board b
             join member me on (b.member_no = me.member_no)
             join files f on (b.board_no = f.f_reference_no)
             join files ff on (b.member_no = ff.f_reference_no)
             join EXPERIENCE E ON (b.BOARD_NO = E.BOARD_NO)
             where board_status = 0 and f.FILES_SECESSION = 0 and f.FILES_TYPE = 4 and board_type=5 and b.writing_type = 16 and ff.files_type = 1 AND E.EXPERIENCE_APPROVAL = 1
-            group by b.board_title, b.board_title, b.board_date, b.board_count, me.COMPANY_NAME, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title,ff.files_root
+            group by b.board_title, b.board_title, b.board_date, b.board_count, me.COMPANY_NAME, f.files_root, b.board_no,ME.MEMBER_NO, b.writing_type, f.files_change_title
             order by b.board_no desc
         
 	</select>
@@ -70,11 +71,17 @@
 	</update>
 	
 	<select id="selectExperienceOne" resultMap="tipsResultSet3">
-		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,b.member_no, BOARD_DATE,BOARD_STATUS,BOARD_COUNT, FILES_root,M.COMPANY_NAME as nick_name
+		<!-- SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,b.member_no, BOARD_DATE,BOARD_STATUS,BOARD_COUNT, FILES_root,M.COMPANY_NAME as nick_name
+		FROM BOARD B
+		JOIN FILES F ON (F.F_REFERENCE_NO = B.MEMBER_NO)
+		JOIN MEMBER M ON (B.MEMBER_NO = M.MEMBER_NO)
+		WHERE BOARD_NO = #{experience_no} AND FILES_TYPE = 1 -->
+		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,TO_CHAR(SUBSTR(BOARD_CONTENT,0,1000)) as BOARD_CONTENT,b.member_no, BOARD_DATE,BOARD_STATUS,BOARD_COUNT, max(FILES_root) as files_root,M.COMPANY_NAME as nick_name, min(files_change_title) as files_change_title
 		FROM BOARD B
 		JOIN FILES F ON (F.F_REFERENCE_NO = B.MEMBER_NO)
 		JOIN MEMBER M ON (B.MEMBER_NO = M.MEMBER_NO)
 		WHERE BOARD_NO = #{experience_no} AND FILES_TYPE = 1
+        group by BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,TO_CHAR(SUBSTR(BOARD_CONTENT,0,1000)),b.member_no, BOARD_DATE,BOARD_STATUS,BOARD_COUNT,M.COMPANY_NAME
 	</select>
 	
 	<select id="selectHeartExperience" resultType="_int">
@@ -90,7 +97,7 @@
 		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
         JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)
 		WHERE BOARD_NO = #{experience_no} AND COMMENTS_STATUS = 0 and FILES_TYPE = 1 ORDER BY COMMENTS_NO DESC -->
-		SELECT C.COMMENTS_NO, TO_CHAR(SUBSTR(C.COMMENTS_CONTENT,0,1000)) as COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,max(FILES_ROOT ) as files_root
+		SELECT C.COMMENTS_NO, TO_CHAR(SUBSTR(C.COMMENTS_CONTENT,0,1000)) as COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,max(FILES_ROOT ) as files_root, min(files_change_title) as files_change_title
 		FROM COMMENTS C
 		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
         JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)

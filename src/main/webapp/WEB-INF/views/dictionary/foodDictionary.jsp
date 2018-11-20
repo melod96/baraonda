@@ -92,7 +92,7 @@
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<jsp:include page="../common/banner.jsp" />
 		<h2 class="title">음식 칼로리</h2>
 		<div class="search">
 		<form action="searchFoodDictionary.dt" method="get">
@@ -219,5 +219,6 @@
 	<jsp:include page="../common/rightBoard.jsp" />
   </div>
   </div>
+  <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

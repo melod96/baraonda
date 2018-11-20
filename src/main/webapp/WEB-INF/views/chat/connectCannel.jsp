@@ -36,7 +36,7 @@
     <div class="row">
 
       <div class="left">
-		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<jsp:include page="../common/banner.jsp" />
 		<h2 class="title">화상채팅</h2>
 		<div class="col-md-6">
         <h2 class="h3">채널 입장하기</h2>
@@ -105,5 +105,7 @@
       appCallee.connectChannel(channelId);
     }, false);
   </script>
+  <jsp:include page="../common/footer.jsp"/>
+  
 </body>
 </html>

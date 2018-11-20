@@ -105,7 +105,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="left">
-		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<jsp:include page="../common/banner.jsp" />
 		<h2 class="title">칼로리 처방 받기</h2>
 		<div class="tbl-y-wrap r5">
 				<table class="tbl-y">
@@ -179,5 +179,6 @@
 			<jsp:include page="../common/rightBoard.jsp" />
 		</div>
 	</div>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

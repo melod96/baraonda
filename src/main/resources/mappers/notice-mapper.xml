@@ -18,6 +18,7 @@
 		<result property="board_status" column="BOARD_STATUS" />
 		<result property="board_count" column="BOARD_COUNT" />
 		<result property="profile" column = "FILES_ROOT"/>
+		<result property="files_change_title" column = "FILES_CHANGE_TITLE"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.baraonda.notice.model.vo.NoticeComment" id="CommentResultSet2">
@@ -29,6 +30,7 @@
 		<result property="comments_status" column="COMMENTS_STATUS"/>
 		<result property="nick_name" column="NICK_NAME" />
 		<result property="profile" column = "FILES_ROOT"/>
+		<result property="files_change_title" column = "FILES_CHANGE_TITLE"/>
 	</resultMap>
  
 	
@@ -41,7 +43,7 @@
 	</select>
 	
 	<select id="selectNoticeOne" resultMap="NoticeResultSet2">
-		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,MEMBER_NO,BOARD_DATE,MODIFY_DATE,BOARD_STATUS,BOARD_COUNT, FILES_ROOT
+		SELECT BOARD_NO,BOARD_TYPE,WRITING_TYPE,BOARD_TITLE,BOARD_CONTENT,MEMBER_NO,BOARD_DATE,MODIFY_DATE,BOARD_STATUS,BOARD_COUNT, FILES_ROOT, FILES_CHANGE_TITLE
 		FROM BOARD B
 		JOIN FILES F ON (F.F_REFERENCE_NO = B.MEMBER_NO)
 		WHERE BOARD_NO = #{notice_no} AND FILES_TYPE = 1
@@ -60,7 +62,8 @@
 		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
         JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)
 		WHERE BOARD_NO = #{notice_no} AND COMMENTS_STATUS = 0 and FILES_TYPE = 1 ORDER BY COMMENTS_NO DESC -->
-		SELECT C.COMMENTS_NO, TO_CHAR(SUBSTR(C.COMMENTS_CONTENT,0,1000)) as COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,max(FILES_ROOT ) as files_root
+		SELECT C.COMMENTS_NO, TO_CHAR(SUBSTR(C.COMMENTS_CONTENT,0,1000)) as COMMENTS_CONTENT, C.BOARD_NO, C.MEMBER_NO, C.COMMENTS_DATE, C.COMMENTS_STATUS, M.NICK_NAME,
+	max(FILES_ROOT ) as files_root, min(FILES_CHANGE_TITLE ) as files_change_title
 		FROM COMMENTS C
 		JOIN MEMBER M ON (C.MEMBER_NO = M.MEMBER_NO)
         JOIN FILES F ON (F.F_REFERENCE_NO = C.MEMBER_NO)

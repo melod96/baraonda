@@ -102,5 +102,6 @@ div#editor {
       $('#edit').froalaEditor()
     });
   </script>
+  <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

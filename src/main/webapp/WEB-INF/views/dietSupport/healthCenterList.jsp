@@ -71,8 +71,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="left">
-				<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG"
-					style="width: 732px; height: 180px;">
+				<jsp:include page="../common/banner.jsp" />
+					
 				<h2 class="title">인바디 측정 가능 보건소 찾기</h2>
 				<p>
 					<i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size:20px;"></i>&nbsp;
@@ -257,5 +257,6 @@
 			<jsp:include page="../common/rightBoard.jsp" />
 		</div>
 	</div>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

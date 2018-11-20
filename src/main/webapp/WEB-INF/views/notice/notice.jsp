@@ -79,7 +79,7 @@
 	<div class="container">
     <div class="row">
 	<div class="left">
-		<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG" style="width:732px; height:180px;">
+		<jsp:include page="../common/banner.jsp" />
 		<h2 class="title">공지사항</h2>
 		<form action="searchNotice.nt" method="get">
 			<div class="search">
@@ -222,5 +222,6 @@
 	<jsp:include page="../common/rightBoard.jsp" />
   </div>
   </div>
+  <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

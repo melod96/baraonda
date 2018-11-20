@@ -71,7 +71,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="left">
-				<img src="${pageContext.request.contextPath}/resources/images/berrywater.PNG"
+				<jsp:include page="../common/banner.jsp" />
 					style="width: 732px; height: 180px;">
 				<h2 class="title">나의 BMI 지수 확인</h2>
 				<div class="tbl-y-wrap r5">
@@ -218,5 +218,6 @@
 			<jsp:include page="../common/rightBoard.jsp" />
 		</div>
 	</div>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
