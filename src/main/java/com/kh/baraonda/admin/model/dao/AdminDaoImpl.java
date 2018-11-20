@@ -197,6 +197,10 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.update("Admin.updateExperienceInfo", adminBoard);
 	}
 
+
+
+	
+
 	
 	
 

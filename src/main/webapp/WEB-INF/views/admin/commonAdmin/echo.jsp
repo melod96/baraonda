@@ -28,13 +28,56 @@
 
     function sendMessage() {
         /*소켓으로 보내겠다.  */
-        sock.send("${ loginUser.member_no }" + "||"  + $("#message").val());
+        sock.send("${ loginUser.member_no }" + "|||"  + $("#message").val());
     }
 
     //evt 파라미터는 웹소켓을 보내준 데이터다.(자동으로 들어옴)
     function onMessage(evt) {
         var data = evt.data;
-        $("#data").append(data + "<br/>");
+        var arr = data.split('|||');
+        for ( var i in arr ) {
+        	console.log(arr[i]);
+        }
+        console.log("arr길이" + arr.length)
+        
+        if(arr[2] == ''){
+        	arr[2] = '/resources/images/myPageImages/level.png';
+        }
+        
+        var content = '';
+        if(arr.length >= 5){
+	        if(arr[0] == '${ loginUser.member_no }'){
+	        	content = '<li class="right clearfix">' +
+						  	'<span class="chat-img pull-right">' +
+								'<img src="${pageContext.request.contextPath}' + arr[2] + arr[3] + '" alt="User Avatar" class="img-circle" />' +
+							'</span>' +
+							'<div class="chat-body clearfix">' +
+								'<div class="header">' +
+									'<strong class="pull-right primary-font">' + arr[1] + '</strong>' +
+							    '</div>' +
+									'<p>' +
+							        	arr[4] +
+							        '</p>' +
+							    '</div>' +
+							'</li>';
+	        }else{
+	        	content = '<li class="left clearfix">' +
+					      	'<span class="chat-img pull-left">' +
+					      		'<img src="${pageContext.request.contextPath}' + arr[2] + arr[3] + '" alt="User Avatar" class="img-circle" />' +
+					        '</span>' +
+					        '<div class="chat-body clearfix">' +
+					        	'<div class="header">' +
+					                '<strong class="primary-font">' + arr[1] + '</strong>' +
+					            '</div>' +
+					            '<p>' +
+					                arr[4] +
+					            '</p>' +
+					        '</div>' +
+					      '</li>';
+	        }
+        }
+        
+        $("#data").append(content);
         //sock.close();
     }
 
@@ -42,10 +85,18 @@
         $("#data").append("연결 끊김");
     }
 </script>
+<style>
+	.img-circle {
+		width: 50px;
+		height: 50px;
+	}
+	.chat-button {
+		
+	}
+</style>
 <div class="container">
-	<h2>Modal Example</h2>
 	<!-- Trigger the modal with a button -->
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+	<button type="button" class="btn btn-info btn-lg chat-button" data-toggle="modal"
 		data-target="#myModal">Open Modal</button>
 
 	<!-- Modal -->
@@ -61,60 +112,7 @@
 				<div class="chat-panel panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <ul class="chat" id="data">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
+                        
                         </div>
                         <!-- /.panel-body -->
                         <div class="panel-footer">

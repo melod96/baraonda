@@ -83,5 +83,7 @@ public interface AdminDao {
 	void updateExperienceInfo(SqlSessionTemplate sqlSession, AdminBoard adminBoard) throws AdminException;
 
 
+
+
 	
 }
