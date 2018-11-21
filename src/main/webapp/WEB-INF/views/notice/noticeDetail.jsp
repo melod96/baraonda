@@ -406,7 +406,7 @@
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="${pageContext.request.contextPath}${ninfo.profile }" class="proic">
+							<img src="${pageContext.request.contextPath}/resources/images/uploadFiles/${ninfo.files_change_title }" class="proic">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
