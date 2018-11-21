@@ -2,6 +2,7 @@ package com.kh.baraonda.echo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,9 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.kh.baraonda.admin.model.vo.AdminBoard;
+import com.kh.baraonda.admin.model.vo.Member;
 
 public class EchoHandler extends TextWebSocketHandler {
 	private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
@@ -25,8 +29,24 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
+		ChatController cc = new ChatController();
+		
+		String result = "";
+		String data = message.getPayload();
+		String member_no = data.substring(0, data.lastIndexOf("|||"));
+		String content = data.substring(data.lastIndexOf("|||") + 3);
+		AdminBoard adminBoard = new AdminBoard(member_no, null, content);
+		if(member_no.trim().length() > 0) {
+			try {
+				Member member = cc.doEcho(adminBoard); 
+				result += member.getMember_no() + "|||" + member.getNick_name() + "|||" + member.getFiles_root() + "|||" + member.getFiles_change_title();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		result += "|||" + content;
 		for (WebSocketSession sess : sessionList) {
-			sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));
+			sess.sendMessage(new TextMessage(result));
 		}
 	}
 

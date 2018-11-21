@@ -188,6 +188,14 @@ public class AdminServiceImpl implements AdminService {
 		ad.updateExperienceInfo(sqlSession, adminBoard);
 	}
 
+	public Map<String, Object> doEcho(AdminBoard adminBoard) throws AdminException{
+		sqlSession.update("Admin.insertChat", adminBoard);
+		return sqlSession.selectOne("Admin.selectMember", adminBoard.getBoard_no());
+	}
+
+
+	
+
 
 	
 	

@@ -76,6 +76,8 @@ public interface AdminService {
 
 	void updateExperienceInfo(AdminBoard adminBoard) throws AdminException;
 
+	Map<String, Object> doEcho(AdminBoard adminBoard) throws AdminException;
+
 	
 	
 }
