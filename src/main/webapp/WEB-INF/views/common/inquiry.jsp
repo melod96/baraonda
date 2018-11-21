@@ -68,7 +68,7 @@ background:#a4b68f;
 									<br>
 									
 									<div class="limiter2" align="center">
-									<p style="padding-top:10px;"><p style="float:left; margin-left:25px;">담당자 : </p><p style="color:green; float:left;">&nbsp;alfzm560@naver.com</p></p>
+									<p style="padding-top:10px;"><p style="float:left; margin-left:25px;">담당자 : </p><p style="color:green; float:left;">&nbsp;baraonda5949@gmail.com</p></p>
 									</div>
 									<br>
 									<p>감사합니다.</p>

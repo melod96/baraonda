@@ -28,4 +28,6 @@ public interface MemberDao {
 
 	ArrayList<Member> selectIds(SqlSessionTemplate sqlSession, Member m);
 
+	int insertProfile(SqlSessionTemplate sqlSession, Member member);
+
 }

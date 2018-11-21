@@ -26,4 +26,6 @@ public interface MemberService {
 	int selectNickCheck(Member m);
 
 	ArrayList<Member> selectIds(Member m);
+
+	int insertProfile(Member member);
 }

@@ -91,6 +91,11 @@ public class MemberServiceImpl implements MemberService{
 		return md.selectIds(sqlSession, m);
 	}
 
+	@Override
+	public int insertProfile(Member member) {
+		return md.insertProfile(sqlSession, member);
+	}
+
 	
 
 
