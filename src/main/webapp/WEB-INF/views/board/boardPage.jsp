@@ -506,10 +506,10 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<ul>
 							<li class="comment-list-li">
 								<div class="comment-pic">
-								<%-- <c:if test="${file.files_change_title != null}"> --%>
-									<img class="commentPro" src="${pageContext.request.contextPath}${commentList.FILES_ROOT}${commentList.FILES_CHANGE_TITLE}">
+								<%-- <c:if test="${row.FILES_CHANGE_TITLE != null}"> --%>
+									<img class="commentPro" src="${pageContext.request.contextPath}${row.FILES_ROOT}${row.FILES_CHANGE_TITLE}">
 								<%-- </c:if>
-								<c:if test="${file.files_change_title == null} ">
+								<c:if test="${row.FILES_CHANGE_TITLE == null} ">
 									<img class="commentPro" src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
 								</c:if> --%>
 								<%-- <img class="commentPro" src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif"> --%>
