@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BARAON.DA - 커뮤니티</title>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -72,7 +73,9 @@
 .boardNo {
 	text-align: center;
 }
-
+.boardNo1 {
+	text-align: left;
+}
 .boardSubject1 {
 	text-align: center;
 }
@@ -193,7 +196,7 @@
 						<thead>
 							<tr>
 								<!------------------------------ 게시글 번호, 제목, 작성자, 작성일, 조회수 ------------------------------>
-								<th class="boardNo">번호</th>
+								<th class="boardNo">게시판</th>
 								<th class="boardSubject1">제목</th>
 								<th class="boardWriter">작성자</th>
 								<th class="boardDay">작성일</th>
@@ -202,16 +205,40 @@
 						</thead>
 						<tbody>
 						<tr class="boardTr" style="font-weight: bold;">
-									<th class="boardNo" onclick="location.href='question.do'">.</th>
+									<th class="boardNo1" onclick="location.href='question.do'">[공지사항]</th>
 									<th class="boardSubject2" onclick="location.href='question.do'">자주하는 질문</th>
 									<th class="boardWriter" onclick="location.href='question.do'">관리자</th>
 									<th class="boardDay" onclick="location.href='question.do'">2018-11-19</th>
-									<th class="boardCount" onclick="location.href='question.do'">123</th>
+									<th class="boardCount" onclick="location.href='question.do'">54205</th>
 							</tr>
 						
 							<c:forEach items="${list}" var="row">
-								<tr class="boardTr" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'"> 
-									<th class="boardNo">${row.BOARD_NO}</th>
+								<tr class="boardTr" onclick="location.href='${path}/baraonda/view.do?board_no=${row.BOARD_NO}'">
+									<c:if test="${row.WRITING_TYPE == 11 }">
+										<th class="boardNo1">[비포&애프터]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 12 }">
+										<th class="boardNo1">[자극사진]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 13 }">
+										<th class="boardNo1">[다이어트 일기]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 14 }">
+										<th class="boardNo1">[다이어트 식단]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 15 }">
+										<th class="boardNo1">[고민/질문]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 18 }">
+										<th class="boardNo1">[자유게시판]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 19 }">
+										<th class="boardNo1">[관리자에게]</th>
+									</c:if>
+									<c:if test="${row.WRITING_TYPE == 20 }">
+										<th class="boardNo1">[체험단리뷰]</th>
+									</c:if>
+									<%-- <th class="boardNo">${row.BOARD_NO}</th> --%>
 									<th class="boardSubject2">${row.BOARD_TITLE}</th>
 									<th class="boardWriter">${row.NICK_NAME}</th>
 									<th class="boardDay">${ fn:substring(row.BOARD_DATE, 0, 10) }</th>
@@ -236,7 +263,7 @@
 							<tbody>
 							<tr class="boardTr" style="font-weight: bold;">
 								<th></th>
-									<th class="boardNo" onclick="location.href='question.do'">.</th>
+									<th class="boardNo" onclick="location.href='question.do'">[공지사항]</th>
 									<th class="boardSubject2" onclick="location.href='question.do'">자주하는 질문</th>
 									<th class="boardWriter" onclick="location.href='question.do'">관리자</th>
 									<th class="boardDay" onclick="location.href='question.do'">2018-11-19</th>

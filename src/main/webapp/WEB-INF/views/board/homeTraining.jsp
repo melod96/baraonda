@@ -101,8 +101,8 @@
 										</div>
 										<div id="fonts">
 											<label>${list.board_date}</label>&nbsp;|&nbsp;
-											조회수&nbsp;<label style="color: red">${list.board_count }</label>&nbsp;|&nbsp;
-											좋아요&nbsp;<label style="color: red">${list.board_good }</label>
+											조회수&nbsp;<label style="color: red">${list.board_count }</label><%-- &nbsp;|&nbsp;
+											좋아요&nbsp;<label style="color: red">${list.board_good }</label> --%>
 										</div>
 										<img src="<%=request.getContextPath()%>/resources/images/boardImg/woman.png" style="width: 25px; height: 25px; border-radius: 20px">
 										<a id="ba_font">홈트레이닝</a> <br> <a onclick="location.href='view.do?board_no=' + ${list.board_no}" class="btn">more</a>
