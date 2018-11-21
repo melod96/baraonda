@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <style>
-
 	.menu1{display:inline-block;}
 	.menu1:hover{color:white;cursor:pointer;}
 	*{font-family:'Chungchunsidae'}
@@ -27,7 +26,6 @@
 		
 		/*페이징 버튼*/
 		.paginate2{margin-right:auto;margin-left:auto;text-align:center;margin-top:15px;margin-bottom:20px;}
-		.paginate2>button{background:white !important;}
 		
 		
 		/*글자 수 넘치면 ...으로 변환*/			
