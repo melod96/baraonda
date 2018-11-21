@@ -65,6 +65,11 @@ public class MemberDaoImpl implements MemberDao{
 		return (ArrayList)sqlSession.selectList("Member.selectIds",m);
 	}
 
+	@Override
+	public int insertProfile(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.insert("Member.insertProfile",member);
+	}
+
 
 	
 	

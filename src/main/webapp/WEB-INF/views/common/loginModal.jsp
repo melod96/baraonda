@@ -9,9 +9,9 @@
 </style>
 
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-		aria-labelledby="Login" aria-hidden="true">
+		aria-labelledby="Login" aria-hidden="true" style="height:700px;">
 		<div class="modal-dialog modal-sm" style="z-index: 999999;">
-			<div class="modal-content">
+			<div class="modal-content" style="width:400px;">
 			
 				<div class="modal-header">
 					<span class="login100-form-title p-b-10" style="z-index:50;">LOGIN</span>
@@ -19,7 +19,7 @@
 
 					
 									<div class="limiter">
-							<div class="container-login100">
+							<div class="container-login100" style="height:700px;">
 								<div class="wrap-login100 p-t-15 p-b-15">
 									<form class="login100-form validate-form" action="login.me" method="post">
 										<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email: ex@abc.xyz">

@@ -13,9 +13,9 @@
 		#message{position:fixed;bottom:20px;right:20px;z-index: 999999;}
 		.messageDiv{width:400px;height:327px;position:fixed;bottom:70px;right:20px;z-index: 999999;visibility:hidden;
 					background:white;border:7px solid #FFE8B5; border-radius:10px;}
-		.messageArea th{border:2px solid #FFE8B5;text-align:center;width:100px;}
-		.messageArea td{text-align:center;font-size:0.8em;}
-		.messageArea{height:320px;}
+		.messageArea th{border:2px solid #FFE8B5;text-align:center;width:100px;height:22px;}
+		.messageArea td{text-align:center;font-size:0.7em;height:21px;}
+		.messageArea{height:auto;}
 		.msgTr:hover{background:#ddd;color:black;cursor:pointer;}
 		
 		.msgTr2{border:2px solid #FFE8B5;text-align:center;width:100px;}
@@ -312,7 +312,7 @@
 								
 								"<tr class='msgTr3'>" +
 									"<td>내용</td>"+
-									"<td><textarea id='msgContent' name='msgContent'>"+ 
+									"<td><textarea id='msgContent' name='msgContent'readonly>"+ 
 										data["msgDetail"].message_content + 
 									"</textarea></td>"+
 								"</tr>"

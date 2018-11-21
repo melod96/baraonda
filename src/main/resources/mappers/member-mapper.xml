@@ -128,6 +128,15 @@
 		WHERE NAME = #{name} AND EMAIL = #{email}
 	</select>
 	
+	<!--기본 프로필 사진 생성-->
+	<insert id="insertProfile" parameterType="Member">
+		INSERT INTO FILES
+		VALUES(
+			SEQ_FILES_NO.NEXTVAL, #{member_no},
+			 'woman.png', 'woman.png', 
+			 1, '/resources/images/boardImg/', 0
+		)
+	</insert>
 </mapper>
 
 

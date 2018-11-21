@@ -120,9 +120,16 @@ public class MemberController {
 		
 		if(result > 0) {
 			int result2 =ms.insertPoint(member);
+			int result3 =ms.insertProfile(member);
 			
 			if(result2 > 0) {
-				return "redirect:goMain.me";
+				if(result3 > 0) {
+					
+					return "redirect:goMain.me";
+				}else {
+					model.addAttribute("msg", "기본 프로필 사진 생성 실패");
+					return "common/errorPage";
+				}
 			}else {
 				model.addAttribute("msg", "포인트 생성 실패");
 				return "common/errorPage";
