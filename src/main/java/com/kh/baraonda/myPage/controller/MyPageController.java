@@ -487,7 +487,6 @@ public class MyPageController {
 				case "changeEmail" : 
 					return "myPage/changeEmailPageView";
 				case "changeStatus" : 
-					System.out.println(type + "실행2");
 					mps.updateStatus(loginUser.getMember_no());
 					return "redirect:logout.me";
 					

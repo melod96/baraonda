@@ -334,7 +334,7 @@ hr{
 	      <label>
 	     	 <div style="float:right; margin-left:100px;"> 
 	      <img src="${pageContext.request.contextPath}${r.files_root}${r.files_change_title}" id="profile_img" style="margin-left:15px; width:30px; height:30px; border-radius:20px;">
-	      <a id="profile_font" onclick="location.href='othersView.my?member_no=' + ${r.member_no}">${ r.nick_name } </a>
+	      <a id="profile_font" onclick="location.href='othersView.my?member_no=' + ${r.member_no}" style="font-size:15px; padding-left:2px;">${ r.nick_name } </a>
 	  	    </div> 
 	      <a style="float:left; margin-top:4px;">누적경험치 :&nbsp;</a><a style="float:left; margin-top:4px;">${ r.accrue_point}</a>&nbsp;&nbsp;&nbsp;
 	      </label>
