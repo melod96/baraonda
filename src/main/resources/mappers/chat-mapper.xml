@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Chat">
+	
+	<select id="selectMemberForChat" parameterType="java.lang.String" resultType="map">
+		SELECT M.MEMBER_NO, M.NICK_NAME, F.FILES_ROOT, F.FILES_CHANGE_TITLE 
+		FROM MEMBER M
+		JOIN FILES F ON(M.MEMBER_NO = F.F_REFERENCE_NO) 
+		WHERE 1 = 1 
+		AND MEMBER_NO = #{member_no} 
+		AND FILES_SECESSION = 0
+		AND FILES_TYPE = 1
+	</select>
+	
+	<insert id="insertChat" parameterType="AdminBoard">
+		INSERT INTO CHAT VALUES(SEQ_CHAT_NO.NEXTVAL, #{board_no}, #{content}, SYSDATE)
+	</insert>
+	
+</mapper> 
+  
