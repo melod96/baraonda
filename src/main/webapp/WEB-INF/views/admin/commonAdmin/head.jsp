@@ -3,7 +3,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Baraonda Admin</title>
+    <title>Baraonda</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${ pageContext.servletContext.contextPath }/resources/admin/css/bootstrap.min.css" rel="stylesheet">

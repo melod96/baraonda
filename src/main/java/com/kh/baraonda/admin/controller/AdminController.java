@@ -372,9 +372,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value="goChat.adm")
-	public ModelAndView goChat(ModelAndView mv) {
-		
-		mv.setViewName("admin/dashboard/websocket-echo");
+	public ModelAndView goChat(ModelAndView mv, @RequestParam(value="num", required=true)String num) {
+		mv.addObject("num", num);
+		mv.setViewName("common/echo");
 		
 		return mv;
 	}

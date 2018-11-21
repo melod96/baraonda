@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="modal" id="chat-modal">
   <div class="modal-dialog">
-    <div class="modal-content" style="height:500px;">
+    <div class="modal-content" style="height:400px;">
 
       <!-- Modal Header -->
       <div class="modal-header">
@@ -12,14 +12,16 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-		<button class="btn btn-default" id="createChannel" style="margin:0; width:230px; height:230px;" onclick = "location.href='createCannel.ch'">
-            <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 채널 생성하기
+      <button class="btn btn-default" id="createChannel" style="margin:0; width:150px; height:150px;" onclick = "location.href='createCannel.ch'">
+            <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 화상 채팅 채널 <br /> 생성하기
         </button>
           
-        <button class="btn btn-default" id="connectChannel" style="margin:0;width:230px; height:230px;" onclick = "location.href='connectCannel.ch'">
-            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 채널 연결하기
+        <button class="btn btn-default" id="connectChannel" style="margin:0;width:150px; height:150px;" onclick = "location.href='connectCannel.ch'">
+            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 화상 채팅 채널 <br />연결하기
         </button>
+         <button type="button" class="btn btn-default" style="margin:0;width:150px; height:150px;" onclick="window.open('http://192.168.10.37:8001/baraonda/goChat.adm?num=${ loginUser.member_no }', 'Chat', 'width=720px, height=500px')">채팅 연결하기</button>
       </div>
+      
 
       <!-- Modal footer -->
       <div class="modal-footer">
