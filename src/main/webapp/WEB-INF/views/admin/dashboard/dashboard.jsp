@@ -228,10 +228,6 @@
                 </div>
                 <!-- /.col-lg-4 -->
                 
-                <!-- ㅁㅁ -->
-  				<jsp:include page="../commonAdmin/echo.jsp" />
-                <!-- ㅁㅁ -->
-                
             </div>
             <!-- /.row -->
         </div>
