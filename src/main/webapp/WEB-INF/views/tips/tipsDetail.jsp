@@ -373,7 +373,7 @@ $(document).ready(function(){
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="${pageContext.request.contextPath}${tinfo.files_root }${tinfo.files_change_title}" class="proic" style="border-radius:20px">
+							<img src="<%=request.getContextPath()%>/resources/images/uploadFiles/아이유프사.png" class="proic" style="border-radius:20px">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
