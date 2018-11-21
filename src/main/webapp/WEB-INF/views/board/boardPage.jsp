@@ -305,7 +305,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 #rPopup{width: 260px; margin-left: 880px; margin-top: -170px; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);}
 #report{-webkit-appearance: radio !important;}
 #closePopup{float:right; color:blue;}
-#report{border-bottom: 1px solid #eee;}
+#report{border-bottom: 1px solid #eee; margin-left: -150px;}
 .pop_check{float: left;
     position: absolute;
     left: 1408px;
@@ -390,7 +390,8 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic">
+							<%-- <img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic"> --%>
+							<img src="${pageContext.request.contextPath}${detail.FILES_ROOT}${detail.FILES_CHANGE_TITLE}" class="proic">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
@@ -401,7 +402,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
 							<div class="group_inner">
 								<ul class="date_menu">
-									<li class="da01"><span>${ fn:substring(detail.BOARD_DATE, 0, 10) }</span></li>
+									<li class="da01"><span>${ fn:substring(detail.BOARD_DATE, 0, 16) }</span></li>
 									<li class="da02"><span>${detail.BOARD_COUNT}</span></li>
 									<li class="da03"><span>${detail.COMMENTS_COUNT}</span></li>
 								</ul>

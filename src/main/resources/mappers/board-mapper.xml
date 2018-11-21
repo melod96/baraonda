@@ -41,6 +41,8 @@
  	   <result property="BOARD_NO" column="BOARD_NO" />
  	   <result property="WRITING_TYPE" column="WRITING_TYPE" />
  	   <result property="MEMBER_NO" column="MEMBER_NO" />
+ 	   <result property="CHANGE_TITLE" column="CHANGE_TITLE" />
+ 	   <result property="FILES_ROOT" column="FILES_ROOT" />
  	   
 	</resultMap>
 		<resultMap type="com.kh.baraonda.board.model.vo.Home" id="homeResultSet">
@@ -109,10 +111,12 @@
              (SELECT COUNT(*)
               FROM COMMENTS C
               JOIN BOARD B ON(B.BOARD_NO = C.BOARD_NO)
-              WHERE B.BOARD_NO = #{BOARD_NO} AND C.COMMENTS_STATUS = 0) AS COMMENTS_COUNT
+              WHERE B.BOARD_NO = #{board_no} AND C.COMMENTS_STATUS = 0) AS COMMENTS_COUNT,
+              F.FILES_ROOT, F.FILES_CHANGE_TITLE
 		FROM BOARD B
 		JOIN MEMBER M ON(B.MEMBER_NO = M.MEMBER_NO)
-		WHERE B.BOARD_NO = #{BOARD_NO}
+		JOIN FILES F ON(M.MEMBER_NO = F.F_REFERENCE_NO)
+		WHERE B.BOARD_NO = #{board_no}  AND F.FILES_SECESSION = 0 AND F.FILES_TYPE = 1
 	</select>
 	
 	<!-- 게시글 검색 개수 -->
@@ -157,6 +161,7 @@
 		JOIN MEMBER M ON(C.MEMBER_NO = M.MEMBER_NO)
 		JOIN FILES F ON(M.MEMBER_NO = F.F_REFERENCE_NO)
 		WHERE C.BOARD_NO = #{board_no} AND C.COMMENTS_STATUS = 0 AND F.FILES_SECESSION = 0 AND FILES_TYPE = 1
+		ORDER BY C.COMMENTS_NO DESC
 	</select>
 	<!-- 댓글 수 -->
 	<select id="commentListCount" resultType="_int">

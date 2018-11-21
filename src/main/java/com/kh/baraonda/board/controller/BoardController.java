@@ -149,7 +149,6 @@ public class BoardController {
 			detail = boardService.detail(board_no);
 			commentList = boardService.commentList(board_no, info);
 			
-			System.out.println("리스트 : " + commentList);
 			//뷰 이름
 			mv.setViewName("board/boardPage");
 			//뷰에 전달할 데이터
@@ -419,7 +418,6 @@ public class BoardController {
 			file.setFiles_change_title(changeName+ext);
 			file.setFiles_type(4);
 			file.setFiles_root(filePath + "\\" + changeName + ext);
-			System.out.println("파일 : " + file);
 			
 			boardService.insertPhoto(file);
 			
