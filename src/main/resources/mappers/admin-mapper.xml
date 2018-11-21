@@ -463,18 +463,6 @@
 		AND EXPERIENCE_NO = #{board_no}
 	</update>
 	
-	<insert id="insertChat" parameterType="AdminBoard">
-		INSERT INTO CHAT VALUES(SEQ_CHAT_NO.NEXTVAL, #{board_no}, #{content}, SYSDATE);
-	</insert>
-	
-	<select id="selectMember" parameterType="java.lang.String" resultType="map">
-		SELECT M.MEMBER_NO, M.NICK_NAME, F.FILES_ROOT, F.FILES_CHANGE_TITLE
-		FROM MEMBER M
-		JOIN FILES F ON(M.MEMBER_NO = F.F_REFERENCE_NO)
-		WHERE 1 = 1
-		AND MEMBER_NO = #{member_no}
-		AND FILES_SECESSION = 0
-	</select>
-	
+
 </mapper> 
   
