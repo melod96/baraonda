@@ -134,7 +134,7 @@
 		<result property="dispatch_member_no" column="DISPATCH_MEMBER_NO"/>
 		<result property="dispatch_nickname" column="DISPATCH_NICKNAME"/>
 		<result property="receive_member_no" column="RECEIVE_MEMBER_NO"/>
-		<result property="receive_nickname" column="DISPATCH_NICKNAME"/>
+		<result property="receive_nickname" column="RECEIVE_NICKNAME"/>
 		<result property="check_date" column="CHECK_DATE"/>
 	</resultMap>
 	
@@ -347,23 +347,45 @@
 	
 	<!--메세지 리스트 조회 -->	
 	<select id="selectMessageList" resultMap="messageResultSet">
-		SELECT MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, MESSAGE_DATE, DISPATCH_MEMBER_NO, RECEIVE_MEMBER_NO, CHECK_DATE, DISPATCH_NICKNAME, RECEIVE_NICKNAME
-  		FROM
-			 (SELECT MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, MESSAGE_DATE, DISPATCH_MEMBER_NO, RECEIVE_MEMBER_NO, CHECK_DATE
-		       	FROM  MESSAGE 
-		        WHERE DISPATCH_MEMBER_NO = 4 OR RECEIVE_MEMBER_NO = 4
-		        ORDER BY MESSAGE_DATE DESC),
-        
-		        (SELECT NICK_NAME DISPATCH_NICKNAME
-		         FROM MEMBER M 
-		         JOIN MESSAGE G ON(M.MEMBER_NO = G.DISPATCH_MEMBER_NO)
-		         WHERE M.MEMBER_NO= G.DISPATCH_MEMBER_NO),
-         
-		        (SELECT NICK_NAME RECEIVE_NICKNAME
-		         FROM MEMBER M 
-		         JOIN MESSAGE G ON(M.MEMBER_NO = G.RECEIVE_MEMBER_NO)
-		         WHERE M.MEMBER_NO= G.RECEIVE_MEMBER_NO)
+		SELECT MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, MESSAGE_DATE, DISPATCH_MEMBER_NO, RECEIVE_MEMBER_NO, CHECK_DATE,
+                        M1.NICK_NAME DISPATCH_NICKNAME, M2.NICK_NAME RECEIVE_NICKNAME
+		       	FROM  MESSAGE ME
+                JOIN MEMBER M1 ON(M1.MEMBER_NO = ME.DISPATCH_MEMBER_NO)
+                JOIN MEMBER M2 ON(M2.MEMBER_NO = ME.RECEIVE_MEMBER_NO)
+		        WHERE DISPATCH_MEMBER_NO = #{member_no} OR RECEIVE_MEMBER_NO = #{member_no}
+		        ORDER BY MESSAGE_DATE DESC
 	</select>
+	
+	<!--닉네임으로 회원번호 조회 -->	
+	<select id="selectNicksNo" resultMap="memberResultSet">
+		SELECT MEMBER_NO
+		FROM MEMBER
+		WHERE NICK_NAME = #{receive_nickname}
+		AND MEMBER_STATUS = 0
+	</select>
+	
+	<!--쪽지 전송 -->
+	<insert id="insertMsg" parameterType="Message">
+		INSERT INTO MESSAGE
+		VALUES(
+			SEQ_MESSAGE_NO.NEXTVAL, #{message_title}, #{message_content}, 
+			SYSDATE, #{dispatch_member_no}, #{receive_member_no}, null
+		)
+	
+	</insert>
+	
+	<!--message detail -->	
+	<select id="selectMsgOne" resultMap="messageResultSet">
+		SELECT MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, MESSAGE_DATE, DISPATCH_MEMBER_NO, RECEIVE_MEMBER_NO, CHECK_DATE,
+                        M1.NICK_NAME DISPATCH_NICKNAME, M2.NICK_NAME RECEIVE_NICKNAME
+		FROM  MESSAGE ME
+                JOIN MEMBER M1 ON(M1.MEMBER_NO = ME.DISPATCH_MEMBER_NO)
+                JOIN MEMBER M2 ON(M2.MEMBER_NO = ME.RECEIVE_MEMBER_NO)
+	        WHERE MESSAGE_NO = #{message_no}
+	        ORDER BY MESSAGE_DATE DESC
+	</select>	
+	
+	
 	
 </mapper>
 

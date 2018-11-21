@@ -199,4 +199,21 @@ public class MyPageDaoImpl implements MyPageDao {
 		return (ArrayList) sqlSession.selectList("MyPage.selectMessageList", member_no, rowBounds);
 	}
 
+	@Override
+	public int selectNicksNo(SqlSessionTemplate sqlSession, String receive_nickname){
+		Member m = sqlSession.selectOne("MyPage.selectNicksNo", receive_nickname);
+		System.out.println("m : " + m);
+		System.out.println("no :" + m.getMember_no());
+		return m.getMember_no();
+	}
+	
+	@Override
+	public void insertMsg(SqlSessionTemplate sqlSession, Message msg){
+		sqlSession.insert("MyPage.insertMsg", msg);
+	}
+	
+	@Override
+	public Message selectMsgOne(SqlSessionTemplate sqlSession, int message_no){
+		return sqlSession.selectOne("MyPage.selectMsgOne",message_no);
+	}
 }

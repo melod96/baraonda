@@ -22,7 +22,7 @@ import com.kh.baraonda.member.model.exception.LoginException;
 import com.kh.baraonda.member.model.service.MemberService;
 import com.kh.baraonda.member.model.vo.Member;
 
-@SessionAttributes("loginUser") 
+@SessionAttributes("loginUser")
 @Controller
 public class MemberController {
 	
@@ -42,6 +42,7 @@ public class MemberController {
 				Member loginUser = ms.loginMember(m);
 				
 				model.addAttribute("loginUser", loginUser);
+				
 				System.out.println("loginUser : " + loginUser);
 				return "redirect:goMain.me";
 				
