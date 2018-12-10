@@ -46,7 +46,7 @@
                                     <div class="panel-heading">
                                         	제목 : ${ boardInfo.BOARD_TITLE }
                                     </div>
-                                    <div class="panel-body content">
+                                    <div class="panel-body content" style="overflow-y:scroll;">
                                         <p>${ boardInfo.BOARD_CONTENT }</p>
                                     </div>
                                     <div class="panel-footer">

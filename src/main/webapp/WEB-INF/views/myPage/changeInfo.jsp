@@ -70,7 +70,7 @@
 			<div class="profileFrame">
 				<div class="profileImg">
 					<img id="photo" src="${pageContext.request.contextPath}${file.files_root}${file.files_change_title}"
-									onerror="this.src='${pageContext.request.contextPath}/resources/images/myPageImages/level.png'">
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/boardImg/woman.png'">
 					<form action="uploadPhoto.my" method="post"  enctype="multipart/form-data">
 						<div class="Position1">
 							<button type="button" id="uploadBtn" class="btn btn-default" onclick="uploadPhoto();">사진 불러오기</button>

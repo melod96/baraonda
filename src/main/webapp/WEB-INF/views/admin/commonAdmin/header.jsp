@@ -5,7 +5,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="goChat.adm">BARAONDA</a>
+                <a class="navbar-brand" href="main.m">BARAONDA</a>
             </div>
             <!-- /.navbar-header -->
 

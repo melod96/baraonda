@@ -26,8 +26,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		 <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
-		 <property name="username" value="baraonda"/>
-		 <property name="password" value="baraonda"/>
+		 <property name="username" value="baraonda1"/>
+		 <property name="password" value="baraonda1"/>
 		 <property name="defaultAutoCommit" value="false"/>
 	</bean>
 		

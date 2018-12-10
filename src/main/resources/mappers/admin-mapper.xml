@@ -434,6 +434,7 @@
 			AND (BOARD_TITLE LIKE '%' || #{content} || '%' 
 			OR COMPANY_NAME LIKE '%' || #{content} || '%' )
 		</if>
+		ORDER BY B.BOARD_NO DESC
 	</select>
 
 	<resultMap type="HashMap" id="ExperienceInfo">

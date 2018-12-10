@@ -16,6 +16,13 @@
 	display: inline-block;
 }
 
+.text1{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+    white-space: nowrap;
+}
 .title {
 	border-bottom: 2px solid #5d5d5d;
 	font-size: 30px;

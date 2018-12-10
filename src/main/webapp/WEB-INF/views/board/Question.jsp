@@ -335,7 +335,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<span class="inner">
 						<span class="ico_wrap">
 						<a href="#">
-							<img src="<%=request.getContextPath()%>/resources/images/main/아이유프사.png" style="border-radius:20px;" class="proic">
+							<img src="${pageContext.request.contextPath}/resources/images/uploadFiles/아이유프사.png" style="border-radius:20px;" class="proic">
 						</a>
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
