@@ -39,7 +39,7 @@ public class EchoHandler extends TextWebSocketHandler {
          try {
         	 sqlSession.insert("Chat.insertChat", adminBoard);
         	 Map<String, Object> member = sqlSession.selectOne("Chat.selectMemberForChat", member_no);
-        	 result += member.get("MEMBER_NO") + "|||" + member.get("NICK_NAME") + "|||" + member.get("FILES_ROOT") + "|||" + member.get("FILES+CHANGE_TITLE");
+        	 result += member.get("MEMBER_NO") + "|||" + member.get("NICK_NAME") + "|||" + member.get("FILES_ROOT") + "|||" + member.get("FILES_CHANGE_TITLE");
          }catch(Exception e){
             e.printStackTrace();
          }

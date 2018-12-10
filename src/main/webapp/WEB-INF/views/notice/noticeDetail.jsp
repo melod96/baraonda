@@ -498,7 +498,7 @@
 								<li class="comment-list-li">
 									<div class="comment-pic">
 										<img class="commentPro" 
-											src="${pageContext.request.contextPath}/${clist.profile }">
+											src="${pageContext.request.contextPath}${clist.profile }${clist.files_change_title}">
 									</div>
 									<div class="comment-txt">
 										<!--------------------------------- 댓글 작성자명 ---------------------------------->

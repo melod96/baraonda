@@ -98,7 +98,9 @@
 	                                	</tr>
 	                                	<tr>
 	                                		<th><h5>신고글</h5></th>
-	                                		<td><h5>${ reportInfo.BOARD_CONTENT }</h5></td>
+	                                		<td><h5><div style="overflow-y:scroll; height:400px;">
+	                                			${ reportInfo.BOARD_CONTENT }
+	                                		</div></h5></td>
 	                                	</tr>
 	                                </tbody>
 	                            </table>
